@@ -1,2 +1,4 @@
-# build-lights
-DiUS Build Lights
+build-light
+===========
+
+Continuous Integration build light controller
