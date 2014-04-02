@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# copy to:
+# /etc/init.d/build-light
+
+BIN_PATH="/home/pi/build-light/light_controller"
+CONFIG_FILE="/home/pi/build-light/config.json"
+CONFIG_LINE="-c $CONFIG_FILE -b -l"
+PID_FILE="/var/run/light_controller"
+
+case "$1" in
+    start)
+        echo "Starting build-light ..."
+		$BIN_PATH $CONFIG_LINE
+    ;;
+    stop)
+        echo "Stopping build-light ..."
+		if [ -f "$PID_FILE" ]; then
+			kill `cat $PID_FILE`
+		fi
+    ;;
+    *)
+        echo "Usage: /etc/init.d/build-light {start|stop}"
+        exit 1
+    ;;
+esac
+exit 0
