@@ -13,7 +13,7 @@ class Job2LedStrip(job2light_translator.Job2LightTranslator):
         self.logger = logger.Logger('JenkinsPoller')
         self.strand = strand
 
-        if len(jobs) > self.strand.num_leds:
+        if len(jobs) == 0 or len(jobs) > self.strand.num_leds:
             raise job2light_translator.InputError('Unable to map ' + len(jobs) + ' jobs to ' + self.strand.num_leds + ' LEDs')
         # order of the jobs is important
         self.jobs = jobs
@@ -29,17 +29,127 @@ class Job2LedStrip(job2light_translator.Job2LightTranslator):
     def update(self, job_name, job_status):
         #self.logger.log('%s:%s', job_name, job_status)
         if job_name in self.offset.keys():
-            if (job_status == job2light_translator.STATUS.SUCCESS):
-                self.strand.fill(0, 255, 0, False, start_index=self.offset[job_name], end_index=self.offset[job_name] + self.leds_per_job)
+            kwargs = {}
+            kwargs['start_index'] = self.offset[job_name]
+            kwargs['end_index']   = self.offset[job_name] + self.leds_per_job
+
+            if (job_status == job2light_translator.STATUS.UNKNOWN):
+                # purple
+                kwargs['r']     = 102
+                kwargs['g']     = 0
+                kwargs['b']     = 204
+                kwargs['blink'] = False
+
+            elif (job_status == job2light_translator.STATUS.SUCCESS):
+                # green
+                kwargs['r']     = 0
+                kwargs['g']     = 204
+                kwargs['b']     = 0
+                kwargs['blink'] = False
+
             elif (job_status == job2light_translator.STATUS.FAILURE):
-                self.strand.fill(255, 0, 0, False, start_index=self.offset[job_name], end_index=self.offset[job_name] + self.leds_per_job)
-            elif (job_status == job2light_translator.STATUS.BUILDING_FROM_SUCCESS):
-                self.strand.fill(0, 255, 0, True, start_index=self.offset[job_name], end_index=self.offset[job_name] + self.leds_per_job)
-            elif (job_status == job2light_translator.STATUS.BUILDING_FROM_FAILURE):
-                self.strand.fill(255, 0, 0, True, start_index=self.offset[job_name], end_index=self.offset[job_name] + self.leds_per_job)
+                # red
+                kwargs['r']     = 204
+                kwargs['g']     = 0
+                kwargs['b']     = 0
+                kwargs['blink'] = False
+
+            elif (job_status == job2light_translator.STATUS.ABORTED):
+                # yellow
+                kwargs['r']     = 204
+                kwargs['g']     = 204
+                kwargs['b']     = 0
+                kwargs['blink'] = False
+
+            elif (job_status == job2light_translator.STATUS.DISABLED):
+                # off
+                kwargs['r']     = 0
+                kwargs['g']     = 0
+                kwargs['b']     = 0
+                kwargs['blink'] = False
+
+            elif (job_status == job2light_translator.STATUS.UNSTABLE):
+                # pink
+                kwargs['r']     = 204
+                kwargs['g']     = 0
+                kwargs['b']     = 204
+                kwargs['blink'] = False
+
+            elif (job_status == job2light_translator.STATUS.NOT_BUILT):
+                # white
+                kwargs['r']     = 204
+                kwargs['g']     = 204
+                kwargs['b']     = 204
+                kwargs['blink'] = False
+
             elif (job_status == job2light_translator.STATUS.BUILDING_FROM_UNKNOWN):
-                self.strand.fill(255, 255, 0, True, start_index=self.offset[job_name], end_index=self.offset[job_name] + self.leds_per_job)
-            elif (job_status == job2light_translator.STATUS.UNKNOWN):
-                self.strand.fill(255, 255, 0, False, start_index=self.offset[job_name], end_index=self.offset[job_name] + self.leds_per_job)
+                # purple
+                kwargs['r']     = 102
+                kwargs['g']     = 0
+                kwargs['b']     = 204
+                kwargs['blink'] = True
+
+            elif (job_status == job2light_translator.STATUS.BUILDING_FROM_SUCCESS):
+                # green
+                kwargs['r']     = 0
+                kwargs['g']     = 204
+                kwargs['b']     = 0
+                kwargs['blink'] = True
+
+            elif (job_status == job2light_translator.STATUS.BUILDING_FROM_FAILURE):
+                # red
+                kwargs['r']     = 204
+                kwargs['g']     = 0
+                kwargs['b']     = 0
+                kwargs['blink'] = True
+
+            elif (job_status == job2light_translator.STATUS.BUILDING_FROM_ABORTED):
+                # yellow
+                kwargs['r']     = 204
+                kwargs['g']     = 204
+                kwargs['b']     = 0
+                kwargs['blink'] = True
+
+            elif (job_status == job2light_translator.STATUS.BUILDING_FROM_DISABLED):
+                # cyan
+                kwargs['r']     = 0
+                kwargs['g']     = 204
+                kwargs['b']     = 204
+                kwargs['blink'] = True
+
+            elif (job_status == job2light_translator.STATUS.BUILDING_FROM_UNSTABLE):
+                # pink
+                kwargs['r']     = 204
+                kwargs['g']     = 0
+                kwargs['b']     = 204
+                kwargs['blink'] = True
+
+            elif (job_status == job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT):
+                # white
+                kwargs['r']     = 204
+                kwargs['g']     = 204
+                kwargs['b']     = 204
+                kwargs['blink'] = True
+
+            elif (job_status == job2light_translator.STATUS.POLL_ERROR):
+                # blue
+                kwargs['r']     = 0
+                kwargs['g']     = 0
+                kwargs['b']     = 204
+                kwargs['blink'] = False
+
+            elif (job_status == job2light_translator.STATUS.INVALID_STATUS):
+                # cyan
+                kwargs['r']     = 0
+                kwargs['g']     = 204
+                kwargs['b']     = 204
+                kwargs['blink'] = False
+
             else:
-                self.strand.fill(0, 0, 0, False, start_index=self.offset[job_name], end_index=self.offset[job_name] + self.leds_per_job)
+                # off
+                kwargs['r']     = 0
+                kwargs['g']     = 0
+                kwargs['b']     = 0
+                kwargs['blink'] = False
+
+            self.strand.fill(**kwargs)

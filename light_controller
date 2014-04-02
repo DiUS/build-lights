@@ -13,20 +13,13 @@ import os
 import getopt
 
 import daemonize
-import error
 import logger
 import json_config
 
 
-class Error(error.Generic):
-    """Base class for light controller module exceptions"""
-    pass
-
-class ConfigError(Error):
-    """Config error"""
-    pass
 
 
+default_config_file = 'config.json'
 light = None
 
 
@@ -42,6 +35,7 @@ def print_usage(prog_cmd):
     print "Options:"
     print "-b           --daemonize         Run in the background."
     print "-l           --syslog            Log output to syslog."
+    print "-c <file>    --config <file>     Config file, default \"%s\"." % default_config_file
     print "-h           --help              Print this help page."
 
 
@@ -52,10 +46,11 @@ def run():
 
     background = False
     forcesyslog = False
-    dlogger = logger.Logger('LightController')
+    config_file = default_config_file
+    dlogger = logger.Logger(os.path.basename(sys.argv[0]))
 
     try:
-        (opts, args) = getopt.getopt(sys.argv[1:], "hblc:s:d:u:", ["help", "daemonize", "syslog", "cacert=", "sslcert=", "devid=", "url="])
+        (opts, args) = getopt.getopt(sys.argv[1:], "hblc:s:d:u:", ["help", "daemonize", "syslog", "config="])
     except getopt.error, why:
         print "Error: getopt error: %s" % (why)
         print_usage(sys.argv[0])
@@ -72,34 +67,15 @@ def run():
             if opt[0] == "-l" or opt[0] == "--syslog":
                 forcesyslog = True
                 continue
+            if opt[0] == "-c" or opt[0] == "--config":
+                config_file = opt[1]
+                continue
             print_usage(sys.argv[0])
             sys.exit(-1)
     except ValueError, why:
         print "Error: bad parameter \"%s\" for option %s: %s" % (opt[1], opt[0], why)
         print_usage(sys.argv[0])
         sys.exit(-1)
-
-
-
-    # TODO: specify config file from cli args
-    conf = json_config.JsonConfig()
-
-    api_conf = conf.get_api_config()
-    light_conf = conf.get_light_config()
-    jobs = conf.get_jobs()
-
-    if light_conf['type'] == 'strand':
-        import ledstrip
-        import job2ledstrip
-        light = ledstrip.Strand(num_leds=light_conf['num_leds'], spidev=light_conf['spidev'])
-    else:
-        raise ConfigError(str(light_conf['strand']) + ' light type not supported')
-
-    if api_conf['type'] == 'jenkins_direct':
-        import jenkins_monitor
-        import jenkins_poller
-    else:
-        raise ConfigError(str(api_conf['type']) + ' API type not supported')
 
 
 
@@ -110,6 +86,45 @@ def run():
         logger.Logger.use_syslog = True
         daemonize.createDaemon()
 
+
+
+    try:
+        if not os.path.isfile(config_file):
+            dlogger.log("ERROR: config file %s not found.", config_file)
+            sys.exit(-1)
+
+        conf = json_config.JsonConfig(config_file)
+        api_conf = conf.get_api_config()
+        light_conf = conf.get_light_config()
+        jobs = conf.get_jobs()
+
+
+        if light_conf['type'] == 'strand':
+            import ledstrip
+            import job2ledstrip
+            kwargs = {}
+            if light_conf.has_key('num_leds'):
+                kwargs['num_leds'] = light_conf['num_leds']
+            if light_conf.has_key('spidev'):
+                kwargs['spidev'] = light_conf['spidev']
+            if light_conf.has_key('simulate_mode'):
+                kwargs['simulate_mode'] = light_conf['simulate_mode']
+            light = ledstrip.Strand(**kwargs)
+        else:
+            raise json_config.ConfigError(str(light_conf['strand']) + ' light type not supported')
+
+        if api_conf['type'] == 'jenkins_direct':
+            import jenkins_monitor
+            import jenkins_poller
+        else:
+            raise ConfigError(str(api_conf['type']) + ' API type not supported')
+
+    except Exception, e:
+        logger.print_trace(e)
+        sys.exit(-1)
+
+
+
     # write pid file
     pidfilename = "/var/run/%s.pid" % os.path.basename(sys.argv[0])
     try:
@@ -117,7 +132,7 @@ def run():
         pidfile.write("%d\n" % os.getpid())
         pidfile.close()
     except IOError, e:
-        dlogger.log("Error: unable to write pid file %s: %s", pidfilename, str(e))
+        dlogger.log("ERROR: unable to write pid file %s: %s", pidfilename, str(e))
 
     dlogger.log("Starting light controller")
     try:

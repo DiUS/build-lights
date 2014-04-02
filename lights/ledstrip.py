@@ -229,7 +229,7 @@ class Strand(threading.Thread):
             self.spi.write(bytearray(b'\x00'))
             self.spi.flush()
         else:
-            print '%s\n\n' % str(tmp)
+            print '%s\n' % str(tmp)
 
     def run(self):
         if self.terminate:
