@@ -168,16 +168,14 @@ class Strand(threading.Thread):
                     for j in range(3):
                         self.buffer[i][j] = float(self.buffer[i][j]) + self.blink_step[i][j]
                     for j in range(3):
-                        if self.buffer[i][j] > self.led_colour[i][j]:
-                            self.buffer[i][j] = self.led_colour[i][j]
+                        if self.buffer[i][j] + self.blink_step[i][j] > self.led_colour[i][j]:
                             self.blink_direction[i] = False
                             break
                 else:
                     for j in range(3):
                         self.buffer[i][j] = float(self.buffer[i][j]) - self.blink_step[i][j]
                     for j in range(3):
-                        if self.buffer[i][j] < 0:
-                            self.buffer[i][j] = 0
+                        if self.buffer[i][j] - self.blink_step[i][j] < 0:
                             self.blink_direction[i] = True
                             break
 
