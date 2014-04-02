@@ -8,8 +8,8 @@ Colors are provided as RGB and converted internally to the strand's 7 bit values
 The leds are available here: http://adafruit.com/products/306
 
 Wiring:
-	Pi MOSI -> Strand DI
-	Pi SCLK -> Strand CI
+        Pi MOSI -> Strand DI
+        Pi SCLK -> Strand CI
 
 Make sure to use an external power supply to power the strand.
 """
@@ -18,6 +18,7 @@ import sys
 sys.path.append("../lib")
 
 import threading
+import signal
 
 import logger
 import error
@@ -35,9 +36,7 @@ class InputError(Error):
 
 class Strand(threading.Thread):
 
-    #SLEEP_INTERVAL_S = 0.030
-    SLEEP_INTERVAL_S = 3.000
-    BLINK_STEPS = 66
+    BLINK_STEPS = 30
 
     def __init__(self, num_leds=32, spidev='/dev/spidev0.0', simulate_mode=False):
         threading.Thread.__init__(self)
@@ -49,6 +48,9 @@ class Strand(threading.Thread):
         if num_leds < 1:
             raise InputError('num_leds must be greater than zero')
         self.num_leds = num_leds
+        self.sleep_interval_s = 0.030
+        if simulate_mode:
+            self.sleep_interval_s = 3.000
         self.simulate_mode = simulate_mode
         self.spidev = spidev
         self.spi = None
@@ -58,10 +60,21 @@ class Strand(threading.Thread):
             # Color calculations from http://learn.adafruit.com/light-painting-with-raspberry-pi
             self.gamma[i] = 0x80 | int(pow(float(i) / 255.0, 2.5) * 127.0 + 0.5)
         self.led_colour = [bytearray(3) for x in range(self.num_leds)]
-        self.buffer = [bytearray(3) for x in range(self.num_leds)]
+        self.buffer = [[0.0, 0.0, 0.0] for x in range(self.num_leds)]
         self.blink = [False for x in range(self.num_leds)]
-        self.blink_state = Strand.BLINK_STEPS
-        self.blink_direction = -1
+        self.blink_step = [[0.0, 0.0, 0.0] for x in range(self.num_leds)]
+        self.blink_direction = [True for x in range(self.num_leds)]
+
+        if not self.simulate_mode:
+            self.spi = open(self.spidev, 'wb')
+        self.fill(0, 0, 0)
+
+        signal.signal(signal.SIGTERM, self._handle_signals)
+        signal.signal(signal.SIGINT, self._handle_signals)
+
+    def _handle_signals(self, signum, stack):
+        if signum == signal.SIGTERM or signum == signal.SIGINT:
+            self.stop()
 
     def alloff(self):
         """
@@ -73,9 +86,6 @@ class Strand(threading.Thread):
         """
         Fills a range of LEDs with the specific colour.
         """
-        r = int(r)
-        g = int(g)
-        b = int(b)
         if start_index is None:
             start_index = 0
         if end_index is None or end_index == 0:
@@ -93,22 +103,20 @@ class Strand(threading.Thread):
            b < 0 or b >= 256 :
             raise InputError('rgb out of range')
         self.lock.acquire()
-        changed = False
-        for i in range(start_index, end_index):
-            if self.__setled(i, r, g, b, blink):
-                changed = True
-        if changed:
-            self.update_event.set()
-        self.lock.release()
+        try:
+            changed = False
+            for i in range(start_index, end_index):
+                if self.__setled(i, r, g, b, blink):
+                    changed = True
+            if changed:
+                self.update_event.set()
+        finally:
+            self.lock.release()
 
     def setled(self, pixel_index, r, g, b, blink=False):
         """
         Set a single LED a specific colour
         """
-        pixel_index = int(pixel_index)
-        r = int(r)
-        g = int(g)
-        b = int(b)
         if pixel_index < 0 or \
            pixel_index >= self.num_leds :
             raise InputError('pixel_index out of range')
@@ -117,21 +125,32 @@ class Strand(threading.Thread):
            b < 0 or b >= 256 :
             raise InputError('rgb out of range')
         self.lock.acquire()
-        changed = self.__setled(pixel_index, r, g, b, blink)
-        if changed:
-            self.update_event.set()
-        self.lock.release()
+        try:
+            changed = self.__setled(pixel_index, r, g, b, blink)
+            if changed:
+                self.update_event.set()
+        finally:
+            self.lock.release()
 
     def __setled(self, pixel_index, r, g, b, blink):
         changed = False
         if self.led_colour[pixel_index][0] != g:
             self.led_colour[pixel_index][0] = g
+            self.buffer[pixel_index][0] = g
+            self.blink_step[pixel_index][0] = float(g)/Strand.BLINK_STEPS
+            self.blink_direction[pixel_index] = False
             changed = True
         if self.led_colour[pixel_index][1] != r:
             self.led_colour[pixel_index][1] = r
+            self.buffer[pixel_index][1] = r
+            self.blink_step[pixel_index][1] = float(r)/Strand.BLINK_STEPS
+            self.blink_direction[pixel_index] = False
             changed = True
         if self.led_colour[pixel_index][2] != b:
             self.led_colour[pixel_index][2] = b
+            self.buffer[pixel_index][2] = b
+            self.blink_step[pixel_index][2] = float(b)/Strand.BLINK_STEPS
+            self.blink_direction[pixel_index] = False
             changed = True
         if self.blink[pixel_index] != blink:
             self.blink[pixel_index] = blink
@@ -139,26 +158,33 @@ class Strand(threading.Thread):
         return changed
 
     def __update(self):
-        self.buffer = [bytearray(3) for x in range(self.num_leds)]
         for i in range(self.num_leds):
-            for j in range(3):
-                if 0 <= self.led_colour[i][j] < 256:
-                    if not self.blink[i]:
-                        self.buffer[i][j] = self.gamma[self.led_colour[i][j]]
-                    else:
-                        step = (float(self.led_colour[i][j]) / Strand.BLINK_STEPS) * self.blink_state
-                        self.buffer[i][j] = self.gamma[int()]
-
-
-        self.blink_state = Strand.BLINK_STEPS
-        self.blink_direction = -1
-
-
+            if not self.blink[i]:
+                for j in range(3):
+                    if 0 <= self.led_colour[i][j] < 256:
+                        self.buffer[i][j] = self.led_colour[i][j]
+            else:
+                if self.blink_direction[i]:
+                    for j in range(3):
+                        self.buffer[i][j] = float(self.buffer[i][j]) + self.blink_step[i][j]
+                    for j in range(3):
+                        if self.buffer[i][j] > self.led_colour[i][j]:
+                            self.buffer[i][j] = self.led_colour[i][j]
+                            self.blink_direction[i] = False
+                            break
+                else:
+                    for j in range(3):
+                        self.buffer[i][j] = float(self.buffer[i][j]) - self.blink_step[i][j]
+                    for j in range(3):
+                        if self.buffer[i][j] < 0:
+                            self.buffer[i][j] = 0
+                            self.blink_direction[i] = True
+                            break
 
         tmp = [bytearray(3) for x in range(self.num_leds)]
-            for i in range(self.num_leds):
-                for j in range(3):
-                    tmp[i][j] = self.gamma[self.buffer[i][j]]
+        for i in range(self.num_leds):
+            for j in range(3):
+                tmp[i][j] = self.gamma[int(self.buffer[i][j])]
 
         if not self.simulate_mode:
             for x in range(self.num_leds):
@@ -169,22 +195,20 @@ class Strand(threading.Thread):
             print '%s\n\n' % str(tmp)
 
     def run(self):
+        if self.terminate:
+            return
+
         try:
-            if not self.simulate_mode:
-                self.spi = open(self.spidev, 'wb')
-            self.fill(0, 0, 0)
             self.__update()
 
-            self.logger.log('LED driver thread: STARTING ...')
+            self.logger.log('LED driver thread: STARTED')
             while not self.terminate:
                 self.update_event.clear()
                 timeout = None
                 if True in self.blink:
-                    timeout = Strand.SLEEP_INTERVAL_S
+                    timeout = self.sleep_interval_s
                 self.update_event.wait(timeout)
                 self.__update()
-
-            self.logger.log('LED driver thread: STOPPING ...')
 
         except Exception, e:
             logger.print_trace(e)
@@ -194,5 +218,4 @@ class Strand(threading.Thread):
     def stop(self):
         self.terminate = True
         self.alloff()
-
-
+        self.update_event.set()
