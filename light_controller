@@ -47,7 +47,24 @@ def run():
     global light
 
     # TODO: read from config
-    jobs = ['ZigBee-devices-gate-1', 'ZigBee-devices-gate-2', 'ZigBee-devices-gate-3a', 'ZigBee-devices-gate-3b', 'ZigBee-devices-gate-3c', 'ZigBee-devices-gate-3d', 'ZigBee-devices-gate-4', 'ZigBee-devices-GridNet-SGC-upgrade-test', 'ZigBee-devices-ZAP_ZNP', 'ZigBee-devices-ZAP_ZNP-GridNet']
+    jobs = [
+            'ZigBee-devices-docs',
+            'ZigBee-devices-gate-1',
+            'ZigBee-devices-gate-1-NA',
+            'ZigBee-devices-gate-1-OR',
+            'ZigBee-devices-gate-2',
+            'ZigBee-devices-gate-3a',
+            'ZigBee-devices-gate-3b',
+            'ZigBee-devices-gate-3c',
+            'ZigBee-devices-gate-3d',
+            'ZigBee-devices-gate-4',
+            'ZigBee-devices-gate1-OR-2.1',
+            'ZigBee-devices-GridNet-SGC-upgrade-test',
+            'ZigBee-devices-ZAP_ZNP',
+            'ZigBee-devices-ZAP_ZNP-GridNet',
+            'zigbee-gateway-gate-1',
+            'zigbee-gateway-gate-2',
+            ]
     url = 'http://psn-ci:8080/api/json'
 
     background = False

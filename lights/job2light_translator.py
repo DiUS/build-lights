@@ -3,6 +3,7 @@
 import sys
 sys.path.append("../lib")
 
+import error
 import enum
 
 
@@ -13,6 +14,17 @@ STATUS = enum.Enum('UNKNOWN',
                    'BUILDING_FROM_SUCCESS',
                    'BUILDING_FROM_FAILURE',
                    'INTERNAL_ERROR')
+
+
+
+class Error(error.Generic):
+    """Base class for job2light translator module exceptions"""
+    pass
+
+class InputError(Error):
+    """Range error"""
+    pass
+
 
 
 class Job2LightTranslator(object):
