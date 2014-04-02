@@ -6,32 +6,35 @@ sys.path.append("./lib")
 sys.path.append("./lights")
 sys.path.append("./monitors")
 sys.path.append("./pollers")
+sys.path.append("./config")
 
 import signal
 import os
 import getopt
 
 import daemonize
+import error
 import logger
+import json_config
 
 
-import ledstrip
-import job2ledstrip
-# TODO: read num LEDs from config
-light = ledstrip.Strand()
+class Error(error.Generic):
+    """Base class for light controller module exceptions"""
+    pass
 
-# TODO: read from config
-import jenkins_monitor
-import jenkins_poller
+class ConfigError(Error):
+    """Config error"""
+    pass
 
+
+light = None
 
 
 def _handle_signals(signum, stack):
-    global terminated
     global light
     if signum == signal.SIGTERM or signum == signal.SIGINT:
-        light.stop()
-        terminated = True
+        if light is not None:
+            light.stop()
 
 
 def print_usage(prog_cmd):
@@ -44,28 +47,8 @@ def print_usage(prog_cmd):
 
 
 def run():
-    global light
 
-    # TODO: read from config
-    jobs = [
-            'ZigBee-devices-docs',
-            'ZigBee-devices-gate-1',
-            'ZigBee-devices-gate-1-NA',
-            'ZigBee-devices-gate-1-OR',
-            'ZigBee-devices-gate-2',
-            'ZigBee-devices-gate-3a',
-            'ZigBee-devices-gate-3b',
-            'ZigBee-devices-gate-3c',
-            'ZigBee-devices-gate-3d',
-            'ZigBee-devices-gate-4',
-            'ZigBee-devices-gate1-OR-2.1',
-            'ZigBee-devices-GridNet-SGC-upgrade-test',
-            'ZigBee-devices-ZAP_ZNP',
-            'ZigBee-devices-ZAP_ZNP-GridNet',
-            'zigbee-gateway-gate-1',
-            'zigbee-gateway-gate-2',
-            ]
-    url = 'http://psn-ci:8080/api/json'
+    global light
 
     background = False
     forcesyslog = False
@@ -96,6 +79,30 @@ def run():
         print_usage(sys.argv[0])
         sys.exit(-1)
 
+
+
+    # TODO: specify config file from cli args
+    conf = json_config.JsonConfig()
+
+    api_conf = conf.get_api_config()
+    light_conf = conf.get_light_config()
+    jobs = conf.get_jobs()
+
+    if light_conf['type'] == 'strand':
+        import ledstrip
+        import job2ledstrip
+        light = ledstrip.Strand(num_leds=light_conf['num_leds'], spidev=light_conf['spidev'])
+    else:
+        raise ConfigError(str(light_conf['strand']) + ' light type not supported')
+
+    if api_conf['type'] == 'jenkins_direct':
+        import jenkins_monitor
+        import jenkins_poller
+    else:
+        raise ConfigError(str(api_conf['type']) + ' API type not supported')
+
+
+
     if forcesyslog:
         logger.Logger.use_syslog = True
 
@@ -116,9 +123,9 @@ def run():
     try:
         translator = job2ledstrip.Job2LedStrip(jobs, light)
 
-        # TODO: read from config
-        monitor = jenkins_monitor.JenkinsMonitor(jobs, translator)
-        poller = jenkins_poller.JenkinsPoller(url, monitor)
+        if api_conf['type'] == 'jenkins_direct':
+            monitor = jenkins_monitor.JenkinsMonitor(jobs, translator)
+            poller = jenkins_poller.JenkinsPoller(api_conf['url'], monitor)
 
         # start the light driver
         light.daemon = True
