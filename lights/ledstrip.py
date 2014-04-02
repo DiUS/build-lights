@@ -198,6 +198,7 @@ class Strand(threading.Thread):
         return changed
 
     def __update(self):
+        self.lock.acquire()
         for i in range(self.num_leds):
             if not self.blink[i]:
                 for j in range(3):
@@ -215,6 +216,7 @@ class Strand(threading.Thread):
                         self.buffer[i][j] = float(self.buffer[i][j]) - self.blink_step[i][j]
                         if self.buffer[i][j] < self.blink_step[i][j]:
                             self.blink_direction[i] = True
+        self.lock.release()
 
         tmp = [bytearray(3) for x in range(self.num_leds)]
         for i in range(self.num_leds):
@@ -238,11 +240,11 @@ class Strand(threading.Thread):
 
             self.logger.log('LED driver thread: STARTED')
             while not self.terminate:
-                self.update_event.clear()
                 timeout = None
                 if True in self.blink:
                     timeout = self.sleep_interval_s
                 self.update_event.wait(timeout)
+                self.update_event.clear()
                 self.__update()
 
             self.alloff()

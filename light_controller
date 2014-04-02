@@ -1,0 +1,127 @@
+#!/usr/bin/python
+""" Build light controller """
+
+import sys
+sys.path.append("./lib")
+sys.path.append("./lights")
+sys.path.append("./monitors")
+sys.path.append("./pollers")
+
+import signal
+import os
+import getopt
+
+import daemonize
+import logger
+
+
+import ledstrip
+import job2ledstrip
+# TODO: read num LEDs from config
+light = ledstrip.Strand()
+
+# TODO: read from config
+import jenkins_monitor
+import jenkins_poller
+
+
+
+def _handle_signals(signum, stack):
+    global terminated
+    global light
+    if signum == signal.SIGTERM or signum == signal.SIGINT:
+        light.stop()
+        terminated = True
+
+
+def print_usage(prog_cmd):
+    print "Usage: %s [options]" % prog_cmd
+    print "Options:"
+    print "-b           --daemonize         Run in the background."
+    print "-l           --syslog            Log output to syslog."
+    print "-h           --help              Print this help page."
+
+
+
+def run():
+    global light
+
+    # TODO: read from config
+    jobs = ['ZigBee-devices-gate-1', 'ZigBee-devices-gate-2', 'ZigBee-devices-gate-3a', 'ZigBee-devices-gate-3b', 'ZigBee-devices-gate-3c', 'ZigBee-devices-gate-3d', 'ZigBee-devices-gate-4', 'ZigBee-devices-GridNet-SGC-upgrade-test', 'ZigBee-devices-ZAP_ZNP', 'ZigBee-devices-ZAP_ZNP-GridNet']
+    url = 'http://psn-ci:8080/api/json'
+
+    background = False
+    forcesyslog = False
+    dlogger = logger.Logger('LightController')
+
+    try:
+        (opts, args) = getopt.getopt(sys.argv[1:], "hblc:s:d:u:", ["help", "daemonize", "syslog", "cacert=", "sslcert=", "devid=", "url="])
+    except getopt.error, why:
+        print "Error: getopt error: %s" % (why)
+        print_usage(sys.argv[0])
+        sys.exit(-1)
+
+    try:
+        for opt in opts:
+            if opt[0] == "-h" or opt[0] == "--help":
+                print_usage(sys.argv[0])
+                sys.exit(1)
+            if opt[0] == "-b" or opt[0] == "--daemonize":
+                background = True
+                continue
+            if opt[0] == "-l" or opt[0] == "--syslog":
+                forcesyslog = True
+                continue
+            print_usage(sys.argv[0])
+            sys.exit(-1)
+    except ValueError, why:
+        print "Error: bad parameter \"%s\" for option %s: %s" % (opt[1], opt[0], why)
+        print_usage(sys.argv[0])
+        sys.exit(-1)
+
+    if forcesyslog:
+        logger.Logger.use_syslog = True
+
+    if background:
+        logger.Logger.use_syslog = True
+        daemonize.createDaemon()
+
+    # write pid file
+    pidfilename = "/var/run/%s.pid" % os.path.basename(sys.argv[0])
+    try:
+        pidfile = open(pidfilename, "w")
+        pidfile.write("%d\n" % os.getpid())
+        pidfile.close()
+    except IOError, e:
+        dlogger.log("Error: unable to write pid file %s: %s", pidfilename, str(e))
+
+    dlogger.log("Starting light controller")
+    try:
+        translator = job2ledstrip.Job2LedStrip(jobs, light)
+
+        # TODO: read from config
+        monitor = jenkins_monitor.JenkinsMonitor(jobs, translator)
+        poller = jenkins_poller.JenkinsPoller(url, monitor)
+
+        # start the light driver
+        light.daemon = True
+        light.start()
+
+        while True:
+            poller.poll()
+            light.join(3)
+            if not light.isAlive():
+                break
+    except Exception, e:
+        logger.print_trace(e)
+
+    try:
+        os.unlink(pidfilename)
+    except:
+        pass
+
+    dlogger.log("Terminated light controller")
+
+
+if __name__ == "__main__":
+    run()

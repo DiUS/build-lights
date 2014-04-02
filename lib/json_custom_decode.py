@@ -9,7 +9,7 @@ def decode_unicode_to_str_list(data):
         elif isinstance(item, list):
             item = decode_unicode_to_str_list(item)
         elif isinstance(item, dict):
-            item = _decode_dict(item)
+            item = decode_unicode_to_str_dict(item)
         rv.append(item)
     return rv
 
@@ -23,6 +23,6 @@ def decode_unicode_to_str_dict(data):
         elif isinstance(value, list):
            value = decode_unicode_to_str_list(value)
         elif isinstance(value, dict):
-           value = _decode_dict(value)
+           value = decode_unicode_to_str_dict(value)
         rv[key] = value
     return rv
