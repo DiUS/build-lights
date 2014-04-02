@@ -82,14 +82,7 @@ class Strand(threading.Thread):
         """
         self.fill(0, 0, 0)
 
-    def fill(self, r, g, b, blink=False, start_index=None, end_index=None):
-        """
-        Fills a range of LEDs with the specific colour.
-        """
-        if start_index is None:
-            start_index = 0
-        if end_index is None or end_index == 0:
-            end_index = self.num_leds
+    def __verify_start_end_range(self, start_index, end_index):
         if start_index < 0 or \
            start_index >= self.num_leds :
             raise InputError('start_index out of range')
@@ -98,6 +91,16 @@ class Strand(threading.Thread):
         if end_index < 0 or \
            end_index > self.num_leds :
             raise InputError('end_index out of range')
+
+    def fill(self, r, g, b, blink=False, start_index=None, end_index=None):
+        """
+        Fills a range of LEDs with the specific colour.
+        """
+        if start_index is None:
+            start_index = 0
+        if end_index is None or end_index == 0:
+            end_index = self.num_leds
+        self.__verify_start_end_range(start_index, end_index)
         if r < 0 or r >= 256 or \
            g < 0 or g >= 256 or \
            b < 0 or b >= 256 :
@@ -107,6 +110,43 @@ class Strand(threading.Thread):
             changed = False
             for i in range(start_index, end_index):
                 if self.__setled(i, r, g, b, blink):
+                    changed = True
+            if changed:
+                self.update_event.set()
+        finally:
+            self.lock.release()
+
+    def setblink(self, pixel_index, blink):
+        """
+        Set a single LED blink state
+        """
+        if pixel_index < 0 or \
+           pixel_index >= self.num_leds :
+            raise InputError('pixel_index out of range')
+        self.lock.acquire()
+        try:
+            if self.blink[pixel_index] != blink:
+                self.blink[pixel_index] = blink
+                self.update_event.set()
+        finally:
+            self.lock.release()
+
+    def setblinkrange(self, blink, start_index=None, end_index=None):
+        """
+        Set a blink state on a range of LEDs
+        """
+        if start_index is None:
+            start_index = 0
+        if end_index is None or end_index == 0:
+            end_index = self.num_leds
+        self.__verify_start_end_range(start_index, end_index)
+
+        self.lock.acquire()
+        try:
+            changed = False
+            for i in range(start_index, end_index):
+                if self.blink[i] != blink:
+                    self.blink[i] = blink
                     changed = True
             if changed:
                 self.update_event.set()
@@ -167,17 +207,14 @@ class Strand(threading.Thread):
                 if self.blink_direction[i]:
                     for j in range(3):
                         self.buffer[i][j] = float(self.buffer[i][j]) + self.blink_step[i][j]
-                    for j in range(3):
-                        if self.buffer[i][j] + self.blink_step[i][j] > self.led_colour[i][j]:
+                        if self.buffer[i][j] > self.led_colour[i][j]:
+                            self.buffer[i][j] = self.led_colour[i][j]
                             self.blink_direction[i] = False
-                            break
                 else:
                     for j in range(3):
                         self.buffer[i][j] = float(self.buffer[i][j]) - self.blink_step[i][j]
-                    for j in range(3):
-                        if self.buffer[i][j] - self.blink_step[i][j] < 0:
+                        if self.buffer[i][j] < self.blink_step[i][j]:
                             self.blink_direction[i] = True
-                            break
 
         tmp = [bytearray(3) for x in range(self.num_leds)]
         for i in range(self.num_leds):

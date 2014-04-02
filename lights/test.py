@@ -32,6 +32,12 @@ def run():
     led.fill(255,255,255,False,18,21)
     led.fill(80,127,255,True,21)
 
+    time.sleep(1)
+    led.setblink(2, True)
+    led.setblinkrange(True, 8, 9)
+    led.setblink(13, True)
+    led.setblink(19, True)
+
     while not terminated:
         time.sleep(3)
 
