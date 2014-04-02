@@ -245,6 +245,9 @@ class Strand(threading.Thread):
                 self.update_event.wait(timeout)
                 self.__update()
 
+            self.alloff()
+            self.__update()
+
         except Exception, e:
             logger.print_trace(e)
 

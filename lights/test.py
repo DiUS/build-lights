@@ -3,15 +3,12 @@ import ledstrip
 import signal
 
 led = ledstrip.Strand()
-terminated = False
 
 
 def _handle_signals(signum, stack):
-    global terminated
     global led
     if signum == signal.SIGTERM or signum == signal.SIGINT:
         led.stop()
-        terminated = True
 
 
 def run():
@@ -20,6 +17,7 @@ def run():
     signal.signal(signal.SIGTERM, _handle_signals)
     signal.signal(signal.SIGINT, _handle_signals)
 
+    led.daemon = True
     led.start()
 
     print 'Fill LEDs\n'
@@ -38,16 +36,15 @@ def run():
     led.setblink(13, True)
     led.setblink(19, True)
 
-    while not terminated:
-        time.sleep(3)
-
     print '\n'
     print 'LED join\n'
-    led.join()
+    while True:
+        led.join(1000)
+        if not led.isAlive():
+            break
     print 'terminated\n'
 
 
 
 if __name__ == "__main__":
     run()
-
