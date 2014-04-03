@@ -21,7 +21,7 @@ class Job2LedStrip(job2light_translator.Job2LightTranslator):
         # order of the jobs is important
         self.jobs = jobs
         self.offset = dict.fromkeys(jobs)
-        self.leds_per_job = self.strand.num_leds / len(self.jobs)
+        self.leds_per_job = int(self.strand.num_leds / len(self.jobs))
 
         index = 0
         for name in self.jobs:

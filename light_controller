@@ -47,7 +47,7 @@ def run():
     dlogger = logger.Logger(os.path.basename(sys.argv[0]))
 
     try:
-        (opts, args) = getopt.getopt(sys.argv[1:], "hblc:s:d:u:", ["help", "daemonize", "syslog", "config="])
+        (opts, args) = getopt.getopt(sys.argv[1:], "hblc:", ["help", "daemonize", "syslog", "config="])
     except getopt.error, why:
         print "Error: getopt error: %s" % (why)
         print_usage(sys.argv[0])
@@ -83,6 +83,8 @@ def run():
         logger.Logger.use_syslog = True
         daemonize.createDaemon()
 
+    signal.signal(signal.SIGTERM, _handle_signals)
+    signal.signal(signal.SIGINT, _handle_signals)
 
 
     try:
@@ -155,7 +157,7 @@ def run():
 
         while True:
             poller.poll()
-            light.join(3)
+            light.join(poll_interval_seconds)
             if not light.isAlive():
                 break
     except Exception, e:
