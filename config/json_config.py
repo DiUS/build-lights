@@ -1,15 +1,18 @@
 """ Config reader """
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
+parent_dir = os.path.join(current_dir, "..")
 import sys
-sys.path.append("../lib")
+sys.path.append(parent_dir)
 
 try:
     import json
 except ImportError:
     import simplejson as json
 
-import logger
-import error
-import json_custom_decode
+from lib import logger
+from lib import error
+from lib import json_custom_decode
 
 
 class Error(error.Generic):

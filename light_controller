@@ -1,20 +1,17 @@
 #!/usr/bin/python
 """ Build light controller """
 
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
 import sys
-sys.path.append("./lib")
-sys.path.append("./lights")
-sys.path.append("./monitors")
-sys.path.append("./pollers")
-sys.path.append("./config")
+sys.path.append(current_dir)
 
 import signal
-import os
 import getopt
 
-import daemonize
-import logger
-import json_config
+from lib import daemonize
+from lib import logger
+from config import json_config
 
 
 
@@ -100,8 +97,8 @@ def run():
 
 
         if light_conf['type'] == 'strand':
-            import ledstrip
-            import job2ledstrip
+            from lights import ledstrip
+            from lights import job2ledstrip
             kwargs = {}
             if light_conf.has_key('num_leds'):
                 kwargs['num_leds'] = light_conf['num_leds']
@@ -114,8 +111,8 @@ def run():
             raise json_config.ConfigError(str(light_conf['strand']) + ' light type not supported')
 
         if api_conf['type'] == 'jenkins_direct':
-            import jenkins_monitor
-            import jenkins_poller
+            from monitors import jenkins_monitor
+            from pollers import jenkins_poller
         else:
             raise ConfigError(str(api_conf['type']) + ' API type not supported')
 

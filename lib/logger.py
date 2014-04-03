@@ -16,7 +16,8 @@ class Logger(object):
     def __init__(self, module_name):
         self.__name = module_name
         if self.__class__.use_syslog:
-            syslog.openlog(os.path.basename(sys.argv[0]), syslog.LOG_PID, syslog.LOG_DAEMON)
+            syslog.openlog(os.path.basename(sys.argv[0]), syslog.LOG_PID)
+            #syslog.openlog(os.path.basename(sys.argv[0]), syslog.LOG_PID, syslog.LOG_DAEMON)
 
     def __del__(self):
         if self.__class__.use_syslog:

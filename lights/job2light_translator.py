@@ -1,10 +1,12 @@
 """ job to light translator """
-
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
+parent_dir = os.path.join(current_dir, "..")
 import sys
-sys.path.append("../lib")
+sys.path.append(parent_dir)
 
-import error
-import enum
+from lib import error
+from lib import enum
 
 
 STATUS = enum.Enum('UNKNOWN',

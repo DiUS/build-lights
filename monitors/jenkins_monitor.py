@@ -1,16 +1,18 @@
 """ jenkins monitor """
+import os
+current_dir = os.path.dirname(os.path.realpath(__file__))
+parent_dir = os.path.join(current_dir, "..")
 import sys
-sys.path.append("../lib")
-sys.path.append("../light")
+sys.path.append(parent_dir)
 
 try:
     import json
 except ImportError:
     import simplejson as json
 
-import logger
-import json_custom_decode
-import job2light_translator
+from lib import logger
+from lib import json_custom_decode
+from lights import job2light_translator
 
 
 class JenkinsMonitor(object):
