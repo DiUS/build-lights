@@ -14,7 +14,7 @@ Currently only polls Jenkins and drives LED strip.
 * 4-pin JST SM Plug + Receptacle Cable Set - http://www.adafruit.com/products/578
 * 4 pins 0.1" pitch header
 * Jumper wires (Black, Red, Yellow, Green)
-* 2 schmitt trigger buffers (for Pi IO pins protection)
+* 2 schmitt trigger buffers, e.g. SN74LVC1G17 (for Pi IO pins protection)
 
 
 
