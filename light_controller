@@ -125,6 +125,17 @@ def run():
                 else:
                     poll_interval_seconds = None
                     dlogger.log("NOT Polling API.")
+        elif api_conf['type'] == 'jenkins_aws_sqs':
+            dlogger.log("API is Jenkins via AWS SQS.")
+            from monitors import jenkins_aws_sqs_monitor
+            from pollers import aws_sqs_poller
+            if api_conf.has_key('pollrate_s'):
+                if api_conf['pollrate_s'] != 0:
+                    poll_interval_seconds = api_conf['pollrate_s']
+                    dlogger.log("Polling API once every %s seconds.", str(poll_interval_seconds))
+                else:
+                    poll_interval_seconds = None
+                    dlogger.log("NOT Polling API.")
         else:
             raise ConfigError(str(api_conf['type']) + ' API type not supported')
 
@@ -150,6 +161,9 @@ def run():
         if api_conf['type'] == 'jenkins_direct':
             monitor = jenkins_monitor.JenkinsMonitor(jobs, translator)
             poller = jenkins_poller.JenkinsPoller(api_conf['url'], monitor)
+        elif api_conf['type'] == 'jenkins_aws_sqs':
+            # TODO: create AWS SQS poller and monitor
+            pass
 
         # start the light driver
         light.daemon = True
