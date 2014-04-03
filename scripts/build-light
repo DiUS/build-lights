@@ -1,7 +1,13 @@
 #!/bin/sh
 
-# copy to:
-# /etc/init.d/build-light
+### BEGIN INIT INFO
+# Provides:        build-light
+# Required-Start:  $network $syslog
+# Required-Stop:   $network $syslog
+# Default-Start:   2 3 4 5
+# Default-Stop:    1
+# Short-Description: Build Lights
+### END INIT INFO
 
 BIN_DIR="/home/pi/build-light"
 BIN_NAME="light_controller"

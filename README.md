@@ -33,3 +33,12 @@ Test it by running build-light/light_controller in the foreground first.
 
 Copy build-light/scripts/build-light to /etc/init.d/build-light
 
+To automatically start on boot:
+```
+$ insserv /etc/init.d/build-light
+```
+
+To remove automatically start on boot:
+```
+$ insserv -r /etc/init.d/build-light
+```
