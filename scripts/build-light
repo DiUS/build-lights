@@ -7,7 +7,7 @@ BIN_DIR="/home/pi/build-light"
 BIN_NAME="light_controller"
 CONFIG_FILE="/home/pi/build-light/config.json"
 CONFIG_LINE="-c $CONFIG_FILE -b -l"
-PID_FILE="/var/run/$BIN_NAME"
+PID_FILE="/var/run/${BIN_NAME}.pid"
 
 case "$1" in
     start)
