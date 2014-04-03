@@ -7,7 +7,8 @@
     },
     "api": {
         "type": "jenkins_direct",
-        "url": "http://psn-ci:8080/api/json"
+        "url": "http://psn-ci:8080/api/json",
+        "pollrate_s": 3
     },
     "jobs": [
         "ZigBee-devices-docs",

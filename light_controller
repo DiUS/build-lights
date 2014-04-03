@@ -94,9 +94,11 @@ def run():
         api_conf = conf.get_api_config()
         light_conf = conf.get_light_config()
         jobs = conf.get_jobs()
+        poll_interval_seconds = 3
 
 
         if light_conf['type'] == 'strand':
+            dlogger.log("Light type is LED strip.")
             from lights import ledstrip
             from lights import job2ledstrip
             kwargs = {}
@@ -111,8 +113,16 @@ def run():
             raise json_config.ConfigError(str(light_conf['strand']) + ' light type not supported')
 
         if api_conf['type'] == 'jenkins_direct':
+            dlogger.log("API is Jenkins API.")
             from monitors import jenkins_monitor
             from pollers import jenkins_poller
+            if api_conf.has_key('pollrate_s'):
+                if api_conf['pollrate_s'] != 0:
+                    poll_interval_seconds = api_conf['pollrate_s']
+                    dlogger.log("Polling API once every %s seconds.", str(poll_interval_seconds))
+                else:
+                    poll_interval_seconds = None
+                    dlogger.log("NOT Polling API.")
         else:
             raise ConfigError(str(api_conf['type']) + ' API type not supported')
 
