@@ -9,6 +9,8 @@ CONFIG_FILE="/home/pi/build-light/config.json"
 CONFIG_LINE="-c $CONFIG_FILE -b -l"
 PID_FILE="/var/run/${BIN_NAME}.pid"
 
+. /lib/lsb/init-functions
+
 case "$1" in
     start)
         echo "Starting build-light ..."
@@ -20,8 +22,14 @@ case "$1" in
 			kill `cat $PID_FILE`
 		fi
     ;;
+	restart)
+		$0 stop && sleep 1 && $0 start
+  		;;
+	status)
+		status_of_proc ${BIN_DIR}/${BIN_NAME} ${BIN_NAME}
+		;;
     *)
-        echo "Usage: /etc/init.d/build-light {start|stop}"
+        echo "Usage: /etc/init.d/build-light {start|stop|restart|status}"
         exit 1
     ;;
 esac
