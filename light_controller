@@ -11,6 +11,7 @@ import getopt
 
 from lib import daemonize
 from lib import logger
+from lib import list_utils
 from config import json_config
 
 
@@ -156,14 +157,36 @@ def run():
 
     dlogger.log("Starting light controller")
     try:
-        translator = job2ledstrip.Job2LedStrip(jobs, light)
-
         if api_conf['type'] == 'jenkins_direct':
+            # Poll Jenkins API directly
+            translator = job2ledstrip.Job2LedStrip(jobs, light)
             monitor = jenkins_monitor.JenkinsMonitor(jobs, translator)
             poller = jenkins_poller.JenkinsPoller(api_conf['url'], monitor)
+
         elif api_conf['type'] == 'jenkins_aws_sqs':
-            # TODO: create AWS SQS poller and monitor
-            pass
+            # Poll Jenkins via AWS SQS
+            first_job_as_trigger = True
+            if api_conf.has_key('first_job_as_trigger'):
+                first_job_as_trigger = api_conf['first_job_as_trigger']
+            if first_job_as_trigger:
+                translator = job2ledstrip.Job2LedStrip(list(list_utils.remove_first_item(jobs)), light)
+            else:
+                translator = job2ledstrip.Job2LedStrip(jobs, light)
+            monitor = jenkins_aws_sqs_monitor.JenkinsAwsSqsMonitor(jobs, translator)
+            kwargs = {}
+            kwargs['monitor'] = monitor
+            if not api_conf.has_key('sqs_region'):
+                raise json_config.ConfigError('sqs_region not configured')
+            kwargs['sqs_region'] = api_conf['sqs_region']
+            if not api_conf.has_key('sqs_queue_name'):
+                raise json_config.ConfigError('sqs_queue_name not configured')
+            kwargs['sqs_queue_name'] = api_conf['sqs_queue_name']
+            if api_conf.has_key('aws_access_key_id'):
+                kwargs['aws_access_key_id'] = api_conf['aws_access_key_id']
+            if api_conf.has_key('aws_secret_access_key'):
+                kwargs['aws_secret_access_key'] = api_conf['aws_secret_access_key']
+            poller = aws_sqs_poller.AwsSqsPoller(**kwargs)
+
 
         # start the light driver
         light.daemon = True

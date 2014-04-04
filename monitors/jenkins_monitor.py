@@ -38,7 +38,7 @@ class JenkinsMonitor(object):
     def __init__(self, jobs, translator):
         self.logger = logger.Logger('JenkinsMonitor')
         self.translator = translator
-        jobs = list_utils.flatten_list(jobs)
+        jobs = list(list_utils.flatten_list(jobs))
         self.jobs = dict.fromkeys(jobs)
 
     def process_build(self, build_json_rsp):

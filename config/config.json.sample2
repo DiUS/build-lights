@@ -11,6 +11,7 @@
         "sqs_queue_name": "raspberry-pipeline",
         "aws_access_key_id": "",
         "aws_secret_access_key": "",
+        "first_job_as_trigger": true,
         "pollrate_s": 3
     },
     "jobs": [
