@@ -23,6 +23,7 @@ STATUS = enum.Enum('UNKNOWN',
                    'BUILDING_FROM_DISABLED',
                    'BUILDING_FROM_UNSTABLE',
                    'BUILDING_FROM_NOT_BUILT',
+                   'BUILDING_FROM_PREVIOUS_STATE',
                    'POLL_ERROR',
                    'INVALID_STATUS')
 

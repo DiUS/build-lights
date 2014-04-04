@@ -20,7 +20,7 @@ class Job2LedStrip(job2light_translator.Job2LightTranslator):
         if len(jobs) == 0 or len(jobs) > self.strand.num_leds:
             raise job2light_translator.InputError('Unable to map ' + len(jobs) + ' jobs to ' + self.strand.num_leds + ' LEDs')
         # order of the jobs is important
-        self.jobs = list_utils.flatten_list(jobs)
+        self.jobs = list(list_utils.flatten_list(jobs))
         self.offset = dict.fromkeys(jobs)
         self.leds_per_job = int(self.strand.num_leds / len(self.jobs))
 
@@ -37,7 +37,15 @@ class Job2LedStrip(job2light_translator.Job2LightTranslator):
             kwargs['start_index'] = self.offset[job_name]
             kwargs['end_index']   = self.offset[job_name] + self.leds_per_job
 
-            if (job_status == job2light_translator.STATUS.UNKNOWN):
+            if (job_status == job2light_translator.STATUS.BUILDING_FROM_PREVIOUS_STATE):
+                kwargs['blink'] = True
+                self.strand.setblinkrange(**kwargs)
+                return
+
+
+            # TODO: convert colours to lookup table
+
+            elif (job_status == job2light_translator.STATUS.UNKNOWN):
                 # purple
                 kwargs['r']     = 102
                 kwargs['g']     = 0
