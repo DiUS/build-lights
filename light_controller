@@ -96,8 +96,10 @@ def run():
         conf = json_config.JsonConfig(config_file)
         api_conf = conf.get_api_config()
         light_conf = conf.get_light_config()
+        sound_conf = conf.get_sound_config()
         jobs = conf.get_jobs()
         poll_interval_seconds = 3
+        splayer = None
 
 
         if light_conf['type'] == 'strand':
@@ -114,6 +116,14 @@ def run():
             light = ledstrip.Strand(**kwargs)
         else:
             raise json_config.ConfigError(str(light_conf['strand']) + ' light type not supported')
+
+        if sound_conf.has_key('enabled'):
+            if sound_conf['enabled']:
+                from sounds import sound_player
+                sound_clips_dir = 'sounds'
+                if sound_conf.has_key('sound_clips_dir'):
+                    sound_clips_dir = sound_conf['sound_clips_dir']
+                splayer = sound_player.SoundPlayer(os.path.join(current_dir, sound_clips_dir))
 
         if api_conf['type'] == 'jenkins_direct':
             dlogger.log("API is Jenkins API.")
@@ -160,7 +170,7 @@ def run():
         if api_conf['type'] == 'jenkins_direct':
             # Poll Jenkins API directly
             translator = job2ledstrip.Job2LedStrip(jobs, light)
-            monitor = jenkins_monitor.JenkinsMonitor(jobs, translator)
+            monitor = jenkins_monitor.JenkinsMonitor(jobs, translator, sound_player=splayer)
             poller = jenkins_poller.JenkinsPoller(api_conf['url'], monitor)
 
         elif api_conf['type'] == 'jenkins_aws_sqs':
@@ -172,7 +182,7 @@ def run():
                 translator = job2ledstrip.Job2LedStrip(list(list_utils.remove_first_item(jobs)), light)
             else:
                 translator = job2ledstrip.Job2LedStrip(jobs, light)
-            monitor = jenkins_aws_sqs_monitor.JenkinsAwsSqsMonitor(jobs, translator)
+            monitor = jenkins_aws_sqs_monitor.JenkinsAwsSqsMonitor(jobs, translator, first_job_as_trigger, sound_player=splayer)
             kwargs = {}
             kwargs['monitor'] = monitor
             if not api_conf.has_key('sqs_region'):

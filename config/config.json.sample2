@@ -54,5 +54,8 @@
             "CL - Create QA",
             "CL - Destroy QA (Except RDS)"
         ]
-    ]
+    ],
+    "sound": {
+        "enabled": true
+    }
 }

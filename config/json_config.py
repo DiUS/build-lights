@@ -32,6 +32,7 @@ class JsonConfig(object):
         'api',
         'light',
         'jobs',
+        'sound',
     ]
 
     def __init__(self, config_file='config.json'):
@@ -61,3 +62,6 @@ class JsonConfig(object):
 
     def get_api_config(self):
         return self.config['api']
+
+    def get_sound_config(self):
+        return self.config['sound']

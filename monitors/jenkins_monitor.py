@@ -35,9 +35,10 @@ class JenkinsMonitor(object):
         'yellow_anime'    : job2light_translator.STATUS.BUILDING_FROM_UNSTABLE
     }
 
-    def __init__(self, jobs, translator):
+    def __init__(self, jobs, translator, sound_player=None):
         self.logger = logger.Logger('JenkinsMonitor')
         self.translator = translator
+        self.sound_player = sound_player
         jobs = list(list_utils.flatten_list(jobs))
         self.jobs = dict.fromkeys(jobs)
 

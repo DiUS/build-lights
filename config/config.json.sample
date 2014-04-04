@@ -27,5 +27,8 @@
         "ZigBee-devices-ZAP_ZNP-GridNet",
         "zigbee-gateway-gate-1",
         "zigbee-gateway-gate-2"
-    ]
+    ],
+    "sound": {
+        "enabled": false
+    }
 }
