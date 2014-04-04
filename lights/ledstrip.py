@@ -128,6 +128,11 @@ class Strand(threading.Thread):
             raise InputError('pixel_index out of range')
         self.lock.acquire()
         try:
+            # no blinking if LED is off
+            if self.led_colour[pixel_index][0] == 0 and \
+               self.led_colour[pixel_index][1] == 0 and \
+               self.led_colour[pixel_index][2] == 0:
+                blink = False
             if self.blink[pixel_index] != blink:
                 self.blink[pixel_index] = blink
                 self.update_event.set()
@@ -148,8 +153,14 @@ class Strand(threading.Thread):
         try:
             changed = False
             for i in range(start_index, end_index):
-                if self.blink[i] != blink:
-                    self.blink[i] = blink
+                tmp_blink = blink
+                # no blinking if LED is off
+                if self.led_colour[i][0] == 0 and \
+                   self.led_colour[i][1] == 0 and \
+                   self.led_colour[i][2] == 0:
+                    tmp_blink = False
+                if self.blink[i] != tmp_blink:
+                    self.blink[i] = tmp_blink
                     changed = True
             if changed:
                 self.update_event.set()
