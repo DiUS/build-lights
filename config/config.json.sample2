@@ -7,28 +7,51 @@
     },
     "api": {
         "type": "jenkins_aws_sqs",
-        "sqs_region": "",
-        "sqs_queue_name": "",
+        "sqs_region": "ap-southeast-2",
+        "sqs_queue_name": "raspberry-pipeline",
         "aws_access_key_id": "",
         "aws_secret_access_key": "",
         "pollrate_s": 3
     },
     "jobs": [
-        "ZigBee-devices-docs",
-        "ZigBee-devices-gate-1",
-        "ZigBee-devices-gate-1-NA",
-        "ZigBee-devices-gate-1-OR",
-        "ZigBee-devices-gate-2",
-        "ZigBee-devices-gate-3a",
-        "ZigBee-devices-gate-3b",
-        "ZigBee-devices-gate-3c",
-        "ZigBee-devices-gate-3d",
-        "ZigBee-devices-gate-4",
-        "ZigBee-devices-gate1-OR-2.1",
-        "ZigBee-devices-GridNet-SGC-upgrade-test",
-        "ZigBee-devices-ZAP_ZNP",
-        "ZigBee-devices-ZAP_ZNP-GridNet",
-        "zigbee-gateway-gate-1",
-        "zigbee-gateway-gate-2"
+        [
+            "WF - Prepare",
+            "WF - Unit Tests",
+            "WF - Integration Tests",
+            "WF - Deploy Test",
+            "WF - Deploy to QA",
+            "WF - Deploy to Production"
+        ],
+        [
+            "RM - Prepare",
+            "RM - Unit Tests",
+            "RM - Integration Tests",
+            "RM - Deploy Test",
+            "RM - Deploy to QA",
+            "RM - Deploy to Production"
+        ],
+        [
+            "DT - Prepare",
+            "DT - Unit Tests",
+            "DT - Deploy Test",
+            "DT - Deploy to QA",
+            "DT - Deploy to Production",
+            "DT - Deploy to Production B"
+        ],
+        [
+            "IN - Prepare",
+            "IN - Unit Tests",
+            "IN - Deploy Test",
+            "IN - Deploy QA",
+            "IN - Deploy to Production (blue)",
+            "IN - Deploy to Production (green)"
+        ],
+        [
+            "CL - Prepare",
+            "CL - Create Canary",
+            "CL - Destroy Canary",
+            "CL - Create QA",
+            "CL - Destroy QA (Except RDS)"
+        ]
     ]
 }

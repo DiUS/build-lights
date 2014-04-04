@@ -12,6 +12,7 @@ except ImportError:
 
 from lib import logger
 from lib import error
+from lib import list_utils
 from lib import json_custom_decode
 
 
@@ -49,6 +50,8 @@ class JsonConfig(object):
             raise ConfigError('api \"type\" not found in config file.')
         if not self.config['light'].has_key('type'):
             raise ConfigError('light \"type\" not found in config file.')
+        if not list_utils.list_items_unique(self.config['jobs']):
+            raise ConfigError('jobs must be unique.')
 
     def get_jobs(self):
         return self.config['jobs']

@@ -11,6 +11,7 @@ except ImportError:
     import simplejson as json
 
 from lib import logger
+from lib import list_utils
 from lib import json_custom_decode
 from lights import job2light_translator
 
@@ -18,25 +19,26 @@ from lights import job2light_translator
 class JenkinsMonitor(object):
 
     status_dict = {
-      'aborted'         : job2light_translator.STATUS.ABORTED,
-      'aborted_anime'   : job2light_translator.STATUS.BUILDING_FROM_ABORTED,
-      'blue'            : job2light_translator.STATUS.SUCCESS,
-      'blue_anime'      : job2light_translator.STATUS.BUILDING_FROM_SUCCESS,
-      'disabled'        : job2light_translator.STATUS.DISABLED,
-      'disabled_anime'  : job2light_translator.STATUS.BUILDING_FROM_DISABLED,
-      'grey'            : job2light_translator.STATUS.UNKNOWN,
-      'grey_anime'      : job2light_translator.STATUS.BUILDING_FROM_UNKNOWN,
-      'notbuilt'        : job2light_translator.STATUS.NOT_BUILT,
-      'notbuilt_anime'  : job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT,
-      'red'             : job2light_translator.STATUS.FAILURE,
-      'red_anime'       : job2light_translator.STATUS.BUILDING_FROM_FAILURE,
-      'yellow'          : job2light_translator.STATUS.UNSTABLE,
-      'yellow_anime'    : job2light_translator.STATUS.BUILDING_FROM_UNSTABLE
+        'aborted'         : job2light_translator.STATUS.ABORTED,
+        'aborted_anime'   : job2light_translator.STATUS.BUILDING_FROM_ABORTED,
+        'blue'            : job2light_translator.STATUS.SUCCESS,
+        'blue_anime'      : job2light_translator.STATUS.BUILDING_FROM_SUCCESS,
+        'disabled'        : job2light_translator.STATUS.DISABLED,
+        'disabled_anime'  : job2light_translator.STATUS.BUILDING_FROM_DISABLED,
+        'grey'            : job2light_translator.STATUS.UNKNOWN,
+        'grey_anime'      : job2light_translator.STATUS.BUILDING_FROM_UNKNOWN,
+        'notbuilt'        : job2light_translator.STATUS.NOT_BUILT,
+        'notbuilt_anime'  : job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT,
+        'red'             : job2light_translator.STATUS.FAILURE,
+        'red_anime'       : job2light_translator.STATUS.BUILDING_FROM_FAILURE,
+        'yellow'          : job2light_translator.STATUS.UNSTABLE,
+        'yellow_anime'    : job2light_translator.STATUS.BUILDING_FROM_UNSTABLE
     }
 
     def __init__(self, jobs, translator):
         self.logger = logger.Logger('JenkinsMonitor')
         self.translator = translator
+        jobs = list_utils.flatten_list(jobs)
         self.jobs = dict.fromkeys(jobs)
 
     def process_build(self, build_json_rsp):
@@ -50,7 +52,7 @@ class JenkinsMonitor(object):
         #self.logger.log('Jobs: %s', self.jobs)
 
         for job_name, status in self.jobs.iteritems():
-          self.translator.update(job_name, status)
+            self.translator.update(job_name, status)
 
     # return true for only the jobs we're interested in
     def __filter_build(self, build):
