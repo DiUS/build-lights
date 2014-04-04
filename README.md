@@ -27,7 +27,22 @@ Currently only polls Jenkins and drives LED strip.
 $ git clone https://github.com/jasaw/build-light.git
 ```
 
-Create config.json based on build-light/config/config.json.sample
+If using AWS/SQS you'll need to:
+```
+$ git clone git://github.com/boto/boto.git
+$ cd boto
+$ sudo python setup.py install
+```
+You'll need to install AWS/SQS plugin on Jenkins too: https://github.com/jkelabora/snsnotify-plugin
+
+If you want to play sounds (mp3's only):
+```
+$ sudo apt-get update
+$ sudo apt-get install alsa-utils
+$ sudo apt-get install mpg321
+```
+
+Create config.json based on one of the sample files in build-light/config/
 
 Test it by running build-light/light_controller in the foreground first.
 
