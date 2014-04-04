@@ -24,7 +24,8 @@ def list_items_unique(list_to_verify):
     Verifies that all items are unique.
     Returns True if unique, otherwise False.
     """
-    if len(list_to_verify) > len(set(list_to_verify)):
+    tmp_list = list(flatten_list(list_to_verify))
+    if len(tmp_list) > len(set(tmp_list)):
         return False
     return True
 
@@ -43,3 +44,14 @@ def find_list_given_value(nested_list, value):
         if item == value:
             yield nested_list
 
+def remove_first_item(nested_list):
+    """
+    Removes the first element of the deepest list.
+    >>> tuple(remove_first_item([['abc','def','ghi'],['123','456','789'],[['000','999'],['AAA','BBB']]]))
+    (['def', 'ghi'], ['456', '789'], [['999'], ['BBB']])
+    """
+    for item in nested_list:
+        if isinstance(item, list):
+            yield list(remove_first_item(item))
+        elif nested_list.index(item) != 0:
+            yield item
