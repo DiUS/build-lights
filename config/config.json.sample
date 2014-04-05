@@ -29,6 +29,7 @@
         "zigbee-gateway-gate-2"
     ],
     "sound": {
-        "enabled": false
+        "enabled": false,
+        "bin_path": "/usr/bin/mpg321"
     }
 }

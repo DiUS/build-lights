@@ -16,7 +16,7 @@ from lib import logger
 
 class SoundPlayer(object):
 
-    def __init__(self, sound_clips_directory, player_bin='mpg321'):
+    def __init__(self, sound_clips_directory, player_bin='/usr/bin/mpg321'):
         self.logger = logger.Logger('SoundPlayer')
         self.sound_clips_directory = sound_clips_directory
         self.player_bin = player_bin
@@ -60,4 +60,3 @@ class SoundPlayer(object):
         if len(files) > 0:
             return files[randrange(len(files))]
         return None
-
