@@ -16,7 +16,7 @@ from lib import logger
 
 class SoundPlayer(object):
 
-    def __init__(self, sound_clips_directory, player_bin='/usr/bin/mpg321'):
+    def __init__(self, sound_clips_directory, player_bin='mpg321'):
         self.logger = logger.Logger('SoundPlayer')
         self.sound_clips_directory = sound_clips_directory
         self.player_bin = player_bin
@@ -32,7 +32,10 @@ class SoundPlayer(object):
                 # subprocess terminated
                 self.player_proc = None
         if self.player_proc is not None:
-            self.player_proc.kill()
+            try:
+                self.player_proc.kill()
+            except OSError, e:
+                self.logger.log('kill error: %s', str(e.reason))
             self.player_proc = None
 
     def play_random_start_sound(self):

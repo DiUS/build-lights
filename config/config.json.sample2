@@ -57,6 +57,6 @@
     ],
     "sound": {
         "enabled": true,
-        "bin_path": "/usr/bin/mpg321"
+        "bin_path": "mpg321"
     }
 }
