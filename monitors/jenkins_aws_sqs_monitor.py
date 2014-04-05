@@ -80,9 +80,17 @@ class JenkinsAwsSqsMonitor(object):
         if self.first_job_as_trigger:
             # use the first job as the indicator of pipeline started
             if found_segment_number == 0:
+                if self.sound_player is not None:
+                    self.sound_player.play_random_start_sound()
                 for i in range(1, len(found_pipeline)):
                     self.jobs[found_pipeline[i]] = job2light_translator.STATUS.BUILDING_FROM_PREVIOUS_STATE
                 return
+
+        if self.sound_player is not None:
+            if found_status == 'SUCCESS':
+                self.sound_player.play_random_success_sound()
+            elif found_status == 'FAILURE':
+                self.sound_player.play_random_failure_sound()
 
         index = 0
         if self.first_job_as_trigger:

@@ -42,10 +42,42 @@ class JenkinsMonitor(object):
         jobs = list(list_utils.flatten_list(jobs))
         self.jobs = dict.fromkeys(jobs)
 
+    def __play_sound(self, sound_statuses):
+        if self.sound_player is not None:
+            building_statuses = [
+                job2light_translator.STATUS.BUILDING_FROM_ABORTED,
+                job2light_translator.STATUS.BUILDING_FROM_SUCCESS,
+                job2light_translator.STATUS.BUILDING_FROM_DISABLED,
+                job2light_translator.STATUS.BUILDING_FROM_UNKNOWN,
+                job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT,
+                job2light_translator.STATUS.BUILDING_FROM_FAILURE,
+                job2light_translator.STATUS.BUILDING_FROM_UNSTABLE,
+                job2light_translator.STATUS.BUILDING_FROM_PREVIOUS_STATE,
+            ]
+            # look for failure first, then success
+            if job2light_translator.STATUS.FAILURE in sound_statuses:
+                self.sound_player.play_random_failure_sound()
+            elif job2light_translator.STATUS.BUILDING_FROM_SUCCESS in sound_statuses:
+                self.sound_player.play_random_success_sound()
+            else:
+                for status in sound_statuses:
+                    if status in building_statuses:
+                        self.sound_player.play_random_start_sound()
+                        break
+
     def process_build(self, build_json_rsp):
         if build_json_rsp is not None:
             parsed_rsp = json.loads(build_json_rsp, object_hook=json_custom_decode.decode_unicode_to_str_dict)
-            self.jobs = self.__parse_build(parsed_rsp)
+            new_jobs = self.__parse_build(parsed_rsp)
+            sound_statuses = []
+            sound_statuses_to_ignore = [job2light_translator.STATUS.POLL_ERROR,
+                                        job2light_translator.STATUS.INVALID_STATUS]
+            for job_name, status in new_jobs.iteritems():
+                if self.jobs[job_name] != status:
+                    if self.jobs[job_name] not in sound_statuses_to_ignore:
+                        sound_statuses.append(status)
+                    self.jobs[job_name] = status
+            self.__play_sound(sound_statuses)
         else:
             for name in self.jobs:
                 self.jobs[name] = job2light_translator.STATUS.POLL_ERROR
