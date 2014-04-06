@@ -121,10 +121,9 @@ def run():
             if sound_conf['enabled']:
                 from sounds import sound_player
                 kwargs = {}
-                sound_clips_dir = 'sounds'
+                kwargs['sound_clips_directory'] = os.path.join(current_dir, 'sounds')
                 if sound_conf.has_key('sound_clips_dir'):
-                    sound_clips_dir = sound_conf['sound_clips_dir']
-                kwargs['sound_clips_directory'] = os.path.join(current_dir, sound_clips_dir)
+                    kwargs['sound_clips_directory'] = sound_conf['sound_clips_dir']
                 if sound_conf.has_key('bin_path'):
                     kwargs['player_bin'] = sound_conf['bin_path']
                 splayer = sound_player.SoundPlayer(**kwargs)
