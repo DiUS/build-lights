@@ -5,6 +5,12 @@ Continuous Integration build light controller.
 
 Monitors Jenkins CI and provides visual indication of the build status via LED strip.
 
+Features:
+* Monitors Jenkins web API directly.
+* Monitors Jenkins via AWS SQS.
+* Plays sound when build finishes.
+* Automatically divides LEDs to each build.
+
 
 
 ### Hardware
