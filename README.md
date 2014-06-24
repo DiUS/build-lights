@@ -65,18 +65,25 @@ $ sudo apt-get install alsa-utils
 $ sudo apt-get install mpg321
 ```
 
+Depending on your distro, you may need to load the SPI driver:
+```
+$ modprobe spi-bcm2708
+```
+
+Automatically load the SPI driver on boot by adding "spi-bcm2708" to /etc/modules.
+
 Create config.json based on one of the sample files in build-light/config/
 
-Test it by running build-light/light_controller in the foreground first.
+Test it by running build-light/light_controller in the foreground first (as root).
 
 Copy build-light/scripts/build-light to /etc/init.d/build-light
 
-To automatically start on boot:
+To automatically start on boot (as root):
 ```
 $ insserv /etc/init.d/build-light
 ```
 
-To remove automatically start on boot:
+To remove automatically start on boot (as root):
 ```
 $ insserv -r /etc/init.d/build-light
 ```
