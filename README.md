@@ -19,7 +19,7 @@ You'll need:
 * Raspberry Pi with enclosure and SD card
 * Digital RGB LED Weatherproof Strip LEDs (1m) - https://www.adafruit.com/products/306
 * 4-pin JST SM Plug + Receptacle Cable Set - http://www.adafruit.com/products/578
-* 5V 2A (2000mA) switching power supply (UL Listed) - https://www.adafruit.com/products/276
+* 5V 2A (2000mA) UL Listed switching power supply (Warning: We need at least 3A power supply, but this will do as long as the lights are *NOT* on full brightness all at the same time) - https://www.adafruit.com/products/276
 * Micro USB to 5.5mm female DC jack (Part Number: VUPN7718) - http://www.vetco.net/catalog/product_info.php?products_id=14954
 * 4-pin 0.1" (2.54mm) pitch male header
 * 4 jumper wires (Black, Red, Yellow, Green) or 4 wires with 4-way 0.1" pitch female connector
@@ -71,6 +71,12 @@ $ modprobe spi-bcm2708
 ```
 
 Automatically load the SPI driver on boot by adding "spi-bcm2708" to /etc/modules.
+
+Assuming you have a standard setup of 32 lights connected to spidev0.0, you can test the lights by running (as root):
+```
+$ cd build-light/lights
+$ python test.py
+```
 
 Create config.json based on one of the sample files in build-light/config/
 
