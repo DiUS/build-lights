@@ -21,7 +21,7 @@ class Job2LedStrip(job2light_translator.Job2LightTranslator):
             raise job2light_translator.InputError('Unable to map ' + len(jobs) + ' jobs to ' + self.strand.num_leds + ' LEDs')
         # order of the jobs is important
         self.jobs = list(list_utils.flatten_list(jobs))
-        self.offset = dict.fromkeys(jobs)
+        self.offset = dict.fromkeys(self.jobs)
         self.leds_per_job = int(self.strand.num_leds / len(self.jobs))
 
         index = 0
