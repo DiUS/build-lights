@@ -182,7 +182,8 @@ def run():
             if api_conf.has_key('first_job_as_trigger'):
                 first_job_as_trigger = api_conf['first_job_as_trigger']
             if first_job_as_trigger:
-                translator = job2ledstrip.Job2LedStrip(list(list_utils.remove_first_item(jobs)), light)
+                tmplist = list(list_utils.remove_first_item(jobs))
+                translator = job2ledstrip.Job2LedStrip(tmplist, light)
             else:
                 translator = job2ledstrip.Job2LedStrip(jobs, light)
             monitor = jenkins_aws_sqs_monitor.JenkinsAwsSqsMonitor(jobs, translator, first_job_as_trigger, sound_player=splayer)

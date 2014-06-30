@@ -31,7 +31,8 @@ class JenkinsAwsSqsMonitor(object):
         self.first_job_as_trigger = first_job_as_trigger
         self.sound_player = sound_player
         self.pipeline = jobs
-        self.jobs = dict.fromkeys(list(list_utils.flatten_list(jobs)))
+        tmplist = list(list_utils.flatten_list(jobs))
+        self.jobs = dict.fromkeys(tmplist)
         # initialize status to Unknown state
         for name in self.jobs:
             self.jobs[name] = job2light_translator.STATUS.UNKNOWN
