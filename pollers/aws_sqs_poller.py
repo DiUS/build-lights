@@ -39,7 +39,7 @@ class AwsSqsPoller(object):
             job = sqs_q.read()
             if job is not None:
                 response_body = job.get_body()
-                self.logger.log('Job found with content: %s', response_body)
+                self.logger.log('Job found with content: %s', str(response_body))
                 sqs_q.delete_message(job)
 
         # FIXME: what other exceptions does boto raise? We need to catch them here.
