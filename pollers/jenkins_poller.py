@@ -29,5 +29,8 @@ class JenkinsPoller(object):
         except urllib2.URLError, e:
             self.logger.log('URL error: %s', str(e.reason))
             response_body = None
+        except urllib2.httplib.BadStatusLine, e:
+            self.logger.log('HTTP bad status line: %s', str(e.reason))
+            response_body = None
 
         self.monitor.process_build(response_body)
