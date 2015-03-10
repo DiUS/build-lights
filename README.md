@@ -11,6 +11,7 @@ Features:
 * Plays sound when build finishes.
 * Automatically divides LEDs to each build.
 
+![build-lights](https://github.com/jasaw/build-light/blob/master/docs/lights.jpg)
 
 
 ### Hardware
@@ -28,6 +29,11 @@ You'll need:
 
 The Pi is fitted with a polyfuse at the USB 5V rail.
 You'll need to tap the 5V from the input side of the polyfuse.
+
+![pre-polyfuse 5V](https://github.com/jasaw/build-light/blob/master/docs/bottom.jpg)
+
+![top](https://github.com/jasaw/build-light/blob/master/docs/top.jpg)
+
 Refer to images in build-light/docs.
 When soldering the 4-pin JST SM Plug to the LED strip, make sure to solder it on the input side of the strip (input is marked with DI, CI).
 If you want protection for the Pi SPI pins, include the schmitt trigger buffer along the 2 SPI lines and power the buffer from the 5V that was tapped earlier (before the polyfuse).
