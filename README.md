@@ -71,12 +71,12 @@ $ sudo apt-get install alsa-utils
 $ sudo apt-get install mpg321
 ```
 
-Depending on your distro, you may need to load the SPI driver:
+If you are using device-tree, enable SPI driver from raspi-config.
 ```
-$ modprobe spi-bcm2708
+raspi-config
 ```
 
-Automatically load the SPI driver on boot by adding "spi-bcm2708" to /etc/modules.
+otherwise you'll need to add "spi-bcm2708" to /etc/modules to automatically load the SPI driver on boot.
 
 Assuming you have a standard setup of 32 lights connected to spidev0.0, you can test the lights by running (as root):
 ```
