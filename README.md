@@ -18,8 +18,12 @@ Features:
 
 You'll need:
 * Raspberry Pi with enclosure and SD card
-* Digital RGB LED Weatherproof Strip LEDs (1m) - ![adafruit](https://www.adafruit.com/products/306), ![AliExpress Lighting Boutique](http://www.aliexpress.com/item/1M-LPD8806-32leds-m-48leds-m-52leds-m-60leds-m-optional-Waterproof-or-Non-Waterproof-LPD8806/32345061646.html), ![AliExpress Angel-LED](http://www.aliexpress.com/item/1M-5M-LPD8806-32leds-m-48leds-m-52leds-m-60leds-m-optional-Waterproof-or-Non-Waterproof/32428471835.html)
-* 4-pin JST SM Plug + Receptacle Cable Set - ![adafruit](http://www.adafruit.com/products/578), ![AliExpress Tranton Lighting](http://www.aliexpress.com/item/JST-4Pin-SM-Connector-15cm-LED-Strip-Connector-Cable-Female-Male-Set-5pcs-lot/32417877799.html)
+* Digital RGB LED Weatherproof Strip LEDs (1m)
+  * adafruit - https://www.adafruit.com/products/306
+  * AliExpress Lighting Boutique - http://www.aliexpress.com/item/1M-LPD8806-32leds-m-48leds-m-52leds-m-60leds-m-optional-Waterproof-or-Non-Waterproof-LPD8806/32345061646.html
+* 4-pin JST SM Plug + Receptacle Cable Set
+  * adafruit - http://www.adafruit.com/products/578
+  * AliExpress Cool Light LED Technologies - http://www.aliexpress.com/item/4Pin-SM-connector-4Way-Multipole-Connector-cable-plug-With-wire-ternimal-male-and-female-set-5pcs/32418707788.html
 * 5V 2A (2000mA) UL Listed switching power supply (Warning: We need at least 3A power supply, but this will do as long as the lights are *NOT* on full brightness all at the same time) - https://www.adafruit.com/products/276
 * Micro USB to 5.5mm female DC jack (Part Number: VUPN7718) - http://www.vetco.net/catalog/product_info.php?products_id=14954
 * 4-pin 0.1" (2.54mm) pitch male header
