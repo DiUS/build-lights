@@ -1,0 +1,23 @@
+{
+  "name": "web-controller",
+  "version": "1.0.0",
+  "description": "Build lights web controller",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dius/build-lights.git"
+  },
+  "keywords": [
+    "build",
+    "lights"
+  ],
+  "author": "DiUS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dius/build-lights/issues"
+  },
+  "homepage": "https://github.com/dius/build-lights#readme"
+}
