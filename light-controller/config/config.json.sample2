@@ -1,6 +1,6 @@
 {
     "light": {
-        "type": "strand",
+        "type": "adafruit_lpd8806",
         "num_leds": 32,
         "simulate_mode": false,
         "spidev": "/dev/spidev0.0"

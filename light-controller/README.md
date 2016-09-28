@@ -1,7 +1,7 @@
-build-light
+build-lights
 ===========
 
-Continuous Integration build light controller.
+Continuous Integration build lights controller.
 
 Monitors Jenkins CI and provides visual indication of the build status via LED strip.
 
@@ -11,7 +11,7 @@ Features:
 * Plays sound when build finishes.
 * Automatically divides LEDs to each build.
 
-![build-lights](https://github.com/jasaw/build-light/blob/master/docs/lights.jpg)
+![build-lights](https://github.com/jasaw/build-lights/blob/master/docs/lights.jpg)
 
 
 ### Hardware
@@ -21,9 +21,11 @@ You'll need:
 * Digital RGB LED Weatherproof Strip LEDs (1m)
   * adafruit - https://www.adafruit.com/products/306
   * AliExpress Lighting Boutique - http://www.aliexpress.com/item/1M-LPD8806-32leds-m-48leds-m-52leds-m-60leds-m-optional-Waterproof-or-Non-Waterproof-LPD8806/32345061646.html
+  * Little bird electronics - https://littlebirdelectronics.com.au/products/digital-rgb-led-weatherproof-strip-lpd8806-32-led-1m
 * 4-pin JST SM Plug + Receptacle Cable Set
   * adafruit - http://www.adafruit.com/products/578
   * AliExpress Cool Light LED Technologies - http://www.aliexpress.com/item/4Pin-SM-connector-4Way-Multipole-Connector-cable-plug-With-wire-ternimal-male-and-female-set-5pcs/32418707788.html
+  * Little bird electronics - https://littlebirdelectronics.com.au/products/4-pin-jst-sm-plug-receptacle-cable-set
 * 5V 2A (2000mA) UL Listed switching power supply (Warning: We need at least 3A power supply, but this will do as long as the lights are *NOT* on full brightness all at the same time) - https://www.adafruit.com/products/276
 * Micro USB to 5.5mm female DC jack (Part Number: VUPN7718) - http://www.vetco.net/catalog/product_info.php?products_id=14954
 * 4-pin 0.1" (2.54mm) pitch male header
@@ -34,11 +36,11 @@ You'll need:
 The Pi is fitted with a polyfuse at the USB 5V rail.
 You'll need to tap the 5V from the input side of the polyfuse.
 
-![pre-polyfuse 5V](https://github.com/jasaw/build-light/blob/master/docs/bottom.jpg)
+![pre-polyfuse 5V](https://github.com/jasaw/build-lights/blob/master/docs/bottom.jpg)
 
-![top](https://github.com/jasaw/build-light/blob/master/docs/top.jpg)
+![top](https://github.com/jasaw/build-lights/blob/master/docs/top.jpg)
 
-Refer to images in build-light/docs.
+Refer to images in build-lights/docs.
 When soldering the 4-pin JST SM Plug to the LED strip, make sure to solder it on the input side of the strip (input is marked with DI, CI).
 If you want protection for the Pi SPI pins, include the schmitt trigger buffer along the 2 SPI lines and power the buffer from the 5V that was tapped earlier (before the polyfuse).
 
@@ -54,9 +56,9 @@ You'll need:
 
 ### Installation
 
-First of all, get the build-light source.
+First of all, get the build-lights source.
 ```
-$ git clone https://github.com/jasaw/build-light.git
+$ git clone https://github.com/jasaw/build-lights.git
 ```
 
 If using AWS/SQS you'll need to:
@@ -84,22 +86,22 @@ otherwise you'll need to add "spi-bcm2708" to /etc/modules to automatically load
 
 Assuming you have a standard setup of 32 lights connected to spidev0.0, you can test the lights by running (as root):
 ```
-$ cd build-light/lights
+$ cd build-lights/lights
 $ python test.py
 ```
 
-Create config.json based on one of the sample files in build-light/config/
+Create config.json based on one of the sample files in build-lights/config/
 
-Test it by running build-light/light_controller in the foreground first (as root).
+Test it by running build-lights/light_controller in the foreground first (as root).
 
-Copy build-light/scripts/build-light to /etc/init.d/build-light
+Copy build-lights/scripts/build-lights to /etc/init.d/build-lights
 
 To automatically start on boot (as root):
 ```
-$ insserv /etc/init.d/build-light
+$ insserv /etc/init.d/build-lights
 ```
 
 To remove automatically start on boot (as root):
 ```
-$ insserv -r /etc/init.d/build-light
+$ insserv -r /etc/init.d/build-lights
 ```

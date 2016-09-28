@@ -102,9 +102,9 @@ def run():
         splayer = None
 
 
-        if light_conf['type'] == 'strand':
-            dlogger.log("Light type is LED strip.")
-            from lights import ledstrip
+        if light_conf['type'] == 'adafruit_lpd8806':
+            dlogger.log("Light type is Adafruit LPD8806 LED strip.")
+            from lights import adafruit_lpd8806
             from lights import job2ledstrip
             kwargs = {}
             if light_conf.has_key('num_leds'):
@@ -113,7 +113,19 @@ def run():
                 kwargs['spidev'] = light_conf['spidev']
             if light_conf.has_key('simulate_mode'):
                 kwargs['simulate_mode'] = light_conf['simulate_mode']
-            light = ledstrip.Strand(**kwargs)
+            light = adafruit_lpd8806.Strand(**kwargs)
+        elif light_conf['type'] == 'epistar_lpd8806':
+            dlogger.log("Light type is Epistar LPD8806 LED strip.")
+            from lights import epistar_lpd8806
+            from lights import job2ledstrip
+            kwargs = {}
+            if light_conf.has_key('num_leds'):
+                kwargs['num_leds'] = light_conf['num_leds']
+            if light_conf.has_key('spidev'):
+                kwargs['spidev'] = light_conf['spidev']
+            if light_conf.has_key('simulate_mode'):
+                kwargs['simulate_mode'] = light_conf['simulate_mode']
+            light = epistar_lpd8806.Strand(**kwargs)
         else:
             raise json_config.ConfigError(str(light_conf['strand']) + ' light type not supported')
 

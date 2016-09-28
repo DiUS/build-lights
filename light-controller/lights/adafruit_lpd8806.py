@@ -1,5 +1,5 @@
 """
-ledstrip.py: Raspberry Pi library for the Adafruit LPD8806 RGB Strand
+adafruit_lpd8806.py: Raspberry Pi library for the Adafruit LPD8806 RGB Strand
 
 Provides the ability to drive a LPD8806 based strand of RGB leds from the Raspberry Pi
 
