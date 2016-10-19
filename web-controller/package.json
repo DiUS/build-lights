@@ -4,6 +4,7 @@
   "description": "Build lights web controller",
   "main": "index.js",
   "scripts": {
+    "start": "VUE_ENV=server node app.js",
     "test": "mocha"
   },
   "repository": {
@@ -14,10 +15,21 @@
     "build",
     "lights"
   ],
+  "standard": {
+    "globals": [ "Vue" ]
+  },
   "author": "DiUS",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dius/build-lights/issues"
   },
-  "homepage": "https://github.com/dius/build-lights#readme"
+  "homepage": "https://github.com/dius/build-lights#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "vue": "^2.0.3",
+    "vue-server-renderer": "^2.0.3"
+  },
+  "devDependencies": {
+    "vue-cli": "^2.4.0"
+  }
 }

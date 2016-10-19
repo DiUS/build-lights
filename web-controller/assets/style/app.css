@@ -1,0 +1,21 @@
+.navigation {
+  background-color: #f5f5f5;
+  height: 80px;
+}
+
+.navigation ul {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  list-style: none;
+}
+
+.navigation ul  li {
+  height: 100%;
+  width: 100%;
+}
+
+.navigation ul  li a {
+  display: block;
+}
