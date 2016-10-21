@@ -51,6 +51,8 @@
   "dependencies": {
     "compression": "^1.6.2",
     "express": "^4.14.0",
-    "express-handlebars": "^3.0.0"
+    "express-handlebars": "^3.0.0",
+    "nodejs-system-reboot": "0.0.4",
+    "power-off": "^1.0.2"
   }
 }

@@ -1,7 +1,9 @@
 'use strict'
 
 const express = require('express')
+const powerOff = require('power-off')
 const compression = require('compression')
+const reboot = require('nodejs-system-reboot')
 const expressHandlebars = require('express-handlebars')
 
 const app = express()
@@ -22,6 +24,28 @@ app.use(compression())
 
 app.get('/', (req, res) => {
   res.render('home')
+})
+
+app.get('/reboot', (req, res) => {
+  reboot((err, stdErr, stdOut) => {
+    if (err) {
+      // TODO log error
+      return res.render('home', { message: 'Could not reboot.' })
+    }
+
+    res.end()
+  })
+})
+
+app.get('/shutdown', (req, res) => {
+  powerOff((err, stdErr, stdOut) => {
+    if (err) {
+      // TODO log error
+      return res.render('home', { message: 'Could not shutdown.' })
+    }
+
+    res.end()
+  })
 })
 
 app.listen(3000, () => {
