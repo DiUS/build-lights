@@ -19,7 +19,6 @@ app.set('view engine', 'handlebars')
 app.set('views', `${process.cwd()}/src/server/views`)
 
 app.use('/static', express.static(`${process.cwd()}/src/server/public`))
-
 app.use(compression())
 
 app.get('/', (req, res) => {
