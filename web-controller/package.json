@@ -4,6 +4,8 @@
   "description": "Build lights web controller",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon ./src/server/index.js",
+    "dist": "rollup -m -c ./config/rollup.config.js",
     "test": "mocha"
   },
   "repository": {
@@ -11,13 +13,44 @@
     "url": "git+https://github.com/dius/build-lights.git"
   },
   "keywords": [
-    "build",
-    "lights"
+    "build lights",
+    "pi lights",
+    "build monitor"
   ],
-  "author": "DiUS",
-  "license": "MIT",
+  "author": "Tarcio Saraiva <tsaraiva@dius.com.au>",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/dius/build-lights/issues"
   },
-  "homepage": "https://github.com/dius/build-lights#readme"
+  "homepage": "https://github.com/dius/build-lights#readme",
+  "standard": {
+    "ignore": [
+      "config/**"
+    ]
+  },
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.2.0",
+    "chai": "^3.5.0",
+    "cssnano": "^3.7.7",
+    "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
+    "postcss-cssnext": "^2.8.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-simple-vars": "^3.0.0",
+    "rollup": "^0.36.3",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-css-only": "0.0.4",
+    "rollup-plugin-livereload": "^0.1.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-postcss": "^0.2.0",
+    "rollup-plugin-serve": "^0.1.0",
+    "rollup-watch": "^2.5.0",
+    "standard": "^8.4.0"
+  },
+  "dependencies": {
+    "compression": "^1.6.2",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0"
+  }
 }
