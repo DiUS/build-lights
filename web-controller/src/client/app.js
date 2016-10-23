@@ -1,14 +1,15 @@
 'use strict'
 
 import * as view from './view'
-import { data as model } from './model'
+import { model } from './model'
 
-// document.addEventListener('DOMContentLoaded', event => {
-//   willLoadTasks(data, present)
-// })
+const cb = (event) => {
+  view.display(view.init(model))
+}
 
-// window.onload = event => {
-//   loadTasks(data, present)
-// }
-
-view.display(view.init(model))
+if (document.readyState === 'complete' ||
+    (document.readyState !== 'loading' && !document.documentElement.doScroll)) {
+  cb()
+} else {
+  document.addEventListener('DOMContentLoaded', cb)
+}

@@ -1,16 +1,23 @@
 'use strict'
 
-// import { render } from './state'
+import { render as renderState } from './state'
 
-export const data = {
-  activeTool: 'network',
+export const model = {
   tools: [
-    { network: {} },
-    { jobs: {} }
+    { name: 'network', configuration: {}, active: true },
+    { name: 'jobs', configuration: {}, active: true },
+    { name: 'statistics', configuration: {}, active: false }
   ],
-  networkConfigured: false
+  selectedTool: 'network'
 }
 
-// export function present (updatedData) {
-//   render(updatedData)
-// }
+export function present (updatedData) {
+  if (updatedData.tabChange && model.selectedTool !== updatedData.tabChange) {
+    model.selectedTool = updatedData.tabChange
+    model.tabChanged = true
+  } else {
+    model.tabChanged = false
+  }
+
+  renderState(model)
+}

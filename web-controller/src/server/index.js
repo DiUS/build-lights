@@ -1,5 +1,7 @@
 'use strict'
 
+require('nodejs-dashboard')
+
 const express = require('express')
 const powerOff = require('power-off')
 const compression = require('compression')

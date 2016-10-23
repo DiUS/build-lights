@@ -2,6 +2,7 @@ import babel from 'rollup-plugin-babel'
 import postcss from 'rollup-plugin-postcss'
 import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
+import livereload from 'rollup-plugin-livereload'
 
 // PostCSS plugins
 import cssnano from 'cssnano'

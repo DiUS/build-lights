@@ -1,10 +1,20 @@
 'use strict'
 
+import InfernoDOM from 'inferno-dom'
+
+import { Tab } from './components/Tab'
+
 export function init (model) {
-  return '<p>test</p>'
+  return Tab(model)
+}
+
+export function tabChange (model) {
+  return Tab(model)
 }
 
 export function display (representation) {
-  const stateRepresentation = document.getElementById('representation')
-  stateRepresentation.innerHTML = representation
+  InfernoDOM.render(
+    representation,
+    document.getElementById('representation')
+  )
 }

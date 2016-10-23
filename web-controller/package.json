@@ -4,8 +4,12 @@
   "description": "Build lights web controller",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/server/index.js",
-    "dist": "rollup -m -c ./config/rollup.config.js",
+    "clean": "rimraf coverage jscpd.json",
+    "dev:server": "nodejs-dashboard nodemon ./src/server/index.js",
+    "dev:client": "rollup -m -c ./config/rollup.config.js --watch",
+    "lint": "standard",
+    "jscpd": "jscpd -p src -r json -e \"src/server/public/js\" -o jscpd.json",
+    "pretest": "npm run lint && npm run jscpd",
     "test": "mocha"
   },
   "repository": {
@@ -29,17 +33,23 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-inferno": "^1.0.0-legacy",
     "babel-preset-es2015-rollup": "^1.2.0",
     "chai": "^3.5.0",
     "cssnano": "^3.7.7",
+    "jscpd": "^0.6.5",
     "mocha": "^3.1.2",
+    "nodejs-dashboard": "^0.1.2",
     "nodemon": "^1.11.0",
     "postcss-cssnext": "^2.8.0",
     "postcss-nested": "^1.0.0",
     "postcss-simple-vars": "^3.0.0",
+    "rimraf": "^2.5.4",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-jsx": "^1.0.3",
+    "rollup-plugin-livereload": "^0.1.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-postcss": "^0.2.0",
     "rollup-watch": "^2.5.0",
@@ -49,6 +59,10 @@
     "compression": "^1.6.2",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
+    "inferno": "^0.7.27",
+    "inferno-component": "^0.7.27",
+    "inferno-create-element": "^0.7.27",
+    "inferno-dom": "^0.7.27",
     "nodejs-system-reboot": "0.0.4",
     "power-off": "^1.0.2"
   }
