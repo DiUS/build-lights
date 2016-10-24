@@ -4,3 +4,4 @@ node_js:
 - '6'
 matrix:
   fast_finish: true
+script: cd web-controller && npm i && npm t
