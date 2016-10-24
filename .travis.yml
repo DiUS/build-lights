@@ -4,4 +4,6 @@ node_js:
 - '6'
 matrix:
   fast_finish: true
-script: cd web-controller && npm i && npm t
+before_install: pushd web-controller
+script: npm test
+after_script: popd
