@@ -73,3 +73,6 @@ img {
     height: auto;
     border: 0;
 }
+input, select {
+    font: 16px/1 'Open Sans', sans-serif;
+}

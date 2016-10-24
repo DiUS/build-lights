@@ -23,7 +23,7 @@ $skyBlue: #00B6F0;
                 color: #666;
                 display: block;
                 font-family: 'Roboto', sans-serif;
-                font-size: 1.125em;
+                font-size: 1.25em;
                 font-weight: bold;
                 text-transform: capitalize;
             }
@@ -50,15 +50,14 @@ $skyBlue: #00B6F0;
     }
 
     .tab-content {
-        padding: 0.625em;
+        padding: 1em 1.5em;
         border-left: $borderThickness solid $skyBlue;
-        border-right: $borderThickness solid $skyBlue;
 
         div {
-            display: none;
+            display: block;
 
-            &.shown {
-                display: block;
+            &.hidden {
+                display: none;
             }
         }
     }

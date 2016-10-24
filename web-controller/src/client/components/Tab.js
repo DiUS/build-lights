@@ -13,7 +13,8 @@ export const Tab = (model) => {
     .map(t => {
       return {
         name: t.name,
-        active: t.name === model.selectedTool
+        active: t.name === model.selectedTool,
+        configuration: t.configuration
       }
     })
 

@@ -4,7 +4,7 @@ import * as view from './view'
 import { model } from './model'
 
 const cb = (event) => {
-  view.display(view.init(model))
+  view.display(view.tabComponent(model))
 }
 
 if (document.readyState === 'complete' ||
