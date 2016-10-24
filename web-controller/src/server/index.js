@@ -31,9 +31,8 @@ app.get('/reboot', (req, res) => {
   reboot((err, stdErr, stdOut) => {
     if (err) {
       // TODO log error
-      return res.render('home', { message: 'Could not reboot.' })
+      return res.render('home', { error: 'Could not reboot.' })
     }
-
     res.end()
   })
 })
@@ -42,13 +41,14 @@ app.get('/shutdown', (req, res) => {
   powerOff((err, stdErr, stdOut) => {
     if (err) {
       // TODO log error
-      return res.render('home', { message: 'Could not shutdown.' })
+      return res.render('home', { error: 'Could not shutdown.' })
     }
-
     res.end()
   })
 })
 
-app.listen(3000, () => {
-  console.log('Build light web server successfully started.')
-})
+module.exports = app
+
+// app.listen(3000, () => {
+//   console.log('Build light web server successfully started.')
+// })

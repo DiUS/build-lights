@@ -1,0 +1,5 @@
+--bail
+--check-leaks
+--colors
+--inline-diffs
+--full-trace

@@ -10,7 +10,7 @@
     "lint": "standard",
     "jscpd": "jscpd -p src -r json -e \"src/server/public/js\" -o jscpd.json",
     "pretest": "npm run lint && npm run jscpd",
-    "test": "mocha"
+    "test": "mocha --opts .mocha src/**/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,8 @@
   "homepage": "https://github.com/dius/build-lights#readme",
   "standard": {
     "ignore": [
-      "config/**"
+      "config/**",
+      "**/*.spec.js"
     ]
   },
   "devDependencies": {
@@ -45,6 +46,7 @@
     "postcss-cssnext": "^2.8.0",
     "postcss-nested": "^1.0.0",
     "postcss-simple-vars": "^3.0.0",
+    "proxyquire": "^1.7.10",
     "rimraf": "^2.5.4",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
@@ -52,7 +54,8 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-postcss": "^0.2.0",
     "rollup-watch": "^2.5.0",
-    "standard": "^8.4.0"
+    "standard": "^8.4.0",
+    "supertest": "^2.0.1"
   },
   "dependencies": {
     "compression": "^1.6.2",
