@@ -5,5 +5,6 @@ node_js:
 matrix:
   fast_finish: true
 before_install: pushd web-controller
+install: npm install
 script: npm test
 after_script: popd
