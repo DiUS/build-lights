@@ -4,6 +4,8 @@ import './styles/forms.css'
 
 import Inferno from 'inferno' // eslint-disable-line
 
+import { Job } from './Job'
+
 export const JobsTabContent = (model) => {
   return (
     <form>
@@ -33,7 +35,13 @@ export const JobsTabContent = (model) => {
         <span>Polling rate (sec)</span>
         <input type='number' value={model.pollrate} />
       </label>
+      <div className='jobs-container'>
+        <Job name='QA Develop' path='/path/to/api/json' />
+        <Job name='QA 2 Develop' path='/path/to/api/json' />
+        <Job name='QA 3 Develop' path='/path/to/api/json' />
+      </div>
       <div className='actions'>
+        <button type='button'>Add new job</button>
         <button type='button'>Save configuration</button>
         <small>Last updated: July 15, 2016 10:19 AM</small>
       </div>
