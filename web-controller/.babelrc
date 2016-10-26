@@ -1,0 +1,4 @@
+{
+ "plugins": ["inferno"],
+  "presets": ["es2015-rollup"]
+}

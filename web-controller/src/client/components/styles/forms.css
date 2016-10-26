@@ -1,0 +1,64 @@
+$lightGrey: #CBCFD1;
+$darkGrey: #838688;
+$secondaryDarkGrey: #353737;
+$radius: 0.1875em;
+$orange: #FF8300;
+$lightOrange: #F39642;
+$skyBlue: #00B6F0;
+$labelWidth: 11em;
+
+form {
+    font-size: 0.875em;
+    letter-spacing: 1px;
+
+    h2 {
+        border-bottom: 1px solid $lightGrey;
+        font-size: 1.25em;
+        margin: 0.4375em 0;
+        padding: 0.4375em 0;
+    }
+
+    label {
+        display: block;
+        line-height: 3.5em;
+
+        span {
+            display: inline-block;
+            font-weight: bold;
+            min-width: $labelWidth;
+        }
+
+        input, select {
+            box-sizing: border-box;
+            padding: 0.3125em;
+        }
+    }
+
+    .actions {
+        border-top: 1px solid $lightGrey;
+        margin: 1em 0 0 $labelWidth;
+        padding-top: 1em;
+
+        button {
+            background-color: $orange;
+            border: 1px solid $secondaryDarkGrey;
+            border-radius: $radius;
+            box-shadow: inset 0px 1px 0px 0px $lightGrey;
+            color: #fff;
+            font-size: 1.285em;
+            font-weight: bold;
+            padding: 0.625em 1.5em;
+            text-shadow: 0px 1px 0px $secondaryDarkGrey;
+            text-transform: capitalize;
+
+            &:hover {
+                background-color: $lightOrange;
+            }
+        }
+
+        small {
+            color: $darkGrey;
+            margin-left: 1em;
+        }
+    }
+}
