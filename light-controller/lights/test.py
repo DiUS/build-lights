@@ -1,5 +1,6 @@
 import time
-import ledstrip
+#import adafruit_lpd8806 as ledstrip
+import epistar_lpd8806 as ledstrip
 import signal
 
 led = ledstrip.Strand()
