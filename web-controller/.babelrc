@@ -1,4 +1,4 @@
 {
- "plugins": ["inferno"],
-  "presets": ["es2015-rollup"]
+  "plugins": [ "syntax-jsx", "inferno", "css-modules-transform" ],
+  "presets": [ "es2015" ]
 }

@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel'
 import postcss from 'rollup-plugin-postcss'
 import commonjs from 'rollup-plugin-commonjs'
+import filesize from 'rollup-plugin-filesize'
 import resolve from 'rollup-plugin-node-resolve'
 
 // PostCSS plugins
@@ -13,7 +14,7 @@ import simplevars from 'postcss-simple-vars'
 export default {
   entry: 'src/client/app.js',
   dest: 'src/server/public/js/bundle.js',
-  format: 'umd',
+  format: 'iife',
   plugins: [
     postcss({
       plugins: [
@@ -30,6 +31,13 @@ export default {
       browser: true
     }),
     commonjs(),
-    babel({ exclude: 'node_modules/**' })
+    babel({
+      babelrc: false,
+      exclude: 'node_modules/**',
+      minified: true,
+      plugins: [ 'inferno', 'syntax-jsx' ],
+      presets: [ 'es2015-rollup' ]
+    }),
+    filesize()
   ]
 }
