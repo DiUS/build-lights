@@ -38,20 +38,22 @@ export const model = {
   selectedTool: 'network'
 }
 
-export function present (updatedData) {
-  if (updatedData.tabChange && model.selectedTool !== updatedData.tabChange) {
-    model.selectedTool = updatedData.tabChange
-    model.tabChanged = true
-  } else {
-    model.tabChanged = false
+export function present (data) {
+  if (!data) {
+    renderState(model)
+    return
   }
 
-  if (updatedData.connectionType) {
-    model.tools[0].configuration.connectionType = updatedData.connectionType
+  if (data.tabChange && model.selectedTool !== data.tabChange) {
+    model.selectedTool = data.tabChange
   }
 
-  if (updatedData.dhcp) {
-    model.tools[0].configuration.dhcp = (updatedData.dhcp === 'true')
+  if (data.connectionType) {
+    model.tools[0].configuration.connectionType = data.connectionType
+  }
+
+  if (data.dhcp) {
+    model.tools[0].configuration.dhcp = (data.dhcp === 'true')
   }
 
   renderState(model)
