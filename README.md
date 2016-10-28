@@ -7,6 +7,17 @@ DiUS Build-Lights is a device that provides visual feedback of a Continuous Inte
 
 It is an effective way of providing constant visual feedback and it can be very useful in agile software development.
 
+#### Master image for your SD card
+We provide a Jessie Raspbian based master image, properly partitioned with all software already installed. You can [download it from here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161028.zip).
+
+All you need to do is unzip it and transfer the downloaded image into an SD Card.
+
+* [Instructions for Linux](https://www.raspberrypi.org/documentation/installation/installing-images/linux.md)
+* [Instructions for Windows](https://www.raspberrypi.org/documentation/installation/installing-images/windows.md)
+* [Instructions for Mac](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)
+
+Then boot it up and configure network settings and jobs. The software is installed under `/home/pi`.
+
 #### Features
 * Monitors Jenkins web API directly.
 * Plays sound when build finishes.
