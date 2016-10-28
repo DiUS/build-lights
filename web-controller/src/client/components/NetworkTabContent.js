@@ -19,8 +19,8 @@ const WirelessConnectionConfig = (props) => {
           <input type='text' value={props.configuration.key} />
         </label>
         <label>
-          <span>Hidden network?</span>
           <input type='checkbox' value={props.configuration.hidden} />
+          <span>Hidden network?</span>
         </label>
       </div>
     )
@@ -81,6 +81,7 @@ export const NetworkTabContent = (model) => {
       <StaticConfiguration dhcp={model.dhcp} address={model.address} netmask={model.netmask} gateway={model.gateway} />
       <div className='actions'>
         <button type='button'>Save configuration</button>
+        <br />
         <small>Last updated: July 15, 2016 10:19 AM</small>
       </div>
     </form>

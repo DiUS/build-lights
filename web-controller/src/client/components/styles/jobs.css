@@ -1,0 +1,25 @@
+.job-container {
+    display: flex;
+
+    .capture-container {
+        flex: 1;
+    }
+
+    .remove-container {
+        height: 0;
+        line-height: 7em;
+        opacity: 0;
+        overflow: hidden;
+        transition: .3s;
+        width: 0;
+
+        &.show {
+            height: auto;
+            margin: 0 0 0 1em;
+            opacity: 1;
+            overflow: auto;
+            width: auto;
+        }
+    }
+
+}

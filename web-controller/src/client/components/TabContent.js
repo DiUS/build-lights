@@ -6,7 +6,7 @@ import { NetworkTabContent } from './NetworkTabContent'
 import { JobsTabContent } from './JobsTabContent'
 
 export const TabContent = (tabInfo) => {
-  const displayClass = !tabInfo.active ? 'hidden' : ''
+  const displayClass = !tabInfo.active ? 'hidden tab-content-container' : 'tab-content-container'
 
   const content = (tabInfo.name === 'network')
     ? NetworkTabContent(tabInfo.configuration)

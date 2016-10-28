@@ -50,10 +50,10 @@ $skyBlue: #00B6F0;
     }
 
     .tab-content {
-        padding: 1em 1.5em;
+        padding: 1.5em 3em;
         border-left: $borderThickness solid $skyBlue;
 
-        div {
+        .tab-content-container {
             display: block;
 
             &.hidden {

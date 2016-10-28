@@ -19,18 +19,33 @@ form {
     }
 
     label {
-        display: block;
+        display: flex;
         line-height: 3.5em;
 
-        span {
-            display: inline-block;
+        span:first-child, input[type="checkbox"]:first-child {
+            flex: initial;
             font-weight: bold;
+            margin: 0;
             min-width: $labelWidth;
+            padding: 0;
+        }
+
+        input[type="checkbox"]:first-child {
+            margin: 1.5em 0.5em 1.5em 9.625em;
+            min-width: auto;
+
+            + span {
+                font-weight: bold;
+                line-height: 1;
+                margin: 1.75em 0;
+            }
         }
 
         input, select {
             box-sizing: border-box;
+            flex: 1;
             padding: 0.3125em;
+            margin: 0.3125em 0;
         }
     }
 
@@ -45,7 +60,8 @@ form {
 
         small {
             color: $darkGrey;
-            margin-left: 1em;
+            display: block;
+            margin-top: 1em;
         }
     }
 
@@ -69,6 +85,7 @@ form {
 
         &.small {
             font-size: 80%;
+            margin: 0.5em 0;
         }
 
         &.danger {
