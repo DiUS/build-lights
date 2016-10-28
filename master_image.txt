@@ -1,0 +1,18 @@
+# Find out size of all partitions
+sudo fdisk -l /dev/sdb
+
+# Each sector will most likely be 512 bytes.
+
+# Backup master image of 2,435,841,536 bytes.
+# count size is calculated this way: 2,435,841,536 / 1024 / 1024
+# Round count size up to the nearest integer.
+sudo dd bs=1M count=2323 if=/dev/sdb of=build-lights-master-20161028.img
+
+# Compress the image
+zip build-lights-master-20161028.zip build-lights-master-20161028.img
+
+
+
+# Copy master image to another SD card
+sudo dd bs=1M if=build-lights-master-20161028.img of=/dev/sdb
+
