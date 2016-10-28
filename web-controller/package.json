@@ -7,7 +7,7 @@
     "dev:server": "nodejs-dashboard nodemon ./src/server/index.js",
     "dev:client": "rollup -m -c ./config/rollup.config.js --watch",
     "lint": "standard",
-    "jscpd": "jscpd -p src -r json -e \"src/server/public/js\" -o jscpd.json",
+    "jscpd": "jscpd -p src -r json -e **/**/bundle.* -o jscpd.json",
     "pretest": "npm run lint && npm run jscpd",
     "test": "mocha --opts .mocha src/**/*.spec.js"
   },
