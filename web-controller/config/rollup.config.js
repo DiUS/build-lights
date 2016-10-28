@@ -34,7 +34,7 @@ export default {
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
-      minified: true,
+      minified: false,
       plugins: [ 'inferno', 'syntax-jsx' ],
       presets: [ 'es2015-rollup' ]
     }),
