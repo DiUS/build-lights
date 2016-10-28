@@ -3,3 +3,5 @@
 --colors
 --inline-diffs
 --full-trace
+--compilers js:babel-register
+--require specHelper.js

@@ -10,7 +10,7 @@ describe('Server', () => {
     cb(new Error('could not execute'))
   }
 
-  const app = proxyquire('./index', {
+  const app = proxyquire('./server', {
     'power-off': stub,
     'nodejs-system-reboot': stub
   })
