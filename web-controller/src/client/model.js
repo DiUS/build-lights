@@ -35,7 +35,8 @@ export const model = {
       active: true },
     { name: 'statistics', configuration: {}, active: false }
   ],
-  selectedTool: 'network'
+  selectedTool: 'network',
+  lastUpdated: '2016-10-29T20:47:59.764Z'
 }
 
 export function present (data) {

@@ -14,7 +14,8 @@ export const Tab = (model) => {
       return {
         name: t.name,
         active: t.name === model.selectedTool,
-        configuration: t.configuration
+        configuration: t.configuration,
+        lastUpdated: new Date(model.lastUpdated).toString()
       }
     })
 

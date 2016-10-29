@@ -48,7 +48,7 @@ const StaticConfiguration = (props) => {
   }
 }
 
-export const NetworkTabContent = (model) => {
+export const NetworkTabContent = (model, lastUpdated) => {
   const handleConnectionTypeChange = (event) => {
     switchConnectionType(event.currentTarget.value)
   }
@@ -82,7 +82,7 @@ export const NetworkTabContent = (model) => {
       <div className='actions'>
         <button type='button'>Save configuration</button>
         <br />
-        <small>Last updated: July 15, 2016 10:19 AM</small>
+        <small>Last updated: {lastUpdated}</small>
       </div>
     </form>
   )

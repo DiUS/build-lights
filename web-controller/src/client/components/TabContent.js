@@ -9,8 +9,8 @@ export const TabContent = (tabInfo) => {
   const displayClass = !tabInfo.active ? 'hidden tab-content-container' : 'tab-content-container'
 
   const content = (tabInfo.name === 'network')
-    ? NetworkTabContent(tabInfo.configuration)
-    : JobsTabContent(tabInfo.configuration)
+    ? NetworkTabContent(tabInfo.configuration, tabInfo.lastUpdated)
+    : JobsTabContent(tabInfo.configuration, tabInfo.lastUpdated)
 
   return (
     <div className={displayClass}>{content}</div>

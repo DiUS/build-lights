@@ -6,7 +6,7 @@ import Inferno from 'inferno' // eslint-disable-line
 
 import { Job } from './Job'
 
-export const JobsTabContent = (model) => {
+export const JobsTabContent = (model, lastUpdated) => {
   return (
     <form>
       <h2>CI server</h2>
@@ -43,7 +43,7 @@ export const JobsTabContent = (model) => {
       <div className='actions'>
         <button type='button'>Add new job</button>
         <button type='button'>Save configuration</button>
-        <small>Last updated: July 15, 2016 10:19 AM</small>
+        <small>Last updated: {lastUpdated}</small>
       </div>
     </form>
   )
