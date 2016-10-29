@@ -15,9 +15,13 @@ describe('Server', () => {
     'nodejs-system-reboot': stub
   })
 
+  it('throws error when configuration file cannot be found', () => {
+    expect(() => { app('notfound.json') }).to.throw(Error, /no such file or directory/)
+  })
+
   context('#home', () => {
     it('renders HTML page', done => {
-      request(app)
+      request(app('configuration.json'))
         .get('/')
         .expect(200, done)
     })
@@ -25,7 +29,7 @@ describe('Server', () => {
 
   context('#reboot', () => {
     it('renders home with message when cant reboot', done => {
-      request(app)
+      request(app('configuration.json'))
         .get('/reboot')
         .expect(200)
         .end((err, res) => {
@@ -37,7 +41,7 @@ describe('Server', () => {
 
   context('#shutdown', () => {
     it('renders home with message when cant shutdown', done => {
-      request(app)
+      request(app('configuration.json'))
         .get('/shutdown')
         .expect(200)
         .end((err, res) => {
