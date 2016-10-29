@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel'
+import uglify from 'rollup-plugin-uglify'
 import postcss from 'rollup-plugin-postcss'
 import commonjs from 'rollup-plugin-commonjs'
 import filesize from 'rollup-plugin-filesize'
@@ -34,10 +35,10 @@ export default {
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
-      minified: false,
       plugins: [ 'inferno', 'syntax-jsx' ],
       presets: [ 'es2015-rollup' ]
     }),
+    uglify(),
     filesize()
   ]
 }

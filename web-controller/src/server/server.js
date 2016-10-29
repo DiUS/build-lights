@@ -28,9 +28,6 @@ module.exports = (configFile) => {
   app.set('view engine', 'handlebars')
   app.set('views', `${process.cwd()}/src/server/views`)
 
-  app.use('/static', express.static(`${process.cwd()}/src/server/public`))
-  app.use(compression())
-
   app.use(expressWinston.logger({
     transports: [
       new winston.transports.Console({
@@ -47,6 +44,9 @@ module.exports = (configFile) => {
     expressFormat: true,
     colorize: true
   }))
+
+  app.use(compression())
+  app.use('/static', express.static(`${process.cwd()}/src/server/public`))
 
   app.get('/', (req, res) => {
     res.render('home')
