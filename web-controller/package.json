@@ -4,12 +4,15 @@
     "description": "Build lights web controller",
     "scripts": {
         "clean": "rimraf coverage jscpd.json",
+        "prestart": "npm run clean && npm run dist",
+        "start": "NODE_ENV=production nodemon -i configuration.json ./src/server/index.js configuration.json",
         "dev:server": "nodejs-dashboard -- nodemon -i configuration.json ./src/server/index.js configuration.json",
         "dev:client": "rollup -m -c ./config/rollup.config.js --watch",
+        "dist": "rollup -m -c ./config/rollup.prod.config.js",
         "lint": "standard",
         "jscpd": "jscpd -p src -r json -e **/**/bundle.* -o jscpd.json",
         "pretest": "npm run lint && npm run jscpd",
-        "test": "mocha --opts .mocha src/**/*.spec.js"
+        "test": "NODE_ENV=test mocha --opts .mocha src/**/*.spec.js"
     },
     "repository": {
         "type": "git",
