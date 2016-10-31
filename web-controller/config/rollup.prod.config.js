@@ -1,10 +1,12 @@
 import babel from 'rollup-plugin-babel'
+import uglify from 'rollup-plugin-uglify'
 import postcss from 'rollup-plugin-postcss'
 import commonjs from 'rollup-plugin-commonjs'
 import filesize from 'rollup-plugin-filesize'
 import resolve from 'rollup-plugin-node-resolve'
 
 // PostCSS plugins
+import cssnano from 'cssnano'
 import nested from 'postcss-nested'
 import cssnext from 'postcss-cssnext'
 import autoprefixer from 'autoprefixer'
@@ -21,6 +23,7 @@ export default {
         nested(),
         autoprefixer({ browsers: 'last 2 versions' }),
         cssnext({ warnForDuplicates: false }),
+        cssnano()
       ]
     }),
     resolve({
@@ -34,6 +37,8 @@ export default {
       exclude: 'node_modules/**',
       plugins: [ 'inferno', 'syntax-jsx' ],
       presets: [ 'es2015-rollup' ]
-    })
+    }),
+    uglify(),
+    filesize()
   ]
 }
