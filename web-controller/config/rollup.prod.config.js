@@ -8,6 +8,7 @@ import resolve from 'rollup-plugin-node-resolve'
 // PostCSS plugins
 import cssnano from 'cssnano'
 import nested from 'postcss-nested'
+import atImport from 'postcss-import'
 import cssnext from 'postcss-cssnext'
 import autoprefixer from 'autoprefixer'
 import simplevars from 'postcss-simple-vars'
@@ -19,11 +20,14 @@ export default {
   plugins: [
     postcss({
       plugins: [
+        atImport(),
         simplevars(),
         nested(),
         autoprefixer({ browsers: 'last 2 versions' }),
         cssnext({ warnForDuplicates: false }),
-        cssnano()
+        cssnano({
+          discardDuplicates: true
+        })
       ]
     }),
     resolve({

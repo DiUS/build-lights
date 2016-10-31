@@ -1,11 +1,11 @@
 import babel from 'rollup-plugin-babel'
 import postcss from 'rollup-plugin-postcss'
 import commonjs from 'rollup-plugin-commonjs'
-import filesize from 'rollup-plugin-filesize'
 import resolve from 'rollup-plugin-node-resolve'
 
 // PostCSS plugins
 import nested from 'postcss-nested'
+import atImport from 'postcss-import'
 import cssnext from 'postcss-cssnext'
 import autoprefixer from 'autoprefixer'
 import simplevars from 'postcss-simple-vars'
@@ -17,10 +17,11 @@ export default {
   plugins: [
     postcss({
       plugins: [
+        atImport(),
         simplevars(),
         nested(),
         autoprefixer({ browsers: 'last 2 versions' }),
-        cssnext({ warnForDuplicates: false }),
+        cssnext({ warnForDuplicates: false })
       ]
     }),
     resolve({

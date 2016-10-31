@@ -1,5 +1,5 @@
-$borderThickness: 0.0625em;
-$skyBlue: #00B6F0;
+@import "colors.css";
+@import "variables.css";
 
 .tab {
     min-width: 100%;

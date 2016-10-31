@@ -1,13 +1,5 @@
-$lightGrey: #CBCFD1;
-$darkGrey: #838688;
-$secondaryDarkGrey: #353737;
-$radius: 0.1875em;
-$orange: #FF8300;
-$lightOrange: #F39642;
-$skyBlue: #00B6F0;
-$labelWidth: 11em;
-$darkRed: #76141B;
-$lightRed: #C12834;
+@import "colors.css";
+@import "variables.css";
 
 form {
     font-size: 0.875em;
