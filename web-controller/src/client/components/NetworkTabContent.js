@@ -4,7 +4,7 @@ import './styles/forms.css'
 
 import Inferno from 'inferno' // eslint-disable-line
 
-import { switchConnectionType, switchDhcp } from '../actions'
+import { switchConnectionType, switchDhcp, saveNetworkInformation } from '../sam/actions'
 
 const WirelessConnectionConfig = (props) => {
   if (props.connectionType === 'wireless') {
@@ -57,8 +57,12 @@ export const NetworkTabContent = (model, lastUpdated) => {
     switchDhcp(event.currentTarget.value)
   }
 
+  const handleFormSubmit = (event) => {
+    saveNetworkInformation()
+  }
+
   return (
-    <form>
+    <form onSubmit={handleFormSubmit}>
       <label>
         <span>Hostname</span>
         <input type='text' value={model.hostname} />
@@ -80,7 +84,7 @@ export const NetworkTabContent = (model, lastUpdated) => {
       </label>
       <StaticConfiguration dhcp={model.dhcp} address={model.address} netmask={model.netmask} gateway={model.gateway} />
       <div className='actions'>
-        <button type='button'>Save configuration</button>
+        <button type='submit'>Save configuration</button>
         <br />
         <small>Last updated: {lastUpdated}</small>
       </div>

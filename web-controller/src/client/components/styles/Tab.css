@@ -1,5 +1,4 @@
 $borderThickness: 0.0625em;
-$radius: 0.4375em;
 $skyBlue: #00B6F0;
 
 .tab {
@@ -7,17 +6,18 @@ $skyBlue: #00B6F0;
 
     ul.tab-nav {
         display: flex;
-        height: 2.5em;
         list-style: none;
 
         li {
-            border-top-left-radius: $radius;
-            border-top-right-radius: $radius;
+            background-color: #f5f5f5;
             border-bottom: $borderThickness solid $skyBlue;
+            border-top-style: solid;
+            border-top-width: 0.25em;
+            border-top-color: #f5f5f5;
             display: inline-block;
             flex: 1;
-            line-height: 2.5em;
             padding: 0 0.625em;
+            transition: .3s;
 
             a {
                 color: #666;
@@ -25,13 +25,17 @@ $skyBlue: #00B6F0;
                 font-family: 'Roboto', sans-serif;
                 font-size: 1.25em;
                 font-weight: bold;
+                letter-spacing: 2px;
+                padding: 1em 0;
+                text-align: center;
                 text-transform: capitalize;
             }
 
             &.selected {
+                background-color: white;
                 border-bottom: none;
                 border-left: $borderThickness solid $skyBlue;
-                border-top: $borderThickness solid $skyBlue;
+                border-top-color: $skyBlue;
                 border-right: $borderThickness solid $skyBlue;
 
                 a {
@@ -40,18 +44,21 @@ $skyBlue: #00B6F0;
 
                 &:hover {
                     background-color: transparent;
+                    border-top-color: $skyBlue;
                 }
             }
 
             &:hover {
-                background-color: #f5f5f5;
+                border-top-color: #CCC;
+                a {
+                    color: #333;
+                }
             }
         }
     }
 
     .tab-content {
         padding: 1.5em 3em;
-        border-left: $borderThickness solid $skyBlue;
 
         .tab-content-container {
             display: block;

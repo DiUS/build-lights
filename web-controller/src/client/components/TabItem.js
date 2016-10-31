@@ -2,7 +2,7 @@
 
 import Inferno from 'inferno' // eslint-disable-line
 
-import { switchToTab } from '../actions'
+import { switchToTab } from '../sam/actions'
 
 export const TabItem = (tabInfo) => {
   const selectedClass = tabInfo.active ? 'selected' : ''

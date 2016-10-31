@@ -6,6 +6,8 @@ $orange: #FF8300;
 $lightOrange: #F39642;
 $skyBlue: #00B6F0;
 $labelWidth: 11em;
+$darkRed: #76141B;
+$lightRed: #C12834;
 
 form {
     font-size: 0.875em;
@@ -88,8 +90,16 @@ form {
             margin: 0.5em 0;
         }
 
+        &.right {
+            float: right;
+        }
+
         &.danger {
-            background-color: red;
+            background-color: $darkRed;
+
+            &:hover {
+                background-color: $lightRed;
+            }
         }
     }
 }

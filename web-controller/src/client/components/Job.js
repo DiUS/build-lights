@@ -5,6 +5,8 @@ import './styles/jobs.css'
 
 import Inferno from 'inferno' // eslint-disable-line
 
+import { removeJob } from '../sam/actions'
+
 export const Job = (props) => {
   const handleMouseOver = (e) => {
     const el = e.currentTarget.getElementsByClassName('remove-container')[0]
@@ -30,6 +32,10 @@ export const Job = (props) => {
     el.classList.remove('show')
   }
 
+  const handleRemoveJob = (e) => {
+    removeJob(Number(e.currentTarget.dataset.jobIndex))
+  }
+
   return (
     <div className='job-container' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       <div className='capture-container'>
@@ -43,7 +49,7 @@ export const Job = (props) => {
         </label>
       </div>
       <div className='remove-container'>
-        <button className='button small danger'>Remove</button>
+        <button type='button' className='small danger' data-job-index={props.index} onClick={handleRemoveJob}>Remove</button>
       </div>
     </div>
   )
