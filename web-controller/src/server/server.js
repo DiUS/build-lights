@@ -6,6 +6,7 @@ const fs = require('fs')
 const winston = require('winston')
 const express = require('express')
 const powerOff = require('power-off')
+const bodyParser = require('body-parser')
 const compression = require('compression')
 const reboot = require('nodejs-system-reboot')
 const expressWinston = require('express-winston')
@@ -27,6 +28,9 @@ module.exports = (configFile) => {
   app.engine('handlebars', expressHandlebars(handlebarsConfig))
   app.set('view engine', 'handlebars')
   app.set('views', `${process.cwd()}/src/server/views`)
+
+  app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(bodyParser.json())
 
   app.use(expressWinston.logger({
     transports: [
@@ -77,8 +81,30 @@ module.exports = (configFile) => {
     res.json(JSON.parse(configuration))
   })
 
-  app.put('/save', (req, res) => {
+  app.put('/model', (req, res) => {
+    const requestData = req.body || {}
+    let model = JSON.parse(fs.readFileSync(configFile, { encoding: 'utf8' }))
 
+    if (requestData.tabChange && model.selectedTool !== requestData.tabChange) {
+      model.selectedTool = requestData.tabChange
+    }
+
+    if (requestData.connectionType) {
+      model.tools[0].configuration.connectionType = requestData.connectionType
+    }
+
+    if (requestData.dhcp) {
+      model.tools[0].configuration.dhcp = (requestData.dhcp === 'true')
+    }
+
+    if (requestData.newJob) {
+      model.tools[1].configuration.items.push({ name: '', path: '', active: false })
+    }
+
+    model.lastUpdated = new Date().toJSON()
+
+    fs.writeFileSync(configFile, JSON.stringify(model))
+    res.json(model)
   })
 
   app.use(expressWinston.errorLogger({
@@ -94,6 +120,11 @@ module.exports = (configFile) => {
       })
     ]
   }))
+
+  app.use((err, req, res, next) => {
+    res.status(500)
+    res.json(err)
+  })
 
   return app
 }

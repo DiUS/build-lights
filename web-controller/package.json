@@ -4,7 +4,7 @@
     "description": "Build lights web controller",
     "scripts": {
         "clean": "rimraf coverage jscpd.json",
-        "dev:server": "nodejs-dashboard nodemon ./src/server/index.js configuration.json",
+        "dev:server": "nodejs-dashboard -- nodemon -i configuration.json ./src/server/index.js configuration.json",
         "dev:client": "rollup -m -c ./config/rollup.config.js --watch",
         "lint": "standard",
         "jscpd": "jscpd -p src -r json -e **/**/bundle.* -o jscpd.json",
@@ -70,6 +70,7 @@
         "supertest": "^2.0.1"
     },
     "dependencies": {
+        "body-parser": "^1.15.2",
         "compression": "^1.6.2",
         "express": "^4.14.0",
         "express-handlebars": "^3.0.0",

@@ -29,3 +29,6 @@ src/server/public/js
 
 # JSCPD
 jscpd.json
+
+# Temporary fixtures
+fixtures/tmp*.json

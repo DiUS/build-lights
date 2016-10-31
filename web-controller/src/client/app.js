@@ -1,10 +1,14 @@
 'use strict'
 
 import * as view from './view'
-import { model } from './model'
 
 const cb = (event) => {
-  view.display(view.tabComponent(model))
+  fetch('/model')
+    .then(res => res.json())
+    .then(json => {
+      // window.model = json
+      view.display(view.tabComponent(json))
+    })
 }
 
 if (document.readyState === 'complete' ||
