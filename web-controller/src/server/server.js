@@ -34,10 +34,6 @@ module.exports = (configFile) => {
 
   app.use(expressWinston.logger({
     transports: [
-      new winston.transports.Console({
-        json: false,
-        colorize: true
-      }),
       new winston.transports.File({
         json: true,
         colorize: false,
