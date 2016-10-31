@@ -39,6 +39,11 @@ export function addNewJob (present) {
   return false
 }
 
+export function removeJob (jobIndex, present) {
+  persistState({ deleteJob: jobIndex })
+  return false
+}
+
 export function saveNetworkInformation (present) {
   // persistState()
   return false

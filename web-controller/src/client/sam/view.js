@@ -2,7 +2,7 @@
 
 import InfernoDOM from 'inferno-dom'
 
-import { Tab } from './components/Tab'
+import { Tab } from '../components/Tab'
 
 export function tabComponent (model) {
   return Tab(model)
