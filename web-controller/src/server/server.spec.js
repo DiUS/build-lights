@@ -173,6 +173,18 @@ describe('Server', () => {
             done()
           })
       })
+
+      it('removes job from configuration when payload to remove is received by the model', () => {
+        request(app(randomConfigFile))
+          .put('/model')
+          .send({ deleteJob: 1 })
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.tools[1].configuration.items).to.have.lengthOf(2)
+            expect(res.body.lastUpdated).to.not.eql(parsedData.lastUpdated)
+            done()
+          })
+      })
     })
   })
 })

@@ -101,6 +101,10 @@ module.exports = (configFile) => {
       model.tools[1].configuration.items.push({ name: '', path: '', active: false })
     }
 
+    if (requestData.deleteJob) {
+      model.tools[1].configuration.items.splice(requestData.deleteJob, 1)
+    }
+
     model.lastUpdated = new Date().toJSON()
 
     fs.writeFileSync(configFile, JSON.stringify(model))
