@@ -1,19 +1,33 @@
 'use strict'
 
 const fs = require('fs')
+const sinon = require('sinon')
 const expect = require('chai').expect
 const request = require('supertest')
 const proxyquire = require('proxyquire')
 
 describe('Server', () => {
 
-  const stub = (cb) => {
-    cb(new Error('could not execute'))
-  }
+  const callback = sinon.stub()
+  callback.onCall(0).yields(new Error('could not execute'))
+  callback.onCall(2).yields(new Error('could not execute'))
+  callback.onCall(1).yields()
+  callback.onCall(3).yields()
+
+  const serviceStub = { persist: (payload) => {} }
+  const persistSpy = sinon.spy(serviceStub, 'persist')
+
+  const modelRoute = proxyquire('./routes/model', {
+    '../services/jobs': serviceStub,
+    '../services/network': serviceStub
+  })
+  const rebootRoute = proxyquire('./routes/reboot', { 'nodejs-system-reboot': callback })
+  const shutdownRoute = proxyquire('./routes/shutdown', { 'power-off': callback })
 
   const app = proxyquire('./server', {
-    'power-off': stub,
-    'nodejs-system-reboot': stub
+    './routes/model': modelRoute,
+    './routes/reboot': rebootRoute,
+    './routes/shutdown': shutdownRoute
   })
 
   it('throws error when configuration file cannot be found', () => {
@@ -32,9 +46,19 @@ describe('Server', () => {
     it('renders home with message when cant reboot', done => {
       request(app('fixtures/configuration.json'))
         .get('/reboot')
-        .expect(200)
+        .expect(500)
         .end((err, res) => {
           expect(res.text).to.contain('Could not reboot')
+          done()
+        })
+    })
+
+    it('ends response when successfully reboots', done => {
+      request(app('fixtures/configuration.json'))
+        .get('/reboot')
+        .expect(200)
+        .end((err, res) => {
+          expect(res.text).to.not.contain('Could not reboot')
           done()
         })
     })
@@ -44,17 +68,28 @@ describe('Server', () => {
     it('renders home with message when cant shutdown', done => {
       request(app('fixtures/configuration.json'))
         .get('/shutdown')
-        .expect(200)
+        .expect(500)
         .end((err, res) => {
           expect(res.text).to.contain('Could not shutdown')
           done()
         })
     })
+
+    it('ends response when successfully reboots', done => {
+      request(app('fixtures/configuration.json'))
+        .get('/shutdown')
+        .expect(200)
+        .end((err, res) => {
+          expect(res.text).to.not.contain('Could not shutdown')
+          done()
+        })
+    })
+
   })
 
   context('#model', () => {
 
-    describe('GET success', () => {
+    describe('GET - HTTP 200', () => {
 
       let responseBody
 
@@ -97,7 +132,7 @@ describe('Server', () => {
       })
     })
 
-    describe('GET fail', () => {
+    describe('GET - HTTP 500', () => {
       it('replies with HTTP 500 when configuration cant be parsed', () => {
         request(app('fixtures/wrong_configuration.json'))
           .get('/model')
@@ -105,7 +140,7 @@ describe('Server', () => {
       })
     })
 
-    describe('PUT', () => {
+    describe('PUT - HTTP 200', () => {
 
       let data, parsedData, randomConfigFile = `fixtures/tmp_${Date.now()}.json`
 
@@ -184,6 +219,22 @@ describe('Server', () => {
             expect(res.body.lastUpdated).to.not.eql(parsedData.lastUpdated)
             done()
           })
+      })
+
+      describe('persisting configuration', () => {
+        ['network', 'jobs'].forEach(tool => {
+          it(`invokes "${tool}" service to persist configuration`, () => {
+            request(app(randomConfigFile))
+              .put('/model')
+              .send({ save: tool, payload: { a: 'b', c: 'd' } })
+              .expect(200)
+              .end((err, res) => {
+                expect(persistSpy).to.have.been.calledWith({ a: 'b', c: 'd' })
+                expect(res.body.lastUpdated).to.not.eql(parsedData.lastUpdated)
+                done()
+              })
+          })
+        })
       })
     })
   })
