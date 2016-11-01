@@ -4,7 +4,8 @@ import './styles/forms.css'
 
 import Inferno from 'inferno' // eslint-disable-line
 
-import { switchConnectionType, switchDhcp, saveNetworkInformation } from '../sam/actions'
+import { transformFormIntoPayload } from './utils'
+import { switchConnectionType, switchDhcp, save } from '../sam/actions'
 
 const WirelessConnectionConfig = (props) => {
   if (props.connectionType === 'wireless') {
@@ -12,14 +13,14 @@ const WirelessConnectionConfig = (props) => {
       <div className='wireless-connection'>
         <label>
           <span>SSID</span>
-          <input type='text' value={props.configuration.ssid} />
+          <input type='text' name='ssid' value={props.configuration.ssid} />
         </label>
         <label>
           <span>Password</span>
-          <input type='text' value={props.configuration.key} />
+          <input type='text' name='key' value={props.configuration.key} />
         </label>
         <label>
-          <input type='checkbox' value={props.configuration.hidden} />
+          <input type='checkbox' name='hidden' value={props.configuration.hidden} />
           <span>Hidden network?</span>
         </label>
       </div>
@@ -33,15 +34,15 @@ const StaticConfiguration = (props) => {
       <div className='static-configuration'>
         <label>
           <span>Address</span>
-          <input type='text' value={props.address} />
+          <input type='text' name='address' value={props.address} />
         </label>
         <label>
           <span>Netmask</span>
-          <input type='text' value={props.netmask} />
+          <input type='text' name='netmask' value={props.netmask} />
         </label>
         <label>
           <span>Gateway</span>
-          <input type='text' value={props.gateway} />
+          <input type='text' name='gateway' value={props.gateway} />
         </label>
       </div>
     )
@@ -50,26 +51,28 @@ const StaticConfiguration = (props) => {
 
 export const NetworkTabContent = (model, lastUpdated) => {
   const handleConnectionTypeChange = (event) => {
-    switchConnectionType(event.currentTarget.value)
+    return switchConnectionType(event.currentTarget.value)
   }
 
   const handleDhcpChange = (event) => {
-    switchDhcp(event.currentTarget.value)
+    return switchDhcp(event.currentTarget.value)
   }
 
   const handleFormSubmit = (event) => {
-    saveNetworkInformation()
+    let postData = { save: 'network', payload: {} }
+    transformFormIntoPayload(event.currentTarget.elements, postData.payload)
+    return save(postData)
   }
 
   return (
     <form onSubmit={handleFormSubmit}>
       <label>
         <span>Hostname</span>
-        <input type='text' value={model.hostname} />
+        <input type='text' name='hostname' value={model.hostname} />
       </label>
       <label>
         <span>Connection type</span>
-        <select value={model.connectionType} onChange={handleConnectionTypeChange}>
+        <select name='connectionType' value={model.connectionType} onChange={handleConnectionTypeChange}>
           <option value='wireless'>Wireless</option>
           <option value='ethernet'>Ethernet</option>
         </select>
@@ -77,7 +80,7 @@ export const NetworkTabContent = (model, lastUpdated) => {
       <WirelessConnectionConfig connectionType={model.connectionType} configuration={model.wireless} />
       <label>
         <span>Use DHCP?</span>
-        <select value={model.dhcp} onChange={handleDhcpChange}>
+        <select name='useDhcp' value={model.dhcp} onChange={handleDhcpChange}>
           <option value='true'>Yes</option>
           <option value='false'>No</option>
         </select>

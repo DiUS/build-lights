@@ -17,39 +17,30 @@ function persistState (payload) {
       // TODO fix this
       // render(window.model)
     })
+
+  return false
 }
 
 export function switchToTab (tabName, present) {
-  persistState({ tabChange: tabName })
-  return false
+  return persistState({ tabChange: tabName })
 }
 
 export function switchConnectionType (connectionType, present) {
-  persistState({ connectionType })
-  return false
+  return persistState({ connectionType })
 }
 
 export function switchDhcp (dhcp, present) {
-  persistState({ dhcp })
-  return false
+  return persistState({ dhcp })
 }
 
 export function addNewJob (present) {
-  persistState({ newJob: true })
-  return false
+  return persistState({ newJob: true })
 }
 
 export function removeJob (jobIndex, present) {
-  persistState({ deleteJob: jobIndex })
-  return false
+  return persistState({ deleteJob: jobIndex })
 }
 
-export function saveNetworkInformation (present) {
-  // persistState()
-  return false
-}
-
-export function saveJobInformation (present) {
-  // persistState()
-  return false
+export function save (data, present) {
+  return persistState(data)
 }

@@ -41,11 +41,11 @@ export const Job = (props) => {
       <div className='capture-container'>
         <label>
           <span>Name</span>
-          <input type='text' value={props.name} onFocus={handleOnFocus} onBlur={handleOnBlur} />
+          <input type='text' name='jobName' value={props.name} onFocus={handleOnFocus} onBlur={handleOnBlur} />
         </label>
         <label>
           <span>URL</span>
-          <input type='text' value={props.path} onFocus={handleOnFocus} onBlur={handleOnBlur} />
+          <input type='text' name='jobPath' value={props.path} onFocus={handleOnFocus} onBlur={handleOnBlur} />
         </label>
       </div>
       <div className='remove-container'>
