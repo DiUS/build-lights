@@ -79,6 +79,7 @@
         "express": "^4.14.0",
         "express-handlebars": "^3.0.0",
         "express-winston": "^2.0.0",
+        "helmet": "^3.0.0",
         "inferno": "^0.7.27",
         "inferno-create-element": "^0.7.27",
         "inferno-dom": "^0.7.27",
