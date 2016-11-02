@@ -35,16 +35,12 @@ module.exports = (configFile) => {
 
   const router = express.Router({ caseSensitive: true })
 
-  router.get('/', (req, res) => {
-    res.render('home')
-  })
-
+  require('./routes/home')(router)
   require('./routes/reboot')(router)
   require('./routes/shutdown')(router)
   require('./routes/model')(router, configFile)
 
   app.use(router)
-
   app.use(logger.errorLogger)
 
   app.use((err, req, res, next) => {
