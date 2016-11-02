@@ -2,6 +2,8 @@
 
 const fs = require('fs')
 const winston = require('winston')
+const cp = require('child_process')
+
 const CUSTOM_BL_MARKER = '#### BL'
 
 function setupDHCP (payload, iface, data) {
@@ -57,5 +59,14 @@ exports.persist = (payload) => {
       break
     default:
       winston.warn('could not persist network configuration')
+  }
+
+  // 4) restart service
+  const result = cp.execSync('service networking restart')
+  if (result.status === 0) {
+    winston.info('successfully restarted networking service')
+  } else {
+    winston.error('could not restart networking service: %j', result.error)
+    throw result.error
   }
 }
