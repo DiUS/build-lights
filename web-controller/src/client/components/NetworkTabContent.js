@@ -17,7 +17,7 @@ const WirelessConnectionConfig = (props) => {
         </label>
         <label>
           <span>Password</span>
-          <input type='text' name='key' value={props.configuration.key} />
+          <input type='password' name='key' value={props.configuration.key} />
         </label>
         <label>
           <input type='checkbox' name='hidden' value={props.configuration.hidden} />
