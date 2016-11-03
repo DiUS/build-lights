@@ -36,10 +36,34 @@ form {
         }
 
         input, select {
+            border: 1px solid #ccc;
             box-sizing: border-box;
+            color: #333;
             flex: 1;
             padding: 0.3125em;
             margin: 0.3125em 0;
+
+            &:focus {
+                border-color: #999;
+            }
+        }
+    }
+
+    .wireless-connection, .static-configuration {
+        transition: .3s;
+
+        &.shown {
+            height: auto;
+            opacity: 1;
+            overflow: auto;
+            width: auto;
+        }
+
+        &.hidden {
+            height: 0;
+            opacity: 0;
+            overflow: hidden;
+            width: 0;
         }
     }
 

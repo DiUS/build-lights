@@ -43,7 +43,6 @@
                 }
 
                 &:hover {
-                    background-color: transparent;
                     border-top-color: $skyBlue;
                 }
             }

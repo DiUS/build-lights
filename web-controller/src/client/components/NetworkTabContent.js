@@ -4,58 +4,34 @@ import './styles/forms.css'
 
 import Inferno from 'inferno' // eslint-disable-line
 
+import { save } from '../sam/actions'
 import { transformFormIntoPayload } from './utils'
-import { switchConnectionType, switchDhcp, save } from '../sam/actions'
-
-const WirelessConnectionConfig = (props) => {
-  if (props.connectionType === 'wireless') {
-    return (
-      <div className='wireless-connection'>
-        <label>
-          <span>SSID</span>
-          <input type='text' name='ssid' value={props.configuration.ssid} />
-        </label>
-        <label>
-          <span>Password</span>
-          <input type='password' name='key' value={props.configuration.key} />
-        </label>
-        <label>
-          <input type='checkbox' name='hidden' value={props.configuration.hidden} />
-          <span>Hidden network?</span>
-        </label>
-      </div>
-    )
-  }
-}
-
-const StaticConfiguration = (props) => {
-  if (!props.dhcp) {
-    return (
-      <div className='static-configuration'>
-        <label>
-          <span>Address</span>
-          <input type='text' name='address' value={props.address} />
-        </label>
-        <label>
-          <span>Netmask</span>
-          <input type='text' name='netmask' value={props.netmask} />
-        </label>
-        <label>
-          <span>Gateway</span>
-          <input type='text' name='gateway' value={props.gateway} />
-        </label>
-      </div>
-    )
-  }
-}
 
 export const NetworkTabContent = (model, lastUpdated) => {
   const handleConnectionTypeChange = (event) => {
-    return switchConnectionType(event.currentTarget.value)
+    const formEl = event.currentTarget.parentNode.parentNode
+    const wifiConfEl = formEl.getElementsByClassName('wireless-connection')[0]
+
+    if (event.currentTarget.value === 'wireless') {
+      wifiConfEl.classList.remove('hidden')
+      wifiConfEl.classList.add('shown')
+    } else {
+      wifiConfEl.classList.remove('shown')
+      wifiConfEl.classList.add('hidden')
+    }
   }
 
   const handleDhcpChange = (event) => {
-    return switchDhcp(event.currentTarget.value)
+    const formEl = event.currentTarget.parentNode.parentNode
+    const staticEl = formEl.getElementsByClassName('static-configuration')[0]
+
+    if (event.currentTarget.value !== 'true') {
+      staticEl.classList.remove('hidden')
+      staticEl.classList.add('shown')
+    } else {
+      staticEl.classList.remove('shown')
+      staticEl.classList.add('hidden')
+    }
   }
 
   const handleFormSubmit = (event) => {
@@ -63,6 +39,9 @@ export const NetworkTabContent = (model, lastUpdated) => {
     transformFormIntoPayload(event.currentTarget.elements, postData.payload)
     return save(postData)
   }
+
+  const wirelessContainerHidden = (model.connectionType !== 'wireless' ? 'hidden' : 'shown')
+  const staticContainerHidden = (model.dhcp === 'true' ? 'hidden' : 'shown')
 
   return (
     <form onSubmit={handleFormSubmit}>
@@ -77,7 +56,20 @@ export const NetworkTabContent = (model, lastUpdated) => {
           <option value='ethernet'>Ethernet</option>
         </select>
       </label>
-      <WirelessConnectionConfig connectionType={model.connectionType} configuration={model.wireless} />
+      <div className='wireless-connection' style={wirelessContainerHidden}>
+        <label>
+          <span>SSID</span>
+          <input type='text' name='ssid' value={model.wireless.ssid} />
+        </label>
+        <label>
+          <span>Password</span>
+          <input type='password' name='key' value={model.wireless.key} />
+        </label>
+        <label>
+          <input type='checkbox' name='hidden' value={model.wireless.hidden} />
+          <span>Hidden network?</span>
+        </label>
+      </div>
       <label>
         <span>Use DHCP?</span>
         <select name='useDhcp' value={model.dhcp} onChange={handleDhcpChange}>
@@ -85,7 +77,16 @@ export const NetworkTabContent = (model, lastUpdated) => {
           <option value='false'>No</option>
         </select>
       </label>
-      <StaticConfiguration dhcp={model.dhcp} address={model.address} netmask={model.netmask} gateway={model.gateway} />
+      <div className='static-configuration' style={staticContainerHidden}>
+        <label>
+          <span>Address</span>
+          <input type='text' name='address' value={model.address} placeholder='192.168.0.10/24' />
+        </label>
+        <label>
+          <span>Gateway</span>
+          <input type='text' name='gateway' value={model.gateway} placeholder='192.168.0.1' />
+        </label>
+      </div>
       <div className='actions'>
         <button type='submit'>Save configuration</button>
         <br />
