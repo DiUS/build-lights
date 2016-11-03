@@ -49,5 +49,16 @@ module.exports.writeStaticNetworkConfiguration = (iface, payload) => {
 }
 
 module.exports.writeWirelessConfiguration = (payload) => {
+  let wpaContent = fs.readFileSync('/etc/wpa_supplicant/wpa_supplicant.conf', UTF_8).split(/\n/)
+  let result = cp.execSync(`wpa_passphrase ${payload.ssid} ${payload.key}`).toString().split(/\n/)
+  if (payload.hidden === 'true') {
+    result[2] = '\tscan_ssid=1'
+  } else {
+    // remove clear text password
+    result.splice(2, 1)
+  }
 
+  wpaContent = wpaContent.concat(result)
+
+  fs.writeFileSync('/storage/etc/wpa_supplicant.conf', wpaContent.join('\n'), UTF_8)
 }

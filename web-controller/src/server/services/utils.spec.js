@@ -123,4 +123,41 @@ describe('Utils', () => {
 
   })
 
+  describe('#writeWirelessConfiguration', () => {
+    const supplicantConf = 'country=AU\nctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1'
+    const wpaPassphraseOut = 'network={\n\tssid="bla"\n\t#psk="12345abcde"\n\tpsk=44b494d80e42253602aba8fd7638e4964c01805052337b72280dd096245f7b2c\n}'
+
+    it('writes custom wpa_supplicant with hashed password', () => {
+      const dataToWrite = `${supplicantConf}\nnetwork={\n\tssid="bla"\n\tpsk=44b494d80e42253602aba8fd7638e4964c01805052337b72280dd096245f7b2c\n}`
+
+      const fsMock = sinon.mock(fs)
+      const cpMock = sinon.mock(child_process)
+
+      fsMock.expects('readFileSync').withArgs('/etc/wpa_supplicant/wpa_supplicant.conf').once().returns(supplicantConf)
+      cpMock.expects('execSync').withArgs('wpa_passphrase whatever mykey').once().returns(wpaPassphraseOut)
+      fsMock.expects('writeFileSync').withArgs('/storage/etc/wpa_supplicant.conf', dataToWrite).once()
+
+      utils.writeWirelessConfiguration({ ssid: 'whatever', key: 'mykey', hidden: 'false' })
+
+      fsMock.verify()
+      cpMock.verify()
+    })
+
+    it('replaces clear password with configuration when hidden ssid', () => {
+      const dataToWrite = `${supplicantConf}\nnetwork={\n\tssid="bla"\n\tscan_ssid=1\n\tpsk=44b494d80e42253602aba8fd7638e4964c01805052337b72280dd096245f7b2c\n}`
+
+      const fsMock = sinon.mock(fs)
+      const cpMock = sinon.mock(child_process)
+
+      fsMock.expects('readFileSync').withArgs('/etc/wpa_supplicant/wpa_supplicant.conf').once().returns(supplicantConf)
+      cpMock.expects('execSync').withArgs('wpa_passphrase whatever mykey').once().returns(wpaPassphraseOut)
+      fsMock.expects('writeFileSync').withArgs('/storage/etc/wpa_supplicant.conf', dataToWrite).once()
+
+      utils.writeWirelessConfiguration({ ssid: 'whatever', key: 'mykey', hidden: 'true' })
+
+      fsMock.verify()
+      cpMock.verify()
+    })
+  })
+
 })
