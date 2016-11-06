@@ -12,11 +12,14 @@
         "lint": "standard",
         "jscpd": "jscpd -p src -r json -e **/**/bundle.* -o jscpd.json",
         "pretest": "npm run lint && npm run jscpd",
-        "test": "NODE_ENV=test mocha --opts .mocha ./src/**/*spec.js ./src/server/**/*spec.js ./src/client/**/*spec.js"
+        "test": "NODE_ENV=test mocha --opts .mocha ./src/**/*spec.js ./src/server/**/*spec.js"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/dius/build-lights.git"
+    },
+    "engines": {
+        "node": ">=4"
     },
     "keywords": [
         "build lights",
