@@ -71,6 +71,7 @@ To get all this going...
 
 ## To run tests
 You can run `npm test` and here's what's going to happen:
+
 1. Run lint using [Standard JS](http://standardjs.com/)
 2. Run [JSCPD](https://github.com/kucherenko/jscpd)
 3. Run all tests (suffixed with `.spec.js`)
