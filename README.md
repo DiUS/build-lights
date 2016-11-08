@@ -8,7 +8,7 @@ DiUS Build-Lights is a device that provides visual feedback of a Continuous Inte
 It is an effective way of providing constant visual feedback and it can be very useful in agile software development.
 
 #### Master image for your SD card
-We provide a Jessie Raspbian based master image, properly partitioned with all software already installed. You can [download it from here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161028.zip).
+We provide a Jessie Raspbian based master image, properly partitioned with all software already installed. More information available [here](https://github.com/DiUS/build-lights/blob/master/README_master_image.md).
 
 All you need to do is unzip it and transfer the downloaded image into an SD Card.
 

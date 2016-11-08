@@ -9,9 +9,9 @@
 # Short-Description: Build Lights
 ### END INIT INFO
 
-BIN_DIR="/home/pi/build-light"
+BIN_DIR="/storage/build-lights"
 BIN_NAME="light_controller"
-CONFIG_FILE="/home/pi/build-light/config.json"
+CONFIG_FILE="/storage/build-lights/config.json"
 CONFIG_LINE="-c $CONFIG_FILE -b -l"
 PID_FILE="/var/run/${BIN_NAME}.pid"
 
