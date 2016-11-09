@@ -30,58 +30,93 @@
       }
 
       header {
-        background-color: #21366C;
-        height: 5em;
-        text-align: right;
+        background-color: #192854;
       }
 
-      header ul {
+      header .container {
         background-image: url('/static/img/dius_logo.png');
         background-position: 0 50%;
-        background-size: contain;
+        background-size: 180px;
         background-repeat: no-repeat;
-        height: 100%;
-        list-style: none;
+        display: flex;
+        height: 5em;
+        margin: .5em auto;
       }
 
-      header ul.container {
-        margin: 0 auto;
-      }
-
-      header ul li {
-        display: inline-block;
-        line-height: 3.125em;
-        margin-top: 0.625em;
-        text-align: center;
-        width: 8em;
-      }
-
-      header ul li a {
-        background-color: rgba(163, 169, 172, 0.5);
-        border-radius: 0.1875em;
-        color: #666;
-        display: block;
-        font-weight: bold;
+      header span {
+        align-self: center;
+        color: #ffffff;
+        flex: 1;
+        font-family: 'Roboto';
+        font-size: 1.5em;
         letter-spacing: 1px;
-        margin: 0.3125em;
+        margin-left: 8em;
+        text-transform: uppercase;
       }
 
-      header ul li a.reboot {
-        background-color: rgba(226, 204, 0, 0.5);
+      header .device-actions {
+        display: flex;
+        position: relative;
       }
 
-      header ul li a.reboot:hover {
-        background-color: rgba(226, 204, 0, 1);
-        color: #333;
+      header .device-actions button {
+        align-self: center;
+        background-color: #21366C;
+        background-image: url('/static/img/power.png');
+        background-position: 1em 50%;
+        background-repeat: no-repeat;
+        background-size: 28px;
+        border: 1px solid #A3A9AC;
+        border-radius: 0.25em;
+        color: #ffffff;
+        font-size: 1.125em;
+        padding: 0.875em 3.5em;
+        position: relative;
       }
 
-      header ul li a.shutdown {
-        background-color: rgba(164, 30, 34, 0.5);
+      header .device-actions:hover button {
+        background-color: #314B84;
       }
 
-      header ul li a.shutdown:hover {
-        background-color: rgba(164, 30, 34, 1);
-        color: #f5f5f5;
+      header .device-actions button:after {
+        border-color: #ffffff transparent transparent transparent;
+        border-style: solid;
+        border-width: 5px 5px 0 5px;
+        content: '\A';
+        height: 0;
+        position: absolute;
+        right: 10%;
+        top: 50%;
+        width: 0;
+      }
+
+      header .device-actions:hover button:after {
+        border-color: transparent transparent #ffffff transparent;
+        border-width: 0 5px 5px 5px;
+      }
+
+      header .device-actions:hover .dropdown-device-actions {
+        display: block;
+      }
+
+      header .device-actions .dropdown-device-actions {
+        background-color: #ffffff;
+        border-radius: 0.25em;
+        box-shadow: 0px 0px 5px 1px #192854;
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 85%;
+      }
+
+      header .device-actions .dropdown-device-actions li a {
+        border-radius: 0.25em;
+        display: block;
+        padding: 0.75em 1.5em;
+      }
+
+      header .device-actions .dropdown-device-actions li a:hover {
+        background-color: #CBCFD1;
       }
 
       footer {
