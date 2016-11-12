@@ -9,7 +9,7 @@ import { transformFormIntoPayload } from './utils'
 
 export const NetworkTabContent = (model, lastUpdated) => {
   const handleConnectionTypeChange = (event) => {
-    const formEl = event.currentTarget.parentNode.parentNode
+    const formEl = event.currentTarget.parentNode.parentNode.parentNode
     const wifiConfEl = formEl.getElementsByClassName('wireless-connection')[0]
 
     if (event.currentTarget.value === 'wireless') {
@@ -22,10 +22,10 @@ export const NetworkTabContent = (model, lastUpdated) => {
   }
 
   const handleDhcpChange = (event) => {
-    const formEl = event.currentTarget.parentNode.parentNode
+    const formEl = event.currentTarget.parentNode.parentNode.parentNode
     const staticEl = formEl.getElementsByClassName('static-configuration')[0]
 
-    if (event.currentTarget.value !== 'true') {
+    if (event.currentTarget.value === 'true') {
       staticEl.classList.remove('hidden')
       staticEl.classList.add('shown')
     } else {
@@ -41,55 +41,57 @@ export const NetworkTabContent = (model, lastUpdated) => {
   }
 
   const wirelessContainerHidden = (model.connectionType !== 'wireless' ? 'hidden' : 'shown')
-  const staticContainerHidden = (model.dhcp === 'true' ? 'hidden' : 'shown')
+  const staticContainerHidden = (model.dhcp === true ? 'hidden' : 'shown')
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <label>
-        <span>Hostname</span>
-        <input type='text' name='hostname' value={model.hostname} />
-      </label>
-      <label>
-        <span>Connection type</span>
-        <select name='connectionType' value={model.connectionType} onChange={handleConnectionTypeChange}>
-          <option value='wireless'>Wireless</option>
-          <option value='ethernet'>Ethernet</option>
-        </select>
-      </label>
-      <div className='wireless-connection' style={wirelessContainerHidden}>
-        <label>
-          <span>SSID</span>
-          <input type='text' name='ssid' value={model.wireless.ssid} />
-        </label>
-        <label>
-          <span>Password</span>
-          <input type='password' name='key' value={model.wireless.key} />
-        </label>
-        <label>
-          <input type='checkbox' name='hidden' value={model.wireless.hidden} />
-          <span>Hidden network?</span>
-        </label>
+      <div className='form-container vertical'>
+        <label>Name of <span>this device</span> on the network</label>
+        <input className='full-length' type='text' name='hostname' placeholder='e.g. mycompany-build-lights' value={model.hostname} />
       </div>
-      <label>
-        <span>Use DHCP?</span>
-        <select name='useDhcp' value={model.dhcp} onChange={handleDhcpChange}>
-          <option value='true'>Yes</option>
-          <option value='false'>No</option>
-        </select>
-      </label>
-      <div className='static-configuration' style={staticContainerHidden}>
-        <label>
-          <span>Address</span>
-          <input type='text' name='address' value={model.address} placeholder='192.168.0.10/24' />
-        </label>
-        <label>
-          <span>Gateway</span>
-          <input type='text' name='gateway' value={model.gateway} placeholder='192.168.0.1' />
-        </label>
+      <div className='form-container vertical'>
+        <div className='fieldset'>
+          <label>Select your <span>preferred connection type</span></label>
+          <div className='controls'>
+            <input type='radio' name='connectionType' checked={model.connectionType === 'wireless' ? 'checked' : ''} value='wireless' id='wireless' onChange={handleConnectionTypeChange} /> <label for='wireless'>Wireless</label>
+            <input type='radio' name='connectionType' checked={model.connectionType === 'ethernet' ? 'checked' : ''} value='ethernet' id='ethernet' onChange={handleConnectionTypeChange} /> <label for='ethernet'>Ethernet</label>
+          </div>
+        </div>
+        <div className={`wireless-connection ${wirelessContainerHidden}`}>
+          <div className='fieldset'>
+            <label>SSID</label>
+            <input type='text' name='ssid' value={model.wireless.ssid} />
+          </div>
+          <div className='fieldset'>
+            <label>Password</label>
+            <input type='password' name='key' value={model.wireless.key} />
+          </div>
+          <label className='checkbox'>
+            <input type='checkbox' name='hidden' value={model.wireless.hidden} /> Hidden network?
+          </label>
+        </div>
+      </div>
+      <div className='form-container vertical'>
+        <div className='fieldset'>
+          <label>Assign network <span>IP address</span></label>
+          <div className='controls'>
+            <input type='radio' name='useDhcp' checked={!model.dhcp ? 'checked' : ''} value='true' id='yes' onChange={handleDhcpChange} /> <label for='yes'>Yes</label>
+            <input type='radio' name='useDhcp' checked={model.dhcp ? 'checked' : ''} value='false' id='no' onChange={handleDhcpChange} /> <label for='no'>No</label>
+          </div>
+        </div>
+        <div className={`static-configuration ${staticContainerHidden}`}>
+          <div className='fieldset'>
+            <label for='address'>Address</label>
+            <input type='text' name='address' id='address' value={model.address} placeholder='192.168.0.10/24' />
+          </div>
+          <div className='fieldset'>
+            <label for='gateway'>Gateway</label>
+            <input type='text' name='gateway' id='gateway' value={model.gateway} placeholder='192.168.0.1' />
+          </div>
+        </div>
       </div>
       <div className='actions'>
-        <button type='submit'>Save configuration</button>
-        <br />
+        <button type='submit'>Save</button>
         <small>Last updated: {lastUpdated}</small>
       </div>
     </form>

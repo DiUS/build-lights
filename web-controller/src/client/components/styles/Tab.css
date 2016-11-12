@@ -4,60 +4,43 @@
 .tab {
     min-width: 100%;
 
-    ul.tab-nav {
-        display: flex;
-        list-style: none;
+    .tab-nav-container {
+        border-bottom: 1px solid $grey;
 
-        li {
-            background-color: #f5f5f5;
-            border-bottom: $borderThickness solid $skyBlue;
-            border-top-style: solid;
-            border-top-width: 0.25em;
-            border-top-color: #f5f5f5;
-            display: inline-block;
-            flex: 1;
-            padding: 0 0.625em;
-            transition: .3s;
+        ul {
+            display: flex;
+            list-style: none;
 
-            a {
-                color: #666;
-                display: block;
-                font-family: 'Roboto', sans-serif;
-                font-size: 1.25em;
-                font-weight: bold;
-                letter-spacing: 2px;
-                padding: 1em 0;
-                text-align: center;
-                text-transform: capitalize;
-            }
-
-            &.selected {
-                background-color: white;
-                border-bottom: none;
-                border-left: $borderThickness solid $skyBlue;
-                border-top-color: $skyBlue;
-                border-right: $borderThickness solid $skyBlue;
+            li {
+                align-self: center;
+                border-bottom-style: solid;
+                border-bottom-width: 4px;
+                border-bottom-color: transparent;
+                flex: 1;
+                margin-top: 4px;
 
                 a {
-                    color: #333;
+                    color: #666;
+                    display: block;
+                    font-family: 'Roboto', sans-serif;
+                    letter-spacing: 2px;
+                    margin: 1em 0;
+                    text-align: center;
+                    text-transform: capitalize;
                 }
 
-                &:hover {
-                    border-top-color: $skyBlue;
-                }
-            }
-
-            &:hover {
-                border-top-color: #CCC;
-                a {
-                    color: #333;
+                &.selected, &:hover {
+                    border-bottom-color: $darkNavy;
+                    a {
+                        color: $darkNavy;
+                    }
                 }
             }
         }
     }
 
     .tab-content {
-        padding: 1.5em 3em;
+        padding: 1.5em 0;
 
         .tab-content-container {
             display: block;

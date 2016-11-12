@@ -2,7 +2,6 @@
 @import "variables.css";
 
 form {
-    font-size: 0.875em;
     letter-spacing: 1px;
 
     h2 {
@@ -12,26 +11,31 @@ form {
         padding: 0.4375em 0;
     }
 
-    label {
+    .form-container {
+        background-color: #EEEFF0;
         display: flex;
-        line-height: 3.5em;
+        margin-bottom: 0.25em;
+        padding: 2em 4em;
 
-        span:first-child, input[type="checkbox"]:first-child {
-            flex: initial;
-            font-weight: bold;
-            margin: 0;
-            min-width: $labelWidth;
-            padding: 0;
+        &.vertical {
+            flex-direction: column;
+            label {
+                margin-bottom: 0.5em;
+            }
         }
 
-        input[type="checkbox"]:first-child {
-            margin: 1.5em 0.5em 1.5em 9.625em;
-            min-width: auto;
+        .fieldset {
+            display: flex;
+            label {
+                align-self: center;
+                margin-bottom: 0;
+            }
+        }
 
-            + span {
+        label {
+            flex: 1;
+            span {
                 font-weight: bold;
-                line-height: 1;
-                margin: 1.75em 0;
             }
         }
 
@@ -40,17 +44,55 @@ form {
             box-sizing: border-box;
             color: #333;
             flex: 1;
-            padding: 0.3125em;
+            padding: 0.625em;
             margin: 0.3125em 0;
 
             &:focus {
-                border-color: #999;
+                border-color: $skyBlue;
             }
+        }
+
+        .full-length {
+            min-width: 100%;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            align-self: flex-start;
+            border: none;
+            cursor: pointer;
+            flex-grow: 0.1;
+            padding: 0;
+
+            + label {
+                cursor: pointer;
+            }
+        }
+
+        .controls {
+            display: flex;
+            flex: 1;
         }
     }
 
     .wireless-connection, .static-configuration {
-        transition: .3s;
+        transition: .2s;
+
+        .fieldset {
+            margin: 0.5em 0;
+        }
+
+        label {
+            text-align: right;
+
+            &.checkbox {
+                cursor: pointer;
+                margin-left: 50%;
+            }
+        }
+
+        input[type="text"],input[type="password"] {
+            margin-left: 1em;
+        }
 
         &.shown {
             height: auto;
@@ -68,33 +110,29 @@ form {
     }
 
     .actions {
-        border-top: 1px solid $lightGrey;
-        margin: 1em 0 0 $labelWidth;
-        padding-top: 1em;
+        display: flex;
+        align-items: center;
+        margin-top: 1em;
 
-        button:first-child {
-            margin-left: 0;
+        button {
+            flex: 0.1;
         }
 
         small {
             color: $darkGrey;
-            display: block;
-            margin-top: 1em;
+            flex: 0.9;
+            text-align: right;
         }
     }
 
     button {
-        background-color: $orange;
-        border: 1px solid $secondaryDarkGrey;
+        background-color: $skyBlue;
         border-radius: $radius;
-        box-shadow: inset 0px 1px 0px 0px $lightGrey;
         color: #fff;
         font-size: 1.285em;
         font-weight: bold;
         line-height: 1;
-        margin-left: 0.5em;
-        padding: 0.625em 1.5em;
-        text-shadow: 0px 1px 0px $secondaryDarkGrey;
+        padding: 1em 3em;
         text-transform: capitalize;
 
         &:hover {

@@ -24,10 +24,12 @@ export const Tab = (model) => {
 
   return (
     <div className='tab'>
-      <ul className='tab-nav'>
-        {tabs}
-      </ul>
-      <div className='tab-content'>
+      <div className='tab-nav-container'>
+        <ul className='container'>
+          {tabs}
+        </ul>
+      </div>
+      <div className='tab-content container'>
         {tabContent}
       </div>
     </div>
