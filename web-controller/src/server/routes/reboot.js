@@ -10,7 +10,7 @@ module.exports = (router) => {
         winston.log('error', 'Could not reboot server: %j', err)
         return res.status(500).render('home', { error: 'Could not reboot.' })
       }
-      res.end()
+      res.render('wait', { message: 'Please wait while I am rebooting.' })
     })
   })
 }

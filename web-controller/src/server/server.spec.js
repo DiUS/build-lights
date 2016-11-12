@@ -59,6 +59,7 @@ describe('Server', () => {
         .expect(200)
         .end((err, res) => {
           expect(res.text).to.not.contain('Could not reboot')
+          expect(res.text).to.contain('Please wait while I am rebooting')
           done()
         })
     })
@@ -81,6 +82,7 @@ describe('Server', () => {
         .expect(200)
         .end((err, res) => {
           expect(res.text).to.not.contain('Could not shutdown')
+          expect(res.text).to.contain('You can now unplug me.')
           done()
         })
     })

@@ -9,8 +9,8 @@ export function tabComponent (model) {
 }
 
 export function display (representation) {
-  InfernoDOM.render(
-    representation,
-    document.getElementById('representation')
-  )
+  const reprEl = document.getElementById('representation')
+  if (reprEl) {
+    InfernoDOM.render(representation, reprEl)
+  }
 }

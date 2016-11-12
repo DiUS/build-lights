@@ -1,6 +1,7 @@
 <header>
   <div class="container">
     <span>Build Lights</span>
+    {{#unless message}}
     <div class="device-actions">
       <button type="button" aria-haspopup="true">Online</button>
       <ul class="dropdown-device-actions">
@@ -12,5 +13,6 @@
         </li>
       </ul>
     </div>
+    {{/unless}}
   </div>
 </header>

@@ -10,7 +10,7 @@ module.exports = (router) => {
         winston.log('error', 'Could not shutdown server: %j', err)
         return res.status(500).render('home', { error: 'Could not shutdown.' })
       }
-      res.end()
+      res.render('wait', { message: 'You can now unplug me.' })
     })
   })
 }
