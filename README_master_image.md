@@ -1,7 +1,7 @@
 DiUS Build Lights Master Image
 ==============================
 
-The master image is based on Jessie Raspbian. The image consists of 3 partitions: boot, storage, root. Both root and boot partitions have been configured to read-only mode, suitable for embedded environment. Storage partition is available for local storage. You will need at least a 4GB microSD card. You can download the master image [here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161103.zip).
+The master image is based on Jessie Raspbian. The image consists of 3 partitions: boot, storage, root. Both root and boot partitions have been configured to read-only mode, suitable for embedded environment. Storage partition is available for local storage. You will need at least a 4GB microSD card. You can download the master image [here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161122.zip).
 
 
 ### Writing master image to microSD card
@@ -46,20 +46,12 @@ Password: raspberry
    rwroot
    ```
 
-   Similarly, to remount *root* partition back to read-only mode:
-   ```
-   roroot
-   ```
-
    To remount *boot* partition with read-write permission, run this command:
    ```
    rwboot
    ```
 
-   Similarly, to remount *boot* partition back to read-only mode:
-   ```
-   roboot
-   ```
+   **Note**: *root* and *boot* partitions can be remounted back to read-only mode via *roroot* and *roboot* commands.
 
 
 2. Change the **hostname** and **resize the root partition** to fill the entire microSD card via raspi-config. You can configure other things if you wish, like timezone and wifi country.
