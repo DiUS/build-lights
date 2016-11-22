@@ -64,3 +64,6 @@ Password: raspberry
 
 
 3. Configure the build-lights jobs via its web interface.
+
+   Alternatively, you can modify the configuration file location at */storage/etc/build-lights/light-controller.json*. You'll need to restart the *light_controller* process for the new configuration to take effect.
+
