@@ -54,9 +54,9 @@ export const NetworkTabContent = (model, lastUpdated) => {
           <label>Select your <span>preferred connection type</span></label>
           <div className='controls'>
             <input type='radio' name='connectionType' checked={model.connectionType === 'wireless' ? 'checked' : ''} value='wireless' id='wireless' onChange={handleConnectionTypeChange} />
-            <label for='wireless'><span><span></span></span>Wireless</label>
+            <label for='wireless'><span><span /></span>Wireless</label>
             <input type='radio' name='connectionType' checked={model.connectionType === 'ethernet' ? 'checked' : ''} value='ethernet' id='ethernet' onChange={handleConnectionTypeChange} />
-            <label for='ethernet'><span><span></span></span>Ethernet</label>
+            <label for='ethernet'><span><span /></span>Ethernet</label>
           </div>
         </div>
         <div className={`wireless-connection ${wirelessContainerHidden}`}>
@@ -70,7 +70,7 @@ export const NetworkTabContent = (model, lastUpdated) => {
           </div>
           <label className='checkbox'>
             <input type='checkbox' id='hidden' name='hidden' value={model.wireless.hidden} />
-            <label for='hidden'><span><span></span></span>Hidden network?</label>
+            <label for='hidden'><span><span /></span>Hidden network?</label>
           </label>
         </div>
       </div>
@@ -79,9 +79,9 @@ export const NetworkTabContent = (model, lastUpdated) => {
           <label>Assign network <span>IP address</span></label>
           <div className='controls'>
             <input type='radio' name='useDhcp' checked={!model.dhcp ? 'checked' : ''} value='true' id='yes' onChange={handleDhcpChange} />
-            <label for='yes'><span><span></span></span>Yes</label>
+            <label for='yes'><span><span /></span>Yes</label>
             <input type='radio' name='useDhcp' checked={model.dhcp ? 'checked' : ''} value='false' id='no' onChange={handleDhcpChange} />
-            <label for='no'><span><span></span></span>No</label>
+            <label for='no'><span><span /></span>No</label>
           </div>
         </div>
         <div className={`static-configuration ${staticContainerHidden}`}>
