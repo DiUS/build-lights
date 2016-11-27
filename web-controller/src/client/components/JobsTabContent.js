@@ -23,38 +23,16 @@ export const JobsTabContent = (model, lastUpdated) => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <h2>CI server</h2>
-      <label>
-        <span>Address</span>
-        <input type='text' name='ciAddress' value={model.ci.address} />
-      </label>
-      <label>
-        <span>Port</span>
-        <input type='text' name='ciPort' value={model.ci.port} />
-      </label>
-      <h2>Hardware</h2>
-      <label>
-        <span>LED strip model</span>
-        <select name='ledType' value={model.hardware.ledType}>
-          <option value='adafruit'>Adafruit LPD8806</option>
-          <option value='epistar'>Epistar LPD8806</option>
-        </select>
-      </label>
-      <label>
-        <span>Number of LEDs</span>
-        <input type='number' name='numberLeds' value={model.hardware.numLeds} />
-      </label>
-      <h2>Jobs to monitor</h2>
-      <label>
-        <span>Polling rate (sec)</span>
-        <input type='number' name='pollRate' value={model.pollrate} />
-      </label>
-      <div className='jobs-container'>
+      <div className='form-container vertical'>
+        <label for='pollRate'>Rate to <span>poll your CI server</span> (in seconds)</label>
+        <input type='number' name='pollRate' id='pollRate' value={model.pollrate} />
+      </div>
+      <div className='jobs-container form-container vertical'>
         {jobs}
+        <button type='button' className='small secondary' onClick={handleAddNewJob}>Add new job</button>
       </div>
       <div className='actions'>
-        <button type='submit'>Save configuration</button>
-        <button type='button' className='small right' onClick={handleAddNewJob}>Add new job</button>
+        <button type='submit'>Save</button>
         <small>Last updated: {lastUpdated}</small>
       </div>
     </form>

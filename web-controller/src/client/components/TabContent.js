@@ -2,8 +2,10 @@
 
 import Inferno from 'inferno' // eslint-disable-line
 
-import { NetworkTabContent } from './NetworkTabContent'
+import { CiTabContent } from './CiTabContent'
 import { JobsTabContent } from './JobsTabContent'
+import { NetworkTabContent } from './NetworkTabContent'
+import { LedHardwareTabContent } from './LedHardwareTabContent'
 
 export const TabContent = (tabInfo) => {
   const displayClass = !tabInfo.active ? 'hidden tab-content-container' : 'tab-content-container'
@@ -13,7 +15,13 @@ export const TabContent = (tabInfo) => {
     case 'network':
       content = NetworkTabContent(tabInfo.configuration, tabInfo.lastUpdated)
       break
-    case 'jobs':
+    case 'ci server':
+      content = CiTabContent(tabInfo.configuration, tabInfo.lastUpdated)
+      break
+    case 'led hardware':
+      content = LedHardwareTabContent(tabInfo.configuration, tabInfo.lastUpdated)
+      break
+    case 'jobs to monitor':
       content = JobsTabContent(tabInfo.configuration, tabInfo.lastUpdated)
       break
     default:

@@ -1,4 +1,6 @@
 $skyBlue: #00B6F0;
+$lighSkyBlue: #3DC5EC;
+$darkSkyBlue: #5894CE;
 
 $grey: #A3A9AC;
 $lightGrey: #CBCFD1;
@@ -8,7 +10,12 @@ $secondaryDarkGrey: #353737;
 $orange: #FF8300;
 $lightOrange: #F39642;
 
+$red: #A41E22;
 $darkRed: #76141B;
 $lightRed: #C12834;
 
 $darkNavy: #192854;
+
+$green: #A2B842;
+$lightGreen:#B9C353;
+$darkGreen: #8A9939;

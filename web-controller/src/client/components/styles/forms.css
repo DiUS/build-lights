@@ -2,7 +2,7 @@
 @import "variables.css";
 
 form {
-    letter-spacing: 1px;
+    letter-spacing: .03125em;
 
     h2 {
         border-bottom: 1px solid $lightGrey;
@@ -65,6 +65,77 @@ form {
 
             + label {
                 cursor: pointer;
+            }
+
+            &:not(old) {
+                font-size: 1em;
+                margin: 0;
+                opacity: 0;
+                width: 2em;
+
+                + label {
+                    display: inline-block;
+                    margin-left: -2em;
+                    line-height: 1.5em;
+
+                    > span {
+                        background: transparent;
+                        border: 0.125em solid $darkGrey;
+                        border-radius: 0.25em;
+                        display: inline-block;
+                        height: 0.875em;
+                        margin: 0.25em 0.5em 0.25em 0.25em;
+                        vertical-align: bottom;
+                        width: 0.875em;
+                    }
+                }
+
+                &:checked {
+                    + label {
+                        > span {
+                            border-color: $skyBlue;
+
+                            &:before {
+                                color: $skyBlue;
+                                display: block;
+                                font-size: 0.875em;
+                                font-weight: bold;
+                                line-height: 1em;
+                                text-align: center;
+                                width: 1em;
+                            }
+
+                            > span {
+                                background-color: $skyBlue;
+                                border: 0.0625em solid $skyBlue;
+                                display: block;
+                                height: 0.5em;
+                                margin: 0.125em;
+                                width: 0.5em;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        input[type="radio"] {
+            &:not(old) {
+                + label {
+                    > span {
+                        border-radius: 1em;
+                    }
+                }
+
+                &:checked {
+                    + label {
+                        > span {
+                            > span {
+                                border-radius: 1em;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -136,7 +207,7 @@ form {
         text-transform: capitalize;
 
         &:hover {
-            background-color: $lightOrange;
+            background-color: $darkSkyBlue;
         }
 
         &.small {
@@ -144,15 +215,19 @@ form {
             margin: 0.5em 0;
         }
 
-        &.right {
-            float: right;
+        &.secondary {
+            background-color: $green;
+
+            &:hover {
+                background-color: $darkGreen;
+            }
         }
 
         &.danger {
-            background-color: $darkRed;
+            background-color: $red;
 
             &:hover {
-                background-color: $lightRed;
+                background-color: $darkRed;
             }
         }
     }

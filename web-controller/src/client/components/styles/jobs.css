@@ -1,25 +1,19 @@
-.job-container {
-    display: flex;
+@import "colors.css";
 
-    .capture-container {
-        flex: 1;
+.jobs-container {
+
+    > button {
+        align-self: flex-end;
+        background-color: $green;
     }
 
-    .remove-container {
-        height: 0;
-        line-height: 7em;
-        opacity: 0;
-        overflow: hidden;
-        transition: .3s;
-        width: 0;
+    .fieldset {
+        label, button {
+            margin-left: 2em;
 
-        &.show {
-            height: auto;
-            margin: 0 0 0 1em;
-            opacity: 1;
-            overflow: auto;
-            width: auto;
+            &:first-child {
+                margin-left: 0;
+            }
         }
     }
-
 }

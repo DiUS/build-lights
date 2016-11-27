@@ -24,9 +24,9 @@
                     display: block;
                     font-family: 'Roboto', sans-serif;
                     letter-spacing: 2px;
-                    margin: 1em 0;
+                    padding: 1em 0;
                     text-align: center;
-                    text-transform: capitalize;
+                    text-transform: uppercase;
                 }
 
                 &.selected, &:hover {
