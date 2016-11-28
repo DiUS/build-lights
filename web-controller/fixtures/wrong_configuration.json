@@ -5,7 +5,7 @@
             "configuration": {
                 "hostname": "superpi",
                 "connectionType": "ethernet",
-                "dhcp": false,
+                "dhcp": true,
                 "address": "10.0.0.100",
                 "netmask": "255.255.255.0",
                 "gateway": "10.0.0.1",
@@ -18,16 +18,25 @@
             "active": true
         },
         {
-            "name": "jobs",
+            "name": "ci server",
             "configuration": {
-                "ci": {
-                    "address": "http://localhost",
-                    "port": 80
-                },
-                "hardware": {
-                    "ledType": "epistar",
-                    "numLeds": 32
-                },
+                "tool": "Jenkins",
+                "address": "http://localhost",
+                "port": 80
+            },
+            "active": true
+        },
+        {
+            "name": "led hardware",
+            "configuration": {
+                "ledType": "epistar",
+                "numLeds": 32
+            },
+            "active": true
+        },
+        {
+            "name": "jobs to monitor",
+            "configuration": {
                 "pollrate": 3,
                 "items": [
                     {
@@ -41,14 +50,8 @@
                         "active": true
                     },
                     {
-                        "name": "Job to monitor 3",
-                        "path": "/path/to/job/3",
-                        "active": true
-                    },
-                    {
                         "name": "",
-                        "path": "",
-                        "active": false
+                        "path": ""
                     }
                 ]
             },
@@ -61,5 +64,5 @@
         }
     ],
     "selectedTool": "network",
-    "lastUpdated": "2016-10-30T21:49:16.307Z"
+    "lastUpdated": "2016-11-28T05:37:49.045Z"
 }

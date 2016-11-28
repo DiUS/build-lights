@@ -12,7 +12,7 @@ exports.persist = (payload) => {
     utils.writeWirelessConfiguration(payload)
   }
 
-  const dhcpConf = (payload.dhcp === 'false' ? payload : {})
+  const dhcpConf = (payload.useDhcp === 'false' ? payload : {})
   utils.writeStaticNetworkConfiguration(iface, dhcpConf)
 
   utils.makeFileSystemReadOnly()

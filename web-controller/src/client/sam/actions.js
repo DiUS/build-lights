@@ -25,14 +25,6 @@ export function switchToTab (tabName, present) {
   return persistState({ tabChange: tabName })
 }
 
-export function switchConnectionType (connectionType, present) {
-  return persistState({ connectionType })
-}
-
-export function switchDhcp (dhcp, present) {
-  return persistState({ dhcp })
-}
-
 export function addNewJob (present) {
   return persistState({ newJob: true })
 }

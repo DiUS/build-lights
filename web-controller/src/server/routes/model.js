@@ -1,6 +1,7 @@
 'use strict'
 
 const fs = require('fs')
+const findIndex = require('lodash.findindex')
 const fsOpts = { encoding: 'utf8' }
 
 module.exports = (router, configFile) => {
@@ -17,20 +18,14 @@ module.exports = (router, configFile) => {
       model.selectedTool = requestData.tabChange
     }
 
-    if (requestData.connectionType) {
-      model.tools[0].configuration.connectionType = requestData.connectionType
-    }
-
-    if (requestData.dhcp) {
-      model.tools[0].configuration.dhcp = (requestData.dhcp === 'true')
-    }
-
     if (requestData.newJob) {
-      model.tools[1].configuration.items.push({ name: '', path: '', active: false })
+      const jobsIdx = findIndex(model.tools, { name: 'jobs to monitor' })
+      model.tools[jobsIdx].configuration.items.push({ name: '', path: '' })
     }
 
     if (requestData.deleteJob) {
-      model.tools[1].configuration.items.splice(requestData.deleteJob, 1)
+      const jobsIdx = findIndex(model.tools, { name: 'jobs to monitor' })
+      model.tools[jobsIdx].configuration.items.splice(requestData.deleteJob, 1)
     }
 
     if (requestData.save) {

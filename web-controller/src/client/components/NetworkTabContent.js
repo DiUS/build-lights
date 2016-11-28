@@ -69,7 +69,7 @@ export const NetworkTabContent = (model, lastUpdated) => {
             <input type='password' name='key' value={model.wireless.key} />
           </div>
           <label className='checkbox'>
-            <input type='checkbox' id='hidden' name='hidden' value={model.wireless.hidden} />
+            <input type='checkbox' id='hidden' name='hidden' value={model.wireless.hidden} checked={model.wireless.hidden ? 'checked' : ''} />
             <label for='hidden'><span><span /></span>Hidden network?</label>
           </label>
         </div>

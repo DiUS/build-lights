@@ -11,7 +11,7 @@ describe('Network Service', () => {
     let payload
 
     it('with ethernet DHCP', () => {
-      payload = { hostname: 'samesame', connectionType: 'ethernet', dhcp: 'true' }
+      payload = { hostname: 'samesame', connectionType: 'ethernet', useDhcp: 'true' }
 
       const utilsMock = sinon.mock(utils)
       utilsMock.expects('makeFileSystemWritable').once()
@@ -28,7 +28,7 @@ describe('Network Service', () => {
       payload = {
         hostname: 'samesame',
         connectionType: 'ethernet',
-        dhcp: 'false',
+        useDhcp: 'false',
         address: '10.10.10.10/24',
         gateway: '10.10.10.1'
       }
@@ -48,7 +48,7 @@ describe('Network Service', () => {
       payload = {
         hostname: 'samesame',
         connectionType: 'wireless',
-        dhcp: 'true'
+        useDhcp: 'true'
       }
 
       const utilsMock = sinon.mock(utils)
@@ -66,7 +66,7 @@ describe('Network Service', () => {
       payload = {
         hostname: 'samesame',
         connectionType: 'wireless',
-        dhcp: 'false',
+        useDhcp: 'false',
         address: '10.10.10.10/24',
         gateway: '10.10.10.1'
       }

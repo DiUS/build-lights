@@ -36,7 +36,7 @@ describe('Server', () => {
 
   context('#home', () => {
     it('renders HTML page', done => {
-      request(app('fixtures/configuration.json'))
+      request(app('fixtures/web-configuration.json'))
         .get('/')
         .expect(200, done)
     })
@@ -44,7 +44,7 @@ describe('Server', () => {
 
   context('#reboot', () => {
     it('renders home with message when cant reboot', done => {
-      request(app('fixtures/configuration.json'))
+      request(app('fixtures/web-configuration.json'))
         .get('/reboot')
         .expect(500)
         .end((err, res) => {
@@ -54,7 +54,7 @@ describe('Server', () => {
     })
 
     it('ends response when successfully reboots', done => {
-      request(app('fixtures/configuration.json'))
+      request(app('fixtures/web-configuration.json'))
         .get('/reboot')
         .expect(200)
         .end((err, res) => {
@@ -67,7 +67,7 @@ describe('Server', () => {
 
   context('#shutdown', () => {
     it('renders home with message when cant shutdown', done => {
-      request(app('fixtures/configuration.json'))
+      request(app('fixtures/web-configuration.json'))
         .get('/shutdown')
         .expect(500)
         .end((err, res) => {
@@ -77,7 +77,7 @@ describe('Server', () => {
     })
 
     it('ends response when successfully reboots', done => {
-      request(app('fixtures/configuration.json'))
+      request(app('fixtures/web-configuration.json'))
         .get('/shutdown')
         .expect(200)
         .end((err, res) => {
@@ -96,7 +96,7 @@ describe('Server', () => {
       let responseBody
 
       before(() => {
-        request(app('fixtures/configuration.json'))
+        request(app('fixtures/web-configuration.json'))
           .get('/model')
           .expect(200)
           .end((err, res) => {
@@ -108,9 +108,9 @@ describe('Server', () => {
         expect(responseBody).to.have.property('tools')
       })
 
-      it('should have 3 tools', () => {
-        expect(responseBody.tools).to.have.lengthOf(3)
-        expect(responseBody.tools.map(t => t.name)).to.eql(['network', 'jobs', 'statistics'])
+      it('should have 5 tools', () => {
+        expect(responseBody.tools).to.have.lengthOf(5)
+        expect(responseBody.tools.map(t => t.name)).to.eql(['network', 'ci server', 'led hardware', 'jobs to monitor', 'statistics'])
       })
 
       it('each tool should have "name", "configuration" and "active" status', () => {
@@ -122,7 +122,7 @@ describe('Server', () => {
       })
 
       it('should have 2 active tools', () => {
-        expect(responseBody.tools.filter(t => t.active)).to.have.lengthOf(2)
+        expect(responseBody.tools.filter(t => t.active)).to.have.lengthOf(4)
       })
 
       it('should have "selectedTool" property', () => {
@@ -130,7 +130,7 @@ describe('Server', () => {
       })
 
       it('should have "lastUpdated" property', () => {
-        expect(responseBody).to.have.property('lastUpdated', '2016-10-30T21:49:16.307Z')
+        expect(responseBody).to.have.property('lastUpdated', '2016-11-28T05:37:49.045Z')
       })
     })
 
@@ -147,7 +147,7 @@ describe('Server', () => {
       let data, parsedData, randomConfigFile = `fixtures/tmp_${Date.now()}.json`
 
       beforeEach(() => {
-        data = fs.readFileSync('fixtures/configuration.json', { encoding: 'utf8' })
+        data = fs.readFileSync('fixtures/web-configuration.json', { encoding: 'utf8' })
         fs.writeFileSync(randomConfigFile, data)
         parsedData = JSON.parse(data)
       })
