@@ -33,3 +33,4 @@ jscpd.json
 # Temporary fixtures
 fixtures/tmp*.json
 configuration.json
+light-configuration.json
