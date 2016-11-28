@@ -165,6 +165,71 @@
       "from": "content-type@>=1.0.2 <1.1.0",
       "resolved": "https://registry.npmjs.org/content-type/-/content-type-1.0.2.tgz"
     },
+    "convict": {
+      "version": "1.5.0",
+      "from": "convict@latest",
+      "resolved": "https://registry.npmjs.org/convict/-/convict-1.5.0.tgz",
+      "dependencies": {
+        "depd": {
+          "version": "1.1.0",
+          "from": "depd@1.1.0",
+          "resolved": "https://registry.npmjs.org/depd/-/depd-1.1.0.tgz"
+        },
+        "json5": {
+          "version": "0.5.0",
+          "from": "json5@0.5.0",
+          "resolved": "https://registry.npmjs.org/json5/-/json5-0.5.0.tgz"
+        },
+        "lodash": {
+          "version": "4.16.2",
+          "from": "lodash@4.16.2",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.16.2.tgz"
+        },
+        "minimist": {
+          "version": "1.2.0",
+          "from": "minimist@1.2.0",
+          "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz"
+        },
+        "moment": {
+          "version": "2.12.0",
+          "from": "moment@2.12.0",
+          "resolved": "https://registry.npmjs.org/moment/-/moment-2.12.0.tgz"
+        },
+        "validator": {
+          "version": "4.6.1",
+          "from": "validator@4.6.1",
+          "resolved": "https://registry.npmjs.org/validator/-/validator-4.6.1.tgz"
+        },
+        "varify": {
+          "version": "0.1.1",
+          "from": "varify@0.1.1",
+          "resolved": "https://registry.npmjs.org/varify/-/varify-0.1.1.tgz",
+          "optional": true,
+          "dependencies": {
+            "redeyed": {
+              "version": "0.4.4",
+              "from": "redeyed@>=0.4.2 <0.5.0",
+              "resolved": "https://registry.npmjs.org/redeyed/-/redeyed-0.4.4.tgz",
+              "optional": true,
+              "dependencies": {
+                "esprima": {
+                  "version": "1.0.4",
+                  "from": "esprima@>=1.0.4 <1.1.0",
+                  "resolved": "https://registry.npmjs.org/esprima/-/esprima-1.0.4.tgz",
+                  "optional": true
+                }
+              }
+            },
+            "through": {
+              "version": "2.3.8",
+              "from": "through@>=2.3.4 <2.4.0",
+              "resolved": "https://registry.npmjs.org/through/-/through-2.3.8.tgz",
+              "optional": true
+            }
+          }
+        }
+      }
+    },
     "cookie": {
       "version": "0.3.1",
       "from": "cookie@0.3.1",
@@ -484,6 +549,11 @@
       "version": "4.11.2",
       "from": "lodash@>=4.11.1 <4.12.0",
       "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.11.2.tgz"
+    },
+    "lodash.findindex": {
+      "version": "4.6.0",
+      "from": "lodash.findindex@latest",
+      "resolved": "https://registry.npmjs.org/lodash.findindex/-/lodash.findindex-4.6.0.tgz"
     },
     "lodash.reduce": {
       "version": "4.6.0",
