@@ -5,9 +5,9 @@ const cp = require('child_process')
 
 const UTF_8 = 'utf8'
 
-module.exports.makeFileSystemWritable = () => cp.execSync('rwroot')
+module.exports.makeFileSystemWritable = () => cp.execSync('/storage/bin/rwroot.sh')
 
-module.exports.makeFileSystemReadOnly = () => cp.execSync('roroot')
+module.exports.makeFileSystemReadOnly = () => cp.execSync('/storage/bin/roroot.sh')
 
 module.exports.writeHostname = (newHostname) => {
   const hostname = fs.readFileSync('/etc/hostname', UTF_8)
