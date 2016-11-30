@@ -31,10 +31,9 @@ module.exports = (router, configFile) => {
     if (requestData.save) {
       const moduleService = require(`../services/${requestData.save}`)
       moduleService.persist(requestData.payload)
-      model = moduleService.mutateModel(model, requestData.payload)
+      moduleService.mutateModel(model, requestData.payload)
+      model.lastUpdated = new Date().toJSON()
     }
-
-    model.lastUpdated = new Date().toJSON()
 
     fs.writeFileSync(configFile, JSON.stringify(model))
     res.json(model)

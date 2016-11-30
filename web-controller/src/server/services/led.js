@@ -28,6 +28,4 @@ module.exports.mutateModel = (model, payload) => {
 
   model.tools[toolIdx].configuration.ledType = payload.ledType
   model.tools[toolIdx].configuration.numLeds = payload.numLeds
-
-  return model
 }

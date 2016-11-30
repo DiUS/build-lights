@@ -41,13 +41,11 @@
                 "items": [
                     {
                         "name": "Job to monitor 1",
-                        "path": "/path/to/job/1",
-                        "active": true
+                        "path": "/path/to/job/1"
                     },
                     {
                         "name": "Job to monitor 2",
-                        "path": "/path/to/job/2",
-                        "active": true
+                        "path": "/path/to/job/2"
                     },
                     {
                         "name": "",
