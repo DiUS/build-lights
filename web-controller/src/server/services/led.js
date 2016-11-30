@@ -12,12 +12,14 @@ module.exports.persist = (payload) => {
 
   try {
     fs.lstatSync(lightConfiguration)
+    logger.info('Light configuration file "%s" exists and will be read.', lightConfiguration)
 
     let lightConfJSON = JSON.parse(fs.readFileSync(lightConfiguration, UTF_8))
     lightConfJSON.light.type = payload.ledType
     lightConfJSON.light.num_leds = payload.numLeds
 
     fs.writeFileSync(lightConfiguration, JSON.stringify(lightConfJSON), UTF_8)
+    logger.info('Persisted new Jobs configuration')
   } catch (e) {
     logger.error('Light Controller configuration could not be found.')
   }

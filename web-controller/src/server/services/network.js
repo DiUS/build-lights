@@ -1,22 +1,29 @@
 'use strict'
 
 const utils = require('./utils')
+const logger = require('winston')
 const findIndex = require('lodash.findindex')
 
 module.exports.persist = (payload) => {
   utils.makeFileSystemWritable()
+  logger.info('File system is now writable.')
+
   utils.writeHostname(payload.hostname)
+  logger.info('Wrote new hostname "%s"', payload.hostname)
 
   let iface = 'eth0'
   if (payload.connectionType === 'wireless') {
     iface = 'wlan0'
     utils.writeWirelessConfiguration(payload)
   }
+  logger.info('Wrote connection information for interface "%s"', iface)
 
   const dhcpConf = (payload.useDhcp === 'false' ? payload : {})
   utils.writeStaticNetworkConfiguration(iface, dhcpConf)
+  logger.info('Wrote DHCP information')
 
   utils.makeFileSystemReadOnly()
+  logger.info('File system is now read only.')
 }
 
 module.exports.mutateModel = (model, payload) => {

@@ -5,6 +5,7 @@ require('nodejs-dashboard')
 const fs = require('fs')
 const helmet = require('helmet')
 const logger = require('./logger')
+const winston = require('winston')
 const express = require('express')
 const bodyParser = require('body-parser')
 const compression = require('compression')
@@ -45,7 +46,12 @@ module.exports = (configFile) => {
 
   app.use((err, req, res, next) => {
     res.status(500)
-    res.json(err)
+    winston.error('could not execute action: %j', err)
+
+    let payload = JSON.parse(fs.readFileSync(configFile, { encoding: 'utf8' }))
+    payload.result = { success: false, message: err.message }
+
+    res.json(payload)
   })
 
   return app

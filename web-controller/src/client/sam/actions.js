@@ -12,11 +12,7 @@ function persistState (payload) {
   fetch('/model', requestOpts)
     .then(res => res.json())
     .then(json => { render(json) })
-    .catch(err => {
-      console.log(err)
-      // TODO fix this
-      // render(window.model)
-    })
+    .catch(err => { render(err) })
 
   return false
 }
