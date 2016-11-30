@@ -35,6 +35,12 @@
                         color: $darkNavy;
                     }
                 }
+
+                &.selected {
+                    a {
+                        font-weight: bold;
+                    }
+                }
             }
         }
     }

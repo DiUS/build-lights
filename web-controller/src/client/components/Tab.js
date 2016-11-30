@@ -4,6 +4,7 @@ import './styles/Tab.css'
 
 import Inferno from 'inferno' // eslint-disable-line
 
+import { Alert } from './Alert'
 import { TabItem } from './TabItem'
 import { TabContent } from './TabContent'
 
@@ -21,6 +22,7 @@ export const Tab = (model) => {
 
   const tabs = enabledTabs.map(TabItem)
   const tabContent = enabledTabs.map(TabContent)
+  const alert = Alert(model.result)
 
   return (
     <div className='tab'>
@@ -30,6 +32,7 @@ export const Tab = (model) => {
         </ul>
       </div>
       <div className='tab-content container'>
+        {alert}
         {tabContent}
       </div>
     </div>

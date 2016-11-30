@@ -1,0 +1,43 @@
+@import "colors.css";
+@import "variables.css";
+
+.alert {
+    border-radius: $radius;
+    color: #f5f5f5;
+    display: flex;
+    margin-bottom: 1.5em;
+    padding: 1em;
+    transition: .3s;
+
+    &.collapse {
+        padding: 0;
+        margin: 0;
+        visibility: collapse;
+
+        span, a {
+            display: none;
+        }
+    }
+
+    &.success {
+        background-color: $darkGreen;
+    }
+
+    &.error {
+        background-color: $lightRed;
+    }
+
+    span, a {
+        flex: 1;
+    }
+
+    a {
+        align-self: flex-end;
+        color: #f5f5f5;
+        font-size: 1.2em;
+        font-weight: bold;
+        right: 1em;
+        text-align: right;
+        transition: none;
+    }
+}

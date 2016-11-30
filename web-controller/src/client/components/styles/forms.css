@@ -13,6 +13,7 @@ form {
 
     .form-container {
         background-color: #EEEFF0;
+        border-radius: $radius;
         display: flex;
         margin-bottom: 0.25em;
         padding: 2em 4em;
@@ -20,7 +21,7 @@ form {
         &.vertical {
             flex-direction: column;
             label {
-                margin-bottom: 0.5em;
+                margin: 0.5em 0;
             }
         }
 
@@ -28,7 +29,7 @@ form {
             display: flex;
             label {
                 align-self: center;
-                margin-bottom: 0;
+                margin: 0;
             }
         }
 
