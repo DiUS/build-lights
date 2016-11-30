@@ -3,7 +3,7 @@
 const convict = require('convict')
 
 // Define a schema
-const conf = convict({
+module.exports = convict({
   env: {
     doc: 'The applicaton environment.',
     format: ['production', 'development', 'test'],
@@ -17,8 +17,3 @@ const conf = convict({
     env: 'LIGHT_CONF'
   }
 })
-
-// Perform validation
-conf.validate({ strict: true })
-
-exports = conf
