@@ -28,14 +28,22 @@ module.exports = (router, configFile) => {
       model.tools[jobsIdx].configuration.items.splice(requestData.deleteJob, 1)
     }
 
+    let persistedConfiguration = false
     if (requestData.save) {
       const moduleService = require(`../services/${requestData.save}`)
       moduleService.persist(requestData.payload)
       moduleService.mutateModel(model, requestData.payload)
       model.lastUpdated = new Date().toJSON()
+
+      persistedConfiguration = true
     }
 
     fs.writeFileSync(configFile, JSON.stringify(model))
+
+    if (persistedConfiguration) {
+      model.result = { success: true, message: 'Configuration successfully persisted.' }
+    }
+
     res.json(model)
   })
 }
