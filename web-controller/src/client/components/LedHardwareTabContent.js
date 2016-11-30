@@ -9,7 +9,7 @@ import { transformFormIntoPayload } from './utils'
 
 export const LedHardwareTabContent = (model, lastUpdated) => {
   const handleFormSubmit = (event) => {
-    let postData = { save: 'hardware', payload: {} }
+    let postData = { save: 'led', payload: {} }
     transformFormIntoPayload(event.currentTarget.elements, postData.payload)
     return save(postData)
   }
@@ -19,8 +19,8 @@ export const LedHardwareTabContent = (model, lastUpdated) => {
       <div className='form-container vertical'>
         <label for='ledType'>Which <span>LED strip</span> you are using</label>
         <select id='ledType' name='ledType' value={model.ledType}>
-          <option value='epistar'>Epistar LPD8806</option>
-          <option value='adafruit'>Adafruit LPD8806</option>
+          <option value='epistar_lpd8806'>Epistar LPD8806</option>
+          <option value='adafruit_lpd8806'>Adafruit LPD8806</option>
         </select>
         <label for='numLeds'>Number of LEDs on your strip</label>
         <input type='text' id='numLeds' placeholder='http://myci.mycompany' name='numLeds' value={model.numLeds} />
