@@ -45,6 +45,10 @@ body {
                 letter-spacing: 1px;
                 line-height: 1.4;
                 text-align: center;
+
+                a {
+                    text-decoration: underline;
+                }
             }
         }
     }

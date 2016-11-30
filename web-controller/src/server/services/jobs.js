@@ -16,6 +16,7 @@ exports.persist = (payload) => {
     let lightConfJSON = JSON.parse(fs.readFileSync(lightConfiguration, UTF_8))
 
     lightConfJSON.api.pollrate_s = Number(payload.pollRate)
+    lightConfJSON.jobs = payload.jobPath
 
     fs.writeFileSync(lightConfiguration, JSON.stringify(lightConfJSON), UTF_8)
   } catch (e) {
@@ -27,6 +28,9 @@ module.exports.mutateModel = (model, payload) => {
   const toolIdx = findIndex(model.tools, { name: 'jobs to monitor' })
 
   model.tools[toolIdx].configuration.pollrate = Number(payload.pollRate)
-  // model.tools[toolIdx].configuration.address = payload.ciAddress
-  // model.tools[toolIdx].configuration.port = payload.ciPort
+  model.tools[toolIdx].configuration.items = []
+
+  for (let i = 0; i < payload.jobName.length; i++) {
+    model.tools[toolIdx].configuration.items.push({ name: payload.jobName[i], path: payload.jobPath[i] })
+  }
 }

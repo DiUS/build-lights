@@ -32,7 +32,7 @@ const mutateScreen = (e) => {
     .then(json => { })
     .catch(() => {
       representation.classList.add('error')
-      representation.innerHTML = '<div class="message"><p>Could not execute.<br/>Please restart manually.</p></div>'
+      representation.innerHTML = '<div class="message"><p>Could not execute.<br/>Please restart manually.<br/><br/><a href="#" onclick="location.reload()">Reload</a></p></div>'
     })
 
   return false

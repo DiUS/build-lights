@@ -25,7 +25,7 @@ export const NetworkTabContent = (model, lastUpdated) => {
     const formEl = event.currentTarget.parentNode.parentNode.parentNode
     const staticEl = formEl.getElementsByClassName('static-configuration')[0]
 
-    if (event.currentTarget.value === 'true') {
+    if (event.currentTarget.value === 'false') {
       staticEl.classList.remove('hidden')
       staticEl.classList.add('shown')
     } else {
@@ -47,7 +47,7 @@ export const NetworkTabContent = (model, lastUpdated) => {
     <form onSubmit={handleFormSubmit}>
       <div className='form-container vertical'>
         <label>Name of <span>this device</span> on the network</label>
-        <input className='full-length' type='text' name='hostname' placeholder='e.g. mycompany-build-lights' value={model.hostname} />
+        <input className='full-length' required type='text' name='hostname' placeholder='e.g. mycompany-build-lights' value={model.hostname} />
       </div>
       <div className='form-container vertical'>
         <div className='fieldset'>

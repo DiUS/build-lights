@@ -5,7 +5,7 @@ exports.transformFormIntoPayload = (formElements, payload) => {
     const formEl = formElements[i]
     let alreadyContainsEl = false
 
-    if (payload[formEl.name]) {
+    if (payload[formEl.name] && !Array.isArray(payload[formEl.name])) {
       alreadyContainsEl = true
 
       const originalValue = payload[formEl.name]
@@ -13,6 +13,10 @@ exports.transformFormIntoPayload = (formElements, payload) => {
 
       payload[formEl.name] = []
       payload[formEl.name].push(originalValue)
+    }
+
+    if (Array.isArray(payload[formEl.name])) {
+      alreadyContainsEl = true
     }
 
     if (alreadyContainsEl) {
