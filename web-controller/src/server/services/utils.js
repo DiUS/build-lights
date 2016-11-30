@@ -36,7 +36,7 @@ module.exports.writeHostname = (newHostname) => {
 }
 
 module.exports.writeStaticNetworkConfiguration = (iface, payload) => {
-  let dhcpConfContent = fs.readFileSync('./templates/dhcpcd.conf.template', UTF_8).split(/\n/)
+  let dhcpConfContent = fs.readFileSync(`${__dirname}/templates/dhcpcd.conf.template`, UTF_8).split(/\n/)
 
   if (payload.address && payload.gateway) {
     dhcpConfContent.push(`interface ${iface}`)

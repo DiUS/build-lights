@@ -82,7 +82,7 @@ describe('Utils', () => {
     it('writes DHCP configuration from template', () => {
       const fsMock = sinon.mock(fs)
       fsMock.expects('readFileSync')
-        .withArgs('./templates/dhcpcd.conf.template').once()
+        .withArgs(`${__dirname}/templates/dhcpcd.conf.template`).once()
         .returns(data)
 
       fsMock.expects('writeFileSync')
@@ -96,7 +96,7 @@ describe('Utils', () => {
     it('throws Error when cant write to /etc/dhcpcd.conf', () => {
       const fsMock = sinon.mock(fs)
       fsMock.expects('readFileSync')
-        .withArgs('./templates/dhcpcd.conf.template').once()
+        .withArgs(`${__dirname}/templates/dhcpcd.conf.template`).once()
         .returns(data)
 
       fsMock.expects('writeFileSync')
@@ -110,7 +110,7 @@ describe('Utils', () => {
     it('writes DHCP configuration from template without any static configuration when empty payload is provided', () => {
       const fsMock = sinon.mock(fs)
       fsMock.expects('readFileSync')
-        .withArgs('./templates/dhcpcd.conf.template').once()
+        .withArgs(`${__dirname}/templates/dhcpcd.conf.template`).once()
         .returns(data)
 
       fsMock.expects('writeFileSync')
