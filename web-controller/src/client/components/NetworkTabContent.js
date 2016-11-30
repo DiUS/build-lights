@@ -78,9 +78,9 @@ export const NetworkTabContent = (model, lastUpdated) => {
         <div className='fieldset'>
           <label>Assign network <span>IP address</span></label>
           <div className='controls'>
-            <input type='radio' name='useDhcp' checked={!model.dhcp ? 'checked' : ''} value='true' id='yes' onChange={handleDhcpChange} />
+            <input type='radio' name='useDhcp' checked={!model.dhcp ? 'checked' : ''} value='false' id='yes' onChange={handleDhcpChange} />
             <label for='yes'><span><span /></span>Yes</label>
-            <input type='radio' name='useDhcp' checked={model.dhcp ? 'checked' : ''} value='false' id='no' onChange={handleDhcpChange} />
+            <input type='radio' name='useDhcp' checked={model.dhcp ? 'checked' : ''} value='true' id='no' onChange={handleDhcpChange} />
             <label for='no'><span><span /></span>No</label>
           </div>
         </div>
