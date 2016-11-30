@@ -158,7 +158,7 @@ describe('Server', () => {
           .expect(200)
           .end((err, res) => {
             expect(res.body.selectedTool).to.eql(parsedData.selectedTool)
-            expect(res.body.lastUpdated).to.not.eql(parsedData.lastUpdated)
+            expect(res.body.lastUpdated).to.eql(parsedData.lastUpdated)
             done()
           })
       })
@@ -170,7 +170,7 @@ describe('Server', () => {
           .expect(200)
           .end((err, res) => {
             expect(res.body.selectedTool).to.eql('abc')
-            expect(res.body.lastUpdated).to.not.eql(parsedData.lastUpdated)
+            expect(res.body.lastUpdated).to.eql(parsedData.lastUpdated)
             done()
           })
       })
