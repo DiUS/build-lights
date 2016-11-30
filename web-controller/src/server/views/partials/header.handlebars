@@ -1,18 +1,16 @@
 <header>
   <div class="container">
     <span>Build Lights</span>
-    {{#unless message}}
     <div class="device-actions">
       <button type="button" aria-haspopup="true">Online</button>
       <ul class="dropdown-device-actions">
         <li>
-          <a href="/reboot">Reboot</a>
+          <a id='actionReboot' href="/reboot">Reboot</a>
         </li>
         <li>
-          <a href="/shutdown">Shutdown</a>
+          <a id='actionShutdown' href="/shutdown">Shutdown</a>
         </li>
       </ul>
     </div>
-    {{/unless}}
   </div>
 </header>

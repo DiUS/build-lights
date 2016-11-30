@@ -16,3 +16,27 @@ if (document.readyState === 'complete' ||
 } else {
   document.addEventListener('DOMContentLoaded', cb)
 }
+
+const mutateScreen = (e) => {
+  let endpoint = '/shutdown'
+  if (e.currentTarget.id === 'actionReboot') {
+    endpoint = '/reboot'
+  }
+
+  const representation = document.getElementById('representation')
+  representation.classList.add('waiting')
+  representation.innerHTML = '<div class="message"><p>Please wait...</p></div>'
+
+  fetch(endpoint)
+    .then(res => res.json())
+    .then(json => { })
+    .catch(() => {
+      representation.classList.add('error')
+      representation.innerHTML = '<div class="message"><p>Could not execute.<br/>Please restart manually.</p></div>'
+    })
+
+  return false
+}
+
+document.getElementById('actionReboot').onclick = mutateScreen
+document.getElementById('actionShutdown').onclick = mutateScreen

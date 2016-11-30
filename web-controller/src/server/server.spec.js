@@ -48,7 +48,7 @@ describe('Server', () => {
         .get('/reboot')
         .expect(500)
         .end((err, res) => {
-          expect(res.text).to.contain('Could not reboot')
+          expect(res.text).to.be.empty
           done()
         })
     })
@@ -58,8 +58,7 @@ describe('Server', () => {
         .get('/reboot')
         .expect(200)
         .end((err, res) => {
-          expect(res.text).to.not.contain('Could not reboot')
-          expect(res.text).to.contain('Please wait while I am rebooting')
+          expect(res.text).to.be.empty
           done()
         })
     })
@@ -71,7 +70,7 @@ describe('Server', () => {
         .get('/shutdown')
         .expect(500)
         .end((err, res) => {
-          expect(res.text).to.contain('Could not shutdown')
+          expect(res.text).to.be.empty
           done()
         })
     })
@@ -81,8 +80,7 @@ describe('Server', () => {
         .get('/shutdown')
         .expect(200)
         .end((err, res) => {
-          expect(res.text).to.not.contain('Could not shutdown')
-          expect(res.text).to.contain('You can now unplug me.')
+          expect(res.text).to.be.empty
           done()
         })
     })

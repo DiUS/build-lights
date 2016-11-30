@@ -8,9 +8,10 @@ module.exports = (router) => {
     powerOff((err, stdErr, stdOut) => {
       if (err) {
         winston.log('error', 'Could not shutdown server: %j', err)
-        return res.status(500).render('home', { error: 'Could not shutdown.' })
+        res.status(500).send()
       }
-      res.render('wait', { message: 'You can now unplug me.' })
+
+      res.end()
     })
   })
 }

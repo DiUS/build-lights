@@ -29,6 +29,10 @@ body {
         background-repeat: no-repeat;
         position: relative;
 
+        &.error {
+            background-image: url('/static/img/warning.png');
+        }
+
         .message {
             position: absolute;
             top: 60%;
@@ -109,6 +113,7 @@ header {
             position: absolute;
             right: 0;
             top: 85%;
+            z-index: 100;
 
             li a {
                 border-radius: 0.25em;

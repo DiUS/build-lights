@@ -8,9 +8,10 @@ module.exports = (router) => {
     reboot((err, stdErr, stdOut) => {
       if (err) {
         winston.log('error', 'Could not reboot server: %j', err)
-        return res.status(500).render('home', { error: 'Could not reboot.' })
+        res.status(500).send()
       }
-      res.render('wait', { message: 'Please wait while I am rebooting.' })
+
+      res.end()
     })
   })
 }
