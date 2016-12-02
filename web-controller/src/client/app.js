@@ -30,11 +30,14 @@ const mutateScreen = (e) => {
   fetch(endpoint)
     .then(res => {
       let countdown = 30
+      if (endpoint === '/shutdown') {
+        countdown = 10
+      }
+
       setInterval(() => {
-        let message = `Reboot underway. Will refresh in ${countdown}s`
+        let message = `Reboot underway. Will refresh in ${countdown} seconds.`
         if (endpoint === '/shutdown') {
-          countdown = 10
-          message = `Shutdown underway. You can unplug your Raspberry Pi in ${countdown}s`
+          message = `Shutdown underway. You can unplug your Raspberry Pi in ${countdown} seconds.`
         }
 
         representation.innerHTML = `<div class="message"><p>${message}</p></div>`
