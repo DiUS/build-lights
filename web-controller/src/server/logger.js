@@ -8,7 +8,7 @@ module.exports.accessLogger = expressWinston.logger({
     new winston.transports.File({
       json: true,
       colorize: false,
-      filename: 'access.log'
+      filename: (process.env.NODE_ENV !== 'production') ? 'access.log' : '/var/log/web-controller-access.log'
     })
   ],
   meta: true,
@@ -25,7 +25,7 @@ module.exports.errorLogger = expressWinston.errorLogger({
     new winston.transports.File({
       json: true,
       colorize: false,
-      filename: 'error.log'
+      filename: (process.env.NODE_ENV !== 'production') ? 'error.log' : '/var/log/web-controller-error.log'
     })
   ]
 })
