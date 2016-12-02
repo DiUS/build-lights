@@ -134,8 +134,8 @@ describe('Utils', () => {
       const cpMock = sinon.mock(child_process)
 
       fsMock.expects('readFileSync').withArgs('/etc/wpa_supplicant/wpa_supplicant.conf').once().returns(supplicantConf)
-      cpMock.expects('execSync').withArgs('wpa_passphrase whatever mykey').once().returns(wpaPassphraseOut)
-      fsMock.expects('writeFileSync').withArgs('/storage/etc/wpa_supplicant.conf', dataToWrite).once()
+      cpMock.expects('execSync').withArgs('wpa_passphrase "whatever" "mykey"').once().returns(wpaPassphraseOut)
+      fsMock.expects('writeFileSync').withArgs('/etc/wpa_supplicant/wpa_supplicant_in_use.conf', dataToWrite).once()
 
       utils.writeWirelessConfiguration({ ssid: 'whatever', key: 'mykey', hidden: 'false' })
 
@@ -150,8 +150,8 @@ describe('Utils', () => {
       const cpMock = sinon.mock(child_process)
 
       fsMock.expects('readFileSync').withArgs('/etc/wpa_supplicant/wpa_supplicant.conf').once().returns(supplicantConf)
-      cpMock.expects('execSync').withArgs('wpa_passphrase whatever mykey').once().returns(wpaPassphraseOut)
-      fsMock.expects('writeFileSync').withArgs('/storage/etc/wpa_supplicant.conf', dataToWrite).once()
+      cpMock.expects('execSync').withArgs('wpa_passphrase "whatever" "mykey"').once().returns(wpaPassphraseOut)
+      fsMock.expects('writeFileSync').withArgs('/etc/wpa_supplicant/wpa_supplicant_in_use.conf', dataToWrite).once()
 
       utils.writeWirelessConfiguration({ ssid: 'whatever', key: 'mykey', hidden: 'true' })
 
