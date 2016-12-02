@@ -5,8 +5,7 @@
     "scripts": {
         "clean": "rimraf coverage jscpd.json",
         "prestart": "npm run clean && npm run dist",
-        "start": "LIGHT_CONF=light-configuration.json NODE_ENV=production nodemon -i configuration.json ./src/server/index.js configuration.json",
-        "dev:server": "nodejs-dashboard -- nodemon -i configuration.json ./src/server/index.js configuration.json",
+        "dev:server": "nodejs-dashboard -- nodemon -i configuration.json -i light-configuration.json ./src/server/index.js configuration.json light-configuration.json",
         "dev:client": "rollup -m -c ./config/rollup.config.js --watch",
         "dist": "rollup -m -c ./config/rollup.prod.config.js",
         "lint": "standard",
@@ -55,7 +54,7 @@
         "jsdomify": "^3.1.0",
         "lodash.clone": "^4.5.0",
         "mocha": "^3.1.2",
-        "nodejs-dashboard": "^0.1.2",
+        "nodejs-dashboard": "^0.2.1",
         "nodemon": "^1.11.0",
         "postcss-cssnext": "^2.8.0",
         "postcss-import": "^8.1.2",
@@ -79,7 +78,6 @@
     "dependencies": {
         "body-parser": "^1.15.2",
         "compression": "^1.6.2",
-        "convict": "^1.5.0",
         "express": "^4.14.0",
         "express-handlebars": "^3.0.0",
         "express-winston": "^2.0.0",
@@ -90,6 +88,6 @@
         "lodash.findindex": "^4.6.0",
         "nodejs-system-reboot": "0.0.4",
         "power-off": "^1.0.2",
-        "winston": "^2.2.0"
+        "winston": "^2.3.0"
     }
 }

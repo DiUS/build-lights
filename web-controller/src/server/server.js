@@ -11,10 +11,13 @@ const bodyParser = require('body-parser')
 const compression = require('compression')
 const expressHandlebars = require('express-handlebars')
 
-module.exports = (configFile) => {
+module.exports = (configFile, lightConfigFile) => {
   // when config file does not exist
   // prevents the server from starting
   fs.lstatSync(configFile)
+
+  // same when light config file does not exist
+  fs.lstatSync(lightConfigFile)
 
   const app = express()
 
@@ -39,7 +42,7 @@ module.exports = (configFile) => {
   require('./routes/home')(router)
   require('./routes/reboot')(router)
   require('./routes/shutdown')(router)
-  require('./routes/model')(router, configFile)
+  require('./routes/model')(router, configFile, lightConfigFile)
 
   app.use(router)
   app.use(logger.errorLogger)

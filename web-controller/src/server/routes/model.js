@@ -6,7 +6,7 @@ const findIndex = require('lodash.findindex')
 
 const fsOpts = { encoding: 'utf8' }
 
-module.exports = (router, configFile) => {
+module.exports = (router, configFile, lightConfigFile) => {
   router.get('/model', (req, res) => {
     const configuration = fs.readFileSync(configFile, fsOpts)
     res.json(JSON.parse(configuration))
@@ -37,7 +37,7 @@ module.exports = (router, configFile) => {
     if (requestData.save) {
       logger.info('About to save a configuration. Payload: %j', requestData)
       const moduleService = require(`../services/${requestData.save}`)
-      moduleService.persist(requestData.payload)
+      moduleService.persist(requestData.payload, lightConfigFile)
       moduleService.mutateModel(model, requestData.payload)
       model.lastUpdated = new Date().toJSON()
 
