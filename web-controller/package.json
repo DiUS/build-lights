@@ -33,7 +33,7 @@
     "homepage": "https://github.com/dius/build-lights#readme",
     "standard": {
         "globals": [
-            "fetch"
+            "fetch", "location"
         ],
         "ignore": [
             "config/**",
@@ -86,8 +86,6 @@
         "inferno-create-element": "^0.7.27",
         "inferno-dom": "^0.7.27",
         "lodash.findindex": "^4.6.0",
-        "nodejs-system-reboot": "0.0.4",
-        "power-off": "^1.0.2",
         "winston": "^2.3.0"
     }
 }

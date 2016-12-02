@@ -11,6 +11,11 @@ exports.persist = (payload, lightConfigFile) => {
     let lightConfJSON = JSON.parse(fs.readFileSync(lightConfigFile, UTF_8))
 
     lightConfJSON.api.pollrate_s = Number(payload.pollRate)
+
+    if (!Array.isArray(payload.jobPath)) {
+      payload.jobPath = [payload.jobPath]
+    }
+
     lightConfJSON.jobs = payload.jobPath
 
     fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON), UTF_8)

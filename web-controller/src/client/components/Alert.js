@@ -4,17 +4,17 @@ import './styles/Alert.css'
 
 import Inferno from 'inferno' // eslint-disable-line
 
+function collapseAlert (el) {
+  el.classList.add('collapse')
+  setTimeout(() => { el.innerHTML = '' }, 300)
+}
+
 export const Alert = (model) => {
   let content = <div />
 
   const handleAlertClose = (e) => {
     const alertEl = e.currentTarget.parentElement
-    alertEl.classList.add('collapse')
-
-    setTimeout(() => {
-      alertEl.innerHTML = ''
-    }, 300)
-
+    collapseAlert(alertEl)
     return false
   }
 
@@ -26,6 +26,11 @@ export const Alert = (model) => {
         <a href='#' onClick={handleAlertClose}>&times;</a>
       </div>
     )
+
+    setTimeout(() => {
+      const alertEl = document.getElementsByClassName('alert')[0]
+      collapseAlert(alertEl)
+    }, 7000)
   }
 
   return content
