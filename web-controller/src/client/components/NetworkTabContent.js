@@ -44,10 +44,10 @@ export const NetworkTabContent = (model, lastUpdated) => {
   const staticContainerHidden = (model.dhcp === true ? 'hidden' : 'shown')
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form name='networkForm' onSubmit={handleFormSubmit}>
       <div className='form-container vertical'>
-        <label>Name of <span>this device</span> on the network</label>
-        <input className='full-length' required type='text' name='hostname' placeholder='e.g. mycompany-build-lights' value={model.hostname} />
+        <label for='hostname'>Name of <span>this device</span> on the network</label>
+        <input className='full-length' required type='text' id='hostname' name='hostname' placeholder='e.g. mycompany-build-lights' value={model.hostname} />
       </div>
       <div className='form-container vertical'>
         <div className='fieldset'>
@@ -61,12 +61,12 @@ export const NetworkTabContent = (model, lastUpdated) => {
         </div>
         <div className={`wireless-connection ${wirelessContainerHidden}`}>
           <div className='fieldset'>
-            <label>SSID</label>
-            <input type='text' name='ssid' value={model.wireless.ssid} />
+            <label for='ssid'>SSID</label>
+            <input type='text' id='ssid' name='ssid' value={model.wireless.ssid} />
           </div>
           <div className='fieldset'>
-            <label>Password</label>
-            <input type='password' name='key' value={model.wireless.key} />
+            <label for='key'>Password</label>
+            <input type='password' id='key' name='key' value={model.wireless.key} />
           </div>
           <label className='checkbox'>
             <input type='checkbox' id='hidden' name='hidden' value={model.wireless.hidden} checked={model.wireless.hidden ? 'checked' : ''} />
