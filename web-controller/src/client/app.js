@@ -18,10 +18,9 @@ if (document.readyState === 'complete' ||
 }
 
 const mutateScreen = (e) => {
-  let endpoint = '/shutdown'
-  if (e.currentTarget.id === 'actionReboot') {
-    endpoint = '/reboot'
-  }
+  const endpoint = e.currentTarget.href
+  const isShutdown = endpoint.endsWith('shutdown')
+  let countdown = Number(e.currentTarget.dataset.countdown)
 
   const representation = document.getElementById('representation')
   representation.classList.add('waiting')
@@ -29,36 +28,39 @@ const mutateScreen = (e) => {
 
   fetch(endpoint)
     .then(res => {
-      let countdown = 30
-      if (endpoint === '/shutdown') {
-        countdown = 10
+      if (!res.ok) {
+        representation.classList.add('error')
+        representation.innerHTML = '<div class="message"><p>Could not execute.<br/>Please restart manually.<br/><br/><a href="#" onclick="location.reload()">Reload</a></p></div>'
+        return
       }
 
-      setInterval(() => {
+      const intervalId = setInterval(() => {
         let message = `Reboot underway. Will refresh in ${countdown} seconds.`
-        if (endpoint === '/shutdown') {
+        if (isShutdown) {
           message = `Shutdown underway. You can unplug your Raspberry Pi in ${countdown} seconds.`
         }
 
         representation.innerHTML = `<div class="message"><p>${message}</p></div>`
-        countdown = countdown - 1
+        countdown -= 1
 
         if (countdown === 0) {
-          if (endpoint === '/reboot') {
-            location.reload()
-          } else {
+          clearInterval(intervalId)
+
+          if (isShutdown) {
             representation.innerHTML = `<div class="message"><p>You can now unplug your Raspberry Pi.</p></div>`
+          } else {
+            location.reload()
           }
         }
       }, 1000)
-    })
-    .catch(() => {
-      representation.classList.add('error')
-      representation.innerHTML = '<div class="message"><p>Could not execute.<br/>Please restart manually.<br/><br/><a href="#" onclick="location.reload()">Reload</a></p></div>'
     })
 
   return false
 }
 
-document.getElementById('actionReboot').onclick = mutateScreen
-document.getElementById('actionShutdown').onclick = mutateScreen
+const deviceActionEls = document.getElementsByClassName('deviceAction')
+for (let i = 0; i < deviceActionEls.length; i++) {
+  if (!deviceActionEls[i].onclick) {
+    deviceActionEls[i].onclick = mutateScreen
+  }
+}

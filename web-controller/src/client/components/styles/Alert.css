@@ -27,13 +27,19 @@
         background-color: $lightRed;
     }
 
-    span, a {
-        flex: 1;
+    span {
+        flex: 0.9;
+        a {
+            font-size: 1em;
+            font-weight: normal;
+            text-decoration: underline;
+        }
     }
 
     a {
         align-self: flex-end;
         color: #f5f5f5;
+        flex: 0.1;
         font-size: 1.2em;
         font-weight: bold;
         right: 1em;

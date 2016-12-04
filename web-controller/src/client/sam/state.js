@@ -7,7 +7,7 @@ export function representation (model) {
 }
 
 export function nextAction (model) {
-  // automatic action that needs invoking
+  // nothing to do here for now
 }
 
 export function render (model) {
