@@ -1,7 +1,9 @@
 import time
 #import adafruit_lpd8806 as ledstrip
 import epistar_lpd8806 as ledstrip
+#import console as ledstrip
 import signal
+from lights import job2light_translator
 
 led = ledstrip.Strand()
 
@@ -21,24 +23,23 @@ def run():
     led.daemon = True
     led.start()
 
-    print 'Fill LEDs\n'
-    led.fill(255,0,0,False,0,3)
-    led.fill(0,255,0,True,3,6)
-    led.fill(0,0,255,False,6,9)
-    led.fill(255,255,0,True,9,12)
-    led.fill(255,0,255,False,12,15)
-    led.fill(0,255,255,True,15,18)
-    led.fill(255,255,255,False,18,21)
-    led.fill(80,127,255,True,21)
+    led.set_status(job2light_translator.STATUS.UNKNOWN, 0, 2)
+    led.set_status(job2light_translator.STATUS.SUCCESS, 2, 4)
+    led.set_status(job2light_translator.STATUS.FAILURE, 4, 6)
+    led.set_status(job2light_translator.STATUS.ABORTED, 6, 8)
+    led.set_status(job2light_translator.STATUS.DISABLED, 8, 10)
+    led.set_status(job2light_translator.STATUS.UNSTABLE, 10, 12)
+    led.set_status(job2light_translator.STATUS.NOT_BUILT, 12, 14)
+    led.set_status(job2light_translator.STATUS.BUILDING_FROM_UNKNOWN, 14, 16)
+    led.set_status(job2light_translator.STATUS.BUILDING_FROM_SUCCESS, 16, 18)
+    led.set_status(job2light_translator.STATUS.BUILDING_FROM_FAILURE, 18, 20)
+    led.set_status(job2light_translator.STATUS.BUILDING_FROM_ABORTED, 20, 22)
+    led.set_status(job2light_translator.STATUS.BUILDING_FROM_DISABLED, 22, 24)
+    led.set_status(job2light_translator.STATUS.BUILDING_FROM_UNSTABLE, 24, 26)
+    led.set_status(job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT, 26, 28)
+    led.set_status(job2light_translator.STATUS.POLL_ERROR, 28, 30)
+    led.set_status(job2light_translator.STATUS.INVALID_STATUS, 30, 32)
 
-    time.sleep(1)
-    led.setblink(2, True)
-    led.setblinkrange(True, 8, 9)
-    led.setblink(13, True)
-    led.setblink(19, True)
-
-    print '\n'
-    print 'LED join\n'
     while True:
         led.join(1000)
         if not led.isAlive():

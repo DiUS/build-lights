@@ -101,8 +101,15 @@ def run():
         poll_interval_seconds = 3
         splayer = None
 
-
-        if light_conf['type'] == 'adafruit_lpd8806':
+        if light_conf['type'] == 'console':
+            dlogger.log("Light type is console")
+            from lights import console
+            from lights import job2ledstrip
+            kwargs = {}
+            if light_conf.has_key('num_leds'):
+                kwargs['num_leds'] = light_conf['num_leds']
+            light = console.Strand(**kwargs)
+        elif light_conf['type'] == 'adafruit_lpd8806':
             dlogger.log("Light type is Adafruit LPD8806 LED strip.")
             from lights import adafruit_lpd8806
             from lights import job2ledstrip
