@@ -23,8 +23,13 @@ Then boot it up and configure network settings and jobs. The software is install
 * Plays sound when build finishes.
 * Automatically divides LEDs to each build.
 
-#### Upcoming Features
+#### Planned features
 * Monitors Jenkins via AWS SQS.
+* Ability to configure sounds via web interface.
+* Buildkite support.
+* Circle CI support.
+* Bamboo support.
+* Statistical information off monitored jobs.
 
 ![build-lights-top](https://github.com/DiUS/build-lights/blob/master/docs/device_top.jpg)
 

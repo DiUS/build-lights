@@ -11,8 +11,5 @@ sudo dd bs=1M count=2323 if=/dev/sdb of=build-lights-master-20161028.img
 # Compress the image
 zip build-lights-master-20161028.zip build-lights-master-20161028.img
 
-
-
 # Copy master image to another SD card
 sudo dd bs=1M if=build-lights-master-20161028.img of=/dev/sdb
-
