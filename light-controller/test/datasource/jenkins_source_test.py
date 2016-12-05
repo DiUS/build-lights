@@ -8,7 +8,7 @@ sys.path.append(parent_dir)
 from datasource.jenkins_source import *
 from lights.job2light_translator import *
 
-class TestStringMethods(unittest.TestCase):
+class JenkinsSourceTest(unittest.TestCase):
 
     def setUp(self):
         self.ci = JenkinsSource('http://localhost:8000/jenkins/')
