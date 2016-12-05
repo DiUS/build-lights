@@ -12,7 +12,7 @@ import threading
 import signal
 
 from lib import error
-from lights import job2light_translator
+from lib.constants import STATUS
 
 class Error(error.Generic):
     """Base class for ledstrip module exceptions"""
@@ -39,23 +39,23 @@ CYAN = ESC + "[46m"
 RESET = ESC + "[0m"
 
 COLORS = {
-    job2light_translator.STATUS.UNKNOWN: MAGENTA + BLACK_CIRCLE + RESET,
-    job2light_translator.STATUS.SUCCESS: GREEN + BLACK_CIRCLE + RESET,
-    job2light_translator.STATUS.FAILURE: RED + BLACK_CIRCLE + RESET,
-    job2light_translator.STATUS.ABORTED: YELLOW + BLACK_CIRCLE + RESET,
-    job2light_translator.STATUS.DISABLED: BLACK + BLACK_CIRCLE + RESET,
-    job2light_translator.STATUS.UNSTABLE: PINK + BLACK_CIRCLE + RESET,
-    job2light_translator.STATUS.NOT_BUILT: WHITE + BLACK_CIRCLE + RESET,
-    job2light_translator.STATUS.BUILDING_FROM_UNKNOWN: MAGENTA + WHITE_CIRCLE + RESET,
-    job2light_translator.STATUS.BUILDING_FROM_SUCCESS: GREEN + WHITE_CIRCLE + RESET,
-    job2light_translator.STATUS.BUILDING_FROM_FAILURE: RED + WHITE_CIRCLE + RESET,
-    job2light_translator.STATUS.BUILDING_FROM_ABORTED: YELLOW + WHITE_CIRCLE + RESET,
-    job2light_translator.STATUS.BUILDING_FROM_DISABLED: CYAN + WHITE_CIRCLE + RESET,
-    job2light_translator.STATUS.BUILDING_FROM_UNSTABLE: PINK + WHITE_CIRCLE + RESET,
-    job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT: WHITE + WHITE_CIRCLE + RESET,
-    job2light_translator.STATUS.BUILDING_FROM_PREVIOUS_STATE: GRAY + WHITE_CIRCLE + RESET,
-    job2light_translator.STATUS.POLL_ERROR: BLUE + BLACK_CIRCLE + RESET,
-    job2light_translator.STATUS.INVALID_STATUS: CYAN + BLACK_CIRCLE + RESET,
+    STATUS.UNKNOWN: MAGENTA + BLACK_CIRCLE + RESET,
+    STATUS.SUCCESS: GREEN + BLACK_CIRCLE + RESET,
+    STATUS.FAILURE: RED + BLACK_CIRCLE + RESET,
+    STATUS.ABORTED: YELLOW + BLACK_CIRCLE + RESET,
+    STATUS.DISABLED: BLACK + BLACK_CIRCLE + RESET,
+    STATUS.UNSTABLE: PINK + BLACK_CIRCLE + RESET,
+    STATUS.NOT_BUILT: WHITE + BLACK_CIRCLE + RESET,
+    STATUS.BUILDING_FROM_UNKNOWN: MAGENTA + WHITE_CIRCLE + RESET,
+    STATUS.BUILDING_FROM_SUCCESS: GREEN + WHITE_CIRCLE + RESET,
+    STATUS.BUILDING_FROM_FAILURE: RED + WHITE_CIRCLE + RESET,
+    STATUS.BUILDING_FROM_ABORTED: YELLOW + WHITE_CIRCLE + RESET,
+    STATUS.BUILDING_FROM_DISABLED: CYAN + WHITE_CIRCLE + RESET,
+    STATUS.BUILDING_FROM_UNSTABLE: PINK + WHITE_CIRCLE + RESET,
+    STATUS.BUILDING_FROM_NOT_BUILT: WHITE + WHITE_CIRCLE + RESET,
+    STATUS.BUILDING_FROM_PREVIOUS_STATE: GRAY + WHITE_CIRCLE + RESET,
+    STATUS.POLL_ERROR: BLUE + BLACK_CIRCLE + RESET,
+    STATUS.INVALID_STATUS: CYAN + BLACK_CIRCLE + RESET,
 }
 
 class Strand(threading.Thread):
@@ -87,7 +87,7 @@ class Strand(threading.Thread):
         if end_index < 0 or end_index > self.num_leds :
             raise InputError('end_index out of range')
 
-    def set_status(self, status=job2light_translator.STATUS.INVALID_STATUS, start_index=None, end_index=None):
+    def set_status(self, status=STATUS.INVALID_STATUS, start_index=None, end_index=None):
         if start_index is None:
             start_index = 0
         if end_index is None or end_index == 0:

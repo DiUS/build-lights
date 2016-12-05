@@ -3,7 +3,7 @@ import time
 import epistar_lpd8806 as ledstrip
 #import console as ledstrip
 import signal
-from lights import job2light_translator
+from lib.constants import STATUS
 
 led = ledstrip.Strand()
 
@@ -23,22 +23,22 @@ def run():
     led.daemon = True
     led.start()
 
-    led.set_status(job2light_translator.STATUS.UNKNOWN, 0, 2)
-    led.set_status(job2light_translator.STATUS.SUCCESS, 2, 4)
-    led.set_status(job2light_translator.STATUS.FAILURE, 4, 6)
-    led.set_status(job2light_translator.STATUS.ABORTED, 6, 8)
-    led.set_status(job2light_translator.STATUS.DISABLED, 8, 10)
-    led.set_status(job2light_translator.STATUS.UNSTABLE, 10, 12)
-    led.set_status(job2light_translator.STATUS.NOT_BUILT, 12, 14)
-    led.set_status(job2light_translator.STATUS.BUILDING_FROM_UNKNOWN, 14, 16)
-    led.set_status(job2light_translator.STATUS.BUILDING_FROM_SUCCESS, 16, 18)
-    led.set_status(job2light_translator.STATUS.BUILDING_FROM_FAILURE, 18, 20)
-    led.set_status(job2light_translator.STATUS.BUILDING_FROM_ABORTED, 20, 22)
-    led.set_status(job2light_translator.STATUS.BUILDING_FROM_DISABLED, 22, 24)
-    led.set_status(job2light_translator.STATUS.BUILDING_FROM_UNSTABLE, 24, 26)
-    led.set_status(job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT, 26, 28)
-    led.set_status(job2light_translator.STATUS.POLL_ERROR, 28, 30)
-    led.set_status(job2light_translator.STATUS.INVALID_STATUS, 30, 32)
+    led.set_status(STATUS.UNKNOWN, 0, 2)
+    led.set_status(STATUS.SUCCESS, 2, 4)
+    led.set_status(STATUS.FAILURE, 4, 6)
+    led.set_status(STATUS.ABORTED, 6, 8)
+    led.set_status(STATUS.DISABLED, 8, 10)
+    led.set_status(STATUS.UNSTABLE, 10, 12)
+    led.set_status(STATUS.NOT_BUILT, 12, 14)
+    led.set_status(STATUS.BUILDING_FROM_UNKNOWN, 14, 16)
+    led.set_status(STATUS.BUILDING_FROM_SUCCESS, 16, 18)
+    led.set_status(STATUS.BUILDING_FROM_FAILURE, 18, 20)
+    led.set_status(STATUS.BUILDING_FROM_ABORTED, 20, 22)
+    led.set_status(STATUS.BUILDING_FROM_DISABLED, 22, 24)
+    led.set_status(STATUS.BUILDING_FROM_UNSTABLE, 24, 26)
+    led.set_status(STATUS.BUILDING_FROM_NOT_BUILT, 26, 28)
+    led.set_status(STATUS.POLL_ERROR, 28, 30)
+    led.set_status(STATUS.INVALID_STATUS, 30, 32)
 
     while True:
         led.join(1000)

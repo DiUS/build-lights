@@ -13,26 +13,25 @@ except ImportError:
 from lib import logger
 from lib import list_utils
 from lib import json_custom_decode
-from lights import job2light_translator
-
+from lib.constants import STATUS
 
 class JenkinsMonitor(object):
 
     status_dict = {
-        'aborted'         : job2light_translator.STATUS.ABORTED,
-        'aborted_anime'   : job2light_translator.STATUS.BUILDING_FROM_ABORTED,
-        'blue'            : job2light_translator.STATUS.SUCCESS,
-        'blue_anime'      : job2light_translator.STATUS.BUILDING_FROM_SUCCESS,
-        'disabled'        : job2light_translator.STATUS.DISABLED,
-        'disabled_anime'  : job2light_translator.STATUS.BUILDING_FROM_DISABLED,
-        'grey'            : job2light_translator.STATUS.UNKNOWN,
-        'grey_anime'      : job2light_translator.STATUS.BUILDING_FROM_UNKNOWN,
-        'notbuilt'        : job2light_translator.STATUS.NOT_BUILT,
-        'notbuilt_anime'  : job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT,
-        'red'             : job2light_translator.STATUS.FAILURE,
-        'red_anime'       : job2light_translator.STATUS.BUILDING_FROM_FAILURE,
-        'yellow'          : job2light_translator.STATUS.UNSTABLE,
-        'yellow_anime'    : job2light_translator.STATUS.BUILDING_FROM_UNSTABLE
+        'aborted'         : STATUS.ABORTED,
+        'aborted_anime'   : STATUS.BUILDING_FROM_ABORTED,
+        'blue'            : STATUS.SUCCESS,
+        'blue_anime'      : STATUS.BUILDING_FROM_SUCCESS,
+        'disabled'        : STATUS.DISABLED,
+        'disabled_anime'  : STATUS.BUILDING_FROM_DISABLED,
+        'grey'            : STATUS.UNKNOWN,
+        'grey_anime'      : STATUS.BUILDING_FROM_UNKNOWN,
+        'notbuilt'        : STATUS.NOT_BUILT,
+        'notbuilt_anime'  : STATUS.BUILDING_FROM_NOT_BUILT,
+        'red'             : STATUS.FAILURE,
+        'red_anime'       : STATUS.BUILDING_FROM_FAILURE,
+        'yellow'          : STATUS.UNSTABLE,
+        'yellow_anime'    : STATUS.BUILDING_FROM_UNSTABLE
     }
 
     def __init__(self, jobs, translator, sound_player=None):
@@ -45,19 +44,19 @@ class JenkinsMonitor(object):
     def __play_sound(self, sound_statuses):
         if self.sound_player is not None:
             building_statuses = [
-                job2light_translator.STATUS.BUILDING_FROM_ABORTED,
-                job2light_translator.STATUS.BUILDING_FROM_SUCCESS,
-                job2light_translator.STATUS.BUILDING_FROM_DISABLED,
-                job2light_translator.STATUS.BUILDING_FROM_UNKNOWN,
-                job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT,
-                job2light_translator.STATUS.BUILDING_FROM_FAILURE,
-                job2light_translator.STATUS.BUILDING_FROM_UNSTABLE,
-                job2light_translator.STATUS.BUILDING_FROM_PREVIOUS_STATE,
+                STATUS.BUILDING_FROM_ABORTED,
+                STATUS.BUILDING_FROM_SUCCESS,
+                STATUS.BUILDING_FROM_DISABLED,
+                STATUS.BUILDING_FROM_UNKNOWN,
+                STATUS.BUILDING_FROM_NOT_BUILT,
+                STATUS.BUILDING_FROM_FAILURE,
+                STATUS.BUILDING_FROM_UNSTABLE,
+                STATUS.BUILDING_FROM_PREVIOUS_STATE,
             ]
             # look for failure first, then success
-            if job2light_translator.STATUS.FAILURE in sound_statuses:
+            if STATUS.FAILURE in sound_statuses:
                 self.sound_player.play_random_failure_sound()
-            elif job2light_translator.STATUS.BUILDING_FROM_SUCCESS in sound_statuses:
+            elif STATUS.BUILDING_FROM_SUCCESS in sound_statuses:
                 self.sound_player.play_random_success_sound()
             else:
                 for status in sound_statuses:
@@ -70,8 +69,8 @@ class JenkinsMonitor(object):
             parsed_rsp = json.loads(build_json_rsp, object_hook=json_custom_decode.decode_unicode_to_str_dict)
             new_jobs = self.__parse_build(parsed_rsp)
             sound_statuses = []
-            sound_statuses_to_ignore = [job2light_translator.STATUS.POLL_ERROR,
-                                        job2light_translator.STATUS.INVALID_STATUS]
+            sound_statuses_to_ignore = [STATUS.POLL_ERROR,
+                                        STATUS.INVALID_STATUS]
             for job_name, status in new_jobs.iteritems():
                 if self.jobs[job_name] != status:
                     if self.jobs[job_name] not in sound_statuses_to_ignore:
@@ -80,7 +79,7 @@ class JenkinsMonitor(object):
             self.__play_sound(sound_statuses)
         else:
             for name in self.jobs:
-                self.jobs[name] = job2light_translator.STATUS.POLL_ERROR
+                self.jobs[name] = STATUS.POLL_ERROR
 
         #self.logger.log('Jobs: %s', self.jobs)
 
@@ -96,7 +95,7 @@ class JenkinsMonitor(object):
         if job['color'] in JenkinsMonitor.status_dict:
             return { job['name'] : JenkinsMonitor.status_dict[job['color']] }
         else:
-            return { job['name'] : job2light_translator.STATUS.INVALID_STATUS }
+            return { job['name'] : STATUS.INVALID_STATUS }
 
     # returns dictionary of build_name to current status
     def __parse_build(self, build):

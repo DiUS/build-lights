@@ -14,15 +14,14 @@ import re
 
 from lib import logger
 from lib import list_utils
-from lights import job2light_translator
-
+from lib.constants import STATUS
 
 class JenkinsAwsSqsMonitor(object):
 
     status_dict = {
-        'FAILURE' : job2light_translator.STATUS.FAILURE,
-        'SUCCESS' : job2light_translator.STATUS.SUCCESS,
-        'ABORTED' : job2light_translator.STATUS.ABORTED,
+        'FAILURE' : STATUS.FAILURE,
+        'SUCCESS' : STATUS.SUCCESS,
+        'ABORTED' : STATUS.ABORTED,
     }
 
     def __init__(self, jobs, translator, first_job_as_trigger=True, sound_player=None):
@@ -35,7 +34,7 @@ class JenkinsAwsSqsMonitor(object):
         self.jobs = dict.fromkeys(tmplist)
         # initialize status to Unknown state
         for name in self.jobs:
-            self.jobs[name] = job2light_translator.STATUS.UNKNOWN
+            self.jobs[name] = STATUS.UNKNOWN
 
     def process_build(self, directive):
         if directive is not None:
@@ -44,7 +43,7 @@ class JenkinsAwsSqsMonitor(object):
             return
             # FIXME: we'll lose the previous status if we change the status to POLL_ERROR, don't do that !
             #for name in self.jobs:
-            #    self.jobs[name] = job2light_translator.STATUS.POLL_ERROR
+            #    self.jobs[name] = STATUS.POLL_ERROR
 
         self.logger.log('Jobs: %s', self.jobs)
 
@@ -56,7 +55,7 @@ class JenkinsAwsSqsMonitor(object):
     def __process_directive(self, directive):
         if directive == 'all_off':
             for name in self.jobs:
-                self.jobs[name] = job2light_translator.STATUS.DISABLED
+                self.jobs[name] = STATUS.DISABLED
             return
 
         jenkins_regex = r"Build ([A-Z]+): (.*) #"
@@ -72,7 +71,7 @@ class JenkinsAwsSqsMonitor(object):
         found_pipeline = found_pipeline[0]
         found_segment_number = found_pipeline.index(job_name)
         if found_status not in JenkinsAwsSqsMonitor.status_dict:
-            self.jobs[job_name] = job2light_translator.STATUS.DISABLED
+            self.jobs[job_name] = STATUS.DISABLED
             return
 
         # set the status for the current job
@@ -84,7 +83,7 @@ class JenkinsAwsSqsMonitor(object):
                 if self.sound_player is not None:
                     self.sound_player.play_random_start_sound()
                 for i in range(1, len(found_pipeline)):
-                    self.jobs[found_pipeline[i]] = job2light_translator.STATUS.BUILDING_FROM_PREVIOUS_STATE
+                    self.jobs[found_pipeline[i]] = STATUS.BUILDING_FROM_PREVIOUS_STATE
                 return
 
         if self.sound_player is not None:
