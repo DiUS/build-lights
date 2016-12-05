@@ -35,11 +35,14 @@ class CircleCISource():
    def __init__(self, api_token, endpoint):
        self.client = CircleClient(api_token, endpoint)
 
-   def list_projects(self):
-       return self.client.projects.list_projects()
+   def list_projects(self, username):
+       projects  = self.client.projects.list_projects()
+       selection = list(filter(lambda x: x['username'] == username, projects))
+       result    = list(map(lambda x: x['reponame'], selection))
+       return result
 
-   def project_status(self, user, project):
-       result = self.client.build.recent(user, project, limit=1, branch='master')[0]
+   def project_status(self, username, project):
+       result = self.client.build.recent(username, project, limit=1, branch='master')[0]
 
        current = result['status']
        previous = result['previous']['status']

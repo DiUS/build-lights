@@ -16,10 +16,12 @@ class TestStringMethods(unittest.TestCase):
         self.ci = CircleCISource(api_token, endpoint)
 
     def test_list_projects(self):
-        self.assertGreater(len(self.ci.list_projects()), 0)
+        projects = self.ci.list_projects('my_username')
+        self.assertTrue('project1' in projects)
+        self.assertTrue('project2' in projects)
 
     def test_successful_build(self):
-        self.assertEqual(self.ci.project_status('RosterRight', 'cirrus'), STATUS.SUCCESS)
+        self.assertEqual(self.ci.project_status('my_username', 'project1'), STATUS.SUCCESS)
 
 if __name__ == '__main__':
     unittest.main()
