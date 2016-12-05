@@ -1,0 +1,11 @@
+{
+  "_class": "hudson.model.Hudson",
+  "jobs": [
+    {
+      "_class": "hudson.matrix.MatrixProject",
+      "name": "debian-stablepkg",
+      "url": "http://localhost:8000/jenkins/job/stablejob",
+      "color": "blue"
+    }
+  ]
+}
