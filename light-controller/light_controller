@@ -8,6 +8,7 @@ sys.path.append(current_dir)
 
 import signal
 import getopt
+import importlib
 
 from lib import daemonize
 from lib import logger
@@ -101,40 +102,16 @@ def run():
         poll_interval_seconds = 3
         splayer = None
 
-        if light_conf['type'] == 'console':
-            dlogger.log("Light type is console")
-            from lights import console
-            from lights import job2ledstrip
-            kwargs = {}
-            if light_conf.has_key('num_leds'):
-                kwargs['num_leds'] = light_conf['num_leds']
-            light = console.Strand(**kwargs)
-        elif light_conf['type'] == 'adafruit_lpd8806':
-            dlogger.log("Light type is Adafruit LPD8806 LED strip.")
-            from lights import adafruit_lpd8806
-            from lights import job2ledstrip
-            kwargs = {}
-            if light_conf.has_key('num_leds'):
-                kwargs['num_leds'] = light_conf['num_leds']
-            if light_conf.has_key('spidev'):
-                kwargs['spidev'] = light_conf['spidev']
-            if light_conf.has_key('simulate_mode'):
-                kwargs['simulate_mode'] = light_conf['simulate_mode']
-            light = adafruit_lpd8806.Strand(**kwargs)
-        elif light_conf['type'] == 'epistar_lpd8806':
-            dlogger.log("Light type is Epistar LPD8806 LED strip.")
-            from lights import epistar_lpd8806
-            from lights import job2ledstrip
-            kwargs = {}
-            if light_conf.has_key('num_leds'):
-                kwargs['num_leds'] = light_conf['num_leds']
-            if light_conf.has_key('spidev'):
-                kwargs['spidev'] = light_conf['spidev']
-            if light_conf.has_key('simulate_mode'):
-                kwargs['simulate_mode'] = light_conf['simulate_mode']
-            light = epistar_lpd8806.Strand(**kwargs)
-        else:
-            raise json_config.ConfigError(str(light_conf['strand']) + ' light type not supported')
+        from lights import job2ledstrip
+
+        light_type = light_conf['type']
+        dlogger.log("Light type is " + light_type)
+
+        try:
+            kwargs = { x:light_conf[x] for x in ['num_leds', 'spidev', 'simulate_mode'] if x in light_conf }
+            light = importlib.import_module('lights.' + light_type).Strand(**kwargs)
+        except ImportError:
+            raise json_config.ConfigError(str(light_type) + ' light type not supported')
 
         if sound_conf.has_key('enabled'):
             if sound_conf['enabled']:
