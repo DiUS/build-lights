@@ -1,6 +1,6 @@
 import jenkinsapi
 from jenkinsapi.jenkins import Jenkins
-from lights.job2light_translator import STATUS
+from lib.constants import STATUS
 
 _STATUS = {
     'aborted'         : STATUS.ABORTED,

@@ -5,8 +5,8 @@ parent_dir = os.path.join(current_dir, "../..")
 import sys
 sys.path.append(parent_dir)
 
-from datasource.jenkins_source import *
-from lights.job2light_translator import *
+from datasource.jenkins_source import JenkinsSource
+from lib.constants import STATUS
 
 class JenkinsSourceTest(unittest.TestCase):
 

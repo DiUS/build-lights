@@ -1,5 +1,5 @@
 from circleclient.circleclient import CircleClient
-from lights.job2light_translator import STATUS
+from lib.constants import STATUS
 
 # other status values include 'retried' and 'running'
 _CURRENT_STATUS = {

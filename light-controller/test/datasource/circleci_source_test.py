@@ -5,8 +5,8 @@ parent_dir = os.path.join(current_dir, "../..")
 import sys
 sys.path.append(parent_dir)
 
-from datasource.circleci_source import *
-from lights.job2light_translator import *
+from datasource.circleci_source import CircleCISource
+from lib.constants import STATUS
 
 class TestStringMethods(unittest.TestCase):
 
