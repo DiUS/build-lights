@@ -18,6 +18,15 @@ All you need to do is unzip it and transfer the downloaded image into an SD Card
 
 Then boot it up and configure network settings and jobs. The software is installed under `/home/pi`.
 
+
+#### Additional steps
+Some additional Python packages are required.  Install them as follows:
+
+```sh
+sudo apt-get install python-pip
+sudo pip install -r light-controller/requirements.txt
+```
+
 #### Features
 * Monitors Jenkins web API directly.
 * Plays sound when build finishes.
