@@ -1,45 +1,23 @@
-DiUS Build Lights 2.0
-=====================
+# DiUS Build Lights 2.0
 
 [![Build Status](https://travis-ci.org/DiUS/build-lights.svg?branch=master)](https://travis-ci.org/DiUS/build-lights)
 
-DiUS Build-Lights is a device that provides visual feedback of a Continuous Integration (CI) or Continuous Deployment (CD) status. It polls the CI/CD server and displays the various gate or project status on an LED strip. Each section of the LED strip represents a gate or project, and the colour represents the status of that gate or project.
+DiUS Build Lights is a device that provides visual feedback of a Continuous Integration (CI) or Continuous Deployment (CD) pipeline.
+
+The software in the device constantly polls the CI/CD server and displays the various gate or project status on an LED strip. Each section of the LED strip represents a gate or project, and the color represents the status of that gate or project.
 
 It is an effective way of providing constant visual feedback and it can be very useful in agile software development.
 
-#### Master image for your SD card
-We provide a Jessie Raspbian based master image, properly partitioned with all software already installed. More information available [here](https://github.com/DiUS/build-lights/blob/master/README_master_image.md).
+#### Features at a glance
 
-All you need to do is unzip it and transfer the downloaded image into an SD Card.
-
-* [Instructions for Linux](https://www.raspberrypi.org/documentation/installation/installing-images/linux.md)
-* [Instructions for Windows](https://www.raspberrypi.org/documentation/installation/installing-images/windows.md)
-* [Instructions for Mac](https://www.raspberrypi.org/documentation/installation/installing-images/mac.md)
-
-Then boot it up and configure network settings and jobs. The software is installed under `/home/pi`.
-
-
-#### Additional steps
-Some additional Python packages are required.  Install them as follows:
-
-```sh
-sudo apt-get install python-pip
-sudo pip install -r light-controller/requirements.txt
-```
-
-#### Features
 * Monitors Jenkins web API directly.
 * Plays sound when build finishes.
 * Automatically divides LEDs to each build.
 
-#### Planned features
-* Monitors Jenkins via AWS SQS.
-* Ability to configure sounds via web interface.
-* Buildkite support.
-* Circle CI support.
-* Bamboo support.
-* Statistical information off monitored jobs.
+Check the [road map](/docs/roadmap.md) for our planned features.
 
-![build-lights-top](https://github.com/DiUS/build-lights/blob/master/docs/device_top.jpg)
+#### Getting help
 
-![build-lights-side](https://github.com/DiUS/build-lights/blob/master/docs/device_side.jpg)
+Submit an issue via Github or get in touch on Gitter.
+
+![DiUS Build Lights from top](/docs/device_top.jpg)
