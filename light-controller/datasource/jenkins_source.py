@@ -1,22 +1,22 @@
 import jenkinsapi
 from jenkinsapi.jenkins import Jenkins
-from lights import job2light_translator
+from lights.job2light_translator import STATUS
 
-STATUS = {
-    'aborted'         : job2light_translator.STATUS.ABORTED,
-    'aborted_anime'   : job2light_translator.STATUS.BUILDING_FROM_ABORTED,
-    'blue'            : job2light_translator.STATUS.SUCCESS,
-    'blue_anime'      : job2light_translator.STATUS.BUILDING_FROM_SUCCESS,
-    'disabled'        : job2light_translator.STATUS.DISABLED,
-    'disabled_anime'  : job2light_translator.STATUS.BUILDING_FROM_DISABLED,
-    'grey'            : job2light_translator.STATUS.UNKNOWN,
-    'grey_anime'      : job2light_translator.STATUS.BUILDING_FROM_UNKNOWN,
-    'notbuilt'        : job2light_translator.STATUS.NOT_BUILT,
-    'notbuilt_anime'  : job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT,
-    'red'             : job2light_translator.STATUS.FAILURE,
-    'red_anime'       : job2light_translator.STATUS.BUILDING_FROM_FAILURE,
-    'yellow'          : job2light_translator.STATUS.UNSTABLE,
-    'yellow_anime'    : job2light_translator.STATUS.BUILDING_FROM_UNSTABLE
+_STATUS = {
+    'aborted'         : STATUS.ABORTED,
+    'aborted_anime'   : STATUS.BUILDING_FROM_ABORTED,
+    'blue'            : STATUS.SUCCESS,
+    'blue_anime'      : STATUS.BUILDING_FROM_SUCCESS,
+    'disabled'        : STATUS.DISABLED,
+    'disabled_anime'  : STATUS.BUILDING_FROM_DISABLED,
+    'grey'            : STATUS.UNKNOWN,
+    'grey_anime'      : STATUS.BUILDING_FROM_UNKNOWN,
+    'notbuilt'        : STATUS.NOT_BUILT,
+    'notbuilt_anime'  : STATUS.BUILDING_FROM_NOT_BUILT,
+    'red'             : STATUS.FAILURE,
+    'red_anime'       : STATUS.BUILDING_FROM_FAILURE,
+    'yellow'          : STATUS.UNSTABLE,
+    'yellow_anime'    : STATUS.BUILDING_FROM_UNSTABLE
 }
 
 class JenkinsSource():
@@ -29,4 +29,4 @@ class JenkinsSource():
 
     def project_status(self, project):
         result = self.J[project].poll(tree='color')
-        return STATUS[result['color']]
+        return _STATUS[result['color']]
