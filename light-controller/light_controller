@@ -126,7 +126,6 @@ def run():
 
         if api_conf['type'] == 'jenkins_direct':
             dlogger.log("API is Jenkins API.")
-            from monitors import jenkins_monitor
             from pollers import jenkins_poller
             if api_conf.has_key('pollrate_s'):
                 if api_conf['pollrate_s'] != 0:
@@ -137,7 +136,6 @@ def run():
                     dlogger.log("NOT Polling API.")
         elif api_conf['type'] == 'jenkins_aws_sqs':
             dlogger.log("API is Jenkins via AWS SQS.")
-            from monitors import jenkins_aws_sqs_monitor
             from pollers import aws_sqs_poller
             if api_conf.has_key('pollrate_s'):
                 if api_conf['pollrate_s'] != 0:
@@ -169,8 +167,7 @@ def run():
         if api_conf['type'] == 'jenkins_direct':
             # Poll Jenkins API directly
             translator = job2ledstrip.Job2LedStrip(jobs, light)
-            monitor = jenkins_monitor.JenkinsMonitor(jobs, translator, sound_player=splayer)
-            poller = jenkins_poller.JenkinsPoller(api_conf['url'], monitor)
+            poller = jenkins_poller.JenkinsPoller(api_conf['url'], jobs, translator, splayer)
 
         elif api_conf['type'] == 'jenkins_aws_sqs':
             # Poll Jenkins via AWS SQS
@@ -182,21 +179,11 @@ def run():
                 translator = job2ledstrip.Job2LedStrip(tmplist, light)
             else:
                 translator = job2ledstrip.Job2LedStrip(jobs, light)
-            monitor = jenkins_aws_sqs_monitor.JenkinsAwsSqsMonitor(jobs, translator, first_job_as_trigger, sound_player=splayer)
-            kwargs = {}
-            kwargs['monitor'] = monitor
             if not api_conf.has_key('sqs_region'):
                 raise json_config.ConfigError('sqs_region not configured')
-            kwargs['sqs_region'] = api_conf['sqs_region']
             if not api_conf.has_key('sqs_queue_name'):
                 raise json_config.ConfigError('sqs_queue_name not configured')
-            kwargs['sqs_queue_name'] = api_conf['sqs_queue_name']
-            if api_conf.has_key('aws_access_key_id'):
-                kwargs['aws_access_key_id'] = api_conf['aws_access_key_id']
-            if api_conf.has_key('aws_secret_access_key'):
-                kwargs['aws_secret_access_key'] = api_conf['aws_secret_access_key']
-            poller = aws_sqs_poller.AwsSqsPoller(**kwargs)
-
+            poller = aws_sqs_poller.AwsSqsPoller(jobs, translator, first_job_as_trigger, splayer, api_conf['sqs_region'], api_conf['sqs_queue_name'], api_conf['aws_access_key_id'], api_conf['aws_secret_access_key'])
 
         # start the light driver
         light.daemon = True

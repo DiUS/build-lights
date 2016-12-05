@@ -8,14 +8,14 @@ sys.path.append(parent_dir)
 import urllib2
 
 from lib import logger
-
+from monitors import jenkins_monitor
 
 class JenkinsPoller(object):
 
-    def __init__(self, url, monitor):
+    def __init__(self, url, jobs, translator, sound_player):
         self.logger = logger.Logger('JenkinsPoller')
         self.url = url
-        self.monitor = monitor
+        self.monitor = jenkins_monitor.JenkinsMonitor(jobs, translator, sound_player)
 
     def poll(self):
         req = urllib2.Request(self.url)

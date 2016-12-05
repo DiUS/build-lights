@@ -10,17 +10,17 @@ from boto.sqs.message import RawMessage
 from boto.exception import SQSError
 
 from lib import logger
-
+from monitors import jenkins_aws_sqs_monitor
 
 class AwsSqsPoller(object):
 
-    def __init__(self, monitor, sqs_region, sqs_queue_name, aws_access_key_id=None, aws_secret_access_key=None):
+    def __init__(self, jobs, translator, first_job_as_trigger, sound_player, sqs_region, sqs_queue_name, aws_access_key_id=None, aws_secret_access_key=None):
         self.logger = logger.Logger('AwsSqsPoller')
         self.sqs_region = sqs_region
         self.sqs_queue_name = sqs_queue_name
         self.aws_access_key_id = aws_access_key_id
         self.aws_secret_access_key = aws_secret_access_key
-        self.monitor = monitor
+        self.monitor = jenkins_aws_sqs_monitor.JenkinsAwsSqsMonitor(jobs, translator, first_job_as_trigger, sound_player)
 
     def poll(self):
         response_body = None
