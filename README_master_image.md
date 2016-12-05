@@ -3,7 +3,7 @@ DiUS Build Lights Master Image
 
 The master image is based on Jessie Raspbian. The image consists of 3 partitions: boot, storage, root. Both root and boot partitions have been configured to read-only mode, suitable for embedded environment. Storage partition is available for local storage. You will need at least a 4GB microSD card.
 
-You can download the master image [here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161122.zip).
+You can download the master image [here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161205.zip).
 
 
 ### Writing master image to microSD card
