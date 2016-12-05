@@ -17,7 +17,7 @@ class TestStringMethods(unittest.TestCase):
         self.assertGreater(len(self.ci.list_projects()), 0)
 
     def test_successful_build(self):
-        self.assertEqual(self.ci.project_status('debian-stablepkg'), STATUS.SUCCESS)
+        self.assertEqual(self.ci.project_status('stablejob'), STATUS.SUCCESS)
 
 if __name__ == '__main__':
     unittest.main()
