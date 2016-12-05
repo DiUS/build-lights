@@ -1,0 +1,1061 @@
+[ {
+  "irc_server" : null,
+  "ssh_keys" : [ ],
+  "branches" : {
+    "costing_restructure" : {
+      "pusher_logins" : [ "vwong" ]
+    },
+    "dist_array_test" : {
+      "pusher_logins" : [ "hsgan" ]
+    },
+    "dso_coeff_dist_array" : {
+      "pusher_logins" : [ "hsgan" ]
+    },
+    "master" : {
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 3346,
+        "vcs_revision" : "c8c709a95806a2a3fee92f50fcdd490cfdc5d136",
+        "pushed_at" : "2016-11-27T11:12:21.246Z",
+        "added_at" : "2016-11-27T11:13:43.940Z"
+      },
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3388,
+        "vcs_revision" : "ecdb7de130e8c2a14763a0a102e6f10a5394b614",
+        "pushed_at" : "2016-12-05T01:13:25.751Z",
+        "added_at" : "2016-12-05T01:35:38.553Z"
+      },
+      "pusher_logins" : [ "hsgan", "dnetherton", "jwolstenholme", "huwr", "vwong", "alexs333", "OmidKar", "leahgarrett" ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3388,
+        "vcs_revision" : "ecdb7de130e8c2a14763a0a102e6f10a5394b614",
+        "pushed_at" : "2016-12-05T01:13:25.751Z",
+        "added_at" : "2016-12-05T01:35:38.553Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3387,
+        "vcs_revision" : "f87d2df334f60839eba25ff07f8c78ddd252e8a7",
+        "pushed_at" : "2016-12-03T12:52:42.471Z",
+        "added_at" : "2016-12-03T12:59:03.476Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3386,
+        "vcs_revision" : "b21807ec132a49cfb1db19ddb972d50abe708cda",
+        "pushed_at" : "2016-12-02T23:55:03.080Z",
+        "added_at" : "2016-12-03T00:00:54.036Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3385,
+        "vcs_revision" : "b54399c305fa91b97bc557e384f9b3c94eda365a",
+        "pushed_at" : "2016-12-02T14:22:13.976Z",
+        "added_at" : "2016-12-02T14:27:55.632Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3384,
+        "vcs_revision" : "6ae1010f49b32d76f403a48cc8ec856cd4018425",
+        "pushed_at" : "2016-12-02T12:02:26.570Z",
+        "added_at" : "2016-12-02T12:09:17.971Z"
+      } ],
+      "running_builds" : [ ]
+    },
+    "new_short_long_days" : {
+      "pusher_logins" : [ "hsgan" ]
+    },
+    "rosterability" : {
+      "pusher_logins" : [ "hsgan" ]
+    },
+    "shift_shortest_path" : {
+      "pusher_logins" : [ "OmidKar" ]
+    },
+    "v3764-hotfix" : {
+      "pusher_logins" : [ "dnetherton" ],
+      "running_builds" : [ ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 2529,
+        "vcs_revision" : "9ce6cdd1841bf6849b5983897dd588da79dc1309",
+        "pushed_at" : "2016-07-21T23:02:23.000Z",
+        "added_at" : "2016-07-21T23:08:12.155Z"
+      }, {
+        "outcome" : "canceled",
+        "status" : "canceled",
+        "build_num" : 2528,
+        "vcs_revision" : "cafcd1ed2ee8fac86dd541c06712e98d20a2ac21",
+        "pushed_at" : "2016-07-21T23:00:15.000Z",
+        "added_at" : "2016-07-21T23:02:52.525Z"
+      } ],
+      "last_non_success" : {
+        "outcome" : "canceled",
+        "status" : "canceled",
+        "build_num" : 2528,
+        "vcs_revision" : "cafcd1ed2ee8fac86dd541c06712e98d20a2ac21",
+        "pushed_at" : "2016-07-21T23:00:15.000Z",
+        "added_at" : "2016-07-21T23:02:52.525Z"
+      },
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 2529,
+        "vcs_revision" : "9ce6cdd1841bf6849b5983897dd588da79dc1309",
+        "pushed_at" : "2016-07-21T23:02:23.000Z",
+        "added_at" : "2016-07-21T23:08:12.155Z"
+      }
+    }
+  },
+  "irc_keyword" : null,
+  "oss" : false,
+  "slack_channel" : null,
+  "hipchat_notify_prefs" : null,
+  "reponame" : "cyclone",
+  "dependencies" : "",
+  "aws" : {
+    "keypair" : {
+      "access_key_id" : "xxxxMNUA",
+      "secret_access_key" : "xxxxYymi"
+    }
+  },
+  "slack_webhook_url" : "https://hooks.slack.com/services/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",
+  "irc_channel" : null,
+  "parallel" : 1,
+  "campfire_subdomain" : null,
+  "followed" : true,
+  "username" : "RosterRight",
+  "campfire_notify_prefs" : null,
+  "hipchat_notify" : null,
+  "heroku_deploy_user" : null,
+  "irc_username" : null,
+  "slack_notify_prefs" : "smart",
+  "scopes" : [ "write-settings", "view-builds", "read-settings", "trigger-builds", "all", "status", "none" ],
+  "campfire_room" : null,
+  "hipchat_api_token" : null,
+  "campfire_token" : null,
+  "slack_subdomain" : null,
+  "has_usable_key" : true,
+  "setup" : "",
+  "vcs_type" : "github",
+  "feature_flags" : {
+    "trusty-beta" : false,
+    "osx" : false,
+    "set-github-status" : true,
+    "build-prs-only" : false,
+    "fleet" : null,
+    "build-fork-prs" : false,
+    "autocancel-builds" : false,
+    "junit" : true
+  },
+  "irc_password" : null,
+  "compile" : "",
+  "irc_notify_prefs" : null,
+  "extra" : "",
+  "jira" : null,
+  "language" : "Julia",
+  "hipchat_room" : null,
+  "flowdock_api_token" : null,
+  "slack_channel_override" : null,
+  "vcs_url" : "https://github.com/RosterRight/cyclone",
+  "default_branch" : "master",
+  "slack_api_token" : null,
+  "test" : ""
+}, {
+  "irc_server" : null,
+  "ssh_keys" : [ ],
+  "branches" : {
+    "allow_duplicate_store_names" : {
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5165,
+        "vcs_revision" : "709cafd5f539b17df6299ebbbc27bea7a67e99c8",
+        "pushed_at" : "2016-11-30T06:07:44.773Z",
+        "added_at" : "2016-11-30T06:36:09.961Z"
+      },
+      "pusher_logins" : [ "leahgarrett" ],
+      "recent_builds" : [ {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5165,
+        "vcs_revision" : "709cafd5f539b17df6299ebbbc27bea7a67e99c8",
+        "pushed_at" : "2016-11-30T06:07:44.773Z",
+        "added_at" : "2016-11-30T06:36:09.961Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5164,
+        "vcs_revision" : "709cafd5f539b17df6299ebbbc27bea7a67e99c8",
+        "pushed_at" : "2016-11-30T06:07:44.773Z",
+        "added_at" : "2016-11-30T06:17:26.322Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5125,
+        "vcs_revision" : "96ce9f4d4b5ae31d90552115a19ecd8ecc50a3af",
+        "pushed_at" : "2016-11-28T22:51:38.877Z",
+        "added_at" : "2016-11-28T23:18:36.403Z"
+      } ],
+      "running_builds" : [ ]
+    },
+    "lodash_upgrade" : {
+      "pusher_logins" : [ "alexs333" ],
+      "running_builds" : [ ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3909,
+        "vcs_revision" : "7c4ff9b22d5e276addc0cb90f241084fe5dc1062",
+        "pushed_at" : "2016-07-29T23:48:33.000Z",
+        "added_at" : "2016-07-29T23:57:29.315Z"
+      } ],
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3909,
+        "vcs_revision" : "7c4ff9b22d5e276addc0cb90f241084fe5dc1062",
+        "pushed_at" : "2016-07-29T23:48:33.000Z",
+        "added_at" : "2016-07-29T23:57:29.315Z"
+      }
+    },
+    "report_builder" : {
+      "pusher_logins" : [ "alexs333" ],
+      "running_builds" : [ ],
+      "recent_builds" : [ {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 4495,
+        "vcs_revision" : "ee5d25622fe500fbd3cdc362a58d1fe092e4309f",
+        "pushed_at" : "2016-09-26T00:12:48.000Z",
+        "added_at" : "2016-09-26T00:23:24.535Z"
+      } ],
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 4495,
+        "vcs_revision" : "ee5d25622fe500fbd3cdc362a58d1fe092e4309f",
+        "pushed_at" : "2016-09-26T00:12:48.000Z",
+        "added_at" : "2016-09-26T00:23:24.535Z"
+      }
+    },
+    "landing_page" : {
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4162,
+        "vcs_revision" : "b7cf91f88a84f690c55b844c1e65892300d2c177",
+        "pushed_at" : "2016-08-25T00:06:24.000Z",
+        "added_at" : "2016-08-25T00:28:29.172Z"
+      },
+      "pusher_logins" : [ "jcleefw", "dnetherton" ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4162,
+        "vcs_revision" : "b7cf91f88a84f690c55b844c1e65892300d2c177",
+        "pushed_at" : "2016-08-25T00:06:24.000Z",
+        "added_at" : "2016-08-25T00:28:29.172Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4161,
+        "vcs_revision" : "35816789afee5d39ea491e468cba709cfdfb9d3e",
+        "pushed_at" : "2016-08-24T23:59:57.000Z",
+        "added_at" : "2016-08-25T00:19:00.843Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4160,
+        "vcs_revision" : "1cafbd3a82425617d868d04f93912cecaac1a9ad",
+        "pushed_at" : "2016-08-24T23:58:29.000Z",
+        "added_at" : "2016-08-25T00:09:32.604Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4155,
+        "vcs_revision" : "b894f0acaf02f6b32be6523a908de2b3c330a760",
+        "pushed_at" : "2016-08-24T04:25:56.000Z",
+        "added_at" : "2016-08-24T04:41:48.578Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4149,
+        "vcs_revision" : "8c2de3594675890590e16e5af7ae91d0e1b1ce83",
+        "pushed_at" : "2016-08-24T03:22:21.000Z",
+        "added_at" : "2016-08-24T03:32:04.303Z"
+      } ],
+      "running_builds" : [ ]
+    },
+    "home_refresh" : {
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5093,
+        "vcs_revision" : "9d591956d9126a6be1aba78a2b47f53369b6d453",
+        "pushed_at" : "2016-11-24T05:15:56.344Z",
+        "added_at" : "2016-11-24T05:28:02.282Z"
+      },
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 5114,
+        "vcs_revision" : "2dd3bc15ba31084f4aa18471877c4049dfe6cfeb",
+        "pushed_at" : "2016-11-27T23:19:28.340Z",
+        "added_at" : "2016-11-27T23:29:45.994Z"
+      },
+      "pusher_logins" : [ "vwong", "leahgarrett" ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 5114,
+        "vcs_revision" : "2dd3bc15ba31084f4aa18471877c4049dfe6cfeb",
+        "pushed_at" : "2016-11-27T23:19:28.340Z",
+        "added_at" : "2016-11-27T23:29:45.994Z"
+      }, {
+        "outcome" : "success",
+        "status" : "fixed",
+        "build_num" : 5106,
+        "vcs_revision" : "b5b8e7769d2729b1c9091a5b2419e35b0cee3216",
+        "pushed_at" : "2016-11-25T04:59:07.723Z",
+        "added_at" : "2016-11-25T05:09:19.110Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5093,
+        "vcs_revision" : "9d591956d9126a6be1aba78a2b47f53369b6d453",
+        "pushed_at" : "2016-11-24T05:15:56.344Z",
+        "added_at" : "2016-11-24T05:28:02.282Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5092,
+        "vcs_revision" : "b467d6836d3eee91e189fda0a646e5725b2515de",
+        "pushed_at" : "2016-11-24T04:41:51.764Z",
+        "added_at" : "2016-11-24T04:53:53.663Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5083,
+        "vcs_revision" : "82589a1fee38851c30bc814d526d35879e98c0ae",
+        "pushed_at" : "2016-11-23T06:55:45.714Z",
+        "added_at" : "2016-11-23T07:07:34.971Z"
+      } ],
+      "running_builds" : [ ]
+    },
+    "change_widgets" : {
+      "pusher_logins" : [ "vwong" ],
+      "running_builds" : [ ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4432,
+        "vcs_revision" : "8fb2684b3488fee18cfc61b9d77c78807a719054",
+        "pushed_at" : "2016-09-19T04:41:09.000Z",
+        "added_at" : "2016-09-19T04:53:49.870Z"
+      } ],
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4432,
+        "vcs_revision" : "8fb2684b3488fee18cfc61b9d77c78807a719054",
+        "pushed_at" : "2016-09-19T04:41:09.000Z",
+        "added_at" : "2016-09-19T04:53:49.870Z"
+      }
+    },
+    "nodejs" : {
+      "pusher_logins" : [ "jwolstenholme" ],
+      "running_builds" : [ ],
+      "recent_builds" : [ {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 793,
+        "vcs_revision" : "b90b861b16ef111cb43f93e7a89c4873d27ef977",
+        "pushed_at" : "2015-10-19T02:01:41.000Z",
+        "added_at" : "2015-10-19T02:06:27.668Z"
+      } ],
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 793,
+        "vcs_revision" : "b90b861b16ef111cb43f93e7a89c4873d27ef977",
+        "pushed_at" : "2015-10-19T02:01:41.000Z",
+        "added_at" : "2015-10-19T02:06:27.668Z"
+      }
+    },
+    "report-template" : {
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4166,
+        "vcs_revision" : "93c4067dc9e82c7c070a18f52843407006a95495",
+        "pushed_at" : "2016-08-25T01:29:05.000Z",
+        "added_at" : "2016-08-25T01:49:02.000Z"
+      },
+      "pusher_logins" : [ "jcleefw", "dnetherton" ],
+      "recent_builds" : [ {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 4174,
+        "vcs_revision" : "df24bcbf371aebe58ade2180f3c1870cf6b2d6dd",
+        "pushed_at" : "2016-08-25T03:08:33.000Z",
+        "added_at" : "2016-08-25T03:17:53.082Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4166,
+        "vcs_revision" : "93c4067dc9e82c7c070a18f52843407006a95495",
+        "pushed_at" : "2016-08-25T01:29:05.000Z",
+        "added_at" : "2016-08-25T01:49:02.000Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4163,
+        "vcs_revision" : "2fcf10a5131667e9766c9f3ff2e44c6555b4585c",
+        "pushed_at" : "2016-08-25T00:07:46.000Z",
+        "added_at" : "2016-08-25T00:37:57.963Z"
+      } ],
+      "running_builds" : [ ],
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 4174,
+        "vcs_revision" : "df24bcbf371aebe58ade2180f3c1870cf6b2d6dd",
+        "pushed_at" : "2016-08-25T03:08:33.000Z",
+        "added_at" : "2016-08-25T03:17:53.082Z"
+      }
+    },
+    "client_profile" : {
+      "pusher_logins" : [ "alexs333" ],
+      "running_builds" : [ ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3871,
+        "vcs_revision" : "b735818aa224cbe05f5ec287925c9f8096692f77",
+        "pushed_at" : "2016-07-27T00:24:39.000Z",
+        "added_at" : "2016-07-27T00:34:52.692Z"
+      } ],
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3871,
+        "vcs_revision" : "b735818aa224cbe05f5ec287925c9f8096692f77",
+        "pushed_at" : "2016-07-27T00:24:39.000Z",
+        "added_at" : "2016-07-27T00:34:52.692Z"
+      }
+    },
+    "rename-from-role-instances-to-roles" : {
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 4358,
+        "vcs_revision" : "b59d37e087f5d750890b63a3c8c9e496dfa8d64a",
+        "pushed_at" : "2016-09-09T01:45:39.000Z",
+        "added_at" : "2016-09-09T02:03:40.033Z"
+      },
+      "pusher_logins" : [ "dnetherton", "hsgan" ],
+      "recent_builds" : [ {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 4358,
+        "vcs_revision" : "b59d37e087f5d750890b63a3c8c9e496dfa8d64a",
+        "pushed_at" : "2016-09-09T01:45:39.000Z",
+        "added_at" : "2016-09-09T02:03:40.033Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 4357,
+        "vcs_revision" : "b59d37e087f5d750890b63a3c8c9e496dfa8d64a",
+        "pushed_at" : "2016-09-09T01:45:39.000Z",
+        "added_at" : "2016-09-09T01:58:52.310Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 4352,
+        "vcs_revision" : "49558da497f9fd94f6f246ef8194009ef88f2559",
+        "pushed_at" : "2016-09-08T23:22:53.000Z",
+        "added_at" : "2016-09-08T23:34:48.791Z"
+      } ],
+      "running_builds" : [ ]
+    },
+    "no_excel" : {
+      "pusher_logins" : [ "vwong" ],
+      "running_builds" : [ ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4693,
+        "vcs_revision" : "486c1d11147bc5721dc3d75f6699a774db68a0c7",
+        "pushed_at" : "2016-10-18T05:37:06.071Z",
+        "added_at" : "2016-10-18T05:48:09.086Z"
+      } ],
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 4693,
+        "vcs_revision" : "486c1d11147bc5721dc3d75f6699a774db68a0c7",
+        "pushed_at" : "2016-10-18T05:37:06.071Z",
+        "added_at" : "2016-10-18T05:48:09.086Z"
+      }
+    },
+    "starred_baselines" : {
+      "pusher_logins" : [ "vwong" ],
+      "running_builds" : [ ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3866,
+        "vcs_revision" : "9c471e4ca0e3476fc8ee4a88439a716f157aa694",
+        "pushed_at" : "2016-07-26T04:25:16.000Z",
+        "added_at" : "2016-07-26T04:34:15.676Z"
+      } ],
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3866,
+        "vcs_revision" : "9c471e4ca0e3476fc8ee4a88439a716f157aa694",
+        "pushed_at" : "2016-07-26T04:25:16.000Z",
+        "added_at" : "2016-07-26T04:34:15.676Z"
+      }
+    },
+    "master" : {
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5201,
+        "vcs_revision" : "8041d295c2c8587e77d53ff2802c8d4bc591c486",
+        "pushed_at" : "2016-12-05T03:48:15.432Z",
+        "added_at" : "2016-12-05T04:04:13.489Z"
+      },
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 5205,
+        "vcs_revision" : "0325736b772dd11b7afecd187b11093df649e327",
+        "pushed_at" : "2016-12-05T22:25:12.996Z",
+        "added_at" : "2016-12-05T22:41:34.096Z"
+      },
+      "pusher_logins" : [ "jcleefw", "dnetherton", "acrough", "jwolstenholme", "huwr", "hsgan", "vwong", "alexs333", "OmidKar", "leahgarrett" ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 5205,
+        "vcs_revision" : "0325736b772dd11b7afecd187b11093df649e327",
+        "pushed_at" : "2016-12-05T22:25:12.996Z",
+        "added_at" : "2016-12-05T22:41:34.096Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 5204,
+        "vcs_revision" : "c460214bc582437117320ad9d6f1533bf6f55b08",
+        "pushed_at" : "2016-12-05T22:20:51.092Z",
+        "added_at" : "2016-12-05T22:30:37.369Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 5203,
+        "vcs_revision" : "298b309290327d5e5a2a7ee55232dd6b8996d07c",
+        "pushed_at" : "2016-12-05T04:19:38.289Z",
+        "added_at" : "2016-12-05T04:29:28.322Z"
+      }, {
+        "outcome" : "success",
+        "status" : "fixed",
+        "build_num" : 5202,
+        "vcs_revision" : "8041d295c2c8587e77d53ff2802c8d4bc591c486",
+        "pushed_at" : "2016-12-05T03:48:15.432Z",
+        "added_at" : "2016-12-05T04:16:59.973Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5201,
+        "vcs_revision" : "8041d295c2c8587e77d53ff2802c8d4bc591c486",
+        "pushed_at" : "2016-12-05T03:48:15.432Z",
+        "added_at" : "2016-12-05T04:04:13.489Z"
+      } ],
+      "running_builds" : [ ]
+    },
+    "costing_restructure" : {
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3749,
+        "vcs_revision" : "4550a7d5c99c152c577d3d683a29f5382663b1be",
+        "pushed_at" : "2016-07-15T03:50:52.000Z",
+        "added_at" : "2016-07-15T04:00:10.432Z"
+      },
+      "pusher_logins" : [ "vwong" ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3749,
+        "vcs_revision" : "4550a7d5c99c152c577d3d683a29f5382663b1be",
+        "pushed_at" : "2016-07-15T03:50:52.000Z",
+        "added_at" : "2016-07-15T04:00:10.432Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3747,
+        "vcs_revision" : "718712f06f8c9019dc9706db286c770b8718633b",
+        "pushed_at" : "2016-07-15T02:09:15.000Z",
+        "added_at" : "2016-07-15T02:18:38.375Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3745,
+        "vcs_revision" : "1913ece3cec5faf9a2dfe261433bc4b4e867e209",
+        "pushed_at" : "2016-07-15T00:59:17.000Z",
+        "added_at" : "2016-07-15T01:08:59.625Z"
+      } ],
+      "running_builds" : [ ]
+    },
+    "v3764-hotfix" : {
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3825,
+        "vcs_revision" : "2613ba794d6891e07096d57a19ea792b72788e4c",
+        "pushed_at" : "2016-07-21T23:38:40.000Z",
+        "added_at" : "2016-07-21T23:44:38.707Z"
+      },
+      "pusher_logins" : [ "dnetherton" ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 3825,
+        "vcs_revision" : "2613ba794d6891e07096d57a19ea792b72788e4c",
+        "pushed_at" : "2016-07-21T23:38:40.000Z",
+        "added_at" : "2016-07-21T23:44:38.707Z"
+      } ],
+      "running_builds" : [ {
+        "outcome" : null,
+        "status" : "not_running",
+        "build_num" : 3827,
+        "vcs_revision" : "2ff85dc460f731eddf66d14ccaf1afc2475ce51c",
+        "pushed_at" : "2016-07-21T23:46:39.000Z",
+        "added_at" : "2016-07-21T23:46:34.597Z"
+      } ]
+    },
+    "home_refresh_animations" : {
+      "pusher_logins" : [ "leahgarrett" ],
+      "running_builds" : [ ],
+      "recent_builds" : [ {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5094,
+        "vcs_revision" : "3c9a300ce1b40ab5583ef8df43f13b35e2351218",
+        "pushed_at" : "2016-11-24T06:51:07.440Z",
+        "added_at" : "2016-11-24T07:03:40.524Z"
+      } ],
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 5094,
+        "vcs_revision" : "3c9a300ce1b40ab5583ef8df43f13b35e2351218",
+        "pushed_at" : "2016-11-24T06:51:07.440Z",
+        "added_at" : "2016-11-24T07:03:40.524Z"
+      }
+    }
+  },
+  "irc_keyword" : null,
+  "oss" : false,
+  "slack_channel" : null,
+  "hipchat_notify_prefs" : null,
+  "reponame" : "cirrus",
+  "dependencies" : "",
+  "aws" : {
+    "keypair" : {
+      "access_key_id" : "xxxxBLLA",
+      "secret_access_key" : "xxxxhyjf"
+    }
+  },
+  "slack_webhook_url" : "https://hooks.slack.com/services/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",
+  "irc_channel" : null,
+  "parallel" : 1,
+  "campfire_subdomain" : null,
+  "followed" : true,
+  "username" : "RosterRight",
+  "campfire_notify_prefs" : null,
+  "hipchat_notify" : null,
+  "heroku_deploy_user" : null,
+  "irc_username" : null,
+  "slack_notify_prefs" : "smart",
+  "scopes" : [ "write-settings", "view-builds", "read-settings", "trigger-builds", "all", "status", "none" ],
+  "campfire_room" : null,
+  "hipchat_api_token" : null,
+  "campfire_token" : null,
+  "slack_subdomain" : null,
+  "has_usable_key" : true,
+  "setup" : "",
+  "vcs_type" : "github",
+  "feature_flags" : {
+    "trusty-beta" : false,
+    "osx" : false,
+    "set-github-status" : true,
+    "build-prs-only" : false,
+    "fleet" : null,
+    "build-fork-prs" : false,
+    "autocancel-builds" : false,
+    "junit" : true
+  },
+  "irc_password" : null,
+  "compile" : "",
+  "irc_notify_prefs" : null,
+  "extra" : "",
+  "jira" : null,
+  "language" : "JavaScript",
+  "hipchat_room" : null,
+  "flowdock_api_token" : null,
+  "slack_channel_override" : null,
+  "vcs_url" : "https://github.com/RosterRight/cirrus",
+  "default_branch" : "master",
+  "slack_api_token" : null,
+  "test" : ""
+}, {
+  "irc_server" : null,
+  "ssh_keys" : [ ],
+  "branches" : {
+    "cplex" : {
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 54,
+        "vcs_revision" : "df8fcb2f053e6f75f2bf3c7bbb2a979b62f93949",
+        "pushed_at" : "2015-10-20T22:13:48.000Z",
+        "added_at" : "2015-10-20T22:24:18.508Z"
+      },
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "fixed",
+        "build_num" : 58,
+        "vcs_revision" : "85ce32fb36d5da3c8e20e1aa1d5f5f49170de442",
+        "pushed_at" : "2015-11-12T02:49:52.000Z",
+        "added_at" : "2015-11-12T03:06:42.026Z"
+      },
+      "pusher_logins" : [ "dnetherton" ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "fixed",
+        "build_num" : 58,
+        "vcs_revision" : "85ce32fb36d5da3c8e20e1aa1d5f5f49170de442",
+        "pushed_at" : "2015-11-12T02:49:52.000Z",
+        "added_at" : "2015-11-12T03:06:42.026Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 54,
+        "vcs_revision" : "df8fcb2f053e6f75f2bf3c7bbb2a979b62f93949",
+        "pushed_at" : "2015-10-20T22:13:48.000Z",
+        "added_at" : "2015-10-20T22:24:18.508Z"
+      }, {
+        "outcome" : "no_tests",
+        "status" : "no_tests",
+        "build_num" : 53,
+        "vcs_revision" : "df8fcb2f053e6f75f2bf3c7bbb2a979b62f93949",
+        "pushed_at" : "2015-10-20T22:13:48.000Z",
+        "added_at" : "2015-10-20T22:14:24.189Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 48,
+        "vcs_revision" : "8405554bf9f830dcc17c7f0a1e2c041a26c403ac",
+        "pushed_at" : "2015-10-04T21:39:15.000Z",
+        "added_at" : "2015-10-04T21:57:25.175Z"
+      }, {
+        "outcome" : "no_tests",
+        "status" : "no_tests",
+        "build_num" : 47,
+        "vcs_revision" : "8405554bf9f830dcc17c7f0a1e2c041a26c403ac",
+        "pushed_at" : "2015-10-04T21:39:15.000Z",
+        "added_at" : "2015-10-04T21:39:36.605Z"
+      } ],
+      "running_builds" : [ ]
+    },
+    "gurobi" : {
+      "last_non_success" : {
+        "outcome" : "no_tests",
+        "status" : "no_tests",
+        "build_num" : 103,
+        "vcs_revision" : "8330a61b168b54b2bae41f188947f7625d6cf22f",
+        "pushed_at" : "2016-11-10T02:41:13.840Z",
+        "added_at" : "2016-11-10T02:41:44.926Z"
+      },
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 104,
+        "vcs_revision" : "8330a61b168b54b2bae41f188947f7625d6cf22f",
+        "pushed_at" : "2016-11-10T02:41:13.840Z",
+        "added_at" : "2016-11-10T02:55:28.881Z"
+      },
+      "pusher_logins" : [ "dnetherton", "vwong" ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 104,
+        "vcs_revision" : "8330a61b168b54b2bae41f188947f7625d6cf22f",
+        "pushed_at" : "2016-11-10T02:41:13.840Z",
+        "added_at" : "2016-11-10T02:55:28.881Z"
+      }, {
+        "outcome" : "no_tests",
+        "status" : "no_tests",
+        "build_num" : 103,
+        "vcs_revision" : "8330a61b168b54b2bae41f188947f7625d6cf22f",
+        "pushed_at" : "2016-11-10T02:41:13.840Z",
+        "added_at" : "2016-11-10T02:41:44.926Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 102,
+        "vcs_revision" : "67f1918df738a6a9376b513aa5c9f89426cf94f0",
+        "pushed_at" : "2016-11-10T00:58:06.568Z",
+        "added_at" : "2016-11-10T01:14:38.966Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 101,
+        "vcs_revision" : "8a1863d498c48ae6f7aecbd817b98fe68a01bb6c",
+        "pushed_at" : "2016-08-29T02:49:13.000Z",
+        "added_at" : "2016-08-29T03:01:44.395Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 100,
+        "vcs_revision" : "aa1b74a6f8f8350836c56223666cd700bac5b10d",
+        "pushed_at" : "2016-08-09T05:38:07.000Z",
+        "added_at" : "2016-08-09T05:49:35.941Z"
+      } ],
+      "running_builds" : [ ]
+    },
+    "master" : {
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 43,
+        "vcs_revision" : "c834c7b40a50b1c43f94874fbe6c87aaf86152d6",
+        "pushed_at" : "2015-10-01T05:36:14.000Z",
+        "added_at" : "2015-10-01T05:54:06.112Z"
+      },
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 42,
+        "vcs_revision" : "9602f9305fd989c03bcf4795e754a1b5300890ea",
+        "pushed_at" : "2015-08-16T22:37:36.000Z",
+        "added_at" : "2015-08-16T22:54:34.039Z"
+      },
+      "pusher_logins" : [ "dnetherton", "jwolstenholme" ],
+      "recent_builds" : [ {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 43,
+        "vcs_revision" : "c834c7b40a50b1c43f94874fbe6c87aaf86152d6",
+        "pushed_at" : "2015-10-01T05:36:14.000Z",
+        "added_at" : "2015-10-01T05:54:06.112Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 42,
+        "vcs_revision" : "9602f9305fd989c03bcf4795e754a1b5300890ea",
+        "pushed_at" : "2015-08-16T22:37:36.000Z",
+        "added_at" : "2015-08-16T22:54:34.039Z"
+      }, {
+        "outcome" : "no_tests",
+        "status" : "no_tests",
+        "build_num" : 41,
+        "vcs_revision" : "9602f9305fd989c03bcf4795e754a1b5300890ea",
+        "pushed_at" : "2015-08-16T22:37:36.000Z",
+        "added_at" : "2015-08-16T22:37:57.713Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 40,
+        "vcs_revision" : "e0326e4073f96e80d515fc81ec76bff115823a18",
+        "pushed_at" : "2015-08-14T06:40:34.000Z",
+        "added_at" : "2015-08-14T06:43:57.354Z"
+      }, {
+        "outcome" : "no_tests",
+        "status" : "no_tests",
+        "build_num" : 39,
+        "vcs_revision" : "e0326e4073f96e80d515fc81ec76bff115823a18",
+        "pushed_at" : "2015-08-14T06:40:34.000Z",
+        "added_at" : "2015-08-14T06:40:55.349Z"
+      } ],
+      "running_builds" : [ ]
+    }
+  },
+  "irc_keyword" : null,
+  "oss" : false,
+  "slack_channel" : null,
+  "hipchat_notify_prefs" : null,
+  "reponame" : "cyclone-ami",
+  "dependencies" : "",
+  "aws" : {
+    "keypair" : {
+      "access_key_id" : "xxxxBPTA",
+      "secret_access_key" : "xxxxmBrO"
+    }
+  },
+  "slack_webhook_url" : "https://hooks.slack.com/services/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",
+  "irc_channel" : null,
+  "parallel" : 1,
+  "campfire_subdomain" : null,
+  "followed" : true,
+  "username" : "RosterRight",
+  "campfire_notify_prefs" : null,
+  "hipchat_notify" : null,
+  "heroku_deploy_user" : null,
+  "irc_username" : null,
+  "slack_notify_prefs" : "smart",
+  "scopes" : [ "write-settings", "view-builds", "read-settings", "trigger-builds", "all", "status", "none" ],
+  "campfire_room" : null,
+  "hipchat_api_token" : null,
+  "campfire_token" : null,
+  "slack_subdomain" : null,
+  "has_usable_key" : true,
+  "setup" : "",
+  "vcs_type" : "github",
+  "feature_flags" : {
+    "trusty-beta" : false,
+    "osx" : false,
+    "set-github-status" : true,
+    "build-prs-only" : false,
+    "fleet" : null,
+    "build-fork-prs" : false,
+    "autocancel-builds" : false,
+    "junit" : true
+  },
+  "irc_password" : null,
+  "compile" : "",
+  "irc_notify_prefs" : null,
+  "extra" : "",
+  "jira" : null,
+  "language" : "Shell",
+  "hipchat_room" : null,
+  "flowdock_api_token" : null,
+  "slack_channel_override" : null,
+  "vcs_url" : "https://github.com/RosterRight/cyclone-ami",
+  "default_branch" : "master",
+  "slack_api_token" : null,
+  "test" : ""
+}, {
+  "irc_server" : null,
+  "ssh_keys" : [ ],
+  "branches" : {
+    "master" : {
+      "last_non_success" : {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 11,
+        "vcs_revision" : "2c3a3a17f73f891e6926103f3e7f7c6520234402",
+        "pushed_at" : "2016-05-20T02:37:51.000Z",
+        "added_at" : "2016-05-20T02:38:51.786Z"
+      },
+      "last_success" : {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 15,
+        "vcs_revision" : "fa5fd5622ae829797194c631904c7f7cff7a008b",
+        "pushed_at" : "2016-08-05T04:38:27.000Z",
+        "added_at" : "2016-08-05T04:52:54.608Z"
+      },
+      "pusher_logins" : [ "dnetherton" ],
+      "recent_builds" : [ {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 15,
+        "vcs_revision" : "fa5fd5622ae829797194c631904c7f7cff7a008b",
+        "pushed_at" : "2016-08-05T04:38:27.000Z",
+        "added_at" : "2016-08-05T04:52:54.608Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 14,
+        "vcs_revision" : "eb6eff1deb8a623b9fbb01657ed26aa9dafe1254",
+        "pushed_at" : "2016-07-17T22:50:56.000Z",
+        "added_at" : "2016-07-17T22:53:12.113Z"
+      }, {
+        "outcome" : "success",
+        "status" : "success",
+        "build_num" : 13,
+        "vcs_revision" : "0abfc631689637383903e372f5c11c41d0aea8ff",
+        "pushed_at" : "2016-05-26T01:38:58.000Z",
+        "added_at" : "2016-05-26T01:42:52.645Z"
+      }, {
+        "outcome" : "success",
+        "status" : "fixed",
+        "build_num" : 12,
+        "vcs_revision" : "5c1244e8fcf2965b119a303c115844b241224a09",
+        "pushed_at" : "2016-05-20T02:41:42.000Z",
+        "added_at" : "2016-05-20T02:42:45.528Z"
+      }, {
+        "outcome" : "failed",
+        "status" : "failed",
+        "build_num" : 11,
+        "vcs_revision" : "2c3a3a17f73f891e6926103f3e7f7c6520234402",
+        "pushed_at" : "2016-05-20T02:37:51.000Z",
+        "added_at" : "2016-05-20T02:38:51.786Z"
+      } ],
+      "running_builds" : [ ]
+    }
+  },
+  "irc_keyword" : null,
+  "oss" : false,
+  "slack_channel" : null,
+  "hipchat_notify_prefs" : null,
+  "reponame" : "cirrus-ws",
+  "dependencies" : "",
+  "aws" : {
+    "keypair" : {
+      "access_key_id" : "xxxxTMCA",
+      "secret_access_key" : "xxxx4yZA"
+    }
+  },
+  "slack_webhook_url" : null,
+  "irc_channel" : null,
+  "parallel" : 1,
+  "campfire_subdomain" : null,
+  "followed" : true,
+  "username" : "RosterRight",
+  "campfire_notify_prefs" : null,
+  "hipchat_notify" : null,
+  "heroku_deploy_user" : null,
+  "irc_username" : null,
+  "slack_notify_prefs" : null,
+  "scopes" : [ "write-settings", "view-builds", "read-settings", "trigger-builds", "all", "status", "none" ],
+  "campfire_room" : null,
+  "hipchat_api_token" : null,
+  "campfire_token" : null,
+  "slack_subdomain" : null,
+  "has_usable_key" : true,
+  "setup" : "",
+  "vcs_type" : "github",
+  "feature_flags" : {
+    "trusty-beta" : false,
+    "osx" : false,
+    "set-github-status" : true,
+    "build-prs-only" : false,
+    "fleet" : null,
+    "build-fork-prs" : false,
+    "autocancel-builds" : false,
+    "junit" : true
+  },
+  "irc_password" : null,
+  "compile" : "",
+  "irc_notify_prefs" : null,
+  "extra" : "",
+  "jira" : null,
+  "language" : "JavaScript",
+  "hipchat_room" : null,
+  "flowdock_api_token" : null,
+  "slack_channel_override" : null,
+  "vcs_url" : "https://github.com/RosterRight/cirrus-ws",
+  "default_branch" : "master",
+  "slack_api_token" : null,
+  "test" : ""
+} ]
