@@ -124,28 +124,13 @@ def run():
                     kwargs['player_bin'] = sound_conf['bin_path']
                 splayer = sound_player.SoundPlayer(**kwargs)
 
-        if api_conf['type'] == 'jenkins_direct':
-            dlogger.log("API is Jenkins API.")
-            from pollers import jenkins_poller
-            if api_conf.has_key('pollrate_s'):
-                if api_conf['pollrate_s'] != 0:
-                    poll_interval_seconds = api_conf['pollrate_s']
-                    dlogger.log("Polling API once every %s seconds.", str(poll_interval_seconds))
-                else:
-                    poll_interval_seconds = None
-                    dlogger.log("NOT Polling API.")
-        elif api_conf['type'] == 'jenkins_aws_sqs':
-            dlogger.log("API is Jenkins via AWS SQS.")
-            from pollers import aws_sqs_poller
-            if api_conf.has_key('pollrate_s'):
-                if api_conf['pollrate_s'] != 0:
-                    poll_interval_seconds = api_conf['pollrate_s']
-                    dlogger.log("Polling API once every %s seconds.", str(poll_interval_seconds))
-                else:
-                    poll_interval_seconds = None
-                    dlogger.log("NOT Polling API.")
-        else:
-            raise ConfigError(str(api_conf['type']) + ' API type not supported')
+        if api_conf.has_key('pollrate_s'):
+            if api_conf['pollrate_s'] != 0:
+                poll_interval_seconds = api_conf['pollrate_s']
+                dlogger.log("Polling API once every %s seconds.", str(poll_interval_seconds))
+            else:
+                poll_interval_seconds = None
+                dlogger.log("NOT Polling API.")
 
     except Exception, e:
         logger.print_trace(e)
@@ -166,11 +151,17 @@ def run():
     try:
         if api_conf['type'] == 'jenkins_direct':
             # Poll Jenkins API directly
+            dlogger.log("API is Jenkins API.")
+            from pollers import jenkins_poller
+
             translator = job2ledstrip.Job2LedStrip(jobs, light)
             poller = jenkins_poller.JenkinsPoller(api_conf['url'], jobs, translator, splayer)
 
         elif api_conf['type'] == 'jenkins_aws_sqs':
             # Poll Jenkins via AWS SQS
+            dlogger.log("API is Jenkins via AWS SQS.")
+            from pollers import aws_sqs_poller
+
             first_job_as_trigger = True
             if api_conf.has_key('first_job_as_trigger'):
                 first_job_as_trigger = api_conf['first_job_as_trigger']
@@ -184,6 +175,8 @@ def run():
             if not api_conf.has_key('sqs_queue_name'):
                 raise json_config.ConfigError('sqs_queue_name not configured')
             poller = aws_sqs_poller.AwsSqsPoller(jobs, translator, first_job_as_trigger, splayer, api_conf['sqs_region'], api_conf['sqs_queue_name'], api_conf['aws_access_key_id'], api_conf['aws_secret_access_key'])
+        else:
+            raise ConfigError(str(api_conf['type']) + ' API type not supported')
 
         # start the light driver
         light.daemon = True
