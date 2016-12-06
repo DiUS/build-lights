@@ -1,3 +1,3 @@
 .PHONY :test
 test:
-	python -m unittest discover . -p '*_test.py' -v	
+	python -m unittest discover . -p '*_test.py'

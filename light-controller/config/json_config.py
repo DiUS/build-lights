@@ -8,7 +8,6 @@ import jsonschema
 from jsonschema import validate
 from jsonschema import ValidationError
 
-from lib import logger
 from lib import error
 from lib import list_utils
 from lib import json_custom_decode
@@ -26,14 +25,12 @@ class ConfigError(Error):
 class JsonConfig(object):
 
     def __init__(self, config_file='config.json'):
-        self.logger = logger.Logger('JsonConfig')
         self.config_file = config_file
         self._load_config()
         self._check_config_is_valid()
 
     def _load_config(self):
         f = open(self.config_file, 'r')
-        self.logger.log('Reading config file: %s', self.config_file)
         self.config = json.load(f, object_hook=json_custom_decode.decode_unicode_to_str_dict)
         f.close()
 
