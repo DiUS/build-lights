@@ -1,5 +1,7 @@
 # DiUS Build Lights 2.0
 
+[![Gitter](https://badges.gitter.im/DiUS/build-lights.svg)](https://gitter.im/DiUS/build-lights?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 [![Build Status](https://travis-ci.org/DiUS/build-lights.svg?branch=master)](https://travis-ci.org/DiUS/build-lights)
 
 DiUS Build Lights is a device that provides visual feedback of a Continuous Integration (CI) or Continuous Deployment (CD) pipeline.
