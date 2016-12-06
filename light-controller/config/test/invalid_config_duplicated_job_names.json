@@ -10,8 +10,8 @@
         "url": "http://psn-ci:8080/api/json",
         "pollrate_s": 3
     },
-    "should be jobs": [
-        "ZigBee-devices-docs",
-        "ZigBee-devices-gate-1"
+    "jobs": [
+        "abc",
+        "abc"
     ]
 }
