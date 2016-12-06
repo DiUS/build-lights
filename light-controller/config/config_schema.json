@@ -20,9 +20,7 @@
       },
       "required": [
         "type",
-        "num_leds",
-        "simulate_mode",
-        "spidev"
+        "num_leds"
       ]
     },
     "api": {

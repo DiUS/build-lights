@@ -20,7 +20,7 @@ class Error(error.Generic):
 class ConfigError(Error):
     """Config error"""
     def __init__(self, filename, message):
-        super(ConfigError, self).__init__('Error in config file ' + filename + ': ' + message)
+        super(ConfigError, self).__init__('Error in config file {0}: {1}'.format(filename, message))
 
 class JsonConfig(object):
 
