@@ -15,12 +15,25 @@ from lib import logger
 from lib import list_utils
 from config import json_config
 
-
-
-
 default_config_file = 'config.json'
 light = None
+dlogger = None
 
+def _write_pid(filename):
+    global dlogger
+
+    try:
+        pidfile = open(filename, "w")
+        pidfile.write("%d\n" % os.getpid())
+        pidfile.close()
+    except IOError, e:
+        dlogger.log("ERROR: unable to write pid file %s: %s", filename, str(e))
+
+def _unlink_pid(filename):
+    try:
+        os.unlink(filename)
+    except:
+        pass
 
 def _handle_signals(signum, stack):
     global light
@@ -42,6 +55,7 @@ def print_usage(prog_cmd):
 def run():
 
     global light
+    global dlogger
 
     background = False
     forcesyslog = False
@@ -123,16 +137,8 @@ def run():
         logger.print_trace(e)
         sys.exit(-1)
 
-
-
-    # write pid file
     pidfilename = "/var/run/%s.pid" % os.path.basename(sys.argv[0])
-    try:
-        pidfile = open(pidfilename, "w")
-        pidfile.write("%d\n" % os.getpid())
-        pidfile.close()
-    except IOError, e:
-        dlogger.log("ERROR: unable to write pid file %s: %s", pidfilename, str(e))
+    _write_pid(pidfilename)
 
     dlogger.log("Starting light controller")
     translator = job2ledstrip.Job2LedStrip(jobs, light)
@@ -160,11 +166,7 @@ def run():
     except Exception, e:
         logger.print_trace(e)
 
-    try:
-        os.unlink(pidfilename)
-    except:
-        pass
-
+    _unlink_pid(pidfilename)
     dlogger.log("Terminated light controller")
 
 if __name__ == "__main__":
