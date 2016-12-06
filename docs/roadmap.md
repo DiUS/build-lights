@@ -1,6 +1,5 @@
 # Road map
 
-* Monitors Jenkins via AWS SQS.
 * Ability to configure sounds via web interface.
 * Buildkite support.
 * Circle CI support.
