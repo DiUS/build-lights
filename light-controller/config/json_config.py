@@ -12,7 +12,6 @@ from lib import error
 from lib import list_utils
 from lib import json_custom_decode
 
-
 class Error(error.Generic):
     """Base class for light controller module exceptions"""
     pass
@@ -35,9 +34,7 @@ class JsonConfig(object):
         f.close()
 
     def _check_config_is_valid(self):
-
         self._check_config_against_schema()
-
         if not list_utils.list_items_unique(self.config['jobs']):
             raise ConfigError(self.config_file, 'jobs must be unique.')
 
