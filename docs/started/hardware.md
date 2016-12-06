@@ -20,7 +20,9 @@ Some soldering experience will definitely help but don't feel discouraged: below
 * WiFi dongle **only for Raspberry Pi 2**
   * [Edimax 2.4 GHz USB 2.0 Wireless Adapter](http://au.rs-online.com/web/p/wireless-adapters/7603621)
   * [Miniature WiFi module (802.11b/g/n)](https://www.adafruit.com/product/814)
-* [5V 2A \(2000mA\) UL Listed switching power supply](https://www.adafruit.com/products/276)
+* 5V DC power supply
+  * [MP3480 - 15 Watt 5VDC 3.0A](https://littlebirdelectronics.com.au/products/15-watt-switchmode-slim-high-power-5vdc-3-0a)
+  * [5V 2A \(2000mA\) UL Listed switching power supply](https://www.adafruit.com/products/276)
   * _Warning: We need at least 3A power supply, but this will do as long as the lights are ___NOT___ on full brightness all at the same time_
 * [Micro USB to 5.5mm female DC jack \(Part Number: VUPN7718\)](http://www.vetco.net/catalog/product_info.php?products_id=14954)
 * 4-pin 0.1" \(2.54mm\) pitch male header
