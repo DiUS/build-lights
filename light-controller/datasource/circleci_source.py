@@ -32,17 +32,18 @@ _PREVIOUS_STATUS = {
 
 class CircleCISource():
 
-   def __init__(self, api_token, endpoint):
+   def __init__(self, api_token, username, endpoint=None):
        self.client = CircleClient(api_token, endpoint)
+       self.username = username
 
-   def list_projects(self, username):
+   def list_projects(self):
        projects  = self.client.projects.list_projects()
-       selection = list(filter(lambda x: x['username'] == username, projects))
+       selection = list(filter(lambda x: x['username'] == self.username, projects))
        result    = list(map(lambda x: x['reponame'], selection))
        return result
 
-   def project_status(self, username, project):
-       result = self.client.build.recent(username, project, limit=1, branch='master')[0]
+   def project_status(self, project):
+       result = self.client.build.recent(self.username, project, limit=1, branch='master')[0]
 
        current = result['status']
        previous = result['previous']['status']

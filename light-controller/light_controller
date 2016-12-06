@@ -148,14 +148,26 @@ def run():
         dlogger.log("ERROR: unable to write pid file %s: %s", pidfilename, str(e))
 
     dlogger.log("Starting light controller")
+    legacy = False
     try:
-        if api_conf['type'] == 'jenkins_direct':
+        if api_conf['type'] == 'jenkins':
+            from datasource.jenkins_source import JenkinsSource
+            source = JenkinsSource(api_conf['url'])
+            translator = job2ledstrip.Job2LedStrip(jobs, light)
+
+        elif api_conf['type'] == 'circleci':
+            from datasource.circleci_source import CircleCISource
+            source = CircleCISource(api_conf['api_token'], api_conf['username'])
+            translator = job2ledstrip.Job2LedStrip(jobs, light)
+
+        elif api_conf['type'] == 'jenkins_direct':
             # Poll Jenkins API directly
             dlogger.log("API is Jenkins API.")
             from pollers import jenkins_poller
 
             translator = job2ledstrip.Job2LedStrip(jobs, light)
             poller = jenkins_poller.JenkinsPoller(api_conf['url'], jobs, translator, splayer)
+            legacy = True
 
         elif api_conf['type'] == 'jenkins_aws_sqs':
             # Poll Jenkins via AWS SQS
@@ -175,6 +187,7 @@ def run():
             if not api_conf.has_key('sqs_queue_name'):
                 raise json_config.ConfigError('sqs_queue_name not configured')
             poller = aws_sqs_poller.AwsSqsPoller(jobs, translator, first_job_as_trigger, splayer, api_conf['sqs_region'], api_conf['sqs_queue_name'], api_conf['aws_access_key_id'], api_conf['aws_secret_access_key'])
+            legacy = True
         else:
             raise json_config.ConfigError(str(api_conf['type']) + ' API type not supported')
 
@@ -183,7 +196,12 @@ def run():
         light.start()
 
         while True:
-            poller.poll()
+            if legacy:
+                poller.poll()
+            else:
+                for job in jobs:
+                    status = source.project_status(job)
+                    translator.update(job, status)
             light.join(poll_interval_seconds)
             if not light.isAlive():
                 break
