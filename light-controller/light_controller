@@ -143,16 +143,9 @@ def run():
     dlogger.log("Starting light controller")
     translator = job2ledstrip.Job2LedStrip(jobs, light)
     try:
-        if api_conf['type'] == 'jenkins':
-            from datasource.jenkins_source import JenkinsSource
-            source = JenkinsSource(api_conf['url'])
-        elif api_conf['type'] == 'circleci':
-            from datasource.circleci_source import CircleCISource
-            source = CircleCISource(api_conf['api_token'], api_conf['username'])
-        else:
-            raise json_config.ConfigError(str(api_conf['type']) + ' API type not supported')
+        kwargs = { x:api_conf[x] for x in ['url', 'api_token', 'username'] if x in api_conf }
+        source = importlib.import_module('datasource.' + api_conf['type']).Source(**kwargs)
 
-        # start the light driver
         light.daemon = True
         light.start()
 

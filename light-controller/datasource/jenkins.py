@@ -19,10 +19,10 @@ _STATUS = {
     'yellow_anime'    : STATUS.BUILDING_FROM_UNSTABLE
 }
 
-class JenkinsSource():
+class Source():
 
-    def __init__(self, baseurl):
-        self.J = Jenkins(baseurl)
+    def __init__(self, url):
+        self.J = Jenkins(url)
 
     def list_projects(self):
         return self.J.keys()

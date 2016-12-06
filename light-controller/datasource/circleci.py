@@ -30,7 +30,7 @@ _PREVIOUS_STATUS = {
     'success'             : STATUS.BUILDING_FROM_SUCCESS
 }
 
-class CircleCISource():
+class Source():
 
    def __init__(self, api_token, username, endpoint=None):
        self.client = CircleClient(api_token, endpoint)
