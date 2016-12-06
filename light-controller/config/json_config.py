@@ -1,9 +1,4 @@
 """ Config reader """
-import os
-current_dir = os.path.dirname(os.path.realpath(__file__))
-parent_dir = os.path.join(current_dir, "..")
-import sys
-sys.path.append(parent_dir)
 
 try:
     import json
