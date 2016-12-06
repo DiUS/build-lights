@@ -38,7 +38,6 @@
       },
       "required": [
         "type",
-        "url",
         "pollrate_s"
       ]
     },
