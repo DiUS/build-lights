@@ -15,6 +15,10 @@ from lib import error
 from lib import list_utils
 from lib import json_custom_decode
 
+import json
+import jsonschema
+from jsonschema import validate
+from jsonschema import ValidationError
 
 class Error(error.Generic):
     """Base class for light controller module exceptions"""
@@ -24,15 +28,7 @@ class ConfigError(Error):
     """Config error"""
     pass
 
-
-
 class JsonConfig(object):
-
-    mandatory_items = [
-        'api',
-        'light',
-        'jobs'
-    ]
 
     def __init__(self, config_file='config.json'):
         self.logger = logger.Logger('JsonConfig')
@@ -43,15 +39,18 @@ class JsonConfig(object):
         self.config = json.load(f, object_hook=json_custom_decode.decode_unicode_to_str_dict)
         f.close()
 
-        for item in JsonConfig.mandatory_items:
-            if not self.config.has_key(item):
-                raise ConfigError('\"' + item + '\" not found in config file.')
-        if not self.config['api'].has_key('type'):
-            raise ConfigError('api \"type\" not found in config file.')
-        if not self.config['light'].has_key('type'):
-            raise ConfigError('light \"type\" not found in config file.')
+        self._check_against_schema()
+
         if not list_utils.list_items_unique(self.config['jobs']):
             raise ConfigError('jobs must be unique.')
+
+    def _check_against_schema(self):
+        with open('./config/config_schema.json') as data_file:
+            schema = json.load(data_file)
+        try:
+            validate(self.config, schema)
+        except ValidationError as ve:
+            raise ConfigError('Error in config file ' + self.config_file + ': ' + ve.message)
 
     def get_jobs(self):
         return self.config['jobs']

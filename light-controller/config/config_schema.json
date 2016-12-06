@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "light": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "num_leds": {
+          "type": "integer"
+        },
+        "simulate_mode": {
+          "type": "boolean"
+        },
+        "spidev": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "num_leds",
+        "simulate_mode",
+        "spidev"
+      ]
+    },
+    "api": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "pollrate_s": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "type",
+        "url",
+        "pollrate_s"
+      ]
+    },
+    "jobs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "light",
+    "api",
+    "jobs"
+  ]
+}
