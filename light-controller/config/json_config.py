@@ -20,7 +20,8 @@ class Error(error.Generic):
 
 class ConfigError(Error):
     """Config error"""
-    pass
+    def __init__(self, filename, message):
+        super(ConfigError, self).__init__('Error in config file ' + filename + ': ' + message)
 
 class JsonConfig(object):
 
@@ -41,7 +42,7 @@ class JsonConfig(object):
         self._check_config_against_schema()
 
         if not list_utils.list_items_unique(self.config['jobs']):
-            raise ConfigError('jobs must be unique.')
+            raise ConfigError(self.config_file, 'jobs must be unique.')
 
     def _check_config_against_schema(self):
         with open('./config/config_schema.json') as data_file:
@@ -49,7 +50,7 @@ class JsonConfig(object):
         try:
             validate(self.config, schema)
         except ValidationError as ve:
-            raise ConfigError('Error in config file ' + self.config_file + ': ' + ve.message)
+            raise ConfigError(self.config_file, str(ve.message).encode('utf-8'))
 
     def get_jobs(self):
         return self.config['jobs']
