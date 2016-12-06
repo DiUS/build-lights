@@ -4,6 +4,11 @@
       "name": "stablejob",
       "url": "http://localhost:8000/jenkins/job/stablejob",
       "color": "blue"
+    },
+    {
+      "name": "unstablejob",
+      "url": "http://localhost:8000/jenkins/job/unstablejob",
+      "color": "red"
     }
   ]
 }

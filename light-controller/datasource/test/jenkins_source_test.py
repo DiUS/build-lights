@@ -8,7 +8,9 @@ class JenkinsSourceTest(unittest.TestCase):
         self.ci = JenkinsSource('http://localhost:8000/jenkins/')
 
     def test_list_projects(self):
-        self.assertGreater(len(self.ci.list_projects()), 0)
+        projects = self.ci.list_projects()
+        self.assertTrue('stablejob' in projects)
+        self.assertTrue('unstablejob' in projects)
 
     def test_successful_build(self):
         self.assertEqual(self.ci.project_status('stablejob'), STATUS.SUCCESS)
