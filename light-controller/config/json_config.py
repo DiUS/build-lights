@@ -31,8 +31,7 @@ class JsonConfig(object):
     mandatory_items = [
         'api',
         'light',
-        'jobs',
-        'sound',
+        'jobs'
     ]
 
     def __init__(self, config_file='config.json'):
@@ -62,6 +61,3 @@ class JsonConfig(object):
 
     def get_api_config(self):
         return self.config['api']
-
-    def get_sound_config(self):
-        return self.config['sound']

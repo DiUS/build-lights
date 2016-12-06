@@ -97,10 +97,8 @@ def run():
         conf = json_config.JsonConfig(config_file)
         api_conf = conf.get_api_config()
         light_conf = conf.get_light_config()
-        sound_conf = conf.get_sound_config()
         jobs = conf.get_jobs()
         poll_interval_seconds = 3
-        splayer = None
 
         from lights import job2ledstrip
 
@@ -112,17 +110,6 @@ def run():
             light = importlib.import_module('lights.' + light_type).Strand(**kwargs)
         except ImportError:
             raise json_config.ConfigError(str(light_type) + ' light type not supported')
-
-        if sound_conf.has_key('enabled'):
-            if sound_conf['enabled']:
-                from sounds import sound_player
-                kwargs = {}
-                kwargs['sound_clips_directory'] = os.path.join(current_dir, 'sounds')
-                if sound_conf.has_key('sound_clips_dir'):
-                    kwargs['sound_clips_directory'] = sound_conf['sound_clips_dir']
-                if sound_conf.has_key('bin_path'):
-                    kwargs['player_bin'] = sound_conf['bin_path']
-                splayer = sound_player.SoundPlayer(**kwargs)
 
         if api_conf.has_key('pollrate_s'):
             if api_conf['pollrate_s'] != 0:
@@ -148,46 +135,14 @@ def run():
         dlogger.log("ERROR: unable to write pid file %s: %s", pidfilename, str(e))
 
     dlogger.log("Starting light controller")
-    legacy = False
+    translator = job2ledstrip.Job2LedStrip(jobs, light)
     try:
         if api_conf['type'] == 'jenkins':
             from datasource.jenkins_source import JenkinsSource
             source = JenkinsSource(api_conf['url'])
-            translator = job2ledstrip.Job2LedStrip(jobs, light)
-
         elif api_conf['type'] == 'circleci':
             from datasource.circleci_source import CircleCISource
             source = CircleCISource(api_conf['api_token'], api_conf['username'])
-            translator = job2ledstrip.Job2LedStrip(jobs, light)
-
-        elif api_conf['type'] == 'jenkins_direct':
-            # Poll Jenkins API directly
-            dlogger.log("API is Jenkins API.")
-            from pollers import jenkins_poller
-
-            translator = job2ledstrip.Job2LedStrip(jobs, light)
-            poller = jenkins_poller.JenkinsPoller(api_conf['url'], jobs, translator, splayer)
-            legacy = True
-
-        elif api_conf['type'] == 'jenkins_aws_sqs':
-            # Poll Jenkins via AWS SQS
-            dlogger.log("API is Jenkins via AWS SQS.")
-            from pollers import aws_sqs_poller
-
-            first_job_as_trigger = True
-            if api_conf.has_key('first_job_as_trigger'):
-                first_job_as_trigger = api_conf['first_job_as_trigger']
-            if first_job_as_trigger:
-                tmplist = list(list_utils.remove_first_item(jobs))
-                translator = job2ledstrip.Job2LedStrip(tmplist, light)
-            else:
-                translator = job2ledstrip.Job2LedStrip(jobs, light)
-            if not api_conf.has_key('sqs_region'):
-                raise json_config.ConfigError('sqs_region not configured')
-            if not api_conf.has_key('sqs_queue_name'):
-                raise json_config.ConfigError('sqs_queue_name not configured')
-            poller = aws_sqs_poller.AwsSqsPoller(jobs, translator, first_job_as_trigger, splayer, api_conf['sqs_region'], api_conf['sqs_queue_name'], api_conf['aws_access_key_id'], api_conf['aws_secret_access_key'])
-            legacy = True
         else:
             raise json_config.ConfigError(str(api_conf['type']) + ' API type not supported')
 
@@ -196,12 +151,9 @@ def run():
         light.start()
 
         while True:
-            if legacy:
-                poller.poll()
-            else:
-                for job in jobs:
-                    status = source.project_status(job)
-                    translator.update(job, status)
+            for job in jobs:
+                status = source.project_status(job)
+                translator.update(job, status)
             light.join(poll_interval_seconds)
             if not light.isAlive():
                 break
@@ -214,7 +166,6 @@ def run():
         pass
 
     dlogger.log("Terminated light controller")
-
 
 if __name__ == "__main__":
     run()
