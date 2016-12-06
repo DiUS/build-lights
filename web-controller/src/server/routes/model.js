@@ -24,7 +24,7 @@ module.exports = (router, configFile, lightConfigFile) => {
     if (requestData.newJob) {
       logger.info('Adding new job to be monitored. Payload: %j', requestData)
       const jobsIdx = findIndex(model.tools, { name: 'jobs to monitor' })
-      model.tools[jobsIdx].configuration.items.push({ name: '', path: '' })
+      model.tools[jobsIdx].configuration.items.push({ name: '', active: false })
     }
 
     if (requestData.deleteJob) {

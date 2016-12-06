@@ -14,10 +14,10 @@ export const Job = (props) => {
 
   return (
     <div className='fieldset'>
-      <label for={`jobName_${props.index}`}>Name:</label>
+      <input type='checkbox' name='jobActive' id={`jobActive_${props.index}`} checked={props.active} value={`jobActive_${props.index}`} />
+      <label for={`jobActive_${props.index}`}><span><span /></span>&nbsp;</label>
+
       <input type='text' required placeholder='My job to monitor' name='jobName' id={`jobName_${props.index}`} value={props.name} />
-      <label for={`jobPath_${props.index}`}>URL:</label>
-      <input type='text' required placeholder='/path/to/job/on/ci' name='jobPath' id={`jobPath_${props.index}`} value={props.path} />
       <button type='button' className='small danger' data-job-index={props.index} onClick={handleRemoveJob}>Remove</button>
     </div>
   )

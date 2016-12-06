@@ -85,7 +85,9 @@
         "inferno": "^0.7.27",
         "inferno-create-element": "^0.7.27",
         "inferno-dom": "^0.7.27",
+        "lodash.compact": "^3.0.1",
         "lodash.findindex": "^4.6.0",
+        "lodash.flatten": "^4.4.0",
         "winston": "^2.3.0"
     }
 }

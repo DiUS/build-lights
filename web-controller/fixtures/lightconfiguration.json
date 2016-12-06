@@ -1,1 +1,21 @@
-{"light":{"type":"adafruit_lpd8806","num_leds":"32","simulate_mode":false,"spidev":"/dev/spidev0.0"},"api":{"type":"jenkins_direct","url":"http://localhost:8080","pollrate_s":10},"jobs":["/path/to/job/1","/path/3","/path/to/job/2","/path/test"],"sound":{"enabled":false,"bin_path":"mpg321"}}
+{
+    "light": {
+        "type": "adafruit_lpd8806",
+        "num_leds": "32",
+        "simulate_mode": false,
+        "spidev": "/dev/spidev0.0"
+    },
+    "api": {
+        "type": "jenkins_direct",
+        "url": "http://localhost:8080",
+        "pollrate_s": 10
+    },
+    "jobs": [
+        "Job to monitor 1",
+        "Job to monitor 2"
+    ],
+    "sound": {
+        "enabled": false,
+        "bin_path": "mpg321"
+    }
+}

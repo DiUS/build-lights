@@ -19,7 +19,7 @@ export const JobsTabContent = (model, lastUpdated) => {
     addNewJob()
   }
 
-  const jobs = model.items.map((i, idx) => <Job name={i.name} path={i.path} index={idx} />)
+  const jobs = model.items.map((i, idx) => <Job name={i.name} active={i.active} index={idx} />)
 
   return (
     <form onSubmit={handleFormSubmit}>
@@ -28,6 +28,7 @@ export const JobsTabContent = (model, lastUpdated) => {
         <input type='number' name='pollRate' id='pollRate' value={model.pollrate} />
       </div>
       <div className='jobs-container form-container vertical'>
+        <label>Jobs</label>
         {jobs}
         <button type='button' className='small secondary' onClick={handleAddNewJob}>Add new job</button>
       </div>

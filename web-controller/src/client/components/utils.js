@@ -10,7 +10,7 @@ exports.transformFormIntoPayload = (formElements, payload) => {
     }
 
     if (formEl.type !== 'radio') {
-      if (payload[formEl.name] && !Array.isArray(payload[formEl.name])) {
+      if (typeof payload[formEl.name] !== 'undefined' && !Array.isArray(payload[formEl.name])) {
         alreadyContainsEl = true
 
         const originalValue = payload[formEl.name]
@@ -24,15 +24,12 @@ exports.transformFormIntoPayload = (formElements, payload) => {
         alreadyContainsEl = true
       }
 
+      const value = (formEl.type === 'checkbox') ? formEl.checked : formEl.value
       if (alreadyContainsEl) {
-        payload[formEl.name].push(formEl.value)
+        payload[formEl.name].push(value)
       } else {
-        payload[formEl.name] = formEl.value
+        payload[formEl.name] = value
       }
-    }
-
-    if (formEl.type === 'checkbox' && !formEl.checked) {
-      payload[formEl.name] = 'false'
     }
   }
 }

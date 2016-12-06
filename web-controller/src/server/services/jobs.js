@@ -3,6 +3,8 @@
 const fs = require('fs')
 const logger = require('winston')
 const findIndex = require('lodash.findindex')
+const flatten = require('lodash.flatten')
+const compact = require('lodash.compact')
 
 const UTF_8 = 'utf8'
 
@@ -12,11 +14,9 @@ exports.persist = (payload, lightConfigFile) => {
 
     lightConfJSON.api.pollrate_s = Number(payload.pollRate)
 
-    if (!Array.isArray(payload.jobPath)) {
-      payload.jobPath = [payload.jobPath]
-    }
-
-    lightConfJSON.jobs = payload.jobPath
+    const names = flatten([payload.jobName])
+    const actives = flatten([payload.jobActive])
+    lightConfJSON.jobs = compact(names.map((name, index) => actives[index] ? name : null))
 
     fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON), UTF_8)
     logger.info('Persisted new Jobs configuration')
@@ -29,13 +29,8 @@ module.exports.mutateModel = (model, payload) => {
   const toolIdx = findIndex(model.tools, { name: 'jobs to monitor' })
 
   model.tools[toolIdx].configuration.pollrate = Number(payload.pollRate)
-  model.tools[toolIdx].configuration.items = []
 
-  if (Array.isArray(payload.jobName)) {
-    for (let i = 0; i < payload.jobName.length; i++) {
-      model.tools[toolIdx].configuration.items.push({ name: payload.jobName[i], path: payload.jobPath[i] })
-    }
-  } else {
-    model.tools[toolIdx].configuration.items.push({ name: payload.jobName, path: payload.jobPath })
-  }
+  const names = flatten([payload.jobName])
+  const actives = flatten([payload.jobActive])
+  model.tools[toolIdx].configuration.items = names.map((name, index) => ({ name, active: actives[index] }))
 }
