@@ -1,9 +1,7 @@
 {
     "light": {
-        "type": "epistar_lpd8806",
-        "num_leds": 32,
-        "simulate_mode": false,
-        "spidev": "/dev/spidev0.0"
+        "type": "console",
+        "num_leds": 32
     },
     "api": {
         "type": "jenkins",

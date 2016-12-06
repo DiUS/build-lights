@@ -1,0 +1,19 @@
+{
+    "light": {
+        "type": "console",
+        "num_leds": 32
+    },
+    "api": {
+        "type": "travisci",
+        "username": "DiUS",
+        "pollrate_s": 3
+    },
+    "jobs": [
+        "build-lights",
+        "java-faker",
+        "pact-jvm",
+        "pact-consumer-swift",
+        "pact-consumer-js-dsl",
+        "pact_broker-docker"
+    ]
+}
