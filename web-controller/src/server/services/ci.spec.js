@@ -10,13 +10,13 @@ describe('CI Service', () => {
 
   describe('#persist', () => {
 
-    const payload = { ciTool: 'jenkins_direct', ciAddress: 'http://my.ci', ciPort: 9090 }
+    const payload = { ciTool: 'jenkins', ciAddress: 'http://my.ci', ciPort: 9090, ciUsername: 'test' }
 
     it('updates CI configuration', () => {
       const fsMock = sinon.mock(fs)
-      sinon.stub(fs, 'readFileSync').returns('{ "api": { "type": "jenkins_direct", "url": "http://psn-ci:8080/api/json", "pollrate_s": 3 } }')
+      sinon.stub(fs, 'readFileSync').returns('{ "api": { "type": "jenkins", "url": "http://psn-ci:8080/api/json", "pollrate_s": 3 } }')
 
-      fsMock.expects('writeFileSync').withArgs(`${process.cwd()}/light-configuration.json`, '{"api":{"type":"jenkins_direct","url":"http://my.ci:9090","pollrate_s":3}}', 'utf8').once()
+      fsMock.expects('writeFileSync').withArgs(`${process.cwd()}/light-configuration.json`, '{"api":{"type":"jenkins","url":"http://my.ci:9090","pollrate_s":3,"username":"test"}}', 'utf8').once()
 
       ci.persist(payload, `${process.cwd()}/light-configuration.json`)
       fsMock.verify()

@@ -11,6 +11,7 @@ module.exports.persist = (payload, lightConfigFile) => {
     let lightConfJSON = JSON.parse(fs.readFileSync(lightConfigFile, UTF_8))
     lightConfJSON.api.type = payload.ciTool
     lightConfJSON.api.url = `${payload.ciAddress}:${payload.ciPort}`
+    lightConfJSON.api.username = payload.ciUsername
 
     fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON), UTF_8)
     logger.info('Persisted new CI configuration')
@@ -25,4 +26,5 @@ module.exports.mutateModel = (model, payload) => {
   model.tools[toolIdx].configuration.tool = payload.ciTool
   model.tools[toolIdx].configuration.address = payload.ciAddress
   model.tools[toolIdx].configuration.port = payload.ciPort
+  model.tools[toolIdx].configuration.username = payload.ciUsername
 }
