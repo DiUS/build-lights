@@ -3,7 +3,7 @@
 
 Start the stub server
 
-    cd test/http_fixtures
+    cd fixtures
     python -m SimpleHTTPServer 8000
 
 Run the tests
