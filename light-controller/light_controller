@@ -176,7 +176,7 @@ def run():
                 raise json_config.ConfigError('sqs_queue_name not configured')
             poller = aws_sqs_poller.AwsSqsPoller(jobs, translator, first_job_as_trigger, splayer, api_conf['sqs_region'], api_conf['sqs_queue_name'], api_conf['aws_access_key_id'], api_conf['aws_secret_access_key'])
         else:
-            raise ConfigError(str(api_conf['type']) + ' API type not supported')
+            raise json_config.ConfigError(str(api_conf['type']) + ' API type not supported')
 
         # start the light driver
         light.daemon = True
