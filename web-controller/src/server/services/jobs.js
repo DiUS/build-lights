@@ -31,7 +31,11 @@ module.exports.mutateModel = (model, payload) => {
   model.tools[toolIdx].configuration.pollrate = Number(payload.pollRate)
   model.tools[toolIdx].configuration.items = []
 
-  for (let i = 0; i < payload.jobName.length; i++) {
-    model.tools[toolIdx].configuration.items.push({ name: payload.jobName[i], path: payload.jobPath[i] })
+  if (Array.isArray(payload.jobName)) {
+    for (let i = 0; i < payload.jobName.length; i++) {
+      model.tools[toolIdx].configuration.items.push({ name: payload.jobName[i], path: payload.jobPath[i] })
+    }
+  } else {
+    model.tools[toolIdx].configuration.items.push({ name: payload.jobName, path: payload.jobPath })
   }
 }
