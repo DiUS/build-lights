@@ -26,26 +26,26 @@ import signal
 
 from lib import logger
 from lib import error
-from lights import job2light_translator
+from lib.constants import STATUS
 
 COLORS = {
-    job2light_translator.STATUS.UNKNOWN: { 'r': 0x66, 'g': 0x00, 'b': 0xCC, 'blink': False }, # purple
-    job2light_translator.STATUS.SUCCESS: { 'r': 0x00, 'g': 0xCC, 'b': 0x00, 'blink': False }, # green
-    job2light_translator.STATUS.FAILURE: { 'r': 0xCC, 'g': 0x00, 'b': 0x00, 'blink': False }, # red
-    job2light_translator.STATUS.ABORTED: { 'r': 0xCC, 'g': 0xCC, 'b': 0x00, 'blink': False }, # yellow
-    job2light_translator.STATUS.DISABLED: { 'r': 0x00, 'g': 0x00, 'b': 0x00, 'blink': False }, # black
-    job2light_translator.STATUS.UNSTABLE: { 'r': 0xCC, 'g': 0x00, 'b': 0xCC, 'blink': False }, # pink
-    job2light_translator.STATUS.NOT_BUILT: { 'r': 0xCC, 'g': 0xCC, 'b': 0xCC, 'blink': False }, # white
-    job2light_translator.STATUS.BUILDING_FROM_UNKNOWN: { 'r': 0x66, 'g': 0x00, 'b': 0xCC, 'blink': True }, # purple
-    job2light_translator.STATUS.BUILDING_FROM_SUCCESS: { 'r': 0x00, 'g': 0xCC, 'b': 0x00, 'blink': True }, # green
-    job2light_translator.STATUS.BUILDING_FROM_FAILURE: { 'r': 0xCC, 'g': 0x00, 'b': 0x00, 'blink': True }, # red
-    job2light_translator.STATUS.BUILDING_FROM_ABORTED: { 'r': 0xCC, 'g': 0xCC, 'b': 0x00, 'blink': True }, # yellow
-    job2light_translator.STATUS.BUILDING_FROM_DISABLED: { 'r': 0x00, 'g': 0xCC, 'b': 0xCC, 'blink': True }, # cyan
-    job2light_translator.STATUS.BUILDING_FROM_UNSTABLE: { 'r': 0xCC, 'g': 0x00, 'b': 0xCC, 'blink': True }, # pink
-    job2light_translator.STATUS.BUILDING_FROM_NOT_BUILT: { 'r': 0xCC, 'g': 0xCC, 'b': 0xCC, 'blink': True }, # white
-    job2light_translator.STATUS.BUILDING_FROM_PREVIOUS_STATE: { 'blink': True },
-    job2light_translator.STATUS.POLL_ERROR: { 'r': 0x00, 'g': 0x00, 'b': 0xCC, 'blink': False }, # blue
-    job2light_translator.STATUS.INVALID_STATUS: { 'r': 0x00, 'g': 0x66, 'b': 0x66, 'blink': False }, # cyan
+    STATUS.UNKNOWN: { 'r': 0x66, 'g': 0x00, 'b': 0xCC, 'blink': False }, # purple
+    STATUS.SUCCESS: { 'r': 0x00, 'g': 0xCC, 'b': 0x00, 'blink': False }, # green
+    STATUS.FAILURE: { 'r': 0xCC, 'g': 0x00, 'b': 0x00, 'blink': False }, # red
+    STATUS.ABORTED: { 'r': 0xCC, 'g': 0xCC, 'b': 0x00, 'blink': False }, # yellow
+    STATUS.DISABLED: { 'r': 0x00, 'g': 0x00, 'b': 0x00, 'blink': False }, # black
+    STATUS.UNSTABLE: { 'r': 0xCC, 'g': 0x00, 'b': 0xCC, 'blink': False }, # pink
+    STATUS.NOT_BUILT: { 'r': 0xCC, 'g': 0xCC, 'b': 0xCC, 'blink': False }, # white
+    STATUS.BUILDING_FROM_UNKNOWN: { 'r': 0x66, 'g': 0x00, 'b': 0xCC, 'blink': True }, # purple
+    STATUS.BUILDING_FROM_SUCCESS: { 'r': 0x00, 'g': 0xCC, 'b': 0x00, 'blink': True }, # green
+    STATUS.BUILDING_FROM_FAILURE: { 'r': 0xCC, 'g': 0x00, 'b': 0x00, 'blink': True }, # red
+    STATUS.BUILDING_FROM_ABORTED: { 'r': 0xCC, 'g': 0xCC, 'b': 0x00, 'blink': True }, # yellow
+    STATUS.BUILDING_FROM_DISABLED: { 'r': 0x00, 'g': 0xCC, 'b': 0xCC, 'blink': True }, # cyan
+    STATUS.BUILDING_FROM_UNSTABLE: { 'r': 0xCC, 'g': 0x00, 'b': 0xCC, 'blink': True }, # pink
+    STATUS.BUILDING_FROM_NOT_BUILT: { 'r': 0xCC, 'g': 0xCC, 'b': 0xCC, 'blink': True }, # white
+    STATUS.BUILDING_FROM_PREVIOUS_STATE: { 'blink': True },
+    STATUS.POLL_ERROR: { 'r': 0x00, 'g': 0x00, 'b': 0xCC, 'blink': False }, # blue
+    STATUS.INVALID_STATUS: { 'r': 0x00, 'g': 0x66, 'b': 0x66, 'blink': False }, # cyan
 }
 
 class Error(error.Generic):
@@ -117,7 +117,7 @@ class Strand(threading.Thread):
             raise InputError('end_index out of range')
 
     def set_status(self, status, start_index=None, end_index=None):
-        if (status == job2light_translator.STATUS.BUILDING_FROM_PREVIOUS_STATE):
+        if (status == STATUS.BUILDING_FROM_PREVIOUS_STATE):
             self.setblinkrange(True, start_index, end_index)
             return
 

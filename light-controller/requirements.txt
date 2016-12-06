@@ -1,2 +1,4 @@
 jenkinsapi==0.3.3
-circleclient==0.1.6
+TravisPy==0.3.5
+-e git+https://github.com/qba73/circleclient.git@5aa1379601ac576c392fd948b250acd6cf762575#egg=circleclient
+jsonschema==2.5.1

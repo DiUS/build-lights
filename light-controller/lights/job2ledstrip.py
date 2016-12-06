@@ -7,11 +7,15 @@ sys.path.append(parent_dir)
 
 from lib import logger
 from lib import list_utils
-from lights import job2light_translator
+from lib import error
 
+class Error(error.Generic):
+    pass
 
+class InputError(Error):
+    pass
 
-class Job2LedStrip(job2light_translator.Job2LightTranslator):
+class Job2LedStrip(object):
 
     def __init__(self, jobs, strand):
         self.logger = logger.Logger('JenkinsPoller')
@@ -20,7 +24,7 @@ class Job2LedStrip(job2light_translator.Job2LightTranslator):
         # order of the jobs is important
         self.jobs = list(list_utils.flatten_list(jobs))
         if len(self.jobs) == 0 or len(self.jobs) > self.strand.num_leds:
-            raise job2light_translator.InputError('Unable to map ' + str(len(self.jobs)) + ' jobs to ' + str(self.strand.num_leds) + ' LEDs')
+            raise InputError('Unable to map ' + str(len(self.jobs)) + ' jobs to ' + str(self.strand.num_leds) + ' LEDs')
         self.offset = dict.fromkeys(self.jobs)
         self.leds_per_job = int(self.strand.num_leds / len(self.jobs))
 
@@ -28,14 +32,11 @@ class Job2LedStrip(job2light_translator.Job2LightTranslator):
         for name in self.jobs:
             self.offset[name] = index
             index = index + self.leds_per_job
-        #self.logger.log('self.jobs: %s', self.jobs)
 
     def update(self, job_name, job_status):
-        #self.logger.log('%s:%s', job_name, job_status)
         if job_name in self.offset.keys():
-            kwargs = {}
-            kwargs['start_index'] = self.offset[job_name]
-            kwargs['end_index']   = self.offset[job_name] + self.leds_per_job
-            kwargs['status']      = job_status
-
-            self.strand.set_status(**kwargs)
+            self.strand.set_status(
+                status=job_status,
+                start_index=self.offset[job_name],
+                end_index=self.offset[job_name] + self.leds_per_job
+            )

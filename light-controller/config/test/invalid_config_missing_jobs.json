@@ -1,0 +1,13 @@
+{
+    "light": {
+        "type": "epistar_lpd8806",
+        "num_leds": 32,
+        "simulate_mode": false,
+        "spidev": "/dev/spidev0.0"
+    },
+    "api": {
+        "type": "jenkins_direct",
+        "url": "http://psn-ci:8080/api/json",
+        "pollrate_s": 3
+    }
+}

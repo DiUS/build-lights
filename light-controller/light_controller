@@ -15,12 +15,25 @@ from lib import logger
 from lib import list_utils
 from config import json_config
 
-
-
-
 default_config_file = 'config.json'
 light = None
+dlogger = None
 
+def _write_pid(filename):
+    global dlogger
+
+    try:
+        pidfile = open(filename, "w")
+        pidfile.write("%d\n" % os.getpid())
+        pidfile.close()
+    except IOError, e:
+        dlogger.log("ERROR: unable to write pid file %s: %s", filename, str(e))
+
+def _unlink_pid(filename):
+    try:
+        os.unlink(filename)
+    except:
+        pass
 
 def _handle_signals(signum, stack):
     global light
@@ -42,6 +55,7 @@ def print_usage(prog_cmd):
 def run():
 
     global light
+    global dlogger
 
     background = False
     forcesyslog = False
@@ -97,10 +111,8 @@ def run():
         conf = json_config.JsonConfig(config_file)
         api_conf = conf.get_api_config()
         light_conf = conf.get_light_config()
-        sound_conf = conf.get_sound_config()
         jobs = conf.get_jobs()
         poll_interval_seconds = 3
-        splayer = None
 
         from lights import job2ledstrip
 
@@ -112,17 +124,6 @@ def run():
             light = importlib.import_module('lights.' + light_type).Strand(**kwargs)
         except ImportError:
             raise json_config.ConfigError(str(light_type) + ' light type not supported')
-
-        if sound_conf.has_key('enabled'):
-            if sound_conf['enabled']:
-                from sounds import sound_player
-                kwargs = {}
-                kwargs['sound_clips_directory'] = os.path.join(current_dir, 'sounds')
-                if sound_conf.has_key('sound_clips_dir'):
-                    kwargs['sound_clips_directory'] = sound_conf['sound_clips_dir']
-                if sound_conf.has_key('bin_path'):
-                    kwargs['player_bin'] = sound_conf['bin_path']
-                splayer = sound_player.SoundPlayer(**kwargs)
 
         if api_conf.has_key('pollrate_s'):
             if api_conf['pollrate_s'] != 0:
@@ -136,67 +137,30 @@ def run():
         logger.print_trace(e)
         sys.exit(-1)
 
-
-
-    # write pid file
     pidfilename = "/var/run/%s.pid" % os.path.basename(sys.argv[0])
-    try:
-        pidfile = open(pidfilename, "w")
-        pidfile.write("%d\n" % os.getpid())
-        pidfile.close()
-    except IOError, e:
-        dlogger.log("ERROR: unable to write pid file %s: %s", pidfilename, str(e))
+    _write_pid(pidfilename)
 
     dlogger.log("Starting light controller")
+    translator = job2ledstrip.Job2LedStrip(jobs, light)
     try:
-        if api_conf['type'] == 'jenkins_direct':
-            # Poll Jenkins API directly
-            dlogger.log("API is Jenkins API.")
-            from pollers import jenkins_poller
+        kwargs = { x:api_conf[x] for x in ['url', 'api_token', 'username'] if x in api_conf }
+        source = importlib.import_module('datasource.' + api_conf['type']).Source(**kwargs)
 
-            translator = job2ledstrip.Job2LedStrip(jobs, light)
-            poller = jenkins_poller.JenkinsPoller(api_conf['url'], jobs, translator, splayer)
-
-        elif api_conf['type'] == 'jenkins_aws_sqs':
-            # Poll Jenkins via AWS SQS
-            dlogger.log("API is Jenkins via AWS SQS.")
-            from pollers import aws_sqs_poller
-
-            first_job_as_trigger = True
-            if api_conf.has_key('first_job_as_trigger'):
-                first_job_as_trigger = api_conf['first_job_as_trigger']
-            if first_job_as_trigger:
-                tmplist = list(list_utils.remove_first_item(jobs))
-                translator = job2ledstrip.Job2LedStrip(tmplist, light)
-            else:
-                translator = job2ledstrip.Job2LedStrip(jobs, light)
-            if not api_conf.has_key('sqs_region'):
-                raise json_config.ConfigError('sqs_region not configured')
-            if not api_conf.has_key('sqs_queue_name'):
-                raise json_config.ConfigError('sqs_queue_name not configured')
-            poller = aws_sqs_poller.AwsSqsPoller(jobs, translator, first_job_as_trigger, splayer, api_conf['sqs_region'], api_conf['sqs_queue_name'], api_conf['aws_access_key_id'], api_conf['aws_secret_access_key'])
-        else:
-            raise ConfigError(str(api_conf['type']) + ' API type not supported')
-
-        # start the light driver
         light.daemon = True
         light.start()
 
         while True:
-            poller.poll()
+            for job in jobs:
+                status = source.project_status(job)
+                translator.update(job, status)
             light.join(poll_interval_seconds)
             if not light.isAlive():
                 break
     except Exception, e:
         logger.print_trace(e)
 
-    try:
-        os.unlink(pidfilename)
-    except:
-        pass
-
+    _unlink_pid(pidfilename)
     dlogger.log("Terminated light controller")
-
 
 if __name__ == "__main__":
     run()

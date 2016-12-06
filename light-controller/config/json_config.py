@@ -1,20 +1,16 @@
 """ Config reader """
-import os
-current_dir = os.path.dirname(os.path.realpath(__file__))
-parent_dir = os.path.join(current_dir, "..")
-import sys
-sys.path.append(parent_dir)
 
 try:
     import json
 except ImportError:
     import simplejson as json
+import jsonschema
+from jsonschema import validate
+from jsonschema import ValidationError
 
-from lib import logger
 from lib import error
 from lib import list_utils
 from lib import json_custom_decode
-
 
 class Error(error.Generic):
     """Base class for light controller module exceptions"""
@@ -22,37 +18,33 @@ class Error(error.Generic):
 
 class ConfigError(Error):
     """Config error"""
-    pass
-
-
+    def __init__(self, filename, message):
+        super(ConfigError, self).__init__('Error in config file {0}: {1}'.format(filename, message))
 
 class JsonConfig(object):
 
-    mandatory_items = [
-        'api',
-        'light',
-        'jobs',
-        'sound',
-    ]
-
     def __init__(self, config_file='config.json'):
-        self.logger = logger.Logger('JsonConfig')
         self.config_file = config_file
+        self._load_config()
+        self._check_config_is_valid()
 
+    def _load_config(self):
         f = open(self.config_file, 'r')
-        self.logger.log('Reading config file: %s', self.config_file)
         self.config = json.load(f, object_hook=json_custom_decode.decode_unicode_to_str_dict)
         f.close()
 
-        for item in JsonConfig.mandatory_items:
-            if not self.config.has_key(item):
-                raise ConfigError('\"' + item + '\" not found in config file.')
-        if not self.config['api'].has_key('type'):
-            raise ConfigError('api \"type\" not found in config file.')
-        if not self.config['light'].has_key('type'):
-            raise ConfigError('light \"type\" not found in config file.')
+    def _check_config_is_valid(self):
+        self._check_config_against_schema()
         if not list_utils.list_items_unique(self.config['jobs']):
-            raise ConfigError('jobs must be unique.')
+            raise ConfigError(self.config_file, 'jobs must be unique.')
+
+    def _check_config_against_schema(self):
+        with open('./config/config_schema.json') as data_file:
+            schema = json.load(data_file)
+        try:
+            validate(self.config, schema)
+        except ValidationError as ve:
+            raise ConfigError(self.config_file, str(ve.message).encode('utf-8'))
 
     def get_jobs(self):
         return self.config['jobs']
@@ -62,6 +54,3 @@ class JsonConfig(object):
 
     def get_api_config(self):
         return self.config['api']
-
-    def get_sound_config(self):
-        return self.config['sound']
