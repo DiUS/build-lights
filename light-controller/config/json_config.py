@@ -4,6 +4,7 @@ try:
     import json
 except ImportError:
     import simplejson as json
+import os
 import jsonschema
 from jsonschema import validate
 from jsonschema import ValidationError
@@ -39,7 +40,9 @@ class JsonConfig(object):
             raise ConfigError(self.config_file, 'jobs must be unique.')
 
     def _check_config_against_schema(self):
-        with open('./config/config_schema.json') as data_file:
+        schemafile  = os.path.join(os.path.dirname(os.path.realpath(__file__)), "config_schema.json")
+
+        with open(schemafile) as data_file:
             schema = json.load(data_file)
         try:
             validate(self.config, schema)
