@@ -62,3 +62,13 @@ module.exports.writeWirelessConfiguration = (payload) => {
 
   fs.writeFileSync('/etc/wpa_supplicant/wpa_supplicant_in_use.conf', wpaContent.join('\n'), UTF_8)
 }
+
+module.exports.defaultWhenInvalid = (value, defaultValue) => {
+  if (isNaN(value)
+      || value === null
+      || value === undefined) {
+    return defaultValue
+  }
+
+  return Number(value)
+}
