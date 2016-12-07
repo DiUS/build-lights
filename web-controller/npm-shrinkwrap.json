@@ -4503,6 +4503,18 @@
       "resolved": "https://registry.npmjs.org/restore-cursor/-/restore-cursor-1.0.1.tgz",
       "dev": true
     },
+    "rethinkdb": {
+      "version": "2.3.3",
+      "from": "rethinkdb@latest",
+      "resolved": "https://registry.npmjs.org/rethinkdb/-/rethinkdb-2.3.3.tgz",
+      "dependencies": {
+        "bluebird": {
+          "version": "2.11.0",
+          "from": "bluebird@>=2.3.2 <3.0.0",
+          "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-2.11.0.tgz"
+        }
+      }
+    },
     "retry": {
       "version": "0.10.0",
       "from": "retry@>=0.10.0 <0.11.0",
