@@ -5,7 +5,7 @@
         "simulate_mode": false,
         "spidev": "/dev/spidev0.0"
     },
-    "api": {
+    "ci_server": {
         "type": "jenkins_direct",
         "url": "http://localhost:8080",
         "pollrate_s": 10

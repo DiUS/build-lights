@@ -14,9 +14,9 @@ describe('CI Service', () => {
 
     it('updates CI configuration', () => {
       const fsMock = sinon.mock(fs)
-      sinon.stub(fs, 'readFileSync').returns('{ "api": { "type": "jenkins", "url": "http://psn-ci:8080/api/json", "pollrate_s": 3 } }')
+      sinon.stub(fs, 'readFileSync').returns('{ "ci_server": { "type": "jenkins", "url": "http://psn-ci:8080/api/json", "pollrate_s": 3 } }')
 
-      fsMock.expects('writeFileSync').withArgs(`${process.cwd()}/light-configuration.json`, '{"api":{"type":"jenkins","url":"http://my.ci:9090","pollrate_s":3,"username":"test"}}', 'utf8').once()
+      fsMock.expects('writeFileSync').withArgs(`${process.cwd()}/light-configuration.json`, '{"ci_server":{"type":"jenkins","url":"http://my.ci:9090","pollrate_s":3,"username":"test"}}', 'utf8').once()
 
       ci.persist(payload, `${process.cwd()}/light-configuration.json`)
       fsMock.verify()

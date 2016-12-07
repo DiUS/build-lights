@@ -27,8 +27,8 @@ describe('Jobs Service', () => {
       jobs.persist(payload, lightConfig)
 
       const persistedData = JSON.parse(fs.readFileSync(lightConfig, UTF_8))
-      expect(persistedData).to.have.property('api')
-      expect(persistedData.api).to.have.property('pollrate_s', 3)
+      expect(persistedData).to.have.property('ci_server')
+      expect(persistedData.ci_server).to.have.property('pollrate_s', 3)
     })
 
     it('saves polling rate and jobs marked as active', () => {
@@ -41,8 +41,8 @@ describe('Jobs Service', () => {
       jobs.persist(payload, lightConfig)
 
       const persistedData = JSON.parse(fs.readFileSync(lightConfig, UTF_8))
-      expect(persistedData).to.have.property('api')
-      expect(persistedData.api).to.have.property('pollrate_s', 10)
+      expect(persistedData).to.have.property('ci_server')
+      expect(persistedData.ci_server).to.have.property('pollrate_s', 10)
 
       expect(persistedData).to.have.property('jobs')
       expect(persistedData.jobs).to.not.be.empty

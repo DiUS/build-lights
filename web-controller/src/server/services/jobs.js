@@ -13,7 +13,7 @@ const UTF_8 = 'utf8'
 exports.persist = (payload, lightConfigFile) => {
   let lightConfJSON = JSON.parse(fs.readFileSync(lightConfigFile, UTF_8))
 
-  lightConfJSON.api.pollrate_s = utils.defaultWhenInvalid(payload.pollRate, 3)
+  lightConfJSON.ci_server.pollrate_s = utils.defaultWhenInvalid(payload.pollRate, 3)
 
   const names = flatten([payload.jobName])
   const actives = flatten([payload.jobActive])

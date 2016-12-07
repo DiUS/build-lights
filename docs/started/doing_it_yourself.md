@@ -198,8 +198,8 @@ This is the default configuration for the light controller:
     "simulate_mode": false,
     "spidev": "/dev/spidev0.0"
   },
-  "api": {
-    "type": "jenkins_direct",
+  "ci_server": {
+    "type": "jenkins",
     "url": "http://localhost:8080",
     "pollrate_s": 3
   },
