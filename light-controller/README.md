@@ -4,7 +4,7 @@ Install python requirements
 
     pip install -r requirements.txt
 
-Start the stub server
+Start the stub server for testing
 
     cd fixtures
     python -m SimpleHTTPServer 8000
