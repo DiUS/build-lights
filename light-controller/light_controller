@@ -102,7 +102,6 @@ def run():
     signal.signal(signal.SIGTERM, _handle_signals)
     signal.signal(signal.SIGINT, _handle_signals)
 
-
     try:
         if not os.path.isfile(config_file):
             dlogger.log("ERROR: config file %s not found.", config_file)
@@ -113,34 +112,26 @@ def run():
         light_conf = conf.get_light_config()
         jobs = conf.get_jobs()
         poll_interval_seconds = 3
-
-        from lights import job2ledstrip
-
-        light_type = light_conf.pop('type')
-        light = importlib.import_module('lights.' + light_type).Strand(**light_conf)
-        dlogger.log("Light type is " + light_type)
-
-        if api_conf.has_key('pollrate_s'):
-            if api_conf['pollrate_s'] != 0:
-                poll_interval_seconds = api_conf['pollrate_s']
-                dlogger.log("Polling API once every %s seconds.", str(poll_interval_seconds))
-            else:
-                poll_interval_seconds = None
-                dlogger.log("NOT Polling API.")
-
     except Exception, e:
         logger.print_trace(e)
         sys.exit(-1)
 
+    light_type = light_conf.pop('type')
+    light = importlib.import_module('lights.' + light_type).Strand(**light_conf)
+    dlogger.log("Light type is " + light_type)
+
+    source_type = api_conf.pop('type')
+    poll_interval_seconds = api_conf.pop('pollrate_s', None)
+    source = importlib.import_module('datasource.' + source_type).Source(**api_conf)
+
+    from lights import job2ledstrip
+    translator = job2ledstrip.Job2LedStrip(jobs, light)
+
+    dlogger.log("Starting light controller")
     pidfilename = "/var/run/%s.pid" % os.path.basename(sys.argv[0])
     _write_pid(pidfilename)
 
-    dlogger.log("Starting light controller")
-    translator = job2ledstrip.Job2LedStrip(jobs, light)
     try:
-        kwargs = { x:api_conf[x] for x in ['url', 'api_token', 'username'] if x in api_conf }
-        source = importlib.import_module('datasource.' + api_conf['type']).Source(**kwargs)
-
         light.daemon = True
         light.start()
 
