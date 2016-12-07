@@ -13,7 +13,7 @@ describe('Jobs Service', () => {
 
     beforeEach(() => {
       lightConfig = `fixtures/tmp_${Date.now()}.json`
-      const data = fs.readFileSync(`${process.cwd()}/fixtures/lightconfiguration.json`, UTF_8)
+      const data = fs.readFileSync(`${process.cwd()}/fixtures/light-configuration.json`, UTF_8)
       fs.writeFileSync(lightConfig, data)
     })
 

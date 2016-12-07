@@ -42,7 +42,7 @@ describe('Server', () => {
 
   context('#home', () => {
     it('renders HTML page', done => {
-      request(app('fixtures/web-configuration.json', 'fixtures/lightconfiguration.json'))
+      request(app('fixtures/web-configuration.json', 'fixtures/light-configuration.json'))
         .get('/')
         .expect(200, done)
     })
@@ -50,7 +50,7 @@ describe('Server', () => {
 
   context('#reboot', () => {
     it('renders home with message when cant reboot', done => {
-      request(app('fixtures/web-configuration.json', 'fixtures/lightconfiguration.json'))
+      request(app('fixtures/web-configuration.json', 'fixtures/light-configuration.json'))
         .get('/reboot')
         .expect(500)
         .end((err, res) => {
@@ -60,7 +60,7 @@ describe('Server', () => {
     })
 
     it('ends response when successfully reboots', done => {
-      request(app('fixtures/web-configuration.json', 'fixtures/lightconfiguration.json'))
+      request(app('fixtures/web-configuration.json', 'fixtures/light-configuration.json'))
         .get('/reboot')
         .expect(200)
         .end((err, res) => {
@@ -72,7 +72,7 @@ describe('Server', () => {
 
   context('#shutdown', () => {
     it('renders home with message when cant shutdown', done => {
-      request(app('fixtures/web-configuration.json', 'fixtures/lightconfiguration.json'))
+      request(app('fixtures/web-configuration.json', 'fixtures/light-configuration.json'))
         .get('/shutdown')
         .expect(500)
         .end((err, res) => {
@@ -82,7 +82,7 @@ describe('Server', () => {
     })
 
     it('ends response when successfully reboots', done => {
-      request(app('fixtures/web-configuration.json', 'fixtures/lightconfiguration.json'))
+      request(app('fixtures/web-configuration.json', 'fixtures/light-configuration.json'))
         .get('/shutdown')
         .expect(200)
         .end((err, res) => {
@@ -100,7 +100,7 @@ describe('Server', () => {
       let responseBody
 
       before(() => {
-        request(app('fixtures/web-configuration.json', 'fixtures/lightconfiguration.json'))
+        request(app('fixtures/web-configuration.json', 'fixtures/light-configuration.json'))
           .get('/model')
           .expect(200)
           .end((err, res) => {
@@ -140,7 +140,7 @@ describe('Server', () => {
 
     describe('GET - HTTP 500', () => {
       it('replies with HTTP 500 when configuration cant be parsed', () => {
-        request(app('fixtures/wrong_configuration.json', 'fixtures/lightconfiguration.json'))
+        request(app('fixtures/wrong_configuration.json', 'fixtures/light-configuration.json'))
           .get('/model')
           .expect(500)
       })
@@ -157,7 +157,7 @@ describe('Server', () => {
       })
 
       it('renders current model when no data is passed in', done => {
-        request(app(randomConfigFile, 'fixtures/lightconfiguration.json'))
+        request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .expect(200)
           .end((err, res) => {
@@ -168,7 +168,7 @@ describe('Server', () => {
       })
 
       it('renders model with updated tab selection', () => {
-        request(app(randomConfigFile, 'fixtures/lightconfiguration.json'))
+        request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .send({ tabChange: 'abc' })
           .expect(200)
@@ -180,7 +180,7 @@ describe('Server', () => {
       })
 
       it('renders model with connection type', () => {
-        request(app(randomConfigFile, 'fixtures/lightconfiguration.json'))
+        request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .send({ connectionType: 'ethernet' })
           .expect(200)
@@ -192,7 +192,7 @@ describe('Server', () => {
       })
 
       it('renders model with updated DHCP setting', () => {
-        request(app(randomConfigFile, 'fixtures/lightconfiguration.json'))
+        request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .send({ dhcp: 'true' })
           .expect(200)
@@ -204,7 +204,7 @@ describe('Server', () => {
       })
 
       it('renders current model when no decision can be made to present', () => {
-        request(app(randomConfigFile, 'fixtures/lightconfiguration.json'))
+        request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .send({ foo: 'bar' })
           .expect(200)
@@ -216,7 +216,7 @@ describe('Server', () => {
       })
 
       it('removes job from configuration when payload to remove is received by the model', () => {
-        request(app(randomConfigFile, 'fixtures/lightconfiguration.json'))
+        request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .send({ deleteJob: 1 })
           .expect(200)
@@ -230,7 +230,7 @@ describe('Server', () => {
       describe('persisting configuration', () => {
         ['network', 'jobs'].forEach(tool => {
           it(`invokes "${tool}" service to persist configuration`, () => {
-            request(app(randomConfigFile, 'fixtures/lightconfiguration.json'))
+            request(app(randomConfigFile, 'fixtures/light-configuration.json'))
               .put('/model')
               .send({ save: tool, payload: { a: 'b', c: 'd' } })
               .expect(200)
