@@ -14,10 +14,14 @@ export const CiTabContent = (model, lastUpdated) => {
     ciApiToken: ['circleci']
   }
 
-  const handleChange = (event) => {
+  const isFieldRelevantForCiTool = (field, ciTool) => {
+    return ciToolFields[field].indexOf(ciTool) > -1
+  }
+
+  const handleCiToolChange = (event) => {
     const ciTool = event.currentTarget.value
     for (var key in ciToolFields) {
-      const makeVisible = ciToolFields[key].indexOf(ciTool) > -1
+      const makeVisible = isFieldRelevantForCiTool(key, ciTool)
       const fieldElement = document.getElementById(key)
       fieldElement.parentNode.classList.remove(makeVisible ? 'hidden' : 'shown')
       fieldElement.parentNode.classList.add(makeVisible ? 'shown' : 'hidden')
@@ -25,9 +29,12 @@ export const CiTabContent = (model, lastUpdated) => {
     }
   }
 
-  const ciAddressVisibility = (ciToolFields['ciAddress'].indexOf(model.tool) > -1 ? 'shown' : 'hidden')
-  const ciApiTokenVisibility = (ciToolFields['ciApiToken'].indexOf(model.tool) > -1 ? 'shown' : 'hidden')
-  const ciUsernameVisibility = (ciToolFields['ciUsername'].indexOf(model.tool) > -1 ? 'shown' : 'hidden')
+  const ciAddressVisibility = (isFieldRelevantForCiTool('ciAddress', model.tool) ? 'shown' : 'hidden')
+  const ciAddressRequired = (isFieldRelevantForCiTool('ciAddress', model.tool) ? true : false)
+  const ciApiTokenVisibility = (isFieldRelevantForCiTool('ciApiToken', model.tool) ? 'shown' : 'hidden')
+  const ciApiTokenRequired = (isFieldRelevantForCiTool('ciApiToken', model.tool) ? true : false)
+  const ciUsernameVisibility = (isFieldRelevantForCiTool('ciUsername', model.tool) ? 'shown' : 'hidden')
+  const ciUsernameRequired = (isFieldRelevantForCiTool('ciUsername', model.tool) ? true : false)
 
   const removeIrrelevantFields = (obj) => {
     for (var key in ciToolFields) {
@@ -52,22 +59,22 @@ export const CiTabContent = (model, lastUpdated) => {
     <form onSubmit={handleFormSubmit}>
       <div className='form-container vertical'>
         <label for='ciTool'><span>CI tool</span> you are using</label>
-        <select required id='ciTool' name='ciTool' value={model.tool} onChange={handleChange}>
+        <select required id='ciTool' name='ciTool' value={model.tool} onChange={handleCiToolChange}>
           <option value='jenkins'>Jenkins</option>
           <option value='circleci'>Circle CI</option>
           <option value='travisci'>Travis CI</option>
         </select>
         <div className={`fieldset ${ciAddressVisibility}`}>
           <label for='ciAddress'>Address of the <span>CI server you want to connect to</span></label>
-          <input required type='text' id='ciAddress' placeholder='http://myci.mycompany' name='ciAddress' value={model.address} />
+          <input required={ciAddressRequired} type='text' id='ciAddress' placeholder='http://myci.mycompany' name='ciAddress' value={model.address} />
         </div>
         <div className={`fieldset ${ciUsernameVisibility}`}>
           <label for='ciUsername'>Username associated with your CI</label>
-          <input required type='text' id='ciUsername' name='ciUsername' value={model.username} />
+          <input required={ciUsernameRequired} type='text' id='ciUsername' name='ciUsername' value={model.username} />
         </div>
         <div className={`fieldset ${ciApiTokenVisibility}`}>
           <label for='ciApiToken'>API token for CI account</label>
-          <input required type='text' id='ciApiToken' placeholder='' name='ciApiToken' value={model.apiToken} />
+          <input required={ciApiTokenRequired} type='text' id='ciApiToken' placeholder='' name='ciApiToken' value={model.apiToken} />
         </div>
       </div>
       <div className='actions'>
