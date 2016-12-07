@@ -112,7 +112,7 @@ describe('Server', () => {
 
       it('should have 5 tools', () => {
         expect(responseBody.tools).to.have.lengthOf(5)
-        expect(responseBody.tools.map(t => t.name)).to.eql(['network', 'led hardware', 'ci server', 'jobs to monitor', 'statistics'])
+        expect(responseBody.tools.map(t => t.name)).to.eql(['network', 'ci server', 'led hardware', 'jobs to monitor', 'statistics'])
       })
 
       it('each tool should have "name", "configuration" and "active" status', () => {
