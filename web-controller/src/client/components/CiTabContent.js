@@ -28,14 +28,18 @@ export const CiTabContent = (model, lastUpdated) => {
   const ciApiTokenVisibility = (ciToolFields['ciApiToken'].indexOf(model.tool) > -1 ? 'shown' : 'hidden')
   const ciUsernameVisibility = (ciToolFields['ciUsername'].indexOf(model.tool) > -1 ? 'shown' : 'hidden')
 
+  const removeIrrelevantFields = (obj) => {
+    for (var key in ciToolFields) {
+      if (ciToolFields[key].indexOf(obj.ciTool) === -1) {
+        delete obj[key]
+      }
+    }
+  }
+
   const handleFormSubmit = (event) => {
     let postData = { save: 'ci', payload: {} }
     transformFormIntoPayload(event.currentTarget.elements, postData.payload)
-    for (var key in ciToolFields) {
-      if (ciToolFields[key].indexOf(postData.payload.ciTool) === -1) {
-        delete postData.payload[key]
-      }
-    }
+    removeIrrelevantFields(postData.payload)
     return save(postData)
   }
 
