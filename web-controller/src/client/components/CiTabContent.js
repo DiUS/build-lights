@@ -11,7 +11,7 @@ export const CiTabContent = (model, lastUpdated) => {
   const handleChange = (event) => {
     const ciTool = event.currentTarget.value
     const ciUsername = document.getElementById('ciUsername')
-    ciUsername.parentNode.style.display = (ciTool === 'travisci' || ciTool === 'circleci') ? null : 'none'
+    ciUsername.parentNode.style.display = (['travisci','circleci'].indexOf(ciTool) > -1) ? null : 'none'
     const apiToken = document.getElementById('apiToken')
     apiToken.parentNode.style.display = (ciTool ===  'circleci') ? null : 'none'
     const ciAddress = document.getElementById('ciAddress')
