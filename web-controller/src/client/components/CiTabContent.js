@@ -30,11 +30,11 @@ export const CiTabContent = (model, lastUpdated) => {
   }
 
   const ciAddressVisibility = (isFieldRelevantForCiTool('ciAddress', model.tool) ? 'shown' : 'hidden')
-  const ciAddressRequired = (isFieldRelevantForCiTool('ciAddress', model.tool) ? true : false)
+  const ciAddressRequired = isFieldRelevantForCiTool('ciAddress', model.tool)
   const ciApiTokenVisibility = (isFieldRelevantForCiTool('ciApiToken', model.tool) ? 'shown' : 'hidden')
-  const ciApiTokenRequired = (isFieldRelevantForCiTool('ciApiToken', model.tool) ? true : false)
+  const ciApiTokenRequired = isFieldRelevantForCiTool('ciApiToken', model.tool)
   const ciUsernameVisibility = (isFieldRelevantForCiTool('ciUsername', model.tool) ? 'shown' : 'hidden')
-  const ciUsernameRequired = (isFieldRelevantForCiTool('ciUsername', model.tool) ? true : false)
+  const ciUsernameRequired = isFieldRelevantForCiTool('ciUsername', model.tool)
 
   const removeIrrelevantFields = (obj) => {
     for (var key in ciToolFields) {
