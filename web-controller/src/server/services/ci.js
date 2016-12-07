@@ -26,7 +26,6 @@ module.exports.mutateModel = (model, payload) => {
 
   model.tools[toolIdx].configuration.tool = payload.ciTool
   model.tools[toolIdx].configuration.address = payload.ciAddress
-  model.tools[toolIdx].configuration.port = payload.ciPort
   model.tools[toolIdx].configuration.username = payload.ciUsername
   model.tools[toolIdx].configuration.apiToken = payload.ciApiToken
 }
