@@ -108,9 +108,9 @@ def run():
             sys.exit(-1)
 
         conf = json_config.JsonConfig(config_file)
-        api_conf = conf.get_api_config()
-        light_conf = conf.get_light_config()
-        jobs = conf.get_jobs()
+        api_conf = conf['api']
+        light_conf = conf['light']
+        jobs = conf['jobs']
         poll_interval_seconds = 3
     except Exception, e:
         logger.print_trace(e)

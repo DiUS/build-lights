@@ -44,11 +44,5 @@ class JsonConfig(object):
         except ValidationError as ve:
             raise ConfigError(self.config_file, str(ve.message).encode('utf-8'))
 
-    def get_jobs(self):
-        return self.config['jobs']
-
-    def get_light_config(self):
-        return self.config['light']
-
-    def get_api_config(self):
-        return self.config['api']
+    def __getitem__(self, key):
+        return self.config[key]
