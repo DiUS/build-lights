@@ -9,9 +9,13 @@ import { transformFormIntoPayload } from './utils'
 
 export const CiTabContent = (model, lastUpdated) => {
   const handleChange = (event) => {
-    const val = event.currentTarget.value
+    const ciTool = event.currentTarget.value
     const ciUsername = document.getElementById('ciUsername')
-    ciUsername.disabled = (val === 'jenkins')
+    ciUsername.parentNode.style.display = (ciTool === 'travisci' || ciTool === 'circleci') ? null : 'none'
+    const apiToken = document.getElementById('apiToken')
+    apiToken.parentNode.style.display = (ciTool ===  'circleci') ? null : 'none'
+    const ciAddress = document.getElementById('ciAddress')
+    ciAddress.parentNode.style.display = (ciTool ===  'jenkins') ? null : 'none'
   }
 
   const handleFormSubmit = (event) => {
@@ -29,12 +33,18 @@ export const CiTabContent = (model, lastUpdated) => {
           <option value='circleci'>Circle CI</option>
           <option value='travisci'>Travis CI</option>
         </select>
-        <label for='ciAddress'>Address of the <span>CI server you want to connect to</span></label>
-        <input required type='text' id='ciAddress' placeholder='http://myci.mycompany' name='ciAddress' value={model.address} />
-        <label for='ciPort'>Port of the <span>CI server you want to connect to</span></label>
-        <input required type='text' id='ciPort' name='ciPort' value={model.port} />
-        <label for='ciUsername'>Username associated with your CI</label>
-        <input disabled='disabled' required type='text' id='ciUsername' name='ciUsername' value={model.username} />
+        <div class="fieldset">
+          <label for='ciAddress'>Address of the <span>CI server you want to connect to</span></label>
+          <input required type='text' id='ciAddress' placeholder='http://myci.mycompany' name='ciAddress' value={model.address} />
+        </div>
+        <div class="fieldset">
+          <label for='apiToken'>API token for CI account</label>
+          <input required type='text' id='apiToken' placeholder='' name='apiToken' value={model.apiToken} />
+        </div>
+        <div class="fieldset">
+          <label for='ciUsername'>Username associated with your CI</label>
+          <input required type='text' id='ciUsername' name='ciUsername' value={model.username} />
+        </div>
       </div>
       <div className='actions'>
         <button type='submit'>Save</button>

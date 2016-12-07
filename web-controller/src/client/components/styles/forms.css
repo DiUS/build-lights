@@ -31,6 +31,12 @@ form {
                 align-self: center;
                 margin: 0;
             }
+            &.hidden {
+                height: 0;
+                opacity: 0;
+                overflow: hidden;
+                width: 0;
+            }
         }
 
         label {
