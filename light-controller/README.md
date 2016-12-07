@@ -1,5 +1,8 @@
-
 ## Running tests
+
+Install python requirements
+
+    pip install -r requirements.txt
 
 Start the stub server
 
