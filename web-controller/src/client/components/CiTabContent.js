@@ -11,11 +11,11 @@ export const CiTabContent = (model, lastUpdated) => {
   const handleChange = (event) => {
     const ciTool = event.currentTarget.value
     const ciUsername = document.getElementById('ciUsername')
-    ciUsername.parentNode.style.display = (['travisci','circleci'].indexOf(ciTool) > -1) ? null : 'none'
+    ciUsername.parentNode.style.display = (['travisci', 'circleci'].indexOf(ciTool) > -1) ? null : 'none'
     const apiToken = document.getElementById('apiToken')
-    apiToken.parentNode.style.display = (ciTool ===  'circleci') ? null : 'none'
+    apiToken.parentNode.style.display = (ciTool === 'circleci') ? null : 'none'
     const ciAddress = document.getElementById('ciAddress')
-    ciAddress.parentNode.style.display = (ciTool ===  'jenkins') ? null : 'none'
+    ciAddress.parentNode.style.display = (ciTool === 'jenkins') ? null : 'none'
   }
 
   const handleFormSubmit = (event) => {
@@ -33,15 +33,15 @@ export const CiTabContent = (model, lastUpdated) => {
           <option value='circleci'>Circle CI</option>
           <option value='travisci'>Travis CI</option>
         </select>
-        <div class="fieldset">
+        <div class='fieldset'>
           <label for='ciAddress'>Address of the <span>CI server you want to connect to</span></label>
           <input required type='text' id='ciAddress' placeholder='http://myci.mycompany' name='ciAddress' value={model.address} />
         </div>
-        <div class="fieldset">
+        <div class='fieldset'>
           <label for='apiToken'>API token for CI account</label>
           <input required type='text' id='apiToken' placeholder='' name='apiToken' value={model.apiToken} />
         </div>
-        <div class="fieldset">
+        <div class='fieldset'>
           <label for='ciUsername'>Username associated with your CI</label>
           <input required type='text' id='ciUsername' name='ciUsername' value={model.username} />
         </div>
