@@ -1,6 +1,6 @@
 # Using the master image
 
-We provide a Jessie Raspbian based master image, properly partitioned with all software already installed - you can download the master image [here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161122.zip). All you need to do is unzip it and transfer the downloaded image into an SD Card.
+We provide a Jessie Raspbian based master image, properly partitioned with all software already installed - you can download the master image [here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161205.zip). All you need to do is unzip it and transfer the downloaded image into an SD Card.
 
 #### What's in the image
 
