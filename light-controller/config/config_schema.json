@@ -3,26 +3,45 @@
   "type": "object",
   "properties": {
     "light": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "enum": ["adafruit_lpd8806", "console", "epistar_lpd8806"]
-        },
-        "num_leds": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "simulate_mode": {
-          "type": "boolean"
-        },
-        "spidev": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "type",
-        "num_leds"
-      ]
+      "oneOf": [{
+          "type": "object",
+          "properties": {
+              "type": {
+                  "enum": ["adafruit_lpd8806", "epistar_lpd8806"]
+              },
+              "num_leds": {
+                  "type": "integer",
+                  "minimum": 1
+              },
+              "simulate_mode": {
+                  "type": "boolean"
+              },
+              "spidev": {
+                  "type": "string"
+              }
+          },
+          "required": [
+              "type",
+              "num_leds"
+          ],
+          "additionalProperties": false
+      },{
+          "type": "object",
+          "properties": {
+              "type": {
+                  "enum": ["console"]
+              },
+              "num_leds": {
+                  "type": "integer",
+                  "minimum": 1
+              }
+          },
+          "required": [
+              "type",
+              "num_leds"
+          ],
+          "additionalProperties": false
+      }]
     },
     "api": {
       "type": "object",

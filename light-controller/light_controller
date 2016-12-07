@@ -116,14 +116,9 @@ def run():
 
         from lights import job2ledstrip
 
-        light_type = light_conf['type']
+        light_type = light_conf.pop('type')
+        light = importlib.import_module('lights.' + light_type).Strand(**light_conf)
         dlogger.log("Light type is " + light_type)
-
-        try:
-            kwargs = { x:light_conf[x] for x in ['num_leds', 'spidev', 'simulate_mode'] if x in light_conf }
-            light = importlib.import_module('lights.' + light_type).Strand(**kwargs)
-        except ImportError:
-            raise json_config.ConfigError(str(light_type) + ' light type not supported')
 
         if api_conf.has_key('pollrate_s'):
             if api_conf['pollrate_s'] != 0:
