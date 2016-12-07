@@ -19,13 +19,8 @@ export const CiTabContent = (model, lastUpdated) => {
     for (var key in ciToolFields) {
       const makeVisible = ciToolFields[key].indexOf(ciTool) > -1
       const fieldElement = document.getElementById(key)
-      if (makeVisible) {
-        fieldElement.parentNode.classList.remove('hidden')
-        fieldElement.parentNode.classList.add('shown')
-      } else {
-        fieldElement.parentNode.classList.remove('shown')
-        fieldElement.parentNode.classList.add('hidden')
-      }
+      fieldElement.parentNode.classList.remove(makeVisible ? 'hidden' : 'shown')
+      fieldElement.parentNode.classList.add(makeVisible ? 'shown' : 'hidden')
     }
   }
 
@@ -36,6 +31,11 @@ export const CiTabContent = (model, lastUpdated) => {
   const handleFormSubmit = (event) => {
     let postData = { save: 'ci', payload: {} }
     transformFormIntoPayload(event.currentTarget.elements, postData.payload)
+    for (var key in ciToolFields) {
+      if (ciToolFields[key].indexOf(postData.payload.ciTool) === -1) {
+        delete postData.payload[key]
+      }
+    }
     return save(postData)
   }
 

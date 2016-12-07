@@ -10,7 +10,7 @@ describe('CI Service', () => {
 
   describe('#persist', () => {
 
-    const payload = { ciTool: 'jenkins', ciAddress: 'http://my.ci', ciPort: 9090, ciUsername: 'test' }
+    const payload = { ciTool: 'jenkins', ciAddress: 'http://my.ci:9090', ciUsername: 'test' }
 
     it('updates CI configuration', () => {
       const fsMock = sinon.mock(fs)

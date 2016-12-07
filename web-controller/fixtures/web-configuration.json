@@ -22,8 +22,8 @@
             "configuration": {
                 "tool": "jenkins",
                 "address": "http://localhost",
-                "port": 80,
-                "username": ""
+                "username": "",
+                "apiToken": ""
             },
             "active": true
         },
