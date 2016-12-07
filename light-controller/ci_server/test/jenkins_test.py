@@ -1,5 +1,5 @@
 import unittest
-from datasource.jenkins import Source
+from ci_server.jenkins import Source
 from lib.constants import STATUS
 
 class JenkinsTest(unittest.TestCase):

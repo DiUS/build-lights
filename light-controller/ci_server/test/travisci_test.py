@@ -1,5 +1,5 @@
 import unittest
-from datasource.travisci import Source
+from ci_server.travisci import Source
 from lib.constants import STATUS
 
 class TravisCITest(unittest.TestCase):

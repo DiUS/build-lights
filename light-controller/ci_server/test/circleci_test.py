@@ -1,5 +1,5 @@
 import unittest
-from datasource.circleci import Source
+from ci_server.circleci import Source
 from lib.constants import STATUS
 
 class CircleCITest(unittest.TestCase):

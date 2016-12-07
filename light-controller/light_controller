@@ -14,6 +14,7 @@ from lib import daemonize
 from lib import logger
 from lib import list_utils
 from config import json_config
+from lights import job2ledstrip
 
 default_config_file = 'config.json'
 light = None
@@ -41,7 +42,6 @@ def _handle_signals(signum, stack):
         if light is not None:
             light.stop()
 
-
 def print_usage(prog_cmd):
     print "Usage: %s [options]" % prog_cmd
     print "Options:"
@@ -50,10 +50,7 @@ def print_usage(prog_cmd):
     print "-c <file>    --config <file>     Config file, default \"%s\"." % default_config_file
     print "-h           --help              Print this help page."
 
-
-
 def run():
-
     global light
     global dlogger
 
@@ -90,8 +87,6 @@ def run():
         print_usage(sys.argv[0])
         sys.exit(-1)
 
-
-
     if forcesyslog:
         logger.Logger.use_syslog = True
 
@@ -99,35 +94,31 @@ def run():
         logger.Logger.use_syslog = True
         daemonize.createDaemon()
 
-    signal.signal(signal.SIGTERM, _handle_signals)
-    signal.signal(signal.SIGINT, _handle_signals)
+    if not os.path.isfile(config_file):
+        dlogger.log("ERROR: config file %s not found.", config_file)
+        sys.exit(-1)
 
     try:
-        if not os.path.isfile(config_file):
-            dlogger.log("ERROR: config file %s not found.", config_file)
-            sys.exit(-1)
-
         conf = json_config.JsonConfig(config_file)
-        api_conf = conf['api']
-        light_conf = conf['light']
-        jobs = conf['jobs']
-        poll_interval_seconds = 3
     except Exception, e:
         logger.print_trace(e)
         sys.exit(-1)
 
+    light_conf = conf['light']
     light_type = light_conf.pop('type')
     light = importlib.import_module('lights.' + light_type).Strand(**light_conf)
-    dlogger.log("Light type is " + light_type)
 
-    source_type = api_conf.pop('type')
-    poll_interval_seconds = api_conf.pop('pollrate_s', None)
-    source = importlib.import_module('datasource.' + source_type).Source(**api_conf)
+    ci_server_conf = conf['ci_server']
+    ci_server_type = ci_server_conf.pop('type')
+    poll_interval_seconds = ci_server_conf.pop('pollrate_s', None)
+    ci = importlib.import_module('ci_server.' + ci_server_type).Source(**ci_server_conf)
 
-    from lights import job2ledstrip
+    jobs = conf['jobs']
     translator = job2ledstrip.Job2LedStrip(jobs, light)
 
     dlogger.log("Starting light controller")
+    signal.signal(signal.SIGTERM, _handle_signals)
+    signal.signal(signal.SIGINT, _handle_signals)
     pidfilename = "/var/run/%s.pid" % os.path.basename(sys.argv[0])
     _write_pid(pidfilename)
 
@@ -137,13 +128,14 @@ def run():
 
         while True:
             for job in jobs:
-                status = source.project_status(job)
+                status = ci.project_status(job)
                 translator.update(job, status)
             light.join(poll_interval_seconds)
             if not light.isAlive():
                 break
     except Exception, e:
         logger.print_trace(e)
+        sys.exit(-1)
 
     _unlink_pid(pidfilename)
     dlogger.log("Terminated light controller")

@@ -51,7 +51,7 @@
                 }
             ]
         },
-        "api": {
+        "ci_server": {
             "oneOf": [
                 {
                     "type": "object",
@@ -140,7 +140,7 @@
     },
     "required": [
         "light",
-        "api",
+        "ci_server",
         "jobs"
     ]
 }
