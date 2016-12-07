@@ -64,9 +64,9 @@ module.exports.writeWirelessConfiguration = (payload) => {
 }
 
 module.exports.defaultWhenInvalid = (value, defaultValue) => {
-  if (isNaN(value)
-      || value === null
-      || value === undefined) {
+  if (isNaN(value) ||
+      value === null ||
+      value === undefined) {
     return defaultValue
   }
 

@@ -6,6 +6,8 @@ const expect = require('chai').expect
 const request = require('supertest')
 const proxyquire = require('proxyquire')
 
+const UTF_8 = 'utf8'
+
 describe('Server', () => {
 
   const callback = sinon.stub()
