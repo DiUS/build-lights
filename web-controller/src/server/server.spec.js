@@ -149,7 +149,7 @@ describe('Server', () => {
       let data, parsedData, randomConfigFile = `fixtures/tmp_${Date.now()}.json`
 
       beforeEach(() => {
-        data = fs.readFileSync('fixtures/web-configuration.json', { encoding: 'utf8' })
+        data = fs.readFileSync('fixtures/web-configuration.json', UTF_8)
         fs.writeFileSync(randomConfigFile, data)
         parsedData = JSON.parse(data)
       })
