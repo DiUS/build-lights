@@ -15,17 +15,21 @@ STATUS = {
 
 class Source():
 
-   def __init__(self, username, uri=None):
-       kwargs = {}
-       if uri: # leave as unspecified to use default
-          kwargs['uri'] = uri
-       self.client = TravisPy(**kwargs)
-       self.username = username
+    def __init__(self, username, uri=None):
+        kwargs = {}
+        if uri: # leave as unspecified to use default
+            kwargs['uri'] = uri
+        self.client = TravisPy(**kwargs)
+        self.username = username
 
-   def list_projects(self):
-       repos = self.client.repos(owner_name=self.username)
-       return list(map(lambda x: x.slug.split('/')[1], repos))
+    def list_projects(self):
+        repos = self.client.repos(owner_name=self.username)
+        return list(map(lambda x: x.slug.split('/')[1], repos))
 
-   def project_status(self, project):
-       state = self.client.repo(self.username + '/' + project).last_build_state
-       return STATUS[state]
+    def project_status(self, project):
+        try:
+            state = self.client.repo(self.username + '/' + project).last_build_state
+        except Exception, e:
+            return STATUS.POLL_ERROR
+
+        return STATUS[state]

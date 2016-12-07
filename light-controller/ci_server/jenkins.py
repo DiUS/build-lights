@@ -28,5 +28,9 @@ class Source():
         return self.J.keys()
 
     def project_status(self, project):
-        result = self.J[project].poll(tree='color')
+        try:
+            result = self.J[project].poll(tree='color')
+        except Exception, e:
+            return STATUS.POLL_ERROR
+
         return _STATUS[result['color']]
