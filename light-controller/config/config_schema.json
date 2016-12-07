@@ -6,10 +6,11 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "enum": ["adafruit_lpd8806", "console", "epistar_lpd8806"]
         },
         "num_leds": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1
         },
         "simulate_mode": {
           "type": "boolean"
@@ -27,13 +28,15 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "enum": ["jenkins", "circleci", "travisci"]
         },
         "url": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^https?://[0-9a-zA-Z-_]+:?[0-9]+$"
         },
         "pollrate_s": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1
         }
       },
       "required": [
@@ -43,6 +46,8 @@
     },
     "jobs": {
       "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
       "items": {
         "type": "string"
       }

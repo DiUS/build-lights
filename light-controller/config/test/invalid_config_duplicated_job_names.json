@@ -6,8 +6,8 @@
         "spidev": "/dev/spidev0.0"
     },
     "api": {
-        "type": "jenkins_direct",
-        "url": "http://psn-ci:8080/api/json",
+        "type": "jenkins",
+        "url": "http://psn-ci:8080",
         "pollrate_s": 3
     },
     "jobs": [
