@@ -119,13 +119,22 @@ header {
             top: 85%;
             z-index: 100;
 
-            li a {
-                border-radius: 0.25em;
-                display: block;
-                padding: 0.75em 1.5em;
+            li {
+                a {
+                    border-radius: 0.25em;
+                    display: block;
+                    padding: 0.75em 1.5em;
 
-                &:hover {
-                    background-color: $lightGrey;
+                    &:hover {
+                        background-color: $lightGrey;
+                    }
+                }
+
+                &.separator {
+                    div {
+                        border: 0.03125em solid $lightGrey;
+                        margin: 0.75em 1.5em;
+                    }
                 }
             }
         }

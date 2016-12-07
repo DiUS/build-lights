@@ -3,6 +3,8 @@
 import * as view from './sam/view'
 
 const cb = (event) => {
+  document.getElementById('supervisor').href = `${location.hostname}:9001`
+
   fetch('/model')
     .then(res => res.json())
     .then(json => {
