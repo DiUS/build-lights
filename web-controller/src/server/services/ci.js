@@ -12,7 +12,7 @@ module.exports.persist = (payload, lightConfigFile) => {
     lightConfJSON.ci_server.type = payload.ciTool
     lightConfJSON.ci_server.url = payload.ciAddress
     lightConfJSON.ci_server.username = payload.ciUsername
-    lightConfJSON.ci_server.apiToken = payload.ciApiToken
+    lightConfJSON.ci_server.api_token = payload.ciApiToken
 
     fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON), UTF_8)
     logger.info('Persisted new CI configuration')
