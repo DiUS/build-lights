@@ -21,6 +21,7 @@ export const CiTabContent = (model, lastUpdated) => {
       const fieldElement = document.getElementById(key)
       fieldElement.parentNode.classList.remove(makeVisible ? 'hidden' : 'shown')
       fieldElement.parentNode.classList.add(makeVisible ? 'shown' : 'hidden')
+      fieldElement.required = makeVisible
     }
   }
 
@@ -42,6 +43,10 @@ export const CiTabContent = (model, lastUpdated) => {
     removeIrrelevantFields(postData.payload)
     return save(postData)
   }
+
+  if (model.address === undefined) { model.address = '' }
+  if (model.username === undefined) { model.username = '' }
+  if (model.apiToken === undefined) { model.apiToken = '' }
 
   return (
     <form onSubmit={handleFormSubmit}>
