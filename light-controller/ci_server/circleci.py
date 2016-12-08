@@ -17,6 +17,8 @@ _CURRENT_STATUS = {
 }
 
 _PREVIOUS_STATUS = {
+    'retried'             : STATUS.BUILDING_FROM_UNKNOWN,
+    'infrastructure_fail' : STATUS.BUILDING_FROM_FAILURE,
     'canceled'            : STATUS.BUILDING_FROM_ABORTED,
     'infrastructure_fail' : STATUS.BUILDING_FROM_FAILURE,
     'timedout'            : STATUS.BUILDING_FROM_FAILURE,
