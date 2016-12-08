@@ -65,9 +65,9 @@ To get all this going...
 - Change to the `web-controller` directory
 - Run `npm install`
 - Run `npm run dev:client`
-- Run `node ./src/server/index.js /path/to/configuration.json`
+- Run `node ./src/server/index.js /path/to/web-configuration.json`
 
-**Note:** if you create `configuration.json` in the same directory as `web-controller` then you can run `npm run dev:server` and enjoy a dashboard with [nodemon](http://npmjs.com/package/nodemon)
+**Note:** if you create `web-configuration.json` in the same directory as `web-controller` then you can run `npm run dev:server` and enjoy a dashboard with [nodemon](http://npmjs.com/package/nodemon)
 
 ## To run tests
 You can run `npm test` and here's what's going to happen:

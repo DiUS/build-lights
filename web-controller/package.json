@@ -5,7 +5,7 @@
     "scripts": {
         "clean": "rimraf coverage jscpd.json",
         "prestart": "npm run clean && npm run dist",
-        "dev:server": "nodejs-dashboard -- nodemon -i configuration.json -i light-configuration.json ./src/server/index.js configuration.json light-configuration.json",
+        "dev:server": "nodejs-dashboard -- nodemon -i web-configuration.json -i light-configuration.json ./src/server/index.js web-configuration.json light-configuration.json",
         "dev:client": "rollup -m -c ./config/rollup.config.js --watch",
         "dist": "rollup -m -c ./config/rollup.prod.config.js",
         "lint": "standard",
