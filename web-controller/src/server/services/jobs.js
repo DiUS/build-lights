@@ -19,7 +19,7 @@ exports.persist = (payload, lightConfigFile) => {
   const actives = flatten([payload.jobActive])
   lightConfJSON.jobs = compact(names.map((name, index) => actives[index] ? name : null))
 
-  fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON), UTF_8)
+  fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON, null, 2), UTF_8)
   logger.info('Persisted new Jobs configuration')
 }
 

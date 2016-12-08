@@ -13,7 +13,7 @@ module.exports.persist = (payload, lightConfigFile) => {
   lightConfJSON.light.type = payload.ledType
   lightConfJSON.light.num_leds = utils.defaultWhenInvalid(payload.numLeds, 32)
 
-  fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON), UTF_8)
+  fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON, null, 2), UTF_8)
   logger.info('Persisted new LED configuration')
 }
 

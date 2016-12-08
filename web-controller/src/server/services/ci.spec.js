@@ -16,7 +16,16 @@ describe('CI Service', () => {
       const fsMock = sinon.mock(fs)
       sinon.stub(fs, 'readFileSync').returns('{ "ci_server": { "type": "jenkins", "url": "http://psn-ci:8080/api/json", "pollrate_s": 3 } }')
 
-      fsMock.expects('writeFileSync').withArgs(`${process.cwd()}/light-configuration.json`, '{"ci_server":{"type":"jenkins","url":"http://my.ci:9090","pollrate_s":3,"username":"test"}}', 'utf8').once()
+      const expected_result = {
+        ci_server: {
+          type: payload.ciTool,
+          url: payload.ciAddress,
+          pollrate_s: 3,
+          username: payload.ciUsername
+        }
+      }
+
+      fsMock.expects('writeFileSync').withArgs(`${process.cwd()}/light-configuration.json`, JSON.stringify(expected_result, null, 2), 'utf8').once()
 
       ci.persist(payload, `${process.cwd()}/light-configuration.json`)
       fsMock.verify()

@@ -46,7 +46,7 @@ module.exports = (router, configFile, lightConfigFile) => {
       model.lastUpdated = new Date().toJSON()
     }
 
-    fs.writeFileSync(configFile, JSON.stringify(model))
+    fs.writeFileSync(configFile, JSON.stringify(model, null, 2))
     logger.info('Committed configuration to file.')
 
     if (requestData.save) {

@@ -14,7 +14,7 @@ module.exports.persist = (payload, lightConfigFile) => {
     lightConfJSON.ci_server.username = payload.ciUsername
     lightConfJSON.ci_server.api_token = payload.ciApiToken
 
-    fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON), UTF_8)
+    fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON, null, 2), UTF_8)
     logger.info('Persisted new CI configuration')
   } catch (e) {
     logger.error('Light Controller configuration could not be persisted.', e)
