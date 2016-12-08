@@ -82,34 +82,7 @@
                     "properties": {
                         "type": {
                             "enum": [
-                                "circleci"
-                            ]
-                        },
-                        "api_token": {
-                            "type": "string"
-                        },
-                        "username": {
-                            "type": "string"
-                        },
-                        "pollrate_s": {
-                            "type": "integer",
-                            "minimum": 1
-                        }
-                    },
-                    "required": [
-                        "type",
-                        "api_token",
-                        "username",
-                        "pollrate_s"
-                    ],
-                    "additionalProperties": false
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "enum": [
-                                "buildkite"
+                                "circleci","buildkite"
                             ]
                         },
                         "api_token": {
