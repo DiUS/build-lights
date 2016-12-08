@@ -32,6 +32,26 @@ describe('CI Service', () => {
       fs.readFileSync.restore()
     })
 
+    it('removes invalid configuration', () => {
+      const fsMock = sinon.mock(fs)
+      sinon.stub(fs, 'readFileSync').returns('{ "ci_server": { "type": "jenkins", "invalid": "somevalue", "url": "http://psn-ci:8080/api/json", "pollrate_s": 3 } }')
+
+      const expected_result = {
+        ci_server: {
+          type: payload.ciTool,
+          url: payload.ciAddress,
+          pollrate_s: 3,
+          username: payload.ciUsername
+        }
+      }
+
+      fsMock.expects('writeFileSync').withArgs(`${process.cwd()}/light-configuration.json`, JSON.stringify(expected_result, null, 2), 'utf8').once()
+
+      ci.persist(payload, `${process.cwd()}/light-configuration.json`)
+      fsMock.verify()
+      fs.readFileSync.restore()
+    })
+
     it('keeps current configuration when light controller configuration does not exist', () => {
       const fsMock = sinon.mock(fs)
       fsMock.expects('readFileSync').never()
