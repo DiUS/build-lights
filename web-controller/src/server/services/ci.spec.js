@@ -1,64 +1,56 @@
 'use strict'
 
 const fs = require('fs')
-const expect = require('chai').expect
-
 const ci = require('./ci')
-const UTF_8 = 'utf8'
+const sinon = require('sinon')
+const logger = require('winston')
+const proxyquire = require('proxyquire')
 
 describe('CI Service', () => {
 
   describe('#persist', () => {
-    let lightConfig
 
-    beforeEach(() => {
-      lightConfig = `fixtures/tmp_${Date.now()}.json`
-      const data = fs.readFileSync(`${process.cwd()}/fixtures/light-configuration.json`, UTF_8)
-      fs.writeFileSync(lightConfig, data)
-    })
+    const payload = { ciTool: 'jenkins', ciAddress: 'http://my.ci:9090', ciUsername: 'test' }
 
     it('updates CI configuration', () => {
-      const payload = {
-        ciTool: 'jenkins',
-        ciAddress: 'http://my.ci:9090',
-        ciUsername: 'test'
-      }
+      const fsMock = sinon.mock(fs)
+      sinon.stub(fs, 'readFileSync').returns('{ "ci_server": { "type": "jenkins", "url": "http://psn-ci:8080/api/json", "pollrate_s": 3 } }')
 
+      fsMock.expects('writeFileSync').withArgs(`${process.cwd()}/light-configuration.json`, '{"ci_server":{"type":"jenkins","url":"http://my.ci:9090","pollrate_s":3,"username":"test"}}', 'utf8').once()
 
-      ci.persist(payload, lightConfig)
-
-      const persistedData = JSON.parse(fs.readFileSync(lightConfig, UTF_8))
-      expect(persistedData).to.have.property('ci_server')
-      expect(persistedData.ci_server).to.have.property('type', 'jenkins')
-      expect(persistedData.ci_server).to.have.property('url', 'http://my.ci:9090')
-      expect(persistedData.ci_server).to.have.property('username', 'test')
-      expect(persistedData.ci_server).to.have.property('api_token', '')
+      ci.persist(payload, `${process.cwd()}/light-configuration.json`)
+      fsMock.verify()
+      fs.readFileSync.restore()
     })
 
-    it('throws error when light configuration file is not found', () => {
-      expect(() => {
-        ci.persist(payload, 'bla.json')
-      }).to.throw(Error)
+    it('keeps current configuration when light controller configuration does not exist', () => {
+      const fsMock = sinon.mock(fs)
+      fsMock.expects('readFileSync').never()
+      fsMock.expects('writeFileSync').never()
+
+      const logMock = sinon.mock(logger)
+      logMock.expects('error').once()
+
+      ci.persist(payload, `${process.cwd()}/bla.json`)
+      fsMock.verify()
+      logMock.verify()
     })
-  })
 
-  describe('#mutateModel', () => {
-    it('mutates the model with CI configuration', () => {
-      const payload = {
-        ciTool: 'jenkins',
-        ciAddress: 'http://my.ci:9090',
-        ciUsername: 'test'
-      }
+    it('keeps current configuration when fails to update', () => {
+      const fsMock = sinon.mock(fs)
+      fsMock.expects('readFileSync').never()
 
-      const model = { tools: [{ name: 'ci server', configuration: {} }] }
+      const logMock = sinon.mock(logger)
+      logMock.expects('error').once()
 
-      ci.mutateModel(model, payload)
+      sinon.stub(fs, 'writeFileSync').throws()
 
-      expect(model.tools[0].configuration.tool).to.eql(payload.ciTool)
-      expect(model.tools[0].configuration.address).to.eql(payload.ciAddress)
-      expect(model.tools[0].configuration.username).to.eql(payload.ciUsername)
-      expect(model.tools[0].configuration.apiToken).to.eql('')
+      ci.persist(payload, `${process.cwd()}/bla.json`)
+      fsMock.verify()
+      logMock.verify()
+      fs.writeFileSync.restore()
     })
+
   })
 
 })
