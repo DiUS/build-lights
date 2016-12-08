@@ -33,7 +33,7 @@ form {
             }
         }
 
-        &.circleci {
+        &.circleci, &.buildkite {
             [for="ciAddress"], [name="ciAddress"] {
                 display: none;
                 visibility: hidden;

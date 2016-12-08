@@ -91,6 +91,7 @@
         "lodash.compact": "^3.0.1",
         "lodash.findindex": "^4.6.0",
         "lodash.flatten": "^4.4.0",
+        "lodash.merge": "^4.6.0",
         "node-fetch": "^1.6.3",
         "winston": "^2.3.0"
     }

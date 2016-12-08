@@ -17,7 +17,7 @@ describe('CI Service', () => {
       fs.writeFileSync(lightConfig, data)
     })
 
-    it('updates CI configuration', () => {
+    it('updates Jenkins CI configuration', () => {
       const payload = {
         ciTool: 'jenkins',
         ciAddress: 'http://my.ci:9090',
@@ -30,8 +30,44 @@ describe('CI Service', () => {
       expect(persistedData).to.have.property('ci_server')
       expect(persistedData.ci_server).to.have.property('type', 'jenkins')
       expect(persistedData.ci_server).to.have.property('url', 'http://my.ci:9090')
+      expect(persistedData.ci_server).to.not.have.property('username')
+      expect(persistedData.ci_server).to.not.have.property('api_token')
+    })
+
+    it('updates Circle CI configuration', () => {
+      const payload = {
+        ciTool: 'circleci',
+        ciAddress: 'http://my.ci:9090',
+        ciUsername: 'test',
+        ciApiToken: 'test',
+      }
+
+      ci.persist(payload, lightConfig)
+
+      const persistedData = JSON.parse(fs.readFileSync(lightConfig, UTF_8))
+      expect(persistedData).to.have.property('ci_server')
+      expect(persistedData.ci_server).to.have.property('type', 'circleci')
+      expect(persistedData.ci_server).to.not.have.property('url')
       expect(persistedData.ci_server).to.have.property('username', 'test')
-      expect(persistedData.ci_server).to.have.property('api_token', '')
+      expect(persistedData.ci_server).to.have.property('api_token', 'test')
+    })
+
+    it('updates Travis CI configuration', () => {
+      const payload = {
+        ciTool: 'travisci',
+        ciAddress: 'http://my.ci:9090',
+        ciUsername: 'test',
+        ciApiToken: 'test',
+      }
+
+      ci.persist(payload, lightConfig)
+
+      const persistedData = JSON.parse(fs.readFileSync(lightConfig, UTF_8))
+      expect(persistedData).to.have.property('ci_server')
+      expect(persistedData.ci_server).to.have.property('type', 'travisci')
+      expect(persistedData.ci_server).to.not.have.property('url')
+      expect(persistedData.ci_server).to.have.property('username', 'test')
+      expect(persistedData.ci_server).to.not.have.property('api_token')
     })
 
     it('throws error when light configuration file is not found', () => {
