@@ -215,7 +215,7 @@ describe('Server', () => {
           })
       })
 
-      it('removes job from configuration when payload to remove is received by the model', () => {
+      xit('removes job from configuration when payload to remove is received by the model', () => {
         request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .send({ deleteJob: 1 })

@@ -9,12 +9,19 @@ form {
         }
 
         .fieldset {
-            label, button {
-                margin-left: 2em;
 
-                &:first-child {
-                    margin-left: 0;
+            padding: 0 1em;
+
+            &:hover {
+                background-color: #fff;
+                label {
+                    font-weight: bold;
                 }
+            }
+
+            input {
+                flex: initial;
+                flex-grow: initial;
             }
         }
     }

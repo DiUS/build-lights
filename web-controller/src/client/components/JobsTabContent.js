@@ -5,7 +5,7 @@ import './styles/forms.css'
 import Inferno from 'inferno' // eslint-disable-line
 
 import { Job } from './Job'
-import { addNewJob, save } from '../sam/actions'
+import { save } from '../sam/actions'
 import { transformFormIntoPayload } from './utils'
 
 export const JobsTabContent = (model, lastUpdated) => {
@@ -13,10 +13,6 @@ export const JobsTabContent = (model, lastUpdated) => {
     let postData = { save: 'jobs', payload: {} }
     transformFormIntoPayload(event.currentTarget.elements, postData.payload)
     return save(postData)
-  }
-
-  const handleAddNewJob = (event) => {
-    addNewJob()
   }
 
   const jobs = model.items.map((i, idx) => <Job name={i.name} active={i.active} index={idx} />)
@@ -27,10 +23,9 @@ export const JobsTabContent = (model, lastUpdated) => {
         <label for='pollRate'>Rate to <span>poll your CI server</span> (in seconds)</label>
         <input type='number' name='pollRate' id='pollRate' value={model.pollrate} />
       </div>
-      <div className='jobs-container form-container vertical'>
-        <label>Jobs</label>
-        {jobs}
-        <button type='button' className='small secondary' onClick={handleAddNewJob}>Add new job</button>
+      <div className='form-container vertical'>
+        <label><span>Jobs to monitor</span></label>
+        <div className='jobs-container'>{jobs}</div>
       </div>
       <div className='actions'>
         <button type='submit'>Save</button>

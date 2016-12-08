@@ -21,14 +21,6 @@ export function switchToTab (tabName, present) {
   return persistState({ tabChange: tabName })
 }
 
-export function addNewJob (present) {
-  return persistState({ newJob: true })
-}
-
-export function removeJob (jobIndex, present) {
-  return persistState({ deleteJob: jobIndex })
-}
-
 export function save (data, present) {
   return persistState(data)
 }
