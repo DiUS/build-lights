@@ -32,10 +32,10 @@ class Source():
         url = self.endpoint + "/v2/organizations/" + self.username + "/pipelines/" + pipeline + "/builds"
         try:
             data = self._query(url, params)
+            state = data[0]['state']
         except Exception, e:
             return STATUS.POLL_ERROR
 
-        state = data[0]['state']
         return _STATUS[state]
 
     def _query(self, url, params):
