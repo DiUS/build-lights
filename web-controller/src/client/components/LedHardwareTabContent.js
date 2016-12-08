@@ -23,7 +23,7 @@ export const LedHardwareTabContent = (model, lastUpdated) => {
           <option value='adafruit_lpd8806'>Adafruit LPD8806</option>
         </select>
         <label for='numLeds'>Number of LEDs on your strip</label>
-        <input type='text' required id='numLeds' placeholder='http://myci.mycompany' name='numLeds' value={model.numLeds} />
+        <input type='number' required id='numLeds' name='numLeds' value={model.numLeds} />
       </div>
       <div className='actions'>
         <button type='submit'>Save</button>
