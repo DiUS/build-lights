@@ -13,6 +13,7 @@ import importlib
 from lib import daemonize
 from lib import logger
 from lib import list_utils
+from lib.constants import STATUS
 from config import json_config
 from lights import job2ledstrip
 
@@ -126,6 +127,8 @@ def run():
         light.daemon = True
         light.start()
 
+        for job in jobs:
+            translator.update(job, STATUS.UNKNOWN)
         while True:
             for job in jobs:
                 status = ci.project_status(job)
