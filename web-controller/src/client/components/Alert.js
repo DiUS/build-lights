@@ -32,7 +32,7 @@ export const Alert = (model) => {
     setTimeout(() => {
       const alertEl = document.getElementsByClassName('alert')[0]
       collapseAlert(alertEl)
-    }, 70000)
+    }, 7000)
   }
 
   return content
