@@ -41,7 +41,7 @@ module.exports = (router, configFile, lightConfigFile) => {
         model.result = { success: true, message: 'Configuration successfully persisted.' }
         res.json(model)
       }).catch(err => {
-        logger.err(err)
+        logger.error(err)
         model.result = { success: false, message: 'Configuration successfully persisted, but unable to restart lights.' }
         res.json(model)
       })
