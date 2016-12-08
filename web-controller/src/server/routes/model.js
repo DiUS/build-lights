@@ -1,10 +1,16 @@
 'use strict'
 
+const fetch = require('node-fetch')
+
 const fs = require('fs')
 const logger = require('winston')
 const findIndex = require('lodash.findindex')
 
 const fsOpts = { encoding: 'utf8' }
+
+function restartLights() {
+  return fetch('http://localhost:9001/index.html?processname=light_controller&action=restart')
+}
 
 module.exports = (router, configFile, lightConfigFile) => {
   router.get('/model', (req, res) => {
@@ -33,24 +39,27 @@ module.exports = (router, configFile, lightConfigFile) => {
       model.tools[jobsIdx].configuration.items.splice(requestData.deleteJob, 1)
     }
 
-    let persistedConfiguration = false
     if (requestData.save) {
       logger.info('About to save a configuration. Payload: %j', requestData)
       const moduleService = require(`../services/${requestData.save}`)
       moduleService.persist(requestData.payload, lightConfigFile)
       moduleService.mutateModel(model, requestData.payload)
       model.lastUpdated = new Date().toJSON()
-
-      persistedConfiguration = true
     }
 
     fs.writeFileSync(configFile, JSON.stringify(model))
     logger.info('Committed configuration to file.')
 
-    if (persistedConfiguration) {
-      model.result = { success: true, message: 'Configuration successfully persisted.' }
+    if (requestData.save) {
+      restartLights().then(() => {
+        model.result = { success: true, message: 'Configuration successfully persisted.' }
+        res.json(model)
+      }).catch( err => {
+        model.result = { success: false, message: 'Configuration successfully persisted, but unable to restart lights.' }
+        res.json(model)
+      })
+    } else {
+      res.json(model)
     }
-
-    res.json(model)
   })
 }

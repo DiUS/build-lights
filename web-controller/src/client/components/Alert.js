@@ -20,11 +20,10 @@ export const Alert = (model) => {
 
   if (model) {
     const className = model.success ? 'alert success' : 'alert error'
-    const message = model.success ? <strong>Reboot your Pi to activate.</strong> : ''
 
     content = (
       <div className={className}>
-        <span>{model.message} {message}</span>
+        <span>{model.message}</span>
         <a href='#' onClick={handleAlertClose}>&times;</a>
       </div>
     )
