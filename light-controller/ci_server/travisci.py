@@ -1,7 +1,7 @@
 from travispy import TravisPy
 from lib.constants import STATUS
 
-STATUS = {
+_STATUS = {
    'created'  : STATUS.UNKNOWN,
    'queued'   : STATUS.UNKNOWN,
    'received' : STATUS.UNKNOWN,
@@ -32,4 +32,4 @@ class Source():
         except Exception, e:
             return STATUS.POLL_ERROR
 
-        return STATUS[state]
+        return _STATUS[state]
