@@ -1,14 +1,13 @@
 'use strict'
 
-const fetch = require('node-fetch')
-
 const fs = require('fs')
 const logger = require('winston')
+const fetch = require('node-fetch')
 const findIndex = require('lodash.findindex')
 
 const fsOpts = { encoding: 'utf8' }
 
-function restartLights() {
+function restartLights () {
   return fetch('http://localhost:9001/index.html?processname=light_controller&action=restart')
 }
 
@@ -54,7 +53,8 @@ module.exports = (router, configFile, lightConfigFile) => {
       restartLights().then(() => {
         model.result = { success: true, message: 'Configuration successfully persisted.' }
         res.json(model)
-      }).catch( err => {
+      }).catch(err => {
+        logger.err(err)
         model.result = { success: false, message: 'Configuration successfully persisted, but unable to restart lights.' }
         res.json(model)
       })
