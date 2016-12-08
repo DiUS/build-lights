@@ -10,8 +10,8 @@ import { transformFormIntoPayload } from './utils'
 export const CiTabContent = (model, lastUpdated) => {
   const ciToolFields = {
     ciAddress: ['jenkins'],
-    ciUsername: ['travisci', 'circleci'],
-    ciApiToken: ['circleci']
+    ciUsername: ['travisci', 'circleci', 'buildkite'],
+    ciApiToken: ['circleci', 'buildkite']
   }
 
   const isFieldRelevantForCiTool = (field, ciTool) => {
@@ -62,6 +62,7 @@ export const CiTabContent = (model, lastUpdated) => {
         <select required id='ciTool' name='ciTool' value={model.tool} onChange={handleCiToolChange}>
           <option value='jenkins'>Jenkins</option>
           <option value='circleci'>Circle CI</option>
+          <option value='buildkite'>Buildkite</option>
           <option value='travisci'>Travis CI</option>
         </select>
         <div className={`fieldset ${ciAddressVisibility}`}>
