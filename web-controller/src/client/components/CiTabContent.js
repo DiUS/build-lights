@@ -8,56 +8,26 @@ import { save } from '../sam/actions'
 import { transformFormIntoPayload } from './utils'
 
 export const CiTabContent = (model, lastUpdated) => {
-  const ciToolFields = {
-    ciAddress: ['jenkins'],
-    ciUsername: ['travisci', 'circleci', 'buildkite'],
-    ciApiToken: ['circleci', 'buildkite']
-  }
-
-  const isFieldRelevantForCiTool = (field, ciTool) => {
-    return ciToolFields[field].indexOf(ciTool) > -1
-  }
-
   const handleCiToolChange = (event) => {
-    const ciTool = event.currentTarget.value
-    for (var key in ciToolFields) {
-      const makeVisible = isFieldRelevantForCiTool(key, ciTool)
-      const fieldElement = document.getElementById(key)
-      fieldElement.parentNode.classList.remove(makeVisible ? 'hidden' : 'shown')
-      fieldElement.parentNode.classList.add(makeVisible ? 'shown' : 'hidden')
-      fieldElement.required = makeVisible
-    }
-  }
+    const el = event.currentTarget
+    el.parentElement.classList.remove(el.parentElement.classList.item(2))
+    el.parentElement.classList.add(el.value)
 
-  const ciAddressVisibility = (isFieldRelevantForCiTool('ciAddress', model.tool) ? 'shown' : 'hidden')
-  const ciAddressRequired = isFieldRelevantForCiTool('ciAddress', model.tool)
-  const ciApiTokenVisibility = (isFieldRelevantForCiTool('ciApiToken', model.tool) ? 'shown' : 'hidden')
-  const ciApiTokenRequired = isFieldRelevantForCiTool('ciApiToken', model.tool)
-  const ciUsernameVisibility = (isFieldRelevantForCiTool('ciUsername', model.tool) ? 'shown' : 'hidden')
-  const ciUsernameRequired = isFieldRelevantForCiTool('ciUsername', model.tool)
-
-  const removeIrrelevantFields = (obj) => {
-    for (var key in ciToolFields) {
-      if (ciToolFields[key].indexOf(obj.ciTool) === -1) {
-        delete obj[key]
-      }
+    const inputEls = el.parentElement.getElementsByTagName('input')
+    for (let i = 0; i < inputEls.length; i++) {
+      inputEls[i].required = (inputEls[i].offsetParent !== null)
     }
   }
 
   const handleFormSubmit = (event) => {
     let postData = { save: 'ci', payload: {} }
     transformFormIntoPayload(event.currentTarget.elements, postData.payload)
-    removeIrrelevantFields(postData.payload)
     return save(postData)
   }
 
-  if (model.address === undefined) { model.address = '' }
-  if (model.username === undefined) { model.username = '' }
-  if (model.apiToken === undefined) { model.apiToken = '' }
-
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className='form-container vertical'>
+      <div className={`form-container vertical ${model.tool}`}>
         <label for='ciTool'><span>CI tool</span> you are using</label>
         <select required id='ciTool' name='ciTool' value={model.tool} onChange={handleCiToolChange}>
           <option value='jenkins'>Jenkins</option>
@@ -65,17 +35,17 @@ export const CiTabContent = (model, lastUpdated) => {
           <option value='buildkite'>Buildkite</option>
           <option value='travisci'>Travis CI</option>
         </select>
-        <div className={`fieldset ${ciAddressVisibility}`}>
+        <div className='fieldset'>
           <label for='ciAddress'>Address of the <span>CI server you want to connect to</span></label>
-          <input required={ciAddressRequired} type='text' id='ciAddress' placeholder='http://myci.mycompany' name='ciAddress' value={model.address} />
+          <input type='text' id='ciAddress' placeholder='http://myci.mycompany' name='ciAddress' value={model.address} />
         </div>
-        <div className={`fieldset ${ciUsernameVisibility}`}>
+        <div className='fieldset'>
           <label for='ciUsername'>Username associated with your CI</label>
-          <input required={ciUsernameRequired} type='text' id='ciUsername' name='ciUsername' value={model.username} />
+          <input type='text' id='ciUsername' name='ciUsername' value={model.username} />
         </div>
-        <div className={`fieldset ${ciApiTokenVisibility}`}>
+        <div className='fieldset'>
           <label for='ciApiToken'>API token for CI account</label>
-          <input required={ciApiTokenRequired} type='text' id='ciApiToken' placeholder='' name='ciApiToken' value={model.apiToken} />
+          <input type='text' id='ciApiToken' placeholder='' name='ciApiToken' value={model.apiToken} />
         </div>
       </div>
       <div className='actions'>
