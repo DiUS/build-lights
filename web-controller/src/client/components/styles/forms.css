@@ -25,6 +25,29 @@ form {
             }
         }
 
+        &.jenkins {
+            [for="ciUsername"], [name="ciUsername"],
+            [for="ciApiToken"], [name="ciApiToken"] {
+                display: none;
+                visibility: hidden;
+            }
+        }
+
+        &.circleci {
+            [for="ciAddress"], [name="ciAddress"] {
+                display: none;
+                visibility: hidden;
+            }
+        }
+
+        &.travisci {
+            [for="ciAddress"], [name="ciAddress"],
+            [for="ciApiToken"], [name="ciApiToken"] {
+                display: none;
+                visibility: hidden;
+            }
+        }
+
         .fieldset {
             display: flex;
             label {
