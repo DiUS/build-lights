@@ -15,3 +15,6 @@ class TravisCITest(unittest.TestCase):
 
     # def test_successful_build(self):
     #     self.assertEqual(self.source.project_status('build-lights'), STATUS.SUCCESS)
+
+    def test_missing_build(self):
+        self.assertEqual(self.source.project_status('missing-build'), STATUS.POLL_ERROR)

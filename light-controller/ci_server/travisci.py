@@ -29,7 +29,7 @@ class Source():
     def project_status(self, project):
         try:
             state = self.client.repo(self.username + '/' + project).last_build_state
-        except Exception, e:
+        except Exception:
             return STATUS.POLL_ERROR
 
         return _STATUS[state]
