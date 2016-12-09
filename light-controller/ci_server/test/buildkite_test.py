@@ -18,5 +18,5 @@ class BuildkiteTest(unittest.TestCase):
     def test_successful_build(self):
         self.assertEqual(self.source.project_status('project1'), STATUS.SUCCESS)
 
-    def test_build_that_doesnt_exist(self):
+    def test_build_that_doesnt_exist_returns_poll_error(self):
         self.assertEqual(self.source.project_status('missing_project'), STATUS.POLL_ERROR)
