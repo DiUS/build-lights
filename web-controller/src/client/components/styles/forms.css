@@ -40,7 +40,22 @@ form {
             }
         }
 
+        &.buildkite {
+          [name="ciUsernameCircleCi"], [name="ciUsernameTravis"] {
+            display: none;
+            visibility: hidden;
+          }
+        }
+
+        &.circleci {
+          [name="ciUsernameBuildkite"], [name="ciUsernameTravis"] {
+            display: none;
+            visibility: hidden;
+          }
+        }
+
         &.travisci {
+            [name="ciUsernameCircleCi"], [name="ciUsernameBuildkite"],
             [for="ciAddress"], [name="ciAddress"],
             [for="ciApiToken"], [name="ciApiToken"] {
                 display: none;

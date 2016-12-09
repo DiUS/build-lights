@@ -40,11 +40,13 @@ export const CiTabContent = (model, lastUpdated) => {
           <input type='text' id='ciAddress' placeholder='http://myci.mycompany' name='ciAddress' value={model.address} />
         </div>
         <div className='fieldset'>
-          <label for='ciUsername'>Username associated with your CI</label>
+          <label for='ciUsername' name='ciUsernameBuildkite'>Organization Slug</label>
+          <label for='ciUsername' name='ciUsernameCircleCi'>Team Name</label>
+          <label for='ciUsername' name='ciUsernameTravis'>Account</label>
           <input type='text' id='ciUsername' name='ciUsername' value={model.username} />
         </div>
         <div className='fieldset'>
-          <label for='ciApiToken'>API token for CI account</label>
+          <label for='ciApiToken'>API token</label>
           <input type='text' id='ciApiToken' placeholder='' name='ciApiToken' value={model.apiToken} />
         </div>
       </div>
