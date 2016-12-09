@@ -23,7 +23,11 @@ export const Tab = (model) => {
 
   const tabs = enabledTabs.map(TabItem)
   const tabContent = enabledTabs.map(TabContent)
-  const alert = Alert(model.result)
+
+  let alert = ''
+  if (model.result) {
+    alert = <Alert success={model.result.success} message={model.result.message} />
+  }
 
   return (
     <div className='tab'>

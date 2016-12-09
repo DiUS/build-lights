@@ -18,21 +18,19 @@ export const Alert = (model) => {
     return collapseAlert(alertEl)
   }
 
-  if (model) {
-    const className = model.success ? 'alert success' : 'alert error'
+  const className = model.success ? 'alert success' : 'alert error'
 
-    content = (
-      <div className={className}>
-        <span>{model.message}</span>
-        <a href='#' onClick={handleAlertClose}>&times;</a>
-      </div>
-    )
+  content = (
+    <div className={className}>
+      <span>{model.message}</span>
+      <a href='#' onClick={handleAlertClose}>&times;</a>
+    </div>
+  )
 
-    setTimeout(() => {
-      const alertEl = document.getElementsByClassName('alert')[0]
-      collapseAlert(alertEl)
-    }, 7000)
-  }
+  setTimeout(() => {
+    const alertEl = document.getElementsByClassName('alert')[0]
+    collapseAlert(alertEl)
+  }, 7000)
 
   return content
 }

@@ -17,6 +17,10 @@ function persistState (payload) {
   return false
 }
 
+export function addNewJob (present) {
+  return persistState({ newJob: true })
+}
+
 export function switchToTab (tabName, present) {
   return persistState({ tabChange: tabName })
 }

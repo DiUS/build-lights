@@ -6,11 +6,12 @@ form {
         > button {
             align-self: flex-end;
             background-color: $green;
+            margin-right: 0.5em;
         }
 
         .fieldset {
 
-            padding: 0 1em;
+            padding: 0.25em 0.5em;
 
             &:hover {
                 background-color: #fff;
@@ -19,9 +20,14 @@ form {
                 }
             }
 
-            input {
+            input, label {
                 flex: initial;
                 flex-grow: initial;
+
+                &[type="text"] {
+                    flex: 1;
+                    margin-right: 1em;
+                }
             }
         }
     }

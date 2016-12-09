@@ -219,18 +219,6 @@ describe('Server', () => {
           })
       })
 
-      xit('removes job from configuration when payload to remove is received by the model', done => {
-        request(app(randomConfigFile, 'fixtures/light-configuration.json'))
-          .put('/model')
-          .send({ deleteJob: 1 })
-          .expect(200)
-          .end((err, res) => {
-            expect(res.body.tools[1].configuration.items).to.have.lengthOf(2)
-            expect(res.body.lastUpdated).to.not.eql(parsedData.lastUpdated)
-            done()
-          })
-      })
-
       describe('persisting configuration', () => {
         ['network', 'jobs'].forEach(tool => {
           it(`invokes "${tool}" service to persist configuration`, done => {
