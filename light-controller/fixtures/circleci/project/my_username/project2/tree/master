@@ -1,0 +1,8 @@
+[
+  {
+    "status" : "running",
+    "previous" : {
+      "status" : "success"
+    }
+  }
+]
