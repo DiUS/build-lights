@@ -13,7 +13,7 @@ Install python requirements
 Start the stub server for testing
 
     cd fixtures
-    python -m SimpleHTTPServer 8000
+    python run.py
 
 Run the tests
 
