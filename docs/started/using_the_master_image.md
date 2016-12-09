@@ -74,7 +74,7 @@ Once logged in...
 4. We recommend you configure other things such as Timezone and Wifi country, but it's up to you.
 5. Reboot   
 
-At this point, if you plugged an ethernet cable to your Raspberry Pi, you can go to the web interface on http://my-new-hostname:3000 and configure the rest over there:
+At this point, if you plugged an ethernet cable to your Raspberry Pi, you can go to the web interface on http://my-new-hostname and configure the rest over there:
 
 * Change hostname
 * Change connection type (Wireless, Ethernet)

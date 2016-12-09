@@ -155,9 +155,8 @@ This is the default configuration for web controller:
     {
       "name": "ci server",
       "configuration": {
-        "tool": "jenkins_direct",
-        "address": "http://localhost",
-        "port": "8080"
+        "tool": "jenkins",
+        "address": "http://localhost:8080"
       },
       "active": true
     },
@@ -194,20 +193,14 @@ This is the default configuration for the light controller:
 {
   "light": {
     "type": "epistar_lpd8806",
-    "num_leds": "32",
-    "simulate_mode": false,
-    "spidev": "/dev/spidev0.0"
+    "num_leds": "32"
   },
   "ci_server": {
     "type": "jenkins",
     "url": "http://localhost:8080",
     "pollrate_s": 3
   },
-  "jobs": [],
-  "sound": {
-    "enabled": false,
-    "bin_path": "mpg321"
-  }
+  "jobs": []
 }
 ```
 

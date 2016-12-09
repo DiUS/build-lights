@@ -5,51 +5,10 @@ A web application to ease the configuration of your build lights.
 
 ## What you need
 - Raspberry Pi (:grin:)
-- Jenkins setup in your network
 - Node JS ( `>= 4` )
 
 ## How to get it going
-Before anything you will need a configuration file. Create one at your preferred location in the file system, it should look somewhat like this:
-
-```json
-{
-    "tools": [
-        {
-            "name": "network",
-            "configuration": {
-                "hostname": "superpi",
-                "connectionType": "ethernet",
-                "dhcp": true
-            },
-            "active": true
-        },
-        {
-            "name": "jobs",
-            "configuration": {
-                "ci": {
-                    "address": "http://localhost",
-                    "port": 80
-                },
-                "hardware": {
-                    "ledType": "epistar",
-                    "numLeds": 32
-                },
-                "pollrate": 3,
-                "items": [
-                    {
-                        "name": "Job to monitor 1",
-                        "path": "/path/to/job/1",
-                        "active": true
-                    }
-                ]
-            },
-            "active": true
-        }
-    ],
-    "selectedTool": "jobs",
-    "lastUpdated": "2016-11-03T05:34:54.621Z"
-}
-```
+Before anything you will need a configuration file. Create one at your preferred location in the file system.  There are examples in the `fixtures` directory.
 
 This application uses [RollupJS](rollupjs.org) to create a bundle with front end logic and a few assets. It also runs an Express server serving such assets.
 
