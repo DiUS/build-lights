@@ -14,3 +14,6 @@ class JenkinsTest(unittest.TestCase):
 
     def test_successful_build(self):
         self.assertEqual(self.source.project_status('stablejob'), STATUS.SUCCESS)
+
+    def test_project_status_returns_poll_error_when_job_doesnt_exist(self):
+        self.assertEqual(self.source.project_status('unknown_job'), STATUS.POLL_ERROR)

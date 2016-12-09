@@ -30,7 +30,7 @@ class Source():
     def project_status(self, project):
         try:
             result = self.J[project].poll(tree='color')
-        except Exception, e:
+        except Exception:
             return STATUS.POLL_ERROR
 
         return _STATUS[result['color']]
