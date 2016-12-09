@@ -17,6 +17,10 @@ describe('Jobs Service', () => {
       fs.writeFileSync(lightConfig, data)
     })
 
+    afterEach(() => {
+      fs.unlinkSync(lightConfig)
+    })
+
     it('sets polling rate to 3 seconds in case provided is NaN', () => {
       const payload = {
         pollRate: 'a',

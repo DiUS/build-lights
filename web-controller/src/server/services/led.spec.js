@@ -17,6 +17,10 @@ describe('LED Service', () => {
       fs.writeFileSync(lightConfig, data)
     })
 
+    afterEach(() => {
+      fs.unlinkSync(lightConfig)
+    })
+
     it('saves polling rate and jobs marked as active', () => {
       const payload = {
         ledType: 'adafruit_lpd8806',

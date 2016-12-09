@@ -17,6 +17,10 @@ describe('CI Service', () => {
       fs.writeFileSync(lightConfig, data)
     })
 
+    afterEach(() => {
+      fs.unlinkSync(lightConfig)
+    })
+
     it('updates Jenkins CI configuration', () => {
       const payload = {
         ciTool: 'jenkins',

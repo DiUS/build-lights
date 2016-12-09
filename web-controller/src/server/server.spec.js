@@ -156,6 +156,10 @@ describe('Server', () => {
         parsedData = JSON.parse(data)
       })
 
+      afterEach(() => {
+        fs.unlinkSync(randomConfigFile)
+      })
+
       it('renders current model when no data is passed in', done => {
         request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
@@ -167,7 +171,7 @@ describe('Server', () => {
           })
       })
 
-      it('renders model with updated tab selection', () => {
+      it('renders model with updated tab selection', done => {
         request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .send({ tabChange: 'abc' })
@@ -179,10 +183,10 @@ describe('Server', () => {
           })
       })
 
-      it('renders model with connection type', () => {
+      it('renders model with connection type', done => {
         request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
-          .send({ connectionType: 'ethernet' })
+          .send({ save: 'network', payload: { connectionType: 'ethernet' } })
           .expect(200)
           .end((err, res) => {
             expect(res.body.tools[0].configuration.connectionType).to.eql('ethernet')
@@ -191,10 +195,10 @@ describe('Server', () => {
           })
       })
 
-      it('renders model with updated DHCP setting', () => {
+      it('renders model with updated DHCP setting', done => {
         request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
-          .send({ dhcp: 'true' })
+          .send({ save: 'network', payload: { useDhcp: 'true' } })
           .expect(200)
           .end((err, res) => {
             expect(res.body.tools[0].configuration.dhcp).to.eql(true)
@@ -203,19 +207,19 @@ describe('Server', () => {
           })
       })
 
-      it('renders current model when no decision can be made to present', () => {
+      it('renders current model when no decision can be made to present', done => {
         request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .send({ foo: 'bar' })
           .expect(200)
           .end((err, res) => {
             expect(res.body.tools).to.eql(parsedData.tools)
-            expect(res.body.lastUpdated).to.not.eql(parsedData.lastUpdated)
+            expect(res.body.lastUpdated).to.eql(parsedData.lastUpdated)
             done()
           })
       })
 
-      xit('removes job from configuration when payload to remove is received by the model', () => {
+      xit('removes job from configuration when payload to remove is received by the model', done => {
         request(app(randomConfigFile, 'fixtures/light-configuration.json'))
           .put('/model')
           .send({ deleteJob: 1 })
@@ -229,7 +233,7 @@ describe('Server', () => {
 
       describe('persisting configuration', () => {
         ['network', 'jobs'].forEach(tool => {
-          it(`invokes "${tool}" service to persist configuration`, () => {
+          it(`invokes "${tool}" service to persist configuration`, done => {
             request(app(randomConfigFile, 'fixtures/light-configuration.json'))
               .put('/model')
               .send({ save: tool, payload: { a: 'b', c: 'd' } })
