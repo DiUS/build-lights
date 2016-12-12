@@ -1,0 +1,14 @@
+languages:
+  - javascript
+  - jsx
+  - css
+files:
+  - "**/*.js"
+exclude:
+  - "**/bundle.js"
+  - "**/bundle.js.map"
+  - "**/node_modules/**"
+  - "**/*.spec.js"
+  - "**/config/**"
+  - "**/fixtures/**"
+reporter: json

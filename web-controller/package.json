@@ -9,7 +9,7 @@
         "dev:client": "rollup -m -c ./config/rollup.config.js --watch",
         "dist": "rollup -m -c ./config/rollup.prod.config.js",
         "lint": "standard",
-        "jscpd": "jscpd -p src -r json -e **/**/bundle.* -o jscpd.json",
+        "jscpd": "jscpd -o jscpd.json",
         "pretest": "npm run lint && npm run jscpd",
         "test": "NODE_ENV=test mocha --opts .mocha ./src/client/components/*spec.js ./src/server/*spec.js ./src/server/services/*spec.js"
     },
