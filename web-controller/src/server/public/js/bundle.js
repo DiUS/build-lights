@@ -1,3 +1,3805 @@
-!function(){"use strict";function e(e,t){if("undefined"==typeof document)return t;e=e||"";var n=document.head||document.getElementsByTagName("head")[0],r=document.createElement("style");return r.type="text/css",r.styleSheet?r.styleSheet.cssText=e:r.appendChild(document.createTextNode(e)),n.appendChild(r),t}function t(e,t){return t={exports:{}},e(t,t.exports),t.exports}function n(e){return e.classList.add("collapse"),setTimeout(function(){e.innerHTML=""},300),!1}function r(e){u(d(e))}function a(e){}function i(e){r(e),a(e)}function o(e){var t={method:"PUT",body:JSON.stringify(e),headers:{"Content-Type":"application/json"}};return fetch("/model",t).then(function(e){return e.json()}).then(function(e){i(e)}).catch(function(e){i(e)}),!1}function l(e){return o({newJob:!0})}function s(e,t){return o({tabChange:e})}function c(e,t){return o(e)}function d(e){return Wt(e)}function u(e){var t=document.getElementById("representation");t&&p.render(e,t)}var f="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},m=t(function(e,t){!function(n,r){"object"==typeof t&&"undefined"!=typeof e?e.exports=r():"function"==typeof define&&define.amd?define(r):n.InfernoDOM=r()}(f,function(){function e(e,n){if(!a(e)){var r=t(e);(r&&e.length>0||!r)&&(n=n?Object.assign({},n,{children:e}):{children:e})}return n}function t(e){return e instanceof Array}function n(e){return e.prototype&&void 0!==e.prototype.render}function r(e){return l(e)||s(e)}function a(e){return u(e)||c(e)}function i(e){return c(e)||e===!1||e===!0||u(e)}function o(e){return"function"==typeof e}function l(e){return"string"==typeof e}function s(e){return"number"==typeof e}function c(e){return null===e}function d(e){return e===!0}function u(e){return void 0===e}function f(e,n){if(!i(e))if(t(e))for(var r=0;r<e.length;r++){var a=e[r];if(!i(a)){if(a===n)return!0;if(a.children)return f(a.children,n)}}else{if(e===n)return!0;if(e.children)return f(e.children,n)}return!1}function m(e,t){var n=t.props.children;return f(n,e)?m(e,t._parentComponent):t}function p(e,t,n,r,i){if(void 0!==t){var o=t.pool,l=o.pop();if(!a(l))return fe(l,e,null,n,r,i,t.isSVG),e.dom}return null}function g(e){var t=e.bp;return!a(t)&&(t.pool.push(e),!0)}function h(e,t){A(e)?v(e,t,!0):j(e)&&b(e,t,!1)}function v(e,t,n){var r=e.items,a=r.length,i=e.pointer;if(a>0)for(var o=0;o<a;o++){var l=r[o];A(l)?v(l,t,!0):(t&&W(t,l.dom),h(l,null))}t&&n&&W(t,i)}function b(e,n,r){var i=e.instance,o=null,l=null;a(i)||(o=i.hooks,l=i.children,void 0!==i.render&&(i.componentWillUnmount(),i._unmounted=!0,tt.delete(i),!r&&h(i._lastNode,null)));var s=e.hooks||o;a(s)||(a(s.willDetach)||s.willDetach(e.dom),a(s.componentWillUnmount)||s.componentWillUnmount(e.dom,s));var c=(a(i)?e.children:null)||l;if(!a(c))if(t(c))for(var d=0;d<c.length;d++)h(c[d],null);else h(c,null)}function y(e){this.text=e,this.dom=null}function x(){this.placeholder=!0,this.dom=null}function k(e){this.dom=null,this.pointer=null,this.items=e}function w(e){return new y(e)}function B(){return new x}function N(e){return new k(e)}function C(e,t,n){e.split(",").forEach(function(e){return t[e]=n})}function T(e){return void 0!==e.text}function S(e){return e.placeholder===!0}function A(e){return void 0!==e.items}function j(e){return void 0!==e.tag||void 0!==e.bp}function L(e,t,n){a(n)?e.appendChild(t):e.insertBefore(t,n)}function U(e,t,n){var r=t.pointer;v(t,e,!1),M(e,n,r)}function _(e,t){var n;return n=t===!0?document.createElementNS("http://www.w3.org/2000/svg",e):document.createElement(e)}function E(e,t,n){if(null===t)return document.createTextNode(e);if(n){if(""!==e)return t.textContent=e,t.firstChild;var r=document.createTextNode("");return t.appendChild(r),r}var a=document.createTextNode(e);return t.appendChild(a),a}function D(e,t,n,r,i,o,l){var s=null,c=e._lastNode;a(c)||(s=e,e=c),h(e,!1);var d=J(t,null,r,i,o,l);t.dom=d,M(n,d,e.dom),null!==s&&(s._lastNode=t)}function M(e,t,n){e.replaceChild(t,n)}function O(e){return r(e)?w(e):i(e)?B():t(e)?N(e):e}function I(e,t){var n=e[t];return e[t]=O(n)}function z(e,t){if(A(e))return h(e,t);var n=e.dom;n===t?n.innerHTML="":(W(t,n),He&&g(e)),h(e,!1)}function W(e,t){e.removeChild(t)}function V(e,t,n){for(var r=t||Object.keys(e),a=0;a<r.length;a++){var i=r[a];n[i]=null}}function H(){return document.activeElement}function G(e,t){if(He){var n=t.length;if(n>5)for(var r=0;r<n;r++){var a=t[r];i(a)||g(a)}}e.textContent=""}function K(e){null!==e&&e!==document.body&&document.activeElement!==e&&e.focus()}function R(e,t){return!e.complex&&(t.length&&!a(t[0])&&!a(t[0].key)&&e.length&&!a(e[0])&&!a(e[0].key))}function Y(e,t){if("option"===e.tag){var n=e.attrs&&e.attrs.value;t[n]?(e.attrs=e.attrs||{},e.attrs.selected="selected",e.dom.selected=!0):e.dom.selected=!1}else for(var r=0,a=e.children.length;r<a;r++)Y(e.children[r],t)}function P(e){var n=e.attrs&&e.attrs.value,r={};if(t(n))for(var a=0,i=n.length;a<i;a++)r[n[a]]=n[a];else r[n]=n;for(var o=0,l=e.children.length;o<l;o++)Y(e.children[o],r);e.attrs&&e.attrs[n]&&delete e.attrs.value}function q(e,t,n){a(e.created)||e.created(n),a(e.attached)||t.addListener(function(){e.attached(n)})}function X(e){var t=e.attrs.value;a(t)||(e.dom.value=t)}function F(e,t){if("input"===e&&t.attrs){var n=t.attrs.type;if("text"===n)X(t);else if("checkbox"===n||"radio"===n){var r=t.attrs.checked;t.dom.checked=!!r}}else"textarea"===e&&X(t)}function J(e,t,n,r,a,i){if(S(e))return ee(e,t);if(T(e))return $(e,t);if(A(e))return Z(e,t,n,r,a,i);if(j(e))return Q(e,t,n,r,a,i);var o=O(e);if(e!==o)return J(o,t,n,r,a,i);throw new Error('Inferno Error: invalid object "'+typeof e+'" passed to mount()')}function Q(e,t,n,r,a,i){var o=e.bp;if(u(o))return ie(e,t,n,r,a,i);if(He){var l=p(e,o,n,r,a);if(!c(l))return c(t)||t.appendChild(l),l}return ae(e,o,t,n,r,a)}function Z(e,t,n,r,a,i){var o=e.items,l=document.createTextNode(""),s=document.createDocumentFragment();return oe(o,s,n,r,a,i),e.pointer=l,e.dom=s,s.appendChild(l),t&&L(t,s),s}function $(e,t){var n=document.createTextNode(e.text);return e.dom=n,t&&L(t,n),n}function ee(e,t){var n=document.createTextNode("");return e.dom=n,t&&L(t,n),n}function te(e){"select"===e.tag&&P(e)}function ne(e,t,n,r){te(e);var a=e.attrs;if(c(t.attrKeys)){var i=Object.keys(a);t.attrKeys=t.attrKeys?t.attrKeys.concat(i):i}var o=t.attrKeys;ue(e,a,o,n,r)}function re(e,t,n){var r=e.events;c(t.eventKeys)&&(t.eventKeys=Object.keys(r));var a=t.eventKeys;ce(r,a,n)}function ae(e,t,n,r,a,i){var o=e.tag;if(d(t.isComponent))return de(e,o,e.attrs||{},e.hooks,e.children,i,n,r,a);var l=_(t.tag,t.isSVG);e.dom=l,d(t.hasHooks)&&q(e.hooks,r,l),d(t.lazy)&&Ue(e,r,l);var s=e.children;switch(t.childrenType){case 1:E(s,l,!0);break;case 2:J(e.children,l,r,a,i,t.isSVG);break;case 3:oe(s,l,r,a,i,t.isSVG);break;case 4:for(var u=0;u<s.length;u++)J(s[u],l,r,a,i,t.isSVG);break;case 5:le(e,s,l,r,a,i,t.isSVG)}return d(t.hasAttrs)&&ne(e,t,l,i),d(t.hasClassName)&&(l.className=e.className),d(t.hasStyle)&&xe(null,e.style,l),d(t.hasEvents)&&re(e,t,l),c(n)||n.appendChild(l),l}function ie(e,t,n,r,s,d){var u=e.tag;if(o(u))return de(e,u,e.attrs||{},e.hooks,e.children,s,t,n,r);if(!l(u)||""===u)throw Error("Inferno Error: Expected function or string for element tag type");"svg"===u&&(d=!0);var f=_(u,d),m=e.children,p=e.attrs,g=e.events,h=e.hooks,v=e.className,b=e.style;return e.dom=f,a(h)||q(h,n,f),i(m)||le(e,m,f,n,r,s,d),a(p)||(te(e),ue(e,p,Object.keys(p),f,s)),a(v)||(f.className=v),a(b)||xe(null,b,f),a(g)||ce(g,Object.keys(g),f),c(t)||t.appendChild(f),f}function oe(e,t,n,r,a,i){e.complex=!1;for(var o=0;o<e.length;o++){var l=I(e,o);T(l)?($(l,t),e.complex=!0):S(l)?(ee(l,t),e.complex=!0):A(l)?(Z(l,t,n,r,a,i),e.complex=!0):J(l,t,n,r,a,i)}}function le(e,n,a,o,l,s,c){t(n)?oe(n,a,o,l,s,c):r(n)?E(n,a,!0):i(n)||J(n,a,o,l,s,c)}function se(e,t,n){!i(e)&&l(t)&&(e.refs[t]=n)}function ce(e,t,n){for(var r=0;r<t.length;r++){var a=t[r];n[a]=e[a]}}function de(t,r,o,l,s,c,d,u,f){o=e(s,o);var m;if(n(r)){var p=new r(o,f);p._patch=fe,p._componentToDOMNodeMap=tt,!a(c)&&o.ref&&se(c,o.ref,p);var g=p.getChildContext();a(g)||(f=Object.assign({},f,g)),p.context=f,p._unmounted=!1,p._parentNode=t,c&&(p._parentComponent=c),p._pendingSetState=!0,p.componentWillMount();var h=p.render();i(h)&&(h=B()),p._pendingSetState=!1,m=J(h,null,u,f,p,!1),p._lastNode=h,p.componentDidMount(),null===d||i(m)||d.appendChild(m),tt.set(p,m),t.dom=m,t.instance=p}else{a(l)||(a(l.componentWillMount)||l.componentWillMount(null,o),a(l.componentDidMount)||u.addListener(function(){l.componentDidMount(m,o)}));var v=r(o,f);i(v)&&(v=B()),m=J(v,null,u,f,null,!1),t.instance=v,null===d||i(m)||d.appendChild(m),t.dom=m}return m}function ue(e,t,n,r,a){for(var i=0;i<n.length;i++){var o=n[i];"ref"===o?se(m(e,a),t[o],r):we(o,null,t[o],r)}}function fe(e,t,n,a,o,l,s){if(e!==t)if(i(e))J(t,n,a,o,l,s);else if(i(t))z(e,n);else if(r(e))if(r(t))n.firstChild.nodeValue=t;else{var c=J(t,null,a,o,l,s);t.dom=c,M(n,c,n.firstChild)}else if(r(t))M(n,document.createTextNode(t),e.dom);else if(A(t))A(e)?Ne(e,t,n,a,o,l,s):(M(n,Z(t,null,a,o,l,s),e.dom),h(e,null));else if(A(e))U(n,e,J(t,null,a,o,l,s));else if(S(t))S(e)?Te(e,t):(M(n,ee(t,null),e.dom),h(e,null));else if(S(e))M(n,J(t,null,a,o,l,s),e.dom);else if(T(t))T(e)?Se(e,t):(M(n,$(t,null),e.dom),h(e,null));else if(T(e))M(n,J(t,null,a,o,l,s),e.dom);else if(j(t))j(e)?he(e,t,n,a,o,l,s,!1):(M(n,mountVNode(t,null,a,o,l,s),e.dom),h(e,null));else{if(!j(e))return fe(e,O(t),n,a,o,l,s);M(n,J(t,null,a,o,l,s),e.dom),h(e,null)}return t}function me(e,t,n){r(t)&&""!==t?e.firstChild.nodeValue=n:e.textContent=n}function pe(e,t,n,r){e&&(l(t)&&delete e.refs[t],l(n)&&(e.refs[n]=r))}function ge(e,n,a,o,l,s,c){var d=n.children,u=e.children;if(u!==d)if(i(u))r(d)?me(a,u,d):i(d)||(t(d)?oe(d,a,o,l,s,c):J(d,a,o,l,s,c));else if(i(d))G(a,u);else if(t(u))t(d)?(d.complex=u.complex,R(u,d)?Ae(u,d,a,o,l,s,c,null):Ce(u,d,a,o,l,s,c,null)):Ce(u,[d],a,o,l,s,c,null);else if(t(d)){var f=u;r(u)&&(f=w(f),f.dom=a.firstChild),Ce([f],d,a,o,l,s,c,null)}else r(d)?me(a,u,d):r(u)?fe(u,d,a,o,l,s,c):he(u,d,a,o,l,s,c,!1)}function he(e,t,n,r,a,i,o,l){var s=e.bp,c=t.bp;void 0===s||void 0===c?be(e,t,n,r,a,i,o):ve(e,t,s,c,n,r,a,i,l)}function ve(e,t,r,o,l,s,c,d,u){var f;o.hasHooks===!0&&(f=t.hooks,f&&!a(f.willUpdate)&&f.willUpdate(e.dom));var m=t.tag||o.tag,p=e.tag||r.tag;if(p!==m)if(r&&r.isComponent===!0){var g=e.instance;if(o.isComponent===!0)D(e,t,l,s,c,d,!1);else if(n(p)){b(e,null,!0);var h=g._lastNode;ve(h,t,h.bp,o,l,s,c,d,o.isSVG)}else b(e,null,!0),ve(g,t,g.bp,o,l,s,c,d,o.isSVG)}else D(e,t,l,s,c,d,o.isSVG);else if(a(p))t.dom=e.dom;else if(r&&r.isComponent===!0){if(o.isComponent===!0){var v=e.instance;if(!a(v)&&v._unmounted){var y=de(t,p,t.attrs||{},t.hooks,t.children,v,l,s,c);null!==l&&M(l,y,e.dom)}else t.instance=v,t.dom=e.dom,Be(!0,t,t.tag,r,o,v,e.attrs||{},t.attrs||{},t.hooks,e.children,t.children,l,s,c)}}else{var x=e.dom,k=r.childrenType,w=o.childrenType;if(t.dom=x,o.lazy===!0&&u===!1){var B=e.clipData;if(null===s.scrollY&&s.refresh(),t.clipData=B,(B.pending===!0||B.top-s.scrollY>s.screenHeight)&&setClipNode(B,x,e,t,l,s,c,d,r.isSVG))return;if(B.bottom<s.scrollY&&setClipNode(B,x,e,t,l,s,c,d,r.isSVG))return}if(k>0||w>0)if(5===w||5===k)ge(e,t,x,s,c,d);else{var N=e.children,C=t.children;0===k||i(N)?w>2?oe(C,x,s,c,d):J(C,x,s,c,d):0===w||i(C)?k>2?G(x,N):z(N,x):N!==C&&(4===k&&4===w?Ae(N,C,x,s,c,d,o.isSVG,null):2===k&&2===w?fe(N,C,x,s,c,d,!0,o.isSVG):1===k&&1===w?me(x,N,C):ge(e,t,x,s,c,d,o.isSVG))}if(r.hasAttrs!==!0&&o.hasAttrs!==!0||ye(e,t,r.attrKeys,o.attrKeys,x,d),r.hasEvents!==!0&&o.hasEvents!==!0||ke(e.events,t.events,r.eventKeys,o.eventKeys,x),r.hasClassName===!0||o.hasClassName===!0){var T=t.className;e.className!==T&&(a(T)?x.removeAttribute("class"):x.className=T)}if(r.hasStyle===!0||o.hasStyle===!0){var S=t.style,A=e.style;A!==S&&xe(A,S,x)}o.hasHooks!==!0||a(f.didUpdate)||f.didUpdate(x),F(m,t)}}function be(e,t,r,i,l,s,c){var d=t.hooks,u=!a(d);u&&!a(d.willUpdate)&&d.willUpdate(e.dom);var f=t.tag||(a(t.bp)?null:t.bp.tag),m=e.tag||(a(e.bp)?null:e.bp.tag);if("svg"===f&&(c=!0),m!==f){var p=e.instance;o(m)?o(f)?D(e,t,r,i,l,s,c):n(m)?(b(e,null,!0),be(p._lastNode,t,r,i,l,s,c)):(b(e,null,!0),be(p,t,r,i,l,s,c)):D(p||e,t,r,i,l,s,c)}else if(a(m))t.dom=e.dom;else if(o(m)){if(o(f)){var g=e._instance;if(!a(g)&&g._unmounted){var h=de(t,m,t.attrs||{},t.hooks,t.children,g,r,i,l);null!==r&&M(r,h,e.dom)}else t.instance=e.instance,t.dom=e.dom,Be(!1,t,t.tag,null,null,t.instance,e.attrs||{},t.attrs||{},t.hooks,e.children,t.children,r,i,l)}}else{var v=e.dom,y=t.className,x=t.style;t.dom=v,ge(e,t,v,i,l,s,c),ye(e,t,null,null,v,s),ke(e.events,t.events,null,null,v),e.className!==y&&(a(y)?v.removeAttribute("class"):v.className=y),e.style!==x&&xe(e.style,x,v),u&&!a(d.didUpdate)&&d.didUpdate(v),F(f,t)}}function ye(e,t,n,r,i,o){"select"===e.tag&&P(t);var l=t.attrs,s=e.attrs,c=a(l),d=!a(s);if(!c)for(var u=r||Object.keys(l),f=u.length,m=0;m<f;m++){var p=u[m],g=d&&s[p],h=l[p];g!==h&&("ref"===p?pe(o,g,h,i):we(p,g,h,i))}if(d)for(var v=n||Object.keys(s),b=v.length,y=0;y<b;y++){var x=v[y];(c||a(l[x]))&&("ref"===x?pe(getRefInstance(node,o),s[x],null,i):i.removeAttribute(x))}}function xe(e,t,n){if(l(t))n.style.cssText=t;else if(a(e)){if(!a(t))for(var r=Object.keys(t),i=0;i<r.length;i++){var o=r[i],c=t[o];s(c)&&!qe[o]?n.style[o]=c+"px":n.style[o]=c}}else if(a(t))n.removeAttribute("style");else{for(var d=Object.keys(t),u=0;u<d.length;u++){var f=d[u],m=t[f];s(m)&&!qe[f]?n.style[f]=m+"px":n.style[f]=m}for(var p=Object.keys(e),g=0;g<p.length;g++){var h=p[g];a(t[h])&&(n.style[h]="")}}}function ke(e,t,n,r,i){var o,l=!a(t),s=!a(e);if(s&&(o=n||Object.keys(e)),l){var c=r||Object.keys(t);if(s){for(var d=0;d<c.length;d++){var u=c[d],f=e[u],m=t[u];f!==m&&(i[u]=m)}for(var p=0;p<o.length;p++){var g=o[p];a(t[g])&&(i[g]=null)}}else ce(t,c,i)}else s&&V(e,o,i)}function we(e,t,n,r){if("dangerouslySetInnerHTML"===e){var i=t&&t.__html,o=n&&n.__html;if(a(o))throw new Error("Inferno Error: dangerouslySetInnerHTML requires an object with a __html propety containing the innerHTML content");i!==o&&(r.innerHTML=o)}else if("eventData"===e)r.eventData=n;else if(Re[e])r[e]=null===n?"":n;else if(Ye[e])r[e]=!!n;else{var l=Pe[e];n===!1||a(n)?void 0!==l?r.removeAttributeNS(l,e):r.removeAttribute(e):void 0!==l?r.setAttributeNS(l,e,n===!0?e:n):r.setAttribute(e,n===!0?e:n)}}function Be(t,r,o,l,s,c,d,u,f,m,p,g,h,v){if(u=e(p,u),n(o)){var b=c.props,y=c.state,x=c.state,k=c.getChildContext();a(k)||(v=Object.assign({},v,k)),c.context=v;var w=c._updateComponent(y,x,b,u);w===We?w=c._lastNode:a(w)&&(w=B()),fe(c._lastNode,w,g,h,v,c,null,!1),r.dom=w.dom,c._lastNode=w,c.componentDidUpdate(b,y),tt.set(c,w.dom)}else{var N=!0,C=t&&s.hasHooks===!0||!a(f);if(d=e(m,d),C&&!a(f.componentShouldUpdate)&&(N=f.componentShouldUpdate(r.dom,d,u)),N!==!1){C&&!a(f.componentWillUpdate)&&f.componentWillUpdate(r.dom,d,u);var T=o(u,v);i(T)&&(T=B()),T.dom=r.dom,fe(c,T,g,h,v,null,null,!1),r.instance=T,C&&!a(f.componentDidUpdate)&&f.componentDidUpdate(r.dom,d,u)}}}function Ne(e,t,n,r,a,i,o){var l=e.items,s=t.items,c=e.pointer;t.dom=e.dom,t.pointer=c,!l!==s&&(R(l,s)?Ae(l,s,n,r,a,i,o,t):Ce(l,s,n,r,a,i,o,t))}function Ce(e,t,n,r,a,i,o,l){for(var s=e.length,c=t.length,d=s>c?c:s,u=0;u<d;u++){var f=e[u],m=I(t,u);fe(f,m,n,r,a,i,o)}if(s<c)for(u=d;u<c;u++){var p=I(t,u);L(n,J(p,null,r,a,i,o),l&&l.pointer)}else if(s>c)for(u=d;u<s;u++)z(e[u],n)}function Te(e,t){t.dom=e.dom}function Se(e,t){var n=t.text,r=e.dom;t.dom=r,e.text!==n&&(r.nodeValue=n)}function Ae(e,t,n,r,a,i,o,l){for(var s,c=e.length,d=t.length,u=c-1,f=d-1,m=0,p=0,g=null,h=null,v=null,b=null;m<=u&&p<=f&&(h=t[p],g=e[m],h.key===g.key);)he(g,h,n,r,a,i,o,!1),p++,m++;for(;m<=u&&p<=f&&(v=t[f],b=e[u],v.key===b.key);)he(b,v,n,r,a,i,o,!1),f--,u--;for(;m<=u&&p<=f&&(v=t[f],g=e[m],v.key===g.key);)s=f+1<d?t[f+1].dom:null,he(g,v,n,r,a,i,o,!1),L(n,v.dom,s),f--,m++;for(;m<=u&&p<=f&&(h=t[p],b=e[u],h.key===b.key);)s=e[m].dom,he(b,h,n,r,a,i,o,!1),L(n,h.dom,s),p++,u--;if(m>u){if(p<=f)for(s=f+1<d?t[f+1].dom:l&&l.pointer;p<=f;p++)L(n,J(t[p],null,r,a,i,o),s)}else if(p>f)for(;m<=u;)z(e[m++],n);else{var y,x=u-m+1,k=f-p+1,w=new Array(k);for(y=0;y<k;y++)w[y]=-1;var B,N=!1,C=0,T=0,S=!0,A=0;if(k<=4||x*k<=16)for(y=m;y<=u;y++){if(S=!0,b=e[y],A<k)for(B=p;B<=f;B++)if(v=t[B],b.key===v.key){w[B-p]=y,T>B?N=!0:T=B,he(b,v,n,r,a,i,o,!1),A++,S=!1;break}S&&(z(b,n),C++)}else{var j=new Map;for(y=p;y<=f;y++)j.set(t[y].key,y);for(y=m;y<=u;y++)S=!0,b=e[y],A<d&&(B=j.get(b.key),void 0!==B&&(v=t[B],w[B-p]=y,T>B?N=!0:T=B,he(b,v,n,r,a,i,o,!1),A++,S=!1)),S&&(z(b,n),C++)}var U;if(N){var _=je(w);for(B=_.length-1,y=k-1;y>=0;y--)w[y]===-1?(U=y+p,s=U+1<d?t[U+1].dom:l&&l.pointer,L(n,J(t[U],null,r,a,i,o),s)):B<0||y!==_[B]?(U=y+p,s=U+1<d?t[U+1].dom:l&&l.pointer,L(n,t[U].dom,s)):B--}else if(x-C!==k)for(y=k-1;y>=0;y--)w[y]===-1&&(U=y+p,s=U+1<d?t[U+1].dom:l&&l.pointer,L(n,J(t[U],null,r,a,i,o),s))}}function je(e){var t=e.slice(0),n=[];n.push(0);var r,a,i,o,l;for(r=0;r<e.length;r++)if(e[r]!==-1)if(a=n[n.length-1],e[a]<e[r])t[r]=a,n.push(r);else{for(i=0,o=n.length-1;i<o;)l=(i+o)/2|0,e[n[l]]<e[r]?i=l+1:o=l;e[r]<e[n[i]]&&(i>0&&(t[r]=n[i-1]),n[i]=r)}for(i=n.length,o=n[i-1];i-- >0;)n[i]=o,o=t[o];return n}function Le(){this._listeners=[],this.scrollX=null,this.scrollY=null,this.screenHeight=Fe,this.screenWidth=Xe}function Ue(e,t,n){t.addListener(function(){var r=n.getBoundingClientRect();null===t.scrollY&&t.refresh(),e.clipData={top:r.top+t.scrollY,left:r.left+t.scrollX,bottom:r.bottom+t.scrollY,right:r.right+t.scrollX,pending:!1}})}function _e(e,t,n,r,a,i,o){var l=t[n.i];if(T(e)){var s=e.text;if(e.dom=l,3===l.nodeType&&""!==s)l.nodeValue=s;else{var c=$(s);M(r,c,l),t.splice(t.indexOf(l),1,c),e.dom=c}}else if(S(e))e.dom=l;else if(A(e)){var d=e.items;e.dom=document.createDocumentFragment();for(var u=0;u<d.length;u++){var f=_e(I(d,u),t,n,r,a,i,o);if(f)return!0}var m=t[n.i++];if(!m||3!==m.nodeType)return!0;e.pointer=m}else{var p=Me(e,l,r,a,i,o,!1);if(p)return!0}n.i++}function Ee(e){for(var t=[],n=e.childNodes,r=n.length,a=0;a<r;){var i=n[a];if(8===i.nodeType)if("!"===i.data){var o=document.createTextNode("");e.replaceChild(o,i),t.push(o),a++}else e.removeChild(i),r--;else t.push(i),a++}return t}function De(t,r,o,l,s,c,d,u,f,m,p){if(o=e(s,o),!n(r)){var g=t.instance=r(o);return a(l)||(a(l.componentWillMount)||l.componentWillMount(null,o),a(l.componentDidMount)||u.addListener(function(){l.componentDidMount(c,o)})),Me(g,c,d,u,f,g,p)}var h=t.instance=new r(o);h._patch=fe,!a(m)&&o.ref&&se(m,o.ref,h);var v=h.getChildContext();a(v)||(f=Object.assign({},f,v)),h.context=f,h._unmounted=!1,h._parentNode=t,m&&(h._parentComponent=m),h._pendingSetState=!0,h.componentWillMount();var b=h.render();h._pendingSetState=!1,i(b)&&(b=B()),Me(b,c,d,u,f,h,p),h._lastNode=b,h.componentDidMount()}function Me(e,n,i,l,s,c,d){var u=e.bp,f=e.tag||u.tag;if(o(f))e.dom=n,De(e,f,e.attrs||{},e.hooks,e.children,n,i,l,s,c,d);else if(1!==n.nodeType||f!==n.tagName.toLowerCase());else{e.dom=n;var m=e.hooks;(u&&u.hasHooks===!0||!a(m))&&q(m,l,n);var p=e.children;if(!a(p))if(r(p))n.textContent!==p&&(n.textContent=p);else{var g=Ee(n),h={i:0},v=!1;if(t(p))for(var b=0;b<p.length&&!(v=_e(I(p,b),g,h,n,l,s,c));b++);else v=1!==g.length||_e(p,g,h,n,l,s,c)}var y=e.className,x=e.style;if(a(y)||(n.className=y),a(x)||xe(null,x,n),u&&u.hasAttrs===!0)ne(e,u,n,c);else{var k=e.attrs;a(k)||(te(e),ue(e,k,Object.keys(k),n,c))}if(u&&u.hasEvents===!0)re(e,u,n);else{var w=e.events;a(w)||ce(w,Object.keys(w),n)}}}function Oe(e,t,n){if(t&&1===t.nodeType){var r=t.querySelector("[data-infernoroot]");if(r&&r.parentNode===t)return Me(e,r,t,n,{},!0),!0}return t!==$e?t.textContent="":console.warn('Inferno Warning: rendering to the "document.body" is dangerous! Use a dedicated container element instead.'),!1}function Ie(e){return tt.get(e)||null}function ze(e,t){var n=et.get(t),r=new Le;if(u(n))i(e)||(Oe(e,t,r)||J(e,t,r,{},null,!1),r.trigger(),et.set(t,{input:e}));else{var a=H(),o=fe(n.input,e,t,r,{},null,!1);r.trigger(),c(e)&&et.delete(t),n.input=o,K(a)}}var We="NO_RENDER",Ve="undefined"!=typeof window&&window.document,He=!0,Ge="http://www.w3.org/1999/xlink",Ke="http://www.w3.org/XML/1998/namespace",Re={},Ye={},Pe={},qe={};C("xlink:href,xlink:arcrole,xlink:actuate,xlink:role,xlink:titlef,xlink:type",Pe,Ge),C("xml:base,xml:lang,xml:space",Pe,Ke),C("volume,value",Re,!0),C("muted,scoped,loop,open,checked,default,capture,disabled,selected,readonly,multiple,required,autoplay,controls,seamless,reversed,allowfullscreen,novalidate",Ye,!0),C("animationIterationCount,borderImageOutset,borderImageSlice,borderImageWidth,boxFlex,boxFlexGroup,boxOrdinalGroup,columnCount,flex,flexGrow,flexPositive,flexShrink,flexNegative,flexOrder,gridRow,gridColumn,fontWeight,lineClamp,lineHeight,opacity,order,orphans,tabSize,widows,zIndex,zoom,fillOpacity,floodOpacity,stopOpacity,strokeDasharray,strokeDashoffset,strokeMiterlimit,strokeOpacity,strokeWidth,",qe,!0);var Xe=Ve&&window.screen.width,Fe=Ve&&window.screen.height,Je=0,Qe=0,Ze=0;Ve&&(window.onscroll=function(){Je=window.scrollX,Qe=window.scrollY,Ze=performance.now()},window.resize=function(){Je=window.scrollX,Qe=window.scrollY,Xe=window.screen.width,Fe=window.screen.height,Ze=performance.now()}),Le.prototype={refresh:function(){this.scrollX=Ve&&window.scrollX,this.scrollY=Ve&&window.scrollY},addListener:function(e){this._listeners.push(e)},trigger:function(){for(var e=this,t=0;t<this._listeners.length;t++)e._listeners[t]()}};var $e=Ve?document.body:null,et=new Map,tt=new Map,nt={render:ze,findDOMNode:Ie,mount:J,patch:fe,unmount:h};return nt})}),p=m;e("body,html{margin:0;padding:0;height:100%}body{display:-ms-flexbox;display:-webkit-box;display:flex;-ms-flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column;min-width:30em}.container{margin:0 auto;max-width:60em;width:100%}.representation{-ms-flex:1;-webkit-box-flex:1;flex:1}.representation.waiting{background-color:#00b6f0;background-image:url(/static/img/loader.gif);background-position:50% 40%;background-size:auto;background-repeat:no-repeat;position:relative}.representation.waiting.error{background-image:url(/static/img/warning.png)}.representation.waiting .message{position:absolute;top:60%;width:100%}.representation.waiting .message p{color:#fff;font-family:Roboto;font-size:1.8em;letter-spacing:1px;line-height:1.4;text-align:center}.representation.waiting .message p a{text-decoration:underline}header{background-color:#192854}header .container{background-image:url(/static/img/dius_logo.png);background-position:0 50%;background-size:180px;background-repeat:no-repeat;display:-ms-flexbox;display:-webkit-box;display:flex;height:5em;margin:.5em auto}header span{-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:#fff;-ms-flex:1;-webkit-box-flex:1;flex:1;font-family:Roboto;font-size:1.5em;letter-spacing:1px;margin-left:8em;text-transform:uppercase}header .device-actions{display:-ms-flexbox;display:-webkit-box;display:flex}header .device-actions,header .device-actions button{position:relative}header .device-actions button{-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;background-color:#21366c;background-image:url(/static/img/power.png);background-position:1em 50%;background-repeat:no-repeat;background-size:28px;border:1px solid #a3a9ac;border-radius:.25em;color:#fff;font-size:1.125em;padding:.875em 3.5em}header .device-actions button:after{border-color:#fff transparent transparent;border-style:solid;border-width:5px 5px 0;content:'\\A';height:0;position:absolute;right:10%;top:50%;width:0}header .device-actions .dropdown-device-actions{background-color:#fff;border-radius:.25em;box-shadow:0 0 5px 1px #192854;display:none;position:absolute;right:0;top:85%;z-index:1}header .device-actions .dropdown-device-actions li a{border-radius:.25em;display:block;padding:.75em 1.5em}header .device-actions .dropdown-device-actions li a:hover{background-color:#cbcfd1}header .device-actions .dropdown-device-actions li.separator div{border:.03125em solid #cbcfd1;margin:.75em 1.5em}header .device-actions:hover button{background-color:#314b84}header .device-actions:hover button:after{border-color:transparent transparent #fff;border-width:0 5px 5px}header .device-actions:hover .dropdown-device-actions{display:block}footer{background:#a3a9ac;font-size:.75em;padding:.625em;text-align:center}footer div{padding:.5em 0}footer div a{text-decoration:underline}",void 0),e(".tab{min-width:100%}.tab .tab-nav-container{border-bottom:1px solid #a3a9ac}.tab .tab-nav-container ul{display:-ms-flexbox;display:-webkit-box;display:flex;list-style:none}.tab .tab-nav-container ul li{-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;border-bottom-style:solid;border-bottom-width:4px;border-bottom-color:transparent;-ms-flex:1;-webkit-box-flex:1;flex:1;margin-top:4px}.tab .tab-nav-container ul li a{color:#666;display:block;font-family:Roboto,sans-serif;letter-spacing:2px;padding:1em 0;text-align:center;text-transform:uppercase}.tab .tab-nav-container ul li.selected,.tab .tab-nav-container ul li:hover{border-bottom-color:#192854}.tab .tab-nav-container ul li.selected a,.tab .tab-nav-container ul li:hover a{color:#192854}.tab .tab-nav-container ul li.selected a{font-weight:700}.tab .tab-content{padding:1.5em 0}.tab .tab-content .tab-content-container{display:block}.tab .tab-content .tab-content-container.hidden{display:none}",void 0);var g=t(function(e,t){!function(n,r){"object"==typeof t&&"undefined"!=typeof e?e.exports=r():"function"==typeof define&&define.amd?define(r):n.Inferno=r()}(f,function(){function e(e){return r(e)||n(e)}function t(e){return"o"===e[0]&&"n"===e[1]&&e.length>3}function n(e){return null===e}function r(e){return void 0===e}function a(e){this.bp=e,this.dom=null,this.instance=null,this.tag=null,this.children=null,this.style=null,this.className=null,this.attrs=null,this.events=null,this.hooks=null,this.key=null,this.clipData=null}function i(e){return new a(e)}function o(e){return"o"===e[0]&&"n"===e[1]&&e.length>3}function l(e){return"onCreated"===e||"onAttached"===e||"onWillDetach"===e||"onWillUpdate"===e||"onDidUpdate"===e}function s(e){return"onComponentWillMount"===e||"onComponentDidMount"===e||"onComponentWillUnmount"===e||"onComponentShouldUpdate"===e||"onComponentWillUpdate"===e||"onComponentDidUpdate"===e}function c(t,n){var r=t.tag||null,i=!(!r||void 0===r.arg),c=e(t.children)?null:t.children,d=!(!c||void 0===c.arg),u=t.attrs||null,f=!(!u||void 0===u.arg),m=t.hooks||null,p=!(!m||void 0===m.arg),g=t.events||null,h=!(!g||void 0===g.arg),v=void 0===t.key?null:t.key,b=!e(v)&&!e(v.arg),y=t.style||null,x=!(!y||void 0===y.arg),k=void 0===t.className?null:t.className,w=!(!k||void 0===k.arg),B=void 0===t.spread?null:t.spread,N=void 0!==t.spread,C={lazy:t.lazy||!1,dom:null,pool:[],tag:i?null:r,className:""!==k&&k?k:null,style:""!==y&&y?y:null,isComponent:i,hasAttrs:f||!!u,hasHooks:p,hasEvents:h,hasStyle:x||!(""===y||!y),hasClassName:w||!(""===k||!k),childrenType:void 0===n?c?5:0:n,attrKeys:null,eventKeys:null,isSVG:t.isSVG||!1};return function(){var e=new a(C);if(i===!0&&(e.tag=arguments[r.arg]),d===!0&&(e.children=arguments[c.arg]),N){var t,n,T,S=arguments[B.arg],A=[],j=[];for(var L in S){var U=S[L];"className"===L||"class"===L&&!C.isSVG?(e.className=U,C.hasClassName=!0):"style"===L?(e.style=U,C.hasStyle=!0):"key"===L?e.key=U:l(L)||s(L)?(T||(T={}),T[L[2].toLowerCase()+L.substring(3)]=U):o(L)?(n||(n={}),j.push(L.toLowerCase()),n[L.toLowerCase()]=U):"children"===L?(e.children=U,C.childrenType=C.childrenType||5):(t||(t={}),A.push(L),t[L]=U)}t&&(e.attrs=t,C.attrKeys=A,C.hasAttrs=!0),n&&(e.events=n,C.eventKeys=j,C.hasEvents=!0),T&&(e.hooks=T,C.hasHooks=!0)}else f===!0?e.attrs=arguments[u.arg]:e.attrs=u,p===!0&&(e.hooks=arguments[m.arg]),h===!0&&(e.events=arguments[g.arg]),b===!0?e.key=arguments[v.arg]:e.key=v,x===!0?e.style=arguments[y.arg]:e.style=C.style,w===!0?e.className=arguments[k.arg]:e.className=C.className;return e}}function d(e){this.text=e,this.dom=null}function u(e){return new d(e)}function f(e,t){var n;return n=t===!0?document.createElementNS("http://www.w3.org/2000/svg",e):document.createElement(e)}function m(e,t,n){if(g){var r=f(e,n);return t&&p(t,r),r}return null}function p(n,r){for(var a=Object.keys(n),i=0;i<a.length;i++){var o=a[i],l=n[o];"className"===o?r.className=l:l===!0?r.setAttribute(o,o):e(l)||l===!1||t(o)||r.setAttribute(o,l)}}var g="undefined"!=typeof window&&window.document;a.prototype={setAttrs:function(e){return this.attrs=e,this},setTag:function(e){return this.tag=e,this},setStyle:function(e){return this.style=e,this},setClassName:function(e){return this.className=e,this},setChildren:function(e){return this.children=e,this},setHooks:function(e){return this.hooks=e,this},setEvents:function(e){return this.events=e,this},setKey:function(e){return this.key=e,this}};var h={createBlueprint:c,createVNode:i,createVText:u,universal:{createElement:m}};return h})}),h=g;e(".alert{border-radius:.1875em;color:#f5f5f5;display:-ms-flexbox;display:-webkit-box;display:flex;margin-bottom:1.5em;padding:1em;-webkit-transition:.3s;transition:.3s}.alert.collapse{padding:0;margin:0;visibility:collapse}.alert.collapse a,.alert.collapse span{display:none}.alert.success{background-color:#8a9939}.alert.error{background-color:#c12834}.alert span{-ms-flex:0.9;-webkit-box-flex:0.9;flex:0.9}.alert span a{font-size:1em;font-weight:400;text-decoration:underline}.alert a{-ms-flex-item-align:end;align-self:flex-end;color:#f5f5f5;-ms-flex:0.1;-webkit-box-flex:0.1;flex:0.1;font-size:1.2em;font-weight:700;right:1em;text-align:right;-webkit-transition:none;transition:none}",void 0);var v=h.createBlueprint({tag:"div"}),b=h.createBlueprint({tag:"a",attrs:{arg:0},events:{arg:1},children:{arg:2}}),y=h.createBlueprint({tag:"span",children:{arg:0}}),x=h.createBlueprint({tag:"div",className:{arg:0},children:{arg:1}}),k=function(e){var t=v(),r=function(e){var t=e.currentTarget.parentElement;return n(t)},a=e.success?"alert success":"alert error";return t=x(a,[y(e.message),b({href:"#"},{onclick:r},"×")]),setTimeout(function(){var e=document.getElementsByClassName("alert")[0];n(e)},7e3),t},w=h.createBlueprint({tag:"a",attrs:{arg:0},events:{arg:1},children:{arg:2}}),B=h.createBlueprint({tag:"li",className:{arg:0},attrs:{arg:1},children:{arg:2}}),N=function(e){var t=e.active?"selected":"";return B(t,{role:"presentation"},w({href:"#","aria-controls":e.name,role:"tab","data-toggle":"tab"},{onclick:function(){return s(e.name)}},e.name))};e("form{letter-spacing:.03125em}form h2{border-bottom:1px solid #cbcfd1;font-size:1.25em;margin:.4375em 0;padding:.4375em 0}form .form-container{background-color:#eeeff0;border-radius:.1875em;display:-ms-flexbox;display:-webkit-box;display:flex;margin-bottom:.25em;padding:2em 4em}form .form-container.vertical{-ms-flex-direction:column;-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column}form .form-container.vertical label{margin:.5em 0}form .form-container.buildkite [for=ciAddress],form .form-container.buildkite [name=ciAddress],form .form-container.buildkite [name=ciUsernameCircleCi],form .form-container.buildkite [name=ciUsernameTravis],form .form-container.circleci [for=ciAddress],form .form-container.circleci [name=ciAddress],form .form-container.circleci [name=ciUsernameBuildkite],form .form-container.circleci [name=ciUsernameTravis],form .form-container.jenkins [for=ciApiToken],form .form-container.jenkins [for=ciUsername],form .form-container.jenkins [name=ciApiToken],form .form-container.jenkins [name=ciUsername],form .form-container.travisci [for=ciAddress],form .form-container.travisci [for=ciApiToken],form .form-container.travisci [name=ciAddress],form .form-container.travisci [name=ciApiToken],form .form-container.travisci [name=ciUsernameBuildkite],form .form-container.travisci [name=ciUsernameCircleCi]{display:none;visibility:hidden}form .form-container .fieldset{display:-ms-flexbox;display:-webkit-box;display:flex}form .form-container .fieldset label{-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;margin:0}form .form-container .fieldset.hidden{height:0;opacity:0;overflow:hidden;width:0}form .form-container label{-ms-flex:1;-webkit-box-flex:1;flex:1}form .form-container label span{font-weight:700}form .form-container input,form .form-container select{border:1px solid #ccc;box-sizing:border-box;color:#333;-ms-flex:1;-webkit-box-flex:1;flex:1;padding:.625em;margin:.3125em 0}form .form-container input:focus,form .form-container select:focus{border-color:#00b6f0}form .form-container .full-length{min-width:100%}form .form-container input[type=checkbox],form .form-container input[type=radio]{-ms-flex-item-align:start;align-self:flex-start;border:none;cursor:pointer;-ms-flex-positive:0.1;-webkit-box-flex:0.1;flex-grow:0.1;padding:0}form .form-container input[type=checkbox]+label,form .form-container input[type=radio]+label{cursor:pointer}form .form-container input[type=checkbox]:not(old),form .form-container input[type=radio]:not(old){font-size:1em;margin:0;opacity:0;width:2em}form .form-container input[type=checkbox]:not(old)+label,form .form-container input[type=radio]:not(old)+label{display:inline-block;margin-left:-2em;line-height:1.5em}form .form-container input[type=checkbox]:not(old)+label>span,form .form-container input[type=radio]:not(old)+label>span{background:transparent;border:.125em solid #838688;border-radius:.25em;display:inline-block;height:.875em;margin:.25em .5em .25em .25em;vertical-align:bottom;width:.875em}form .form-container input[type=checkbox]:not(old):checked+label>span,form .form-container input[type=radio]:not(old):checked+label>span{border-color:#00b6f0}form .form-container input[type=checkbox]:not(old):checked+label>span:before,form .form-container input[type=radio]:not(old):checked+label>span:before{color:#00b6f0;display:block;font-size:.875em;font-weight:700;line-height:1em;text-align:center;width:1em}form .form-container input[type=checkbox]:not(old):checked+label>span>span,form .form-container input[type=radio]:not(old):checked+label>span>span{background-color:#00b6f0;border:.0625em solid #00b6f0;display:block;height:.5em;margin:.125em;width:.5em}form .form-container input[type=radio]:not(old)+label>span,form .form-container input[type=radio]:not(old):checked+label>span>span{border-radius:1em}form .form-container .controls{display:-ms-flexbox;display:-webkit-box;display:flex;-ms-flex:1;-webkit-box-flex:1;flex:1}form .static-configuration,form .wireless-connection{-webkit-transition:.2s;transition:.2s}form .static-configuration .fieldset,form .wireless-connection .fieldset{margin:.5em 0}form .static-configuration label,form .wireless-connection label{text-align:right}form .static-configuration label.checkbox,form .wireless-connection label.checkbox{cursor:pointer;margin-left:50%}form .static-configuration input[type=password],form .static-configuration input[type=text],form .wireless-connection input[type=password],form .wireless-connection input[type=text]{margin-left:1em}form .static-configuration.shown,form .wireless-connection.shown{height:auto;opacity:1;overflow:auto;width:auto}form .static-configuration.hidden,form .wireless-connection.hidden{height:0;opacity:0;overflow:hidden;width:0}form .actions{display:-ms-flexbox;display:-webkit-box;display:flex;-ms-flex-align:center;-webkit-box-align:center;align-items:center;margin-top:1em}form .actions button{-ms-flex:0.1;-webkit-box-flex:0.1;flex:0.1}form .actions small{color:#838688;-ms-flex:0.9;-webkit-box-flex:0.9;flex:0.9;text-align:right}form button{background-color:#00b6f0;border-radius:.1875em;color:#fff;font-size:1.285em;font-weight:700;line-height:1;padding:1em 3em;text-transform:capitalize}form button:hover{background-color:#5894ce}form button.small{font-size:80%;margin:.5em 0}form button.secondary{background-color:#a2b842}form button.secondary:hover{background-color:#8a9939}form button.danger{background-color:#a41e22}form button.danger:hover{background-color:#76141b}",void 0);
-var C=function(e,t){for(var n=0;n<e.length;n++){var r=e[n],a=!1;if("radio"===r.type&&r.checked&&(t[r.name]=e[r.name].value),"radio"!==r.type){if("undefined"!=typeof t[r.name]&&!Array.isArray(t[r.name])){a=!0;var i=t[r.name];delete t[r.name],t[r.name]=[],t[r.name].push(i)}Array.isArray(t[r.name])&&(a=!0);var o="checkbox"===r.type?r.checked:r.value;a?t[r.name].push(o):t[r.name]=o}}},T=h.createBlueprint({tag:"small",children:{arg:0}}),S=h.createBlueprint({tag:"button",attrs:{type:"submit"},children:{arg:0}}),A=h.createBlueprint({tag:"div",className:"actions",children:{arg:0}}),j=h.createBlueprint({tag:"input",attrs:{arg:0}}),L=h.createBlueprint({tag:"label",attrs:{for:"ciApiToken"},children:{arg:0}}),U=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),_=h.createBlueprint({tag:"input",attrs:{arg:0}}),E=h.createBlueprint({tag:"label",attrs:{for:"ciUsername",name:"ciUsernameTravis"},children:{arg:0}}),D=h.createBlueprint({tag:"label",attrs:{for:"ciUsername",name:"ciUsernameCircleCi"},children:{arg:0}}),M=h.createBlueprint({tag:"label",attrs:{for:"ciUsername",name:"ciUsernameBuildkite"},children:{arg:0}}),O=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),I=h.createBlueprint({tag:"input",attrs:{arg:0}}),z=h.createBlueprint({tag:"span",children:{arg:0}}),W=h.createBlueprint({tag:"label",attrs:{for:"ciAddress"},children:{arg:0}}),V=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),H=h.createBlueprint({tag:"option",attrs:{value:"travisci"},children:{arg:0}}),G=h.createBlueprint({tag:"option",attrs:{value:"buildkite"},children:{arg:0}}),K=h.createBlueprint({tag:"option",attrs:{value:"circleci"},children:{arg:0}}),R=h.createBlueprint({tag:"option",attrs:{value:"jenkins"},children:{arg:0}}),Y=h.createBlueprint({tag:"select",attrs:{arg:0},events:{arg:1},children:{arg:2}}),P=h.createBlueprint({tag:"span",children:{arg:0}}),q=h.createBlueprint({tag:"label",attrs:{for:"ciTool"},children:{arg:0}}),X=h.createBlueprint({tag:"div",className:{arg:0},children:{arg:1}}),F=h.createBlueprint({tag:"form",events:{arg:0},children:{arg:1}}),J=function(e,t){var n=function(e){var t=e.currentTarget;t.parentElement.classList.remove(t.parentElement.classList.item(2)),t.parentElement.classList.add(t.value);for(var n=t.parentElement.getElementsByTagName("input"),r=0;r<n.length;r++)n[r].required=null!==n[r].offsetParent},r=function(e){var t={save:"ci",payload:{}};return C(e.currentTarget.elements,t.payload),c(t)};return F({onsubmit:r},[X("form-container vertical "+e.tool,[q([P("CI tool")," you are using"]),Y({required:!0,id:"ciTool",name:"ciTool",value:e.tool},{onchange:n},[R("Jenkins"),K("Circle CI"),G("Buildkite"),H("Travis CI")]),V([W(["Address of the ",z("CI server you want to connect to")]),I({type:"text",id:"ciAddress",placeholder:"http://myci.mycompany",name:"ciAddress",value:e.address})]),O([M("Organization Slug"),D("Team Name"),E("Account"),_({type:"text",id:"ciUsername",name:"ciUsername",value:e.username})]),U([L("API token"),j({type:"text",id:"ciApiToken",placeholder:"",name:"ciApiToken",value:e.apiToken})])]),A([S("Save"),T(["Last updated: ",t])])])};e("form .jobs-container>button{-ms-flex-item-align:end;align-self:flex-end;background-color:#a2b842;margin-right:.5em}form .jobs-container .fieldset{padding:.25em .5em}form .jobs-container .fieldset:hover{background-color:#fff}form .jobs-container .fieldset:hover label{font-weight:700}form .jobs-container .fieldset input,form .jobs-container .fieldset label{-ms-flex:initial;-webkit-box-flex:initial;flex:initial;-ms-flex-positive:initial;flex-grow:0}form .jobs-container .fieldset input[type=text],form .jobs-container .fieldset label[type=text]{-ms-flex:1;-webkit-box-flex:1;flex:1;margin-right:1em}",void 0);var Q=h.createBlueprint({tag:"button",className:"small danger",attrs:{arg:0},events:{arg:1},children:{arg:2}}),Z=h.createBlueprint({tag:"input",attrs:{arg:0}}),$=h.createBlueprint({tag:"span"}),ee=h.createBlueprint({tag:"span",children:{arg:0}}),te=h.createBlueprint({tag:"label",attrs:{arg:0},children:{arg:1}}),ne=h.createBlueprint({tag:"input",attrs:{arg:0}}),re=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),ae=function(e){var t=function(e){e.currentTarget.parentElement.remove()};return re([ne({type:"checkbox",name:"jobActive",id:"jobActive_"+e.index,checked:e.active,value:"jobActive_"+e.index}),te({for:"jobActive_"+e.index},[ee($())," "]),Z({type:"text",name:"jobName",id:"jobName_"+e.index,value:e.name}),Q({type:"button"},{onclick:t},"Remove")])},ie=h.createBlueprint({tag:{arg:0},attrs:{arg:1}}),oe=h.createBlueprint({tag:"small",children:{arg:0}}),le=h.createBlueprint({tag:"button",attrs:{type:"submit"},children:{arg:0}}),se=h.createBlueprint({tag:"div",className:"actions",children:{arg:0}}),ce=h.createBlueprint({tag:"button",className:"small secondary",attrs:{arg:0},events:{arg:1},children:{arg:2}}),de=h.createBlueprint({tag:"span",children:{arg:0}}),ue=h.createBlueprint({tag:"label",children:{arg:0}}),fe=h.createBlueprint({tag:"div",className:"jobs-container form-container vertical",children:{arg:0}}),me=h.createBlueprint({tag:"input",attrs:{arg:0}}),pe=h.createBlueprint({tag:"span",children:{arg:0}}),ge=h.createBlueprint({tag:"label",attrs:{for:"pollRate"},children:{arg:0}}),he=h.createBlueprint({tag:"div",className:"form-container vertical",children:{arg:0}}),ve=h.createBlueprint({tag:"form",events:{arg:0},children:{arg:1}}),be=function(e,t){var n=function(e){var t={save:"jobs",payload:{}};return C(e.currentTarget.elements,t.payload),c(t)},r=function(e){l()},a=e.items.map(function(e,t){return ie(ae,{name:e.name,active:e.active,index:t})});return ve({onsubmit:n},[he([ge(["Rate to ",pe("poll your CI server")," (in seconds)"]),me({type:"number",name:"pollRate",id:"pollRate",value:e.pollrate})]),fe([ue(de("Jobs to monitor")),a,ce({type:"button"},{onclick:r},"Add new job")]),se([le("Save"),oe(["Last updated: ",t])])])},ye=h.createBlueprint({tag:"small",children:{arg:0}}),xe=h.createBlueprint({tag:"button",attrs:{type:"submit"},children:{arg:0}}),ke=h.createBlueprint({tag:"div",className:"actions",children:{arg:0}}),we=h.createBlueprint({tag:"input",attrs:{arg:0}}),Be=h.createBlueprint({tag:"label",attrs:{for:"gateway"},children:{arg:0}}),Ne=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),Ce=h.createBlueprint({tag:"input",attrs:{arg:0}}),Te=h.createBlueprint({tag:"label",attrs:{for:"address"},children:{arg:0}}),Se=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),Ae=h.createBlueprint({tag:"div",className:{arg:0},children:{arg:1}}),je=h.createBlueprint({tag:"span"}),Le=h.createBlueprint({tag:"span",children:{arg:0}}),Ue=h.createBlueprint({tag:"label",attrs:{for:"no"},children:{arg:0}}),_e=h.createBlueprint({tag:"input",attrs:{arg:0},events:{arg:1}}),Ee=h.createBlueprint({tag:"span"}),De=h.createBlueprint({tag:"span",children:{arg:0}}),Me=h.createBlueprint({tag:"label",attrs:{for:"yes"},children:{arg:0}}),Oe=h.createBlueprint({tag:"input",attrs:{arg:0},events:{arg:1}}),Ie=h.createBlueprint({tag:"div",className:"controls",children:{arg:0}}),ze=h.createBlueprint({tag:"span",children:{arg:0}}),We=h.createBlueprint({tag:"label",children:{arg:0}}),Ve=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),He=h.createBlueprint({tag:"div",className:"form-container vertical",children:{arg:0}}),Ge=h.createBlueprint({tag:"span"}),Ke=h.createBlueprint({tag:"span",children:{arg:0}}),Re=h.createBlueprint({tag:"label",attrs:{for:"hidden"},children:{arg:0}}),Ye=h.createBlueprint({tag:"input",attrs:{arg:0}}),Pe=h.createBlueprint({tag:"label",className:"checkbox",children:{arg:0}}),qe=h.createBlueprint({tag:"input",attrs:{arg:0}}),Xe=h.createBlueprint({tag:"label",attrs:{for:"key"},children:{arg:0}}),Fe=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),Je=h.createBlueprint({tag:"input",attrs:{arg:0}}),Qe=h.createBlueprint({tag:"label",attrs:{for:"ssid"},children:{arg:0}}),Ze=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),$e=h.createBlueprint({tag:"div",className:{arg:0},children:{arg:1}}),et=h.createBlueprint({tag:"span"}),tt=h.createBlueprint({tag:"span",children:{arg:0}}),nt=h.createBlueprint({tag:"label",attrs:{for:"ethernet"},children:{arg:0}}),rt=h.createBlueprint({tag:"input",attrs:{arg:0},events:{arg:1}}),at=h.createBlueprint({tag:"span"}),it=h.createBlueprint({tag:"span",children:{arg:0}}),ot=h.createBlueprint({tag:"label",attrs:{for:"wireless"},children:{arg:0}}),lt=h.createBlueprint({tag:"input",attrs:{arg:0},events:{arg:1}}),st=h.createBlueprint({tag:"div",className:"controls",children:{arg:0}}),ct=h.createBlueprint({tag:"span",children:{arg:0}}),dt=h.createBlueprint({tag:"label",children:{arg:0}}),ut=h.createBlueprint({tag:"div",className:"fieldset",children:{arg:0}}),ft=h.createBlueprint({tag:"div",className:"form-container vertical",children:{arg:0}}),mt=h.createBlueprint({tag:"input",className:"full-length",attrs:{arg:0}}),pt=h.createBlueprint({tag:"span",children:{arg:0}}),gt=h.createBlueprint({tag:"label",attrs:{for:"hostname"},children:{arg:0}}),ht=h.createBlueprint({tag:"div",className:"form-container vertical",children:{arg:0}}),vt=h.createBlueprint({tag:"form",attrs:{arg:0},events:{arg:1},children:{arg:2}}),bt=function(e,t){var n=function(e){var t=e.currentTarget.parentNode.parentNode.parentNode,n=t.getElementsByClassName("wireless-connection")[0];"wireless"===e.currentTarget.value?(n.classList.remove("hidden"),n.classList.add("shown")):(n.classList.remove("shown"),n.classList.add("hidden"))},r=function(e){var t=e.currentTarget.parentNode.parentNode.parentNode,n=t.getElementsByClassName("static-configuration")[0];"false"===e.currentTarget.value?(n.classList.remove("hidden"),n.classList.add("shown")):(n.classList.remove("shown"),n.classList.add("hidden"))},a=function(e){var t={save:"network",payload:{}};return C(e.currentTarget.elements,t.payload),c(t)},i="wireless"!==e.connectionType?"hidden":"shown",o=e.dhcp===!0?"hidden":"shown";return vt({name:"networkForm"},{onsubmit:a},[ht([gt(["Name of ",pt("this device")," on the network"]),mt({required:!0,type:"text",id:"hostname",name:"hostname",placeholder:"e.g. mycompany-build-lights",value:e.hostname})]),ft([ut([dt(["Select your ",ct("preferred connection type")]),st([lt({type:"radio",name:"connectionType",checked:"wireless"===e.connectionType?"checked":"",value:"wireless",id:"wireless"},{onchange:n}),ot([it(at()),"Wireless"]),rt({type:"radio",name:"connectionType",checked:"ethernet"===e.connectionType?"checked":"",value:"ethernet",id:"ethernet"},{onchange:n}),nt([tt(et()),"Ethernet"])])]),$e("wireless-connection "+i,[Ze([Qe("SSID"),Je({type:"text",id:"ssid",name:"ssid",value:e.wireless.ssid})]),Fe([Xe("Password"),qe({type:"password",id:"key",name:"key",value:e.wireless.key})]),Pe([Ye({type:"checkbox",id:"hidden",name:"hidden",value:e.wireless.hidden,checked:e.wireless.hidden?"checked":""}),Re([Ke(Ge()),"Hidden network?"])])])]),He([Ve([We(["Assign network ",ze("IP address")]),Ie([Oe({type:"radio",name:"useDhcp",checked:e.dhcp?"":"checked",value:"false",id:"yes"},{onchange:r}),Me([De(Ee()),"Yes"]),_e({type:"radio",name:"useDhcp",checked:e.dhcp?"checked":"",value:"true",id:"no"},{onchange:r}),Ue([Le(je()),"No"])])]),Ae("static-configuration "+o,[Se([Te("Address"),Ce({type:"text",name:"address",id:"address",value:e.address,placeholder:"192.168.0.10/24"})]),Ne([Be("Gateway"),we({type:"text",name:"gateway",id:"gateway",value:e.gateway,placeholder:"192.168.0.1"})])])]),ke([xe("Save"),ye(["Last updated: ",t])])])},yt=h.createBlueprint({tag:"small",children:{arg:0}}),xt=h.createBlueprint({tag:"button",attrs:{type:"submit"},children:{arg:0}}),kt=h.createBlueprint({tag:"div",className:"actions",children:{arg:0}}),wt=h.createBlueprint({tag:"input",attrs:{arg:0}}),Bt=h.createBlueprint({tag:"label",attrs:{for:"numLeds"},children:{arg:0}}),Nt=h.createBlueprint({tag:"option",attrs:{value:"adafruit_lpd8806"},children:{arg:0}}),Ct=h.createBlueprint({tag:"option",attrs:{value:"epistar_lpd8806"},children:{arg:0}}),Tt=h.createBlueprint({tag:"select",attrs:{arg:0},children:{arg:1}}),St=h.createBlueprint({tag:"span",children:{arg:0}}),At=h.createBlueprint({tag:"label",attrs:{for:"ledType"},children:{arg:0}}),jt=h.createBlueprint({tag:"div",className:"form-container vertical",children:{arg:0}}),Lt=h.createBlueprint({tag:"form",events:{arg:0},children:{arg:1}}),Ut=function(e,t){var n=function(e){var t={save:"led",payload:{}};return C(e.currentTarget.elements,t.payload),c(t)};return Lt({onsubmit:n},[jt([At(["Which ",St("LED strip")," you are using"]),Tt({required:!0,id:"ledType",name:"ledType",value:e.ledType},[Ct("Epistar LPD8806"),Nt("Adafruit LPD8806")]),Bt("Number of LEDs on your strip"),wt({type:"number",required:!0,id:"numLeds",name:"numLeds",value:e.numLeds})]),kt([xt("Save"),yt(["Last updated: ",t])])])},_t=h.createBlueprint({tag:"div",className:{arg:0},children:{arg:1}}),Et=function(e){var t=e.active?"tab-content-container":"hidden tab-content-container",n=void 0;switch(e.name){case"network":n=bt(e.configuration,e.lastUpdated);break;case"ci server":n=J(e.configuration,e.lastUpdated);break;case"led hardware":n=Ut(e.configuration,e.lastUpdated);break;case"jobs to monitor":n=be(e.configuration,e.lastUpdated);break;default:n="Nothing to see here."}return _t(t,n)},Dt=h.createBlueprint({tag:{arg:0},attrs:{arg:1}}),Mt=h.createBlueprint({tag:"div",className:"tab-content container",children:{arg:0}}),Ot=h.createBlueprint({tag:"ul",className:"container",children:{arg:0}}),It=h.createBlueprint({tag:"div",className:"tab-nav-container",children:{arg:0}}),zt=h.createBlueprint({tag:"div",className:"tab",children:{arg:0}}),Wt=function(e){var t=e.tools.filter(function(e){return e.active}).map(function(t){return{name:t.name,active:t.name===e.selectedTool,configuration:t.configuration,lastUpdated:new Date(e.lastUpdated).toString()}}),n=t.map(N),r=t.map(Et),a="";return e.result&&(a=Dt(k,{success:e.result.success,message:e.result.message})),zt([It(Ot(n)),Mt([a,r])])},Vt=function(e){document.getElementById("supervisor").href="http://"+location.hostname+":9001",fetch("/model").then(function(e){return e.json()}).then(function(e){u(d(e))})};"complete"===document.readyState||"loading"!==document.readyState&&!document.documentElement.doScroll?Vt():document.addEventListener("DOMContentLoaded",Vt);for(var Ht=function(e){var t=e.currentTarget.href,n=t.endsWith("shutdown"),r=Number(e.currentTarget.dataset.countdown),a=document.getElementById("representation");return a.classList.add("waiting"),a.innerHTML='<div class="message"><p>Please wait...</p></div>',fetch(t).then(function(e){if(!e.ok)return a.classList.add("error"),void(a.innerHTML='<div class="message"><p>Could not execute.<br/>Please restart manually.<br/><br/><a href="#" onclick="location.reload()">Reload</a></p></div>');var t=setInterval(function(){var e="Reboot underway. Will refresh in "+r+" seconds.";n&&(e="Shutdown underway. You can unplug your Raspberry Pi in "+r+" seconds."),a.innerHTML='<div class="message"><p>'+e+"</p></div>",r-=1,0===r&&(clearInterval(t),n?a.innerHTML='<div class="message"><p>You can now unplug your Raspberry Pi.</p></div>':location.reload())},1e3)}),!1},Gt=document.getElementsByClassName("deviceAction"),Kt=0;Kt<Gt.length;Kt++)Gt[Kt].onclick||(Gt[Kt].onclick=Ht)}();
+(function () {
+'use strict';
+
+function __$styleInject(css, returnValue) {
+  if (typeof document === 'undefined') {
+    return returnValue;
+  }
+  css = css || '';
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  if (style.styleSheet){
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+  head.appendChild(style);
+  return returnValue;
+}
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+
+
+
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var infernoDom$1 = createCommonjsModule(function (module, exports) {
+/*!
+ * inferno-dom v0.7.27
+ * (c) 2016 Dominic Gannaway
+ * Released under the MIT License.
+ */
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.InfernoDOM = factory());
+}(commonjsGlobal, (function () { 'use strict';
+
+function addChildrenToProps(children, props) {
+	if (!isNullOrUndefined(children)) {
+		var isChildrenArray = isArray(children);
+		if (isChildrenArray && children.length > 0 || !isChildrenArray) {
+			if (props) {
+				props = Object.assign({}, props, { children: children });
+			} else {
+				props = {
+					children: children
+				};
+			}
+		}
+	}
+	return props;
+}
+
+var NO_RENDER = 'NO_RENDER';
+
+// Runs only once in applications lifetime
+var isBrowser = typeof window !== 'undefined' && window.document;
+
+function isArray(obj) {
+	return obj instanceof Array;
+}
+
+function isStatefulComponent(obj) {
+	return obj.prototype && obj.prototype.render !== undefined;
+}
+
+function isStringOrNumber(obj) {
+	return isString(obj) || isNumber(obj);
+}
+
+function isNullOrUndefined(obj) {
+	return isUndefined(obj) || isNull(obj);
+}
+
+function isInvalidNode(obj) {
+	return isNull(obj) || obj === false || obj === true || isUndefined(obj);
+}
+
+function isFunction(obj) {
+	return typeof obj === 'function';
+}
+
+function isString(obj) {
+	return typeof obj === 'string';
+}
+
+function isNumber(obj) {
+	return typeof obj === 'number';
+}
+
+function isNull(obj) {
+	return obj === null;
+}
+
+function isTrue(obj) {
+	return obj === true;
+}
+
+function isUndefined(obj) {
+	return obj === undefined;
+}
+
+function deepScanChildrenForNode(children, node) {
+	if (!isInvalidNode(children)) {
+		if (isArray(children)) {
+			for (var i = 0; i < children.length; i++) {
+				var child = children[i];
+
+				if (!isInvalidNode(child)) {
+					if (child === node) {
+						return true;
+					} else if (child.children) {
+						return deepScanChildrenForNode(child.children, node);
+					}
+				}
+			}
+		} else {
+			if (children === node) {
+				return true;
+			} else if (children.children) {
+				return deepScanChildrenForNode(children.children, node);
+			}
+		}
+	}
+	return false;
+}
+
+function getRefInstance$1(node, instance) {
+	var children = instance.props.children;
+
+	if (deepScanChildrenForNode(children, node)) {
+		return getRefInstance$1(node, instance._parentComponent);
+	}
+	return instance;
+}
+
+var recyclingEnabled = true;
+
+function recycle(node, bp, lifecycle, context, instance) {
+	if (bp !== undefined) {
+		var pool = bp.pool;
+		var recycledNode = pool.pop();
+
+		if (!isNullOrUndefined(recycledNode)) {
+			patch(recycledNode, node, null, lifecycle, context, instance, bp.isSVG);
+			return node.dom;
+		}
+	}
+	return null;
+}
+
+function pool(node) {
+	var bp = node.bp;
+
+	if (!isNullOrUndefined(bp)) {
+		bp.pool.push(node);
+		return true;
+	}
+	return false;
+}
+
+function unmount(input, parentDom) {
+	if (isVList(input)) {
+		unmountVList(input, parentDom, true);
+	} else if (isVNode(input)) {
+		unmountVNode(input, parentDom, false);
+	}
+}
+
+function unmountVList(vList, parentDom, removePointer) {
+	var items = vList.items;
+	var itemsLength = items.length;
+	var pointer = vList.pointer;
+
+	if (itemsLength > 0) {
+		for (var i = 0; i < itemsLength; i++) {
+			var item = items[i];
+
+			if (isVList(item)) {
+				unmountVList(item, parentDom, true);
+			} else {
+				if (parentDom) {
+					removeChild(parentDom, item.dom);
+				}
+				unmount(item, null);
+			}
+		}
+	}
+	if (parentDom && removePointer) {
+		removeChild(parentDom, pointer);
+	}
+}
+
+function unmountVNode(node, parentDom, shallow) {
+	var instance = node.instance;
+	var instanceHooks = null;
+	var instanceChildren = null;
+
+	if (!isNullOrUndefined(instance)) {
+		instanceHooks = instance.hooks;
+		instanceChildren = instance.children;
+
+		if (instance.render !== undefined) {
+			instance.componentWillUnmount();
+			instance._unmounted = true;
+			componentToDOMNodeMap.delete(instance);
+			!shallow && unmount(instance._lastNode, null);
+		}
+	}
+	var hooks = node.hooks || instanceHooks;
+
+	if (!isNullOrUndefined(hooks)) {
+		if (!isNullOrUndefined(hooks.willDetach)) {
+			hooks.willDetach(node.dom);
+		}
+		if (!isNullOrUndefined(hooks.componentWillUnmount)) {
+			hooks.componentWillUnmount(node.dom, hooks);
+		}
+	}
+	var children = (isNullOrUndefined(instance) ? node.children : null) || instanceChildren;
+
+	if (!isNullOrUndefined(children)) {
+		if (isArray(children)) {
+			for (var i = 0; i < children.length; i++) {
+				unmount(children[i], null);
+			}
+		} else {
+			unmount(children, null);
+		}
+	}
+}
+
+function VText(text) {
+	this.text = text;
+	this.dom = null;
+}
+
+function VPlaceholder() {
+	this.placeholder = true;
+	this.dom = null;
+}
+
+function VList(items) {
+	this.dom = null;
+	this.pointer = null;
+	this.items = items;
+}
+
+function createVText(text) {
+	return new VText(text);
+}
+
+function createVPlaceholder() {
+	return new VPlaceholder();
+}
+
+function createVList(items) {
+	return new VList(items);
+}
+
+function constructDefaults(string, object, value) {
+	/* eslint no-return-assign: 0 */
+	string.split(',').forEach(function (i) { return object[i] = value; });
+}
+
+var xlinkNS = 'http://www.w3.org/1999/xlink';
+var xmlNS = 'http://www.w3.org/XML/1998/namespace';
+var strictProps = {};
+var booleanProps = {};
+var namespaces = {};
+var isUnitlessNumber = {};
+
+constructDefaults('xlink:href,xlink:arcrole,xlink:actuate,xlink:role,xlink:titlef,xlink:type', namespaces, xlinkNS);
+constructDefaults('xml:base,xml:lang,xml:space', namespaces, xmlNS);
+constructDefaults('volume,value', strictProps, true);
+constructDefaults('muted,scoped,loop,open,checked,default,capture,disabled,selected,readonly,multiple,required,autoplay,controls,seamless,reversed,allowfullscreen,novalidate', booleanProps, true);
+constructDefaults('animationIterationCount,borderImageOutset,borderImageSlice,borderImageWidth,boxFlex,boxFlexGroup,boxOrdinalGroup,columnCount,flex,flexGrow,flexPositive,flexShrink,flexNegative,flexOrder,gridRow,gridColumn,fontWeight,lineClamp,lineHeight,opacity,order,orphans,tabSize,widows,zIndex,zoom,fillOpacity,floodOpacity,stopOpacity,strokeDasharray,strokeDashoffset,strokeMiterlimit,strokeOpacity,strokeWidth,', isUnitlessNumber, true);
+
+function isVText(o) {
+	return o.text !== undefined;
+}
+
+function isVPlaceholder(o) {
+	return o.placeholder === true;
+}
+
+function isVList(o) {
+	return o.items !== undefined;
+}
+
+function isVNode(o) {
+	return o.tag !== undefined || o.bp !== undefined;
+}
+
+function insertOrAppend(parentDom, newNode, nextNode) {
+	if (isNullOrUndefined(nextNode)) {
+		parentDom.appendChild(newNode);
+	} else {
+		parentDom.insertBefore(newNode, nextNode);
+	}
+}
+
+function replaceVListWithNode(parentDom, vList, dom) {
+	var pointer = vList.pointer;
+
+	unmountVList(vList, parentDom, false);
+	replaceNode(parentDom, dom, pointer);
+}
+
+function documentCreateElement(tag, isSVG) {
+	var dom;
+
+	if (isSVG === true) {
+		dom = document.createElementNS('http://www.w3.org/2000/svg', tag);
+	} else {
+		dom = document.createElement(tag);
+	}
+	return dom;
+}
+
+function appendText(text, parentDom, singleChild) {
+	if (parentDom === null) {
+		return document.createTextNode(text);
+	} else {
+		if (singleChild) {
+			if (text !== '') {
+				parentDom.textContent = text;
+				return parentDom.firstChild;
+			} else {
+				var textNode = document.createTextNode('');
+
+				parentDom.appendChild(textNode);
+				return textNode;
+			}
+		} else {
+			var textNode$1 = document.createTextNode(text);
+
+			parentDom.appendChild(textNode$1);
+			return textNode$1;
+		}
+	}
+}
+
+function replaceWithNewNode(lastNode, nextNode, parentDom, lifecycle, context, instance, isSVG) {
+	var lastInstance = null;
+	var instanceLastNode = lastNode._lastNode;
+
+	if (!isNullOrUndefined(instanceLastNode)) {
+		lastInstance = lastNode;
+		lastNode = instanceLastNode;
+	}
+	unmount(lastNode, false);
+	var dom = mount(nextNode, null, lifecycle, context, instance, isSVG);
+
+	nextNode.dom = dom;
+	replaceNode(parentDom, dom, lastNode.dom);
+	if (lastInstance !== null) {
+		lastInstance._lastNode = nextNode;
+	}
+}
+
+function replaceNode(parentDom, nextDom, lastDom) {
+	parentDom.replaceChild(nextDom, lastDom);
+}
+
+function normalise(object) {
+	if (isStringOrNumber(object)) {
+		return createVText(object);
+	} else if (isInvalidNode(object)) {
+		return createVPlaceholder();
+	} else if (isArray(object)) {
+		return createVList(object);
+	}
+	return object;
+}
+
+function normaliseChild(children, i) {
+	var child = children[i];
+
+	return children[i] = normalise(child);
+}
+
+function remove(node, parentDom) {
+	if (isVList(node)) {
+		return unmount(node, parentDom);
+	}
+	var dom = node.dom;
+	if (dom === parentDom) {
+		dom.innerHTML = '';
+	} else {
+		removeChild(parentDom, dom);
+		if (recyclingEnabled) {
+			pool(node);
+		}
+	}
+	unmount(node, false);
+}
+
+function removeChild(parentDom, dom) {
+	parentDom.removeChild(dom);
+}
+
+function removeEvents(events, lastEventKeys, dom) {
+	var eventKeys = lastEventKeys || Object.keys(events);
+
+	for (var i = 0; i < eventKeys.length; i++) {
+		var event = eventKeys[i];
+
+		dom[event] = null;
+	}
+}
+
+// TODO: for node we need to check if document is valid
+function getActiveNode() {
+	return document.activeElement;
+}
+
+function removeAllChildren(dom, children) {
+	if (recyclingEnabled) {
+		var childrenLength = children.length;
+
+		if (childrenLength > 5) {
+			for (var i = 0; i < childrenLength; i++) {
+				var child = children[i];
+
+				if (!isInvalidNode(child)) {
+					pool(child);
+				}
+			}
+		}
+	}
+	dom.textContent = '';
+}
+
+function resetActiveNode(activeNode) {
+	if (activeNode !== null && activeNode !== document.body && document.activeElement !== activeNode) {
+		activeNode.focus(); // TODO: verify are we doing new focus event, if user has focus listener this might trigger it
+	}
+}
+
+function isKeyed(lastChildren, nextChildren) {
+	if (lastChildren.complex) {
+		return false;
+	}
+	return nextChildren.length && !isNullOrUndefined(nextChildren[0]) && !isNullOrUndefined(nextChildren[0].key)
+		&& lastChildren.length && !isNullOrUndefined(lastChildren[0]) && !isNullOrUndefined(lastChildren[0].key);
+}
+
+function selectOptionValueIfNeeded(vdom, values) {
+	if (vdom.tag !== 'option') {
+		for (var i = 0, len = vdom.children.length; i < len; i++) {
+			selectOptionValueIfNeeded(vdom.children[i], values);
+		}
+		// NOTE! Has to be a return here to catch optGroup elements
+		return;
+	}
+
+	var value = vdom.attrs && vdom.attrs.value;
+
+	if (values[value]) {
+		vdom.attrs = vdom.attrs || {};
+		vdom.attrs.selected = 'selected';
+		vdom.dom.selected = true;
+	} else {
+		vdom.dom.selected = false;
+	}
+}
+
+function selectValue(vdom) {
+	var value = vdom.attrs && vdom.attrs.value;
+
+	var values = {};
+	if (isArray(value)) {
+		for (var i = 0, len = value.length; i < len; i++) {
+			values[value[i]] = value[i];
+		}
+	} else {
+		values[value] = value;
+	}
+	for (var i$1 = 0, len$1 = vdom.children.length; i$1 < len$1; i$1++) {
+		selectOptionValueIfNeeded(vdom.children[i$1], values);
+	}
+
+	if (vdom.attrs && vdom.attrs[value]) {
+		delete vdom.attrs.value; // TODO! Avoid deletion here. Set to null or undef. Not sure what you want to usev
+	}
+}
+
+function handleAttachedHooks(hooks, lifecycle, dom) {
+	if (!isNullOrUndefined(hooks.created)) {
+		hooks.created(dom);
+	}
+	if (!isNullOrUndefined(hooks.attached)) {
+		lifecycle.addListener(function () {
+			hooks.attached(dom);
+		});
+	}
+}
+
+function setValueProperty(nextNode) {
+	var value = nextNode.attrs.value;
+	if (!isNullOrUndefined(value)) {
+		nextNode.dom.value = value;
+	}
+}
+
+function setFormElementProperties(nextTag, nextNode) {
+	if (nextTag === 'input' && nextNode.attrs) {
+		var inputType = nextNode.attrs.type;
+		if (inputType === 'text') {
+			setValueProperty(nextNode);
+		} else if (inputType === 'checkbox' || inputType === 'radio') {
+			var checked = nextNode.attrs.checked;
+			nextNode.dom.checked = !!checked;
+		}
+	} else if (nextTag === 'textarea') {
+		setValueProperty(nextNode);
+	}
+}
+
+function mount(input, parentDom, lifecycle, context, instance, isSVG) {
+	if (isVPlaceholder(input)) {
+		return mountVPlaceholder(input, parentDom);
+	} else if (isVText(input)) {
+		return mountVText(input, parentDom);
+	} else if (isVList(input)) {
+		return mountVList(input, parentDom, lifecycle, context, instance, isSVG);
+	} else if (isVNode(input)) {
+		return mountVNode$1(input, parentDom, lifecycle, context, instance, isSVG);
+	} else {
+		var normalisedInput = normalise(input);
+
+		if (input !== normalisedInput) {
+			return mount(normalisedInput, parentDom, lifecycle, context, instance, isSVG);
+		} else {
+			throw new Error(("Inferno Error: invalid object \"" + (typeof input) + "\" passed to mount()"));
+		}
+	}
+}
+
+function mountVNode$1(vNode, parentDom, lifecycle, context, instance, isSVG) {
+	var bp = vNode.bp;
+
+	if (isUndefined(bp)) {
+		return mountVNodeWithoutBlueprint(vNode, parentDom, lifecycle, context, instance, isSVG);
+	} else {
+		if (recyclingEnabled) {
+			var dom = recycle(vNode, bp, lifecycle, context, instance);
+
+			if (!isNull(dom)) {
+				if (!isNull(parentDom)) {
+					parentDom.appendChild(dom);
+				}
+				return dom;
+			}
+		}
+		return mountVNodeWithBlueprint(vNode, bp, parentDom, lifecycle, context, instance);
+	}
+}
+
+function mountVList(vList, parentDom, lifecycle, context, instance, isSVG) {
+	var items = vList.items;
+	var pointer = document.createTextNode('');
+	var dom = document.createDocumentFragment();
+
+	mountArrayChildren(items, dom, lifecycle, context, instance, isSVG);
+	vList.pointer = pointer;
+	vList.dom = dom;
+	dom.appendChild(pointer);
+	if (parentDom) {
+		insertOrAppend(parentDom, dom);
+	}
+	return dom;
+}
+
+function mountVText(vText, parentDom) {
+	var dom = document.createTextNode(vText.text);
+
+	vText.dom = dom;
+	if (parentDom) {
+		insertOrAppend(parentDom, dom);
+	}
+	return dom;
+}
+
+function mountVPlaceholder(vPlaceholder, parentDom) {
+	var dom = document.createTextNode('');
+
+	vPlaceholder.dom = dom;
+	if (parentDom) {
+		insertOrAppend(parentDom, dom);
+	}
+	return dom;
+}
+
+function handleSelects(node) {
+	if (node.tag === 'select') {
+		selectValue(node);
+	}
+}
+
+function mountBlueprintAttrs(node, bp, dom, instance) {
+	handleSelects(node);
+	var attrs = node.attrs;
+
+	if (isNull(bp.attrKeys)) {
+		var newKeys = Object.keys(attrs);
+		bp.attrKeys = bp.attrKeys ? bp.attrKeys.concat(newKeys) : newKeys;
+	}
+	var attrKeys = bp.attrKeys;
+
+	mountAttributes(node, attrs, attrKeys, dom, instance);
+}
+
+function mountBlueprintEvents(node, bp, dom) {
+	var events = node.events;
+
+	if (isNull(bp.eventKeys)) {
+		bp.eventKeys = Object.keys(events);
+	}
+	var eventKeys = bp.eventKeys;
+
+	mountEvents(events, eventKeys, dom);
+}
+
+function mountVNodeWithBlueprint(node, bp, parentDom, lifecycle, context, instance) {
+	var tag = node.tag;
+
+	if (isTrue(bp.isComponent)) {
+		return mountComponent(node, tag, node.attrs || {}, node.hooks, node.children, instance, parentDom, lifecycle, context);
+	}
+	var dom = documentCreateElement(bp.tag, bp.isSVG);
+
+	node.dom = dom;
+	if (isTrue(bp.hasHooks)) {
+		handleAttachedHooks(node.hooks, lifecycle, dom);
+	}
+	if (isTrue(bp.lazy)) {
+		handleLazyAttached(node, lifecycle, dom);
+	}
+	var children = node.children;
+	// bp.childrenType:
+	// 0: no children
+	// 1: text node
+	// 2: single child
+	// 3: multiple children
+	// 4: multiple children (keyed)
+	// 5: variable children (defaults to no optimisation)
+
+	switch (bp.childrenType) {
+		case 1:
+			appendText(children, dom, true);
+			break;
+		case 2:
+			mount(node.children, dom, lifecycle, context, instance, bp.isSVG);
+			break;
+		case 3:
+			mountArrayChildren(children, dom, lifecycle, context, instance, bp.isSVG);
+			break;
+		case 4:
+			for (var i = 0; i < children.length; i++) {
+				mount(children[i], dom, lifecycle, context, instance, bp.isSVG);
+			}
+			break;
+		case 5:
+			mountChildren(node, children, dom, lifecycle, context, instance, bp.isSVG);
+			break;
+		default:
+			break;
+	}
+
+	if (isTrue(bp.hasAttrs)) {
+		mountBlueprintAttrs(node, bp, dom, instance);
+	}
+	if (isTrue(bp.hasClassName)) {
+		dom.className = node.className;
+	}
+	if (isTrue(bp.hasStyle)) {
+		patchStyle(null, node.style, dom);
+	}
+	if (isTrue(bp.hasEvents)) {
+		mountBlueprintEvents(node, bp, dom);
+	}
+	if (!isNull(parentDom)) {
+		parentDom.appendChild(dom);
+	}
+	return dom;
+}
+
+function mountVNodeWithoutBlueprint(node, parentDom, lifecycle, context, instance, isSVG) {
+	var tag = node.tag;
+
+	if (isFunction(tag)) {
+		return mountComponent(node, tag, node.attrs || {}, node.hooks, node.children, instance, parentDom, lifecycle, context);
+	}
+	if (!isString(tag) || tag === '') {
+		throw Error('Inferno Error: Expected function or string for element tag type');
+	}
+	if (tag === 'svg') {
+		isSVG = true;
+	}
+	var dom = documentCreateElement(tag, isSVG);
+	var children = node.children;
+	var attrs = node.attrs;
+	var events = node.events;
+	var hooks = node.hooks;
+	var className = node.className;
+	var style = node.style;
+
+	node.dom = dom;
+	if (!isNullOrUndefined(hooks)) {
+		handleAttachedHooks(hooks, lifecycle, dom);
+	}
+	if (!isInvalidNode(children)) {
+		mountChildren(node, children, dom, lifecycle, context, instance, isSVG);
+	}
+	if (!isNullOrUndefined(attrs)) {
+		handleSelects(node);
+		mountAttributes(node, attrs, Object.keys(attrs), dom, instance);
+	}
+	if (!isNullOrUndefined(className)) {
+		dom.className = className;
+	}
+	if (!isNullOrUndefined(style)) {
+		patchStyle(null, style, dom);
+	}
+	if (!isNullOrUndefined(events)) {
+		mountEvents(events, Object.keys(events), dom);
+	}
+	if (!isNull(parentDom)) {
+		parentDom.appendChild(dom);
+	}
+	return dom;
+}
+
+function mountArrayChildren(children, parentDom, lifecycle, context, instance, isSVG) {
+	children.complex = false;
+	for (var i = 0; i < children.length; i++) {
+		var child = normaliseChild(children, i);
+
+		if (isVText(child)) {
+			mountVText(child, parentDom);
+			children.complex = true;
+		} else if (isVPlaceholder(child)) {
+			mountVPlaceholder(child, parentDom);
+			children.complex = true;
+		} else if (isVList(child)) {
+			mountVList(child, parentDom, lifecycle, context, instance, isSVG);
+			children.complex = true;
+		} else {
+			mount(child, parentDom, lifecycle, context, instance, isSVG);
+		}
+	}
+}
+
+function mountChildren(node, children, parentDom, lifecycle, context, instance, isSVG) {
+	if (isArray(children)) {
+		mountArrayChildren(children, parentDom, lifecycle, context, instance, isSVG);
+	} else if (isStringOrNumber(children)) {
+		appendText(children, parentDom, true);
+	} else if (!isInvalidNode(children)) {
+		mount(children, parentDom, lifecycle, context, instance, isSVG);
+	}
+}
+
+function mountRef(instance, value, refValue) {
+	if (!isInvalidNode(instance) && isString(value)) {
+		instance.refs[value] = refValue;
+	}
+}
+
+function mountEvents(events, eventKeys, dom) {
+	for (var i = 0; i < eventKeys.length; i++) {
+		var event = eventKeys[i];
+
+		dom[event] = events[event];
+	}
+}
+
+function mountComponent(parentNode, Component, props, hooks, children, lastInstance, parentDom, lifecycle, context) {
+	props = addChildrenToProps(children, props);
+
+	var dom;
+	if (isStatefulComponent(Component)) {
+		var instance = new Component(props, context);
+
+		instance._patch = patch;
+		instance._componentToDOMNodeMap = componentToDOMNodeMap;
+		if (!isNullOrUndefined(lastInstance) && props.ref) {
+			mountRef(lastInstance, props.ref, instance);
+		}
+		var childContext = instance.getChildContext();
+
+		if (!isNullOrUndefined(childContext)) {
+			context = Object.assign({}, context, childContext);
+		}
+		instance.context = context;
+		instance._unmounted = false;
+		instance._parentNode = parentNode;
+		if (lastInstance) {
+			instance._parentComponent = lastInstance;
+		}
+		instance._pendingSetState = true;
+		instance.componentWillMount();
+		var node = instance.render();
+
+		if (isInvalidNode(node)) {
+			node = createVPlaceholder();
+		}
+		instance._pendingSetState = false;
+		dom = mount(node, null, lifecycle, context, instance, false);
+		instance._lastNode = node;
+		instance.componentDidMount();
+		if (parentDom !== null && !isInvalidNode(dom)) {
+			parentDom.appendChild(dom);
+		}
+		componentToDOMNodeMap.set(instance, dom);
+		parentNode.dom = dom;
+		parentNode.instance = instance;
+	} else {
+		if (!isNullOrUndefined(hooks)) {
+			if (!isNullOrUndefined(hooks.componentWillMount)) {
+				hooks.componentWillMount(null, props);
+			}
+			if (!isNullOrUndefined(hooks.componentDidMount)) {
+				lifecycle.addListener(function () {
+					hooks.componentDidMount(dom, props);
+				});
+			}
+		}
+
+		/* eslint new-cap: 0 */
+		var node$1 = Component(props, context);
+
+		if (isInvalidNode(node$1)) {
+			node$1 = createVPlaceholder();
+		}
+		dom = mount(node$1, null, lifecycle, context, null, false);
+
+		parentNode.instance = node$1;
+
+		if (parentDom !== null && !isInvalidNode(dom)) {
+			parentDom.appendChild(dom);
+		}
+		parentNode.dom = dom;
+	}
+	return dom;
+}
+
+function mountAttributes(node, attrs, attrKeys, dom, instance) {
+	for (var i = 0; i < attrKeys.length; i++) {
+		var attr = attrKeys[i];
+
+		if (attr === 'ref') {
+			mountRef(getRefInstance$1(node, instance), attrs[attr], dom);
+		} else {
+			patchAttribute(attr, null, attrs[attr], dom);
+		}
+	}
+}
+
+function patch(lastInput, nextInput, parentDom, lifecycle, context, instance, isSVG) {
+	if (lastInput !== nextInput) {
+		if (isInvalidNode(lastInput)) {
+			mount(nextInput, parentDom, lifecycle, context, instance, isSVG);
+		} else if (isInvalidNode(nextInput)) {
+			remove(lastInput, parentDom);
+		} else if (isStringOrNumber(lastInput)) {
+			if (isStringOrNumber(nextInput)) {
+				parentDom.firstChild.nodeValue = nextInput;
+			} else {
+				var dom = mount(nextInput, null, lifecycle, context, instance, isSVG);
+
+				nextInput.dom = dom;
+				replaceNode(parentDom, dom, parentDom.firstChild);
+			}
+		} else if (isStringOrNumber(nextInput)) {
+			replaceNode(parentDom, document.createTextNode(nextInput), lastInput.dom);
+		} else {
+			if (isVList(nextInput)) {
+				if (isVList(lastInput)) {
+					patchVList(lastInput, nextInput, parentDom, lifecycle, context, instance, isSVG);
+				} else {
+					replaceNode(parentDom, mountVList(nextInput, null, lifecycle, context, instance, isSVG), lastInput.dom);
+					unmount(lastInput, null);
+				}
+			} else if (isVList(lastInput)) {
+				replaceVListWithNode(parentDom, lastInput, mount(nextInput, null, lifecycle, context, instance, isSVG));
+			} else if (isVPlaceholder(nextInput)) {
+				if (isVPlaceholder(lastInput)) {
+					patchVFragment(lastInput, nextInput);
+				} else {
+					replaceNode(parentDom, mountVPlaceholder(nextInput, null), lastInput.dom);
+					unmount(lastInput, null);
+				}
+			} else if (isVPlaceholder(lastInput)) {
+				replaceNode(parentDom, mount(nextInput, null, lifecycle, context, instance, isSVG), lastInput.dom);
+			} else if (isVText(nextInput)) {
+				if (isVText(lastInput)) {
+					patchVText(lastInput, nextInput);
+				} else {
+					replaceNode(parentDom, mountVText(nextInput, null), lastInput.dom);
+					unmount(lastInput, null);
+				}
+			} else if (isVText(lastInput)) {
+				replaceNode(parentDom, mount(nextInput, null, lifecycle, context, instance, isSVG), lastInput.dom);
+			} else if (isVNode(nextInput)) {
+				if (isVNode(lastInput)) {
+					patchVNode(lastInput, nextInput, parentDom, lifecycle, context, instance, isSVG, false);
+				} else {
+					replaceNode(parentDom, mountVNode(nextInput, null, lifecycle, context, instance, isSVG), lastInput.dom);
+					unmount(lastInput, null);
+				}
+			} else if (isVNode(lastInput)) {
+				replaceNode(parentDom, mount(nextInput, null, lifecycle, context, instance, isSVG), lastInput.dom);
+				unmount(lastInput, null);
+			} else {
+				return patch(lastInput, normalise(nextInput), parentDom, lifecycle, context, instance, isSVG);
+			}
+		}
+	}
+	return nextInput;
+}
+
+function patchTextNode(dom, lastChildren, nextChildren) {
+	if (isStringOrNumber(lastChildren) && lastChildren !== '') {
+		dom.firstChild.nodeValue = nextChildren;
+	} else {
+		dom.textContent = nextChildren;
+	}
+}
+
+function patchRef(instance, lastValue, nextValue, dom) {
+	if (instance) {
+		if (isString(lastValue)) {
+			delete instance.refs[lastValue];
+		}
+		if (isString(nextValue)) {
+			instance.refs[nextValue] = dom;
+		}
+	}
+}
+
+function patchChildren(lastNode, nextNode, dom, lifecycle, context, instance, isSVG) {
+	var nextChildren = nextNode.children;
+	var lastChildren = lastNode.children;
+
+	if (lastChildren === nextChildren) {
+		return;
+	}
+	if (isInvalidNode(lastChildren)) {
+		if (isStringOrNumber(nextChildren)) {
+			patchTextNode(dom, lastChildren, nextChildren);
+		} else if (!isInvalidNode(nextChildren)) {
+			if (isArray(nextChildren)) {
+				mountArrayChildren(nextChildren, dom, lifecycle, context, instance, isSVG);
+			} else {
+				mount(nextChildren, dom, lifecycle, context, instance, isSVG);
+			}
+		}
+	} else {
+		if (isInvalidNode(nextChildren)) {
+			removeAllChildren(dom, lastChildren);
+		} else {
+			if (isArray(lastChildren)) {
+				if (isArray(nextChildren)) {
+					nextChildren.complex = lastChildren.complex;
+					if (isKeyed(lastChildren, nextChildren)) {
+						patchKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, instance, isSVG, null);
+					} else {
+						patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, instance, isSVG, null);
+					}
+				} else {
+					patchNonKeyedChildren(lastChildren, [nextChildren], dom, lifecycle, context, instance, isSVG, null);
+				}
+			} else {
+				if (isArray(nextChildren)) {
+					var lastChild = lastChildren;
+
+					if (isStringOrNumber(lastChildren)) {
+						lastChild = createVText(lastChild);
+						lastChild.dom = dom.firstChild;
+					}
+					patchNonKeyedChildren([lastChild], nextChildren, dom, lifecycle, context, instance, isSVG, null);
+				} else if (isStringOrNumber(nextChildren)) {
+					patchTextNode(dom, lastChildren, nextChildren);
+				} else if (isStringOrNumber(lastChildren)) {
+					patch(lastChildren, nextChildren, dom, lifecycle, context, instance, isSVG);
+				} else {
+					patchVNode(lastChildren, nextChildren, dom, lifecycle, context, instance, isSVG, false);
+				}
+			}
+		}
+	}
+}
+
+function patchVNode(lastVNode, nextVNode, parentDom, lifecycle, context, instance, isSVG, skipLazyCheck) {
+	var lastBp = lastVNode.bp;
+	var nextBp = nextVNode.bp;
+
+	if (lastBp === undefined || nextBp === undefined) {
+		patchVNodeWithoutBlueprint(lastVNode, nextVNode, parentDom, lifecycle, context, instance, isSVG);
+	} else {
+		patchVNodeWithBlueprint(lastVNode, nextVNode, lastBp, nextBp, parentDom, lifecycle, context, instance, skipLazyCheck);
+	}
+}
+
+function patchVNodeWithBlueprint(lastVNode, nextVNode, lastBp, nextBp, parentDom, lifecycle, context, instance, skipLazyCheck) {
+	var nextHooks;
+
+	if (nextBp.hasHooks === true) {
+		nextHooks = nextVNode.hooks;
+		if (nextHooks && !isNullOrUndefined(nextHooks.willUpdate)) {
+			nextHooks.willUpdate(lastVNode.dom);
+		}
+	}
+	var nextTag = nextVNode.tag || nextBp.tag;
+	var lastTag = lastVNode.tag || lastBp.tag;
+
+	if (lastTag !== nextTag) {
+		if (lastBp && lastBp.isComponent === true) {
+			var lastNodeInstance = lastVNode.instance;
+
+			if (nextBp.isComponent === true) {
+				replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, instance, false);
+			} else if (isStatefulComponent(lastTag)) {
+				unmountVNode(lastVNode, null, true);
+				var lastNode = lastNodeInstance._lastNode;
+				patchVNodeWithBlueprint(lastNode, nextVNode, lastNode.bp, nextBp, parentDom, lifecycle, context, instance, nextBp.isSVG);
+			} else {
+				unmountVNode(lastVNode, null, true);
+				patchVNodeWithBlueprint(lastNodeInstance, nextVNode, lastNodeInstance.bp, nextBp, parentDom, lifecycle, context, instance, nextBp.isSVG);
+			}
+		} else {
+			replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, instance, nextBp.isSVG);
+		}
+	} else if (isNullOrUndefined(lastTag)) {
+		nextVNode.dom = lastVNode.dom;
+	} else {
+		if (lastBp && lastBp.isComponent === true) {
+			if (nextBp.isComponent === true) {
+				var instance$1 = lastVNode.instance;
+
+				if (!isNullOrUndefined(instance$1) && instance$1._unmounted) {
+					var newDom = mountComponent(nextVNode, lastTag, nextVNode.attrs || {}, nextVNode.hooks, nextVNode.children, instance$1, parentDom, lifecycle, context);
+					if (parentDom !== null) {
+						replaceNode(parentDom, newDom, lastVNode.dom);
+					}
+				} else {
+					nextVNode.instance = instance$1;
+					nextVNode.dom = lastVNode.dom;
+					patchComponent(true, nextVNode, nextVNode.tag, lastBp, nextBp, instance$1, lastVNode.attrs || {}, nextVNode.attrs || {}, nextVNode.hooks, lastVNode.children, nextVNode.children, parentDom, lifecycle, context);
+				}
+			}
+		} else {
+			var dom = lastVNode.dom;
+			var lastChildrenType = lastBp.childrenType;
+			var nextChildrenType = nextBp.childrenType;
+			nextVNode.dom = dom;
+
+			if (nextBp.lazy === true && skipLazyCheck === false) {
+				var clipData = lastVNode.clipData;
+
+				if (lifecycle.scrollY === null) {
+					lifecycle.refresh();
+				}
+
+				nextVNode.clipData = clipData;
+				if (clipData.pending === true || clipData.top - lifecycle.scrollY > lifecycle.screenHeight) {
+					if (setClipNode(clipData, dom, lastVNode, nextVNode, parentDom, lifecycle, context, instance, lastBp.isSVG)) {
+						return;
+					}
+				}
+				if (clipData.bottom < lifecycle.scrollY) {
+					if (setClipNode(clipData, dom, lastVNode, nextVNode, parentDom, lifecycle, context, instance, lastBp.isSVG)) {
+						return;
+					}
+				}
+			}
+
+			if (lastChildrenType > 0 || nextChildrenType > 0) {
+				if (nextChildrenType === 5 || lastChildrenType === 5) {
+					patchChildren(lastVNode, nextVNode, dom, lifecycle, context, instance);
+				} else {
+					var lastChildren = lastVNode.children;
+					var nextChildren = nextVNode.children;
+
+					if (lastChildrenType === 0 || isInvalidNode(lastChildren)) {
+						if (nextChildrenType > 2) {
+							mountArrayChildren(nextChildren, dom, lifecycle, context, instance);
+						} else {
+							mount(nextChildren, dom, lifecycle, context, instance);
+						}
+					} else if (nextChildrenType === 0 || isInvalidNode(nextChildren)) {
+						if (lastChildrenType > 2) {
+							removeAllChildren(dom, lastChildren);
+						} else {
+							remove(lastChildren, dom);
+						}
+					} else {
+						if (lastChildren !== nextChildren) {
+							if (lastChildrenType === 4 && nextChildrenType === 4) {
+								patchKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, instance, nextBp.isSVG, null);
+							} else if (lastChildrenType === 2 && nextChildrenType === 2) {
+								patch(lastChildren, nextChildren, dom, lifecycle, context, instance, true, nextBp.isSVG);
+							} else if (lastChildrenType === 1 && nextChildrenType === 1) {
+								patchTextNode(dom, lastChildren, nextChildren);
+							} else {
+								patchChildren(lastVNode, nextVNode, dom, lifecycle, context, instance, nextBp.isSVG);
+							}
+						}
+					}
+				}
+			}
+			if (lastBp.hasAttrs === true || nextBp.hasAttrs === true) {
+				patchAttributes(lastVNode, nextVNode, lastBp.attrKeys, nextBp.attrKeys, dom, instance);
+			}
+			if (lastBp.hasEvents === true || nextBp.hasEvents === true) {
+				patchEvents(lastVNode.events, nextVNode.events, lastBp.eventKeys, nextBp.eventKeys, dom);
+			}
+			if (lastBp.hasClassName === true || nextBp.hasClassName === true) {
+				var nextClassName = nextVNode.className;
+
+				if (lastVNode.className !== nextClassName) {
+					if (isNullOrUndefined(nextClassName)) {
+						dom.removeAttribute('class');
+					} else {
+						dom.className = nextClassName;
+					}
+				}
+			}
+			if (lastBp.hasStyle === true || nextBp.hasStyle === true) {
+				var nextStyle = nextVNode.style;
+				var lastStyle = lastVNode.style;
+
+				if (lastStyle !== nextStyle) {
+					patchStyle(lastStyle, nextStyle, dom);
+				}
+			}
+			if (nextBp.hasHooks === true && !isNullOrUndefined(nextHooks.didUpdate)) {
+				nextHooks.didUpdate(dom);
+			}
+			setFormElementProperties(nextTag, nextVNode);
+		}
+	}
+}
+
+function patchVNodeWithoutBlueprint(lastNode, nextNode, parentDom, lifecycle, context, instance, isSVG) {
+	var nextHooks = nextNode.hooks;
+	var nextHooksDefined = !isNullOrUndefined(nextHooks);
+
+	if (nextHooksDefined && !isNullOrUndefined(nextHooks.willUpdate)) {
+		nextHooks.willUpdate(lastNode.dom);
+	}
+	var nextTag = nextNode.tag || ((isNullOrUndefined(nextNode.bp)) ? null : nextNode.bp.tag);
+	var lastTag = lastNode.tag || ((isNullOrUndefined(lastNode.bp)) ? null : lastNode.bp.tag);
+
+	if (nextTag === 'svg') {
+		isSVG = true;
+	}
+	if (lastTag !== nextTag) {
+		var lastNodeInstance = lastNode.instance;
+
+		if (isFunction(lastTag)) {
+			if (isFunction(nextTag)) {
+				replaceWithNewNode(lastNode, nextNode, parentDom, lifecycle, context, instance, isSVG);
+			} else if (isStatefulComponent(lastTag)) {
+				unmountVNode(lastNode, null, true);
+				patchVNodeWithoutBlueprint(lastNodeInstance._lastNode, nextNode, parentDom, lifecycle, context, instance, isSVG);
+			} else {
+				unmountVNode(lastNode, null, true);
+				patchVNodeWithoutBlueprint(lastNodeInstance, nextNode, parentDom, lifecycle, context, instance, isSVG);
+			}
+		} else {
+			replaceWithNewNode(lastNodeInstance || lastNode, nextNode, parentDom, lifecycle, context, instance, isSVG);
+		}
+	} else if (isNullOrUndefined(lastTag)) {
+		nextNode.dom = lastNode.dom;
+	} else {
+		if (isFunction(lastTag)) {
+			if (isFunction(nextTag)) {
+				var instance$1 = lastNode._instance;
+
+				if (!isNullOrUndefined(instance$1) && instance$1._unmounted) {
+					var newDom = mountComponent(nextNode, lastTag, nextNode.attrs || {}, nextNode.hooks, nextNode.children, instance$1, parentDom, lifecycle, context);
+					if (parentDom !== null) {
+						replaceNode(parentDom, newDom, lastNode.dom);
+					}
+				} else {
+					nextNode.instance = lastNode.instance;
+					nextNode.dom = lastNode.dom;
+					patchComponent(false, nextNode, nextNode.tag, null, null, nextNode.instance, lastNode.attrs || {}, nextNode.attrs || {}, nextNode.hooks, lastNode.children, nextNode.children, parentDom, lifecycle, context);
+				}
+			}
+		} else {
+			var dom = lastNode.dom;
+			var nextClassName = nextNode.className;
+			var nextStyle = nextNode.style;
+
+			nextNode.dom = dom;
+
+			patchChildren(lastNode, nextNode, dom, lifecycle, context, instance, isSVG);
+			patchAttributes(lastNode, nextNode, null, null, dom, instance);
+			patchEvents(lastNode.events, nextNode.events, null, null, dom);
+
+			if (lastNode.className !== nextClassName) {
+				if (isNullOrUndefined(nextClassName)) {
+					dom.removeAttribute('class');
+				} else {
+					dom.className = nextClassName;
+				}
+			}
+			if (lastNode.style !== nextStyle) {
+				patchStyle(lastNode.style, nextStyle, dom);
+			}
+			if (nextHooksDefined && !isNullOrUndefined(nextHooks.didUpdate)) {
+				nextHooks.didUpdate(dom);
+			}
+			setFormElementProperties(nextTag, nextNode);
+		}
+	}
+}
+
+function patchAttributes(lastNode, nextNode, lastAttrKeys, nextAttrKeys, dom, instance) {
+	if (lastNode.tag === 'select') {
+		selectValue(nextNode);
+	}
+	var nextAttrs = nextNode.attrs;
+	var lastAttrs = lastNode.attrs;
+	var nextAttrsIsUndef = isNullOrUndefined(nextAttrs);
+	var lastAttrsIsNotUndef = !isNullOrUndefined(lastAttrs);
+
+	if (!nextAttrsIsUndef) {
+		var nextAttrsKeys = nextAttrKeys || Object.keys(nextAttrs);
+		var attrKeysLength = nextAttrsKeys.length;
+
+		for (var i = 0; i < attrKeysLength; i++) {
+			var attr = nextAttrsKeys[i];
+			var lastAttrVal = lastAttrsIsNotUndef && lastAttrs[attr];
+			var nextAttrVal = nextAttrs[attr];
+
+			if (lastAttrVal !== nextAttrVal) {
+				if (attr === 'ref') {
+					patchRef(instance, lastAttrVal, nextAttrVal, dom);
+				} else {
+					patchAttribute(attr, lastAttrVal, nextAttrVal, dom);
+				}
+			}
+		}
+	}
+	if (lastAttrsIsNotUndef) {
+		var lastAttrsKeys = lastAttrKeys || Object.keys(lastAttrs);
+		var attrKeysLength$1 = lastAttrsKeys.length;
+
+		for (var i$1 = 0; i$1 < attrKeysLength$1; i$1++) {
+			var attr$1 = lastAttrsKeys[i$1];
+
+			if (nextAttrsIsUndef || isNullOrUndefined(nextAttrs[attr$1])) {
+				if (attr$1 === 'ref') {
+					patchRef(getRefInstance(node, instance), lastAttrs[attr$1], null, dom);
+				} else {
+					dom.removeAttribute(attr$1);
+				}
+			}
+		}
+	}
+}
+
+
+function patchStyle(lastAttrValue, nextAttrValue, dom) {
+	if (isString(nextAttrValue)) {
+		dom.style.cssText = nextAttrValue;
+	} else if (isNullOrUndefined(lastAttrValue)) {
+		if (!isNullOrUndefined(nextAttrValue)) {
+			var styleKeys = Object.keys(nextAttrValue);
+
+			for (var i = 0; i < styleKeys.length; i++) {
+				var style = styleKeys[i];
+				var value = nextAttrValue[style];
+
+				if (isNumber(value) && !isUnitlessNumber[style]) {
+					dom.style[style] = value + 'px';
+				} else {
+					dom.style[style] = value;
+				}
+			}
+		}
+	} else if (isNullOrUndefined(nextAttrValue)) {
+		dom.removeAttribute('style');
+	} else {
+		var styleKeys$1 = Object.keys(nextAttrValue);
+
+		for (var i$1 = 0; i$1 < styleKeys$1.length; i$1++) {
+			var style$1 = styleKeys$1[i$1];
+			var value$1 = nextAttrValue[style$1];
+
+			if (isNumber(value$1) && !isUnitlessNumber[style$1]) {
+				dom.style[style$1] = value$1 + 'px';
+			} else {
+				dom.style[style$1] = value$1;
+			}
+		}
+		var lastStyleKeys = Object.keys(lastAttrValue);
+
+		for (var i$2 = 0; i$2 < lastStyleKeys.length; i$2++) {
+			var style$2 = lastStyleKeys[i$2];
+			if (isNullOrUndefined(nextAttrValue[style$2])) {
+				dom.style[style$2] = '';
+			}
+		}
+	}
+}
+
+function patchEvents(lastEvents, nextEvents, _lastEventKeys, _nextEventKeys, dom) {
+	var nextEventsDefined = !isNullOrUndefined(nextEvents);
+	var lastEventsDefined = !isNullOrUndefined(lastEvents);
+	var lastEventKeys;
+
+	if (lastEventsDefined) {
+		lastEventKeys = _lastEventKeys || Object.keys(lastEvents);
+	}
+	if (nextEventsDefined) {
+		var nextEventKeys = _nextEventKeys || Object.keys(nextEvents);
+
+		if (lastEventsDefined) {
+			for (var i = 0; i < nextEventKeys.length; i++) {
+				var event = nextEventKeys[i];
+				var lastEvent = lastEvents[event];
+				var nextEvent = nextEvents[event];
+
+				if (lastEvent !== nextEvent) {
+					dom[event] = nextEvent;
+				}
+			}
+			for (var i$1 = 0; i$1 < lastEventKeys.length; i$1++) {
+				var event$1 = lastEventKeys[i$1];
+
+				if (isNullOrUndefined(nextEvents[event$1])) {
+					dom[event$1] = null;
+				}
+			}
+		} else {
+			mountEvents(nextEvents, nextEventKeys, dom);
+		}
+	} else if (lastEventsDefined) {
+		removeEvents(lastEvents, lastEventKeys, dom);
+	}
+}
+
+function patchAttribute(attrName, lastAttrValue, nextAttrValue, dom) {
+	if (attrName === 'dangerouslySetInnerHTML') {
+		var lastHtml = lastAttrValue && lastAttrValue.__html;
+		var nextHtml = nextAttrValue && nextAttrValue.__html;
+
+		if (isNullOrUndefined(nextHtml)) {
+			throw new Error('Inferno Error: dangerouslySetInnerHTML requires an object with a __html propety containing the innerHTML content');
+		}
+		if (lastHtml !== nextHtml) {
+			dom.innerHTML = nextHtml;
+		}
+	} else if (attrName === 'eventData') {
+		dom.eventData = nextAttrValue;
+	} else if (strictProps[attrName]) {
+		dom[attrName] = nextAttrValue === null ? '' : nextAttrValue;
+	} else {
+		if (booleanProps[attrName]) {
+			dom[attrName] = nextAttrValue ? true : false;
+		} else {
+			var ns = namespaces[attrName];
+
+			if (nextAttrValue === false || isNullOrUndefined(nextAttrValue)) {
+				if (ns !== undefined) {
+					dom.removeAttributeNS(ns, attrName);
+				} else {
+					dom.removeAttribute(attrName);
+				}
+			} else {
+				if (ns !== undefined) {
+					dom.setAttributeNS(ns, attrName, nextAttrValue === true ? attrName : nextAttrValue);
+				} else {
+					dom.setAttribute(attrName, nextAttrValue === true ? attrName : nextAttrValue);
+				}
+			}
+		}
+	}
+}
+
+function patchComponent(hasBlueprint, lastNode, Component, lastBp, nextBp, instance, lastProps, nextProps, nextHooks, lastChildren, nextChildren, parentDom, lifecycle, context) {
+	nextProps = addChildrenToProps(nextChildren, nextProps);
+
+	if (isStatefulComponent(Component)) {
+		var prevProps = instance.props;
+		var prevState = instance.state;
+		var nextState = instance.state;
+
+		var childContext = instance.getChildContext();
+		if (!isNullOrUndefined(childContext)) {
+			context = Object.assign({}, context, childContext);
+		}
+		instance.context = context;
+		var nextNode = instance._updateComponent(prevState, nextState, prevProps, nextProps);
+
+		if (nextNode === NO_RENDER) {
+			nextNode = instance._lastNode;
+		} else if (isNullOrUndefined(nextNode)) {
+			nextNode = createVPlaceholder();
+		}
+		patch(instance._lastNode, nextNode, parentDom, lifecycle, context, instance, null, false);
+		lastNode.dom = nextNode.dom;
+		instance._lastNode = nextNode;
+		instance.componentDidUpdate(prevProps, prevState);
+		componentToDOMNodeMap.set(instance, nextNode.dom);
+	} else {
+		var shouldUpdate = true;
+		var nextHooksDefined = (hasBlueprint && nextBp.hasHooks === true) || !isNullOrUndefined(nextHooks);
+
+		lastProps = addChildrenToProps(lastChildren, lastProps);
+		if (nextHooksDefined && !isNullOrUndefined(nextHooks.componentShouldUpdate)) {
+			shouldUpdate = nextHooks.componentShouldUpdate(lastNode.dom, lastProps, nextProps);
+		}
+		if (shouldUpdate !== false) {
+			if (nextHooksDefined && !isNullOrUndefined(nextHooks.componentWillUpdate)) {
+				nextHooks.componentWillUpdate(lastNode.dom, lastProps, nextProps);
+			}
+			var nextNode$1 = Component(nextProps, context);
+
+			if (isInvalidNode(nextNode$1)) {
+				nextNode$1 = createVPlaceholder();
+			}
+			nextNode$1.dom = lastNode.dom;
+			patch(instance, nextNode$1, parentDom, lifecycle, context, null, null, false);
+			lastNode.instance = nextNode$1;
+			if (nextHooksDefined && !isNullOrUndefined(nextHooks.componentDidUpdate)) {
+				nextHooks.componentDidUpdate(lastNode.dom, lastProps, nextProps);
+			}
+		}
+	}
+}
+
+function patchVList(lastVList, nextVList, parentDom, lifecycle, context, instance, isSVG) {
+	var lastItems = lastVList.items;
+	var nextItems = nextVList.items;
+	var pointer = lastVList.pointer;
+
+	nextVList.dom = lastVList.dom;
+	nextVList.pointer = pointer;
+	if (!lastItems !== nextItems) {
+		if (isKeyed(lastItems, nextItems)) {
+			patchKeyedChildren(lastItems, nextItems, parentDom, lifecycle, context, instance, isSVG, nextVList);
+		} else {
+			patchNonKeyedChildren(lastItems, nextItems, parentDom, lifecycle, context, instance, isSVG, nextVList);
+		}
+	}
+}
+
+function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, instance, isSVG, parentVList) {
+	var lastChildrenLength = lastChildren.length;
+	var nextChildrenLength = nextChildren.length;
+	var commonLength = lastChildrenLength > nextChildrenLength ? nextChildrenLength : lastChildrenLength;
+	var i = 0;
+
+	for (; i < commonLength; i++) {
+		var lastChild = lastChildren[i];
+		var nextChild = normaliseChild(nextChildren, i);
+
+		patch(lastChild, nextChild, dom, lifecycle, context, instance, isSVG);
+	}
+	if (lastChildrenLength < nextChildrenLength) {
+		for (i = commonLength; i < nextChildrenLength; i++) {
+			var child = normaliseChild(nextChildren, i);
+
+			insertOrAppend(dom, mount(child, null, lifecycle, context, instance, isSVG), parentVList && parentVList.pointer);
+		}
+	} else if (lastChildrenLength > nextChildrenLength) {
+		for (i = commonLength; i < lastChildrenLength; i++) {
+			remove(lastChildren[i], dom);
+		}
+	}
+}
+
+function patchVFragment(lastVFragment, nextVFragment) {
+	nextVFragment.dom = lastVFragment.dom;
+}
+
+function patchVText(lastVText, nextVText) {
+	var nextText = nextVText.text;
+	var dom = lastVText.dom;
+
+	nextVText.dom = dom;
+	if (lastVText.text !== nextText) {
+		dom.nodeValue = nextText;
+	}
+}
+
+function patchKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, instance, isSVG, parentVList) {
+	var lastChildrenLength = lastChildren.length;
+	var nextChildrenLength = nextChildren.length;
+	var lastEndIndex = lastChildrenLength - 1;
+	var nextEndIndex = nextChildrenLength - 1;
+	var lastStartIndex = 0;
+	var nextStartIndex = 0;
+	var lastStartNode = null;
+	var nextStartNode = null;
+	var nextEndNode = null;
+	var lastEndNode = null;
+	var nextNode;
+
+	while (lastStartIndex <= lastEndIndex && nextStartIndex <= nextEndIndex) {
+		nextStartNode = nextChildren[nextStartIndex];
+		lastStartNode = lastChildren[lastStartIndex];
+
+		if (nextStartNode.key !== lastStartNode.key) {
+			break;
+		}
+		patchVNode(lastStartNode, nextStartNode, dom, lifecycle, context, instance, isSVG, false);
+		nextStartIndex++;
+		lastStartIndex++;
+	}
+	while (lastStartIndex <= lastEndIndex && nextStartIndex <= nextEndIndex) {
+		nextEndNode = nextChildren[nextEndIndex];
+		lastEndNode = lastChildren[lastEndIndex];
+
+		if (nextEndNode.key !== lastEndNode.key) {
+			break;
+		}
+		patchVNode(lastEndNode, nextEndNode, dom, lifecycle, context, instance, isSVG, false);
+		nextEndIndex--;
+		lastEndIndex--;
+	}
+	while (lastStartIndex <= lastEndIndex && nextStartIndex <= nextEndIndex) {
+		nextEndNode = nextChildren[nextEndIndex];
+		lastStartNode = lastChildren[lastStartIndex];
+
+		if (nextEndNode.key !== lastStartNode.key) {
+			break;
+		}
+		nextNode = (nextEndIndex + 1 < nextChildrenLength) ? nextChildren[nextEndIndex + 1].dom : null;
+		patchVNode(lastStartNode, nextEndNode, dom, lifecycle, context, instance, isSVG, false);
+		insertOrAppend(dom, nextEndNode.dom, nextNode);
+		nextEndIndex--;
+		lastStartIndex++;
+	}
+	while (lastStartIndex <= lastEndIndex && nextStartIndex <= nextEndIndex) {
+		nextStartNode = nextChildren[nextStartIndex];
+		lastEndNode = lastChildren[lastEndIndex];
+
+		if (nextStartNode.key !== lastEndNode.key) {
+			break;
+		}
+		nextNode = lastChildren[lastStartIndex].dom;
+		patchVNode(lastEndNode, nextStartNode, dom, lifecycle, context, instance, isSVG, false);
+		insertOrAppend(dom, nextStartNode.dom, nextNode);
+		nextStartIndex++;
+		lastEndIndex--;
+	}
+
+	if (lastStartIndex > lastEndIndex) {
+		if (nextStartIndex <= nextEndIndex) {
+			nextNode = (nextEndIndex + 1 < nextChildrenLength) ? nextChildren[nextEndIndex + 1].dom : parentVList && parentVList.pointer;
+			for (; nextStartIndex <= nextEndIndex; nextStartIndex++) {
+				insertOrAppend(dom, mount(nextChildren[nextStartIndex], null, lifecycle, context, instance, isSVG), nextNode);
+			}
+		}
+	} else if (nextStartIndex > nextEndIndex) {
+		while (lastStartIndex <= lastEndIndex) {
+			remove(lastChildren[lastStartIndex++], dom);
+		}
+	} else {
+		var aLength = lastEndIndex - lastStartIndex + 1;
+		var bLength = nextEndIndex - nextStartIndex + 1;
+		var sources = new Array(bLength);
+
+		// Mark all nodes as inserted.
+		var i;
+		for (i = 0; i < bLength; i++) {
+			sources[i] = -1;
+		}
+		var moved = false;
+		var removeOffset = 0;
+		var lastTarget = 0;
+		var index;
+		var removed = true;
+		var k = 0;
+
+		if ((bLength <= 4) || (aLength * bLength <= 16)) {
+			for (i = lastStartIndex; i <= lastEndIndex; i++) {
+				removed = true;
+				lastEndNode = lastChildren[i];
+				if (k < bLength) {
+					for (index = nextStartIndex; index <= nextEndIndex; index++) {
+						nextEndNode = nextChildren[index];
+						if (lastEndNode.key === nextEndNode.key) {
+							sources[index - nextStartIndex] = i;
+
+							if (lastTarget > index) {
+								moved = true;
+							} else {
+								lastTarget = index;
+							}
+							patchVNode(lastEndNode, nextEndNode, dom, lifecycle, context, instance, isSVG, false);
+							k++;
+							removed = false;
+							break;
+						}
+					}
+				}
+				if (removed) {
+					remove(lastEndNode, dom);
+					removeOffset++;
+				}
+			}
+		} else {
+			var prevItemsMap = new Map();
+
+			for (i = nextStartIndex; i <= nextEndIndex; i++) {
+				prevItemsMap.set(nextChildren[i].key, i);
+			}
+			for (i = lastStartIndex; i <= lastEndIndex; i++) {
+				removed = true;
+				lastEndNode = lastChildren[i];
+
+				if (k < nextChildrenLength) {
+					index = prevItemsMap.get(lastEndNode.key);
+
+					if (index !== undefined) {
+						nextEndNode = nextChildren[index];
+						sources[index - nextStartIndex] = i;
+						if (lastTarget > index) {
+							moved = true;
+						} else {
+							lastTarget = index;
+						}
+						patchVNode(lastEndNode, nextEndNode, dom, lifecycle, context, instance, isSVG, false);
+						k++;
+						removed = false;
+					}
+				}
+				if (removed) {
+					remove(lastEndNode, dom);
+					removeOffset++;
+				}
+			}
+		}
+
+		var pos;
+		if (moved) {
+			var seq = lis_algorithm(sources);
+			index = seq.length - 1;
+			for (i = bLength - 1; i >= 0; i--) {
+				if (sources[i] === -1) {
+					pos = i + nextStartIndex;
+					nextNode = (pos + 1 < nextChildrenLength) ? nextChildren[pos + 1].dom : parentVList && parentVList.pointer;
+					insertOrAppend(dom, mount(nextChildren[pos], null, lifecycle, context, instance, isSVG), nextNode);
+				} else {
+					if (index < 0 || i !== seq[index]) {
+						pos = i + nextStartIndex;
+						nextNode = (pos + 1 < nextChildrenLength) ? nextChildren[pos + 1].dom : parentVList && parentVList.pointer;
+						insertOrAppend(dom, nextChildren[pos].dom, nextNode);
+					} else {
+						index--;
+					}
+				}
+			}
+		} else if (aLength - removeOffset !== bLength) {
+			for (i = bLength - 1; i >= 0; i--) {
+				if (sources[i] === -1) {
+					pos = i + nextStartIndex;
+					nextNode = (pos + 1 < nextChildrenLength) ? nextChildren[pos + 1].dom : parentVList && parentVList.pointer;
+					insertOrAppend(dom, mount(nextChildren[pos], null, lifecycle, context, instance, isSVG), nextNode);
+				}
+			}
+		}
+	}
+}
+
+// https://en.wikipedia.org/wiki/Longest_increasing_subsequence
+function lis_algorithm(a) {
+	var p = a.slice(0);
+	var result = [];
+	result.push(0);
+	var i;
+	var j;
+	var u;
+	var v;
+	var c;
+
+	for (i = 0; i < a.length; i++) {
+		if (a[i] === -1) {
+			continue;
+		}
+
+		j = result[result.length - 1];
+		if (a[j] < a[i]) {
+			p[i] = j;
+			result.push(i);
+			continue;
+		}
+
+		u = 0;
+		v = result.length - 1;
+
+		while (u < v) {
+			c = ((u + v) / 2) | 0;
+			if (a[result[c]] < a[i]) {
+				u = c + 1;
+			} else {
+				v = c;
+			}
+		}
+
+		if (a[i] < a[result[u]]) {
+			if (u > 0) {
+				p[i] = result[u - 1];
+			}
+			result[u] = i;
+		}
+	}
+
+	u = result.length;
+	v = result[u - 1];
+
+	while (u-- > 0) {
+		result[u] = v;
+		v = p[v];
+	}
+
+	return result;
+}
+
+var screenWidth = isBrowser && window.screen.width;
+var screenHeight = isBrowser && window.screen.height;
+var scrollX = 0;
+var scrollY = 0;
+var lastScrollTime = 0;
+
+if (isBrowser) {
+	window.onscroll = function () {
+		scrollX = window.scrollX;
+		scrollY = window.scrollY;
+		lastScrollTime = performance.now();
+	};
+
+	window.resize = function () {
+		scrollX = window.scrollX;
+		scrollY = window.scrollY;
+		screenWidth = window.screen.width;
+		screenHeight = window.screen.height;
+		lastScrollTime = performance.now();
+	};
+}
+
+function Lifecycle() {
+	this._listeners = [];
+	this.scrollX = null;
+	this.scrollY = null;
+	this.screenHeight = screenHeight;
+	this.screenWidth = screenWidth;
+}
+
+Lifecycle.prototype = {
+	refresh: function refresh() {
+		this.scrollX = isBrowser && window.scrollX;
+		this.scrollY = isBrowser && window.scrollY;
+	},
+	addListener: function addListener(callback) {
+		this._listeners.push(callback);
+	},
+	trigger: function trigger() {
+		var this$1 = this;
+
+		for (var i = 0; i < this._listeners.length; i++) {
+			this$1._listeners[i]();
+		}
+	}
+};
+
+function handleLazyAttached(node, lifecycle, dom) {
+	lifecycle.addListener(function () {
+		var rect = dom.getBoundingClientRect();
+
+		if (lifecycle.scrollY === null) {
+			lifecycle.refresh();
+		}
+		node.clipData = {
+			top: rect.top + lifecycle.scrollY,
+			left: rect.left + lifecycle.scrollX,
+			bottom: rect.bottom + lifecycle.scrollY,
+			right: rect.right + lifecycle.scrollX,
+			pending: false
+		};
+	});
+}
+
+function hydrateChild(child, childNodes, counter, parentDom, lifecycle, context, instance) {
+	var domNode = childNodes[counter.i];
+
+	if (isVText(child)) {
+		var text = child.text;
+
+		child.dom = domNode;
+		if (domNode.nodeType === 3 && text !== '') {
+			domNode.nodeValue = text;
+		} else {
+			var newDomNode = mountVText(text);
+
+			replaceNode(parentDom, newDomNode, domNode);
+			childNodes.splice(childNodes.indexOf(domNode), 1, newDomNode);
+			child.dom = newDomNode;
+		}
+	} else if (isVPlaceholder(child)) {
+		child.dom = domNode;
+	} else if (isVList(child)) {
+		var items = child.items;
+
+		// this doesn't really matter, as it won't be used again, but it's what it should be given the purpose of VList
+		child.dom = document.createDocumentFragment();
+		for (var i = 0; i < items.length; i++) {
+			var rebuild = hydrateChild(normaliseChild(items, i), childNodes, counter, parentDom, lifecycle, context, instance);
+
+			if (rebuild) {
+				return true;
+			}
+		}
+		// at the end of every VList, there should be a "pointer". It's an empty TextNode used for tracking the VList
+		var pointer = childNodes[counter.i++];
+
+		if (pointer && pointer.nodeType === 3) {
+			child.pointer = pointer;
+		} else {
+			// there is a problem, we need to rebuild this tree
+			return true;
+		}
+	} else {
+		var rebuild$1 = hydrateNode(child, domNode, parentDom, lifecycle, context, instance, false);
+
+		if (rebuild$1) {
+			return true;
+		}
+	}
+	counter.i++;
+}
+
+function getChildNodesWithoutComments(domNode) {
+	var childNodes = [];
+	var rawChildNodes = domNode.childNodes;
+	var length = rawChildNodes.length;
+	var i = 0;
+
+	while (i < length) {
+		var rawChild = rawChildNodes[i];
+
+		if (rawChild.nodeType === 8) {
+			if (rawChild.data === '!') {
+				var placeholder = document.createTextNode('');
+
+				domNode.replaceChild(placeholder, rawChild);
+				childNodes.push(placeholder);
+				i++;
+			} else {
+				domNode.removeChild(rawChild);
+				length--;
+			}
+		} else {
+			childNodes.push(rawChild);
+			i++;
+		}
+	}
+	return childNodes;
+}
+
+function hydrateComponent(node, Component, props, hooks, children, domNode, parentDom, lifecycle, context, lastInstance, isRoot) {
+	props = addChildrenToProps(children, props);
+
+	if (isStatefulComponent(Component)) {
+		var instance = node.instance = new Component(props);
+
+		instance._patch = patch;
+		if (!isNullOrUndefined(lastInstance) && props.ref) {
+			mountRef(lastInstance, props.ref, instance);
+		}
+		var childContext = instance.getChildContext();
+
+		if (!isNullOrUndefined(childContext)) {
+			context = Object.assign({}, context, childContext);
+		}
+		instance.context = context;
+		instance._unmounted = false;
+		instance._parentNode = node;
+		if (lastInstance) {
+			instance._parentComponent = lastInstance;
+		}
+		instance._pendingSetState = true;
+		instance.componentWillMount();
+		var nextNode = instance.render();
+
+		instance._pendingSetState = false;
+		if (isInvalidNode(nextNode)) {
+			nextNode = createVPlaceholder();
+		}
+		hydrateNode(nextNode, domNode, parentDom, lifecycle, context, instance, isRoot);
+		instance._lastNode = nextNode;
+		instance.componentDidMount();
+
+	} else {
+		var instance$1 = node.instance = Component(props);
+
+		if (!isNullOrUndefined(hooks)) {
+			if (!isNullOrUndefined(hooks.componentWillMount)) {
+				hooks.componentWillMount(null, props);
+			}
+			if (!isNullOrUndefined(hooks.componentDidMount)) {
+				lifecycle.addListener(function () {
+					hooks.componentDidMount(domNode, props);
+				});
+			}
+		}
+		return hydrateNode(instance$1, domNode, parentDom, lifecycle, context, instance$1, isRoot);
+	}
+}
+
+function hydrateNode(node, domNode, parentDom, lifecycle, context, instance, isRoot) {
+	var bp = node.bp;
+	var tag = node.tag || bp.tag;
+
+	if (isFunction(tag)) {
+		node.dom = domNode;
+		hydrateComponent(node, tag, node.attrs || {}, node.hooks, node.children, domNode, parentDom, lifecycle, context, instance, isRoot);
+	} else {
+		if (
+			domNode.nodeType !== 1 ||
+			tag !== domNode.tagName.toLowerCase()
+		) {
+			// TODO remake node
+		} else {
+			node.dom = domNode;
+			var hooks = node.hooks;
+
+			if ((bp && bp.hasHooks === true) || !isNullOrUndefined(hooks)) {
+				handleAttachedHooks(hooks, lifecycle, domNode);
+			}
+			var children = node.children;
+
+			if (!isNullOrUndefined(children)) {
+				if (isStringOrNumber(children)) {
+					if (domNode.textContent !== children) {
+						domNode.textContent = children;
+					}
+				} else {
+					var childNodes = getChildNodesWithoutComments(domNode);
+					var counter = { i: 0 };
+					var rebuild = false;
+
+					if (isArray(children)) {
+						for (var i = 0; i < children.length; i++) {
+							rebuild = hydrateChild(normaliseChild(children, i), childNodes, counter, domNode, lifecycle, context, instance);
+
+							if (rebuild) {
+								break;
+							}
+						}
+					} else {
+						if (childNodes.length === 1) {
+							rebuild = hydrateChild(children, childNodes, counter, domNode, lifecycle, context, instance);
+						} else {
+							rebuild = true;
+						}
+					}
+
+					if (rebuild) {
+						// TODO scrap children and rebuild again
+					}
+				}
+			}
+			var className = node.className;
+			var style = node.style;
+
+			if (!isNullOrUndefined(className)) {
+				domNode.className = className;
+			}
+			if (!isNullOrUndefined(style)) {
+				patchStyle(null, style, domNode);
+			}
+			if (bp && bp.hasAttrs === true) {
+				mountBlueprintAttrs(node, bp, domNode, instance);
+			} else {
+				var attrs = node.attrs;
+
+				if (!isNullOrUndefined(attrs)) {
+					handleSelects(node);
+					mountAttributes(node, attrs, Object.keys(attrs), domNode, instance);
+				}
+			}
+			if (bp && bp.hasEvents === true) {
+				mountBlueprintEvents(node, bp, domNode);
+			} else {
+				var events = node.events;
+
+				if (!isNullOrUndefined(events)) {
+					mountEvents(events, Object.keys(events), domNode);
+				}
+			}
+		}
+	}
+}
+var documetBody = isBrowser ? document.body : null;
+
+function hydrate(node, parentDom, lifecycle) {
+	if (parentDom && parentDom.nodeType === 1) {
+		var rootNode = parentDom.querySelector('[data-infernoroot]');
+
+		if (rootNode && rootNode.parentNode === parentDom) {
+			hydrateNode(node, rootNode, parentDom, lifecycle, {}, true);
+			return true;
+		}
+	}
+	// clear parentDom, unless it's document.body
+	if (parentDom !== documetBody) {
+		parentDom.textContent = '';
+	} else {
+		console.warn('Inferno Warning: rendering to the "document.body" is dangerous! Use a dedicated container element instead.');
+	}
+	return false;
+}
+
+var roots = new Map();
+var componentToDOMNodeMap = new Map();
+
+function findDOMNode(domNode) {
+	return componentToDOMNodeMap.get(domNode) || null;
+}
+
+function render(input, parentDom) {
+	var root = roots.get(parentDom);
+	var lifecycle = new Lifecycle();
+
+	if (isUndefined(root)) {
+		if (!isInvalidNode(input)) {
+			if (!hydrate(input, parentDom, lifecycle)) {
+				mount(input, parentDom, lifecycle, {}, null, false);
+			}
+			lifecycle.trigger();
+			roots.set(parentDom, { input: input });
+		}
+	} else {
+		var activeNode = getActiveNode();
+		var nextInput = patch(root.input, input, parentDom, lifecycle, {}, null, false);
+
+		lifecycle.trigger();
+		if (isNull(input)) {
+			roots.delete(parentDom);
+		}
+		root.input = nextInput;
+		resetActiveNode(activeNode);
+	}
+}
+
+var index = {
+	render: render,
+	findDOMNode: findDOMNode,
+	mount: mount,
+	patch: patch,
+	unmount: unmount
+};
+
+return index;
+
+})));
+});
+
+var infernoDom = infernoDom$1;
+
+__$styleInject("html, body {\n    margin: 0;\n    padding: 0;\n    height: 100%;\n}\nbody {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    -ms-flex-direction: column;\n            -webkit-box-orient: vertical;\n            -webkit-box-direction: normal;\n        flex-direction: column;\n    min-width: 30em;\n}\n.container {\n    margin: 0 auto;\n    max-width: 60em;\n    width: 100%;\n}\n.representation {\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n}\n.representation.waiting {\n    background-color: #00B6F0;\n    background-image: url('/static/img/loader.gif');\n    background-position: 50% 40%;\n    background-size: auto;\n    background-repeat: no-repeat;\n    position: relative;\n}\n.representation.waiting.error {\n    background-image: url('/static/img/warning.png');\n}\n.representation.waiting .message {\n    position: absolute;\n    top: 60%;\n    width: 100%;\n}\n.representation.waiting .message p {\n    color: #fff;\n    font-family: 'Roboto';\n    font-size: 1.8em;\n    letter-spacing: 1px;\n    line-height: 1.4;\n    text-align: center;\n}\n.representation.waiting .message p a {\n    text-decoration: underline;\n}\nheader {\n    background-color: #192854;\n}\nheader .container {\n    background-image: url('/static/img/dius_logo.png');\n    background-position: 0 50%;\n    background-size: 180px;\n    background-repeat: no-repeat;\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    height: 5em;\n    margin: .5em auto;\n}\nheader span {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    color: #ffffff;\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    font-family: 'Roboto';\n    font-size: 1.5em;\n    letter-spacing: 1px;\n    margin-left: 8em;\n    text-transform: uppercase;\n}\nheader .device-actions {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    position: relative;\n}\nheader .device-actions button {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    background-color: #21366C;\n    background-image: url('/static/img/power.png');\n    background-position: 1em 50%;\n    background-repeat: no-repeat;\n    background-size: 28px;\n    border: 1px solid #A3A9AC;\n    border-radius: 0.25em;\n    color: #ffffff;\n    font-size: 1.125em;\n    padding: 0.875em 3.5em;\n    position: relative;\n}\nheader .device-actions button:after {\n    border-color: #ffffff transparent transparent transparent;\n    border-style: solid;\n    border-width: 5px 5px 0 5px;\n    content: '\\A';\n    height: 0;\n    position: absolute;\n    right: 10%;\n    top: 50%;\n    width: 0;\n}\nheader .device-actions .dropdown-device-actions {\n    background-color: #ffffff;\n    border-radius: 0.25em;\n    box-shadow: 0px 0px 5px 1px #192854;\n    display: none;\n    position: absolute;\n    right: 0;\n    top: 85%;\n    z-index: 100;\n}\nheader .device-actions .dropdown-device-actions li a {\n    border-radius: 0.25em;\n    display: block;\n    padding: 0.75em 1.5em;\n}\nheader .device-actions .dropdown-device-actions li a:hover {\n    background-color: #CBCFD1;\n}\nheader .device-actions .dropdown-device-actions li.separator div {\n    border: 0.03125em solid #CBCFD1;\n    margin: 0.75em 1.5em;\n}\nheader .device-actions:hover button {\n    background-color: #314B84;\n}\nheader .device-actions:hover button:after {\n    border-color: transparent transparent #ffffff transparent;\n    border-width: 0 5px 5px 5px;\n}\nheader .device-actions:hover .dropdown-device-actions {\n    display: block;\n}\nfooter {\n    background: #A3A9AC;\n    font-size: 0.75em;\n    padding: 0.625em;\n    text-align: center;\n}\nfooter div {\n    padding: .5em 0;\n}\nfooter div a {\n    text-decoration: underline;\n}\n", undefined);
+
+__$styleInject(".tab {\n    min-width: 100%;\n}\n.tab .tab-nav-container {\n    border-bottom: 1px solid #A3A9AC;\n}\n.tab .tab-nav-container ul {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    list-style: none;\n}\n.tab .tab-nav-container ul li {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    border-bottom-style: solid;\n    border-bottom-width: 4px;\n    border-bottom-color: transparent;\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    margin-top: 4px;\n}\n.tab .tab-nav-container ul li a {\n    color: #666;\n    display: block;\n    font-family: 'Roboto', sans-serif;\n    letter-spacing: 2px;\n    padding: 1em 0;\n    text-align: center;\n    text-transform: uppercase;\n}\n.tab .tab-nav-container ul li.selected, .tab .tab-nav-container ul li:hover {\n    border-bottom-color: #192854;\n}\n.tab .tab-nav-container ul li.selected a, .tab .tab-nav-container ul li:hover a {\n    color: #192854;\n}\n.tab .tab-nav-container ul li.selected a {\n    font-weight: bold;\n}\n.tab .tab-content {\n    padding: 1.5em 0;\n}\n.tab .tab-content .tab-content-container {\n    display: block;\n}\n.tab .tab-content .tab-content-container.hidden {\n    display: none;\n}\n", undefined);
+
+var inferno$1 = createCommonjsModule(function (module, exports) {
+/*!
+ * inferno v0.7.27
+ * (c) 2016 Dominic Gannaway
+ * Released under the MIT License.
+ */
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.Inferno = factory());
+}(commonjsGlobal, (function () { 'use strict';
+
+// Runs only once in applications lifetime
+var isBrowser = typeof window !== 'undefined' && window.document;
+
+function isNullOrUndefined(obj) {
+	return isUndefined(obj) || isNull(obj);
+}
+
+function isAttrAnEvent$1(attr) {
+	return attr[0] === 'o' && attr[1] === 'n' && attr.length > 3;
+}
+
+function isNull(obj) {
+	return obj === null;
+}
+
+function isUndefined(obj) {
+	return obj === undefined;
+}
+
+function VNode(blueprint) {
+	this.bp = blueprint;
+	this.dom = null;
+	this.instance = null;
+	this.tag = null;
+	this.children = null;
+	this.style = null;
+	this.className = null;
+	this.attrs = null;
+	this.events = null;
+	this.hooks = null;
+	this.key = null;
+	this.clipData = null;
+}
+
+VNode.prototype = {
+	setAttrs: function setAttrs(attrs) {
+		this.attrs = attrs;
+		return this;
+	},
+	setTag: function setTag(tag) {
+		this.tag = tag;
+		return this;
+	},
+	setStyle: function setStyle(style) {
+		this.style = style;
+		return this;
+	},
+	setClassName: function setClassName(className) {
+		this.className = className;
+		return this;
+	},
+	setChildren: function setChildren(children) {
+		this.children = children;
+		return this;
+	},
+	setHooks: function setHooks(hooks) {
+		this.hooks = hooks;
+		return this;
+	},
+	setEvents: function setEvents(events) {
+		this.events = events;
+		return this;
+	},
+	setKey: function setKey(key) {
+		this.key = key;
+		return this;
+	}
+};
+
+function createVNode(bp) {
+	return new VNode(bp);
+}
+
+function isAttrAnEvent(attr) {
+	return attr[0] === 'o' && attr[1] === 'n' && attr.length > 3;
+}
+
+function isAttrAHook(hook) {
+	return hook === 'onCreated'
+		|| hook === 'onAttached'
+		|| hook === 'onWillDetach'
+		|| hook === 'onWillUpdate'
+		|| hook === 'onDidUpdate';
+}
+
+function isAttrAComponentHook(hook) {
+	return hook === 'onComponentWillMount'
+		|| hook === 'onComponentDidMount'
+		|| hook === 'onComponentWillUnmount'
+		|| hook === 'onComponentShouldUpdate'
+		|| hook === 'onComponentWillUpdate'
+		|| hook === 'onComponentDidUpdate';
+}
+
+
+function createBlueprint(shape, childrenType) {
+	var tag = shape.tag || null;
+	var tagIsDynamic = tag && tag.arg !== undefined ? true : false;
+
+	var children = isNullOrUndefined(shape.children) ? null : shape.children;
+	var childrenIsDynamic = children && children.arg !== undefined ? true : false;
+
+	var attrs = shape.attrs || null;
+	var attrsIsDynamic = attrs && attrs.arg !== undefined ? true : false;
+
+	var hooks = shape.hooks || null;
+	var hooksIsDynamic = hooks && hooks.arg !== undefined ? true : false;
+
+	var events = shape.events || null;
+	var eventsIsDynamic = events && events.arg !== undefined ? true : false;
+
+	var key = shape.key === undefined ? null : shape.key;
+	var keyIsDynamic = !isNullOrUndefined(key) && !isNullOrUndefined(key.arg);
+
+	var style = shape.style || null;
+	var styleIsDynamic = style && style.arg !== undefined ? true : false;
+
+	var className = shape.className === undefined ? null : shape.className;
+	var classNameIsDynamic = className && className.arg !== undefined ? true : false;
+
+	var spread = shape.spread === undefined ? null : shape.spread;
+	var hasSpread = shape.spread !== undefined;
+
+	var blueprint = {
+		lazy: shape.lazy || false,
+		dom: null,
+		pool: [],
+		tag: tagIsDynamic ? null : tag,
+		className: className !== '' && className ? className : null,
+		style: style !== '' && style ? style : null,
+		isComponent: tagIsDynamic,
+		hasAttrs: attrsIsDynamic || (attrs ? true : false),
+		hasHooks: hooksIsDynamic,
+		hasEvents: eventsIsDynamic,
+		hasStyle: styleIsDynamic || (style !== '' && style ? true : false),
+		hasClassName: classNameIsDynamic || (className !== '' && className ? true : false),
+		childrenType: childrenType === undefined ? (children ? 5 : 0) : childrenType,
+		attrKeys: null,
+		eventKeys: null,
+		isSVG: shape.isSVG || false
+	};
+
+	return function () {
+		var vNode = new VNode(blueprint);
+
+		if (tagIsDynamic === true) {
+			vNode.tag = arguments[tag.arg];
+		}
+		if (childrenIsDynamic === true) {
+			vNode.children = arguments[children.arg];
+		}
+		if (hasSpread) {
+			var _spread = arguments[spread.arg];
+			var attrs$1;
+			var events$1;
+			var hooks$1;
+			var attrKeys = [];
+			var eventKeys = [];
+
+			for (var prop in _spread) {
+				var value = _spread[prop];
+
+				if (prop === 'className' || (prop === 'class' && !blueprint.isSVG)) {
+					vNode.className = value;
+					blueprint.hasClassName = true;
+				} else if (prop === 'style') {
+					vNode.style = value;
+					blueprint.hasStyle = true;
+				} else if (prop === 'key') {
+					vNode.key = value;
+				} else if (isAttrAHook(prop) || isAttrAComponentHook(prop)) {
+					if (!hooks$1) {
+						hooks$1 = {};
+					}
+					hooks$1[prop[2].toLowerCase() + prop.substring(3)] = value;
+				} else if (isAttrAnEvent(prop)) {
+					if (!events$1) {
+						events$1 = {};
+					}
+					eventKeys.push(prop.toLowerCase());
+					events$1[prop.toLowerCase()] = value;
+				} else if (prop === 'children') {
+					vNode.children = value;
+					blueprint.childrenType = blueprint.childrenType || 5;
+				} else {
+					if (!attrs$1) {
+						attrs$1 = {};
+					}
+					attrKeys.push(prop);
+					attrs$1[prop] = value;
+				}
+			}
+			if (attrs$1) {
+				vNode.attrs = attrs$1;
+				blueprint.attrKeys = attrKeys;
+				blueprint.hasAttrs = true;
+			}
+			if (events$1) {
+				vNode.events = events$1;
+				blueprint.eventKeys = eventKeys;
+				blueprint.hasEvents = true;
+			}
+			if (hooks$1) {
+				vNode.hooks = hooks$1;
+				blueprint.hasHooks = true;
+			}
+		} else {
+			if (attrsIsDynamic === true) {
+				vNode.attrs = arguments[attrs.arg];
+			} else {
+				vNode.attrs = attrs;
+			}
+			if (hooksIsDynamic === true) {
+				vNode.hooks = arguments[hooks.arg];
+			}
+			if (eventsIsDynamic === true) {
+				vNode.events = arguments[events.arg];
+			}
+			if (keyIsDynamic === true) {
+				vNode.key = arguments[key.arg];
+			} else {
+				vNode.key = key;
+			}
+			if (styleIsDynamic === true) {
+				vNode.style = arguments[style.arg];
+			} else {
+				vNode.style = blueprint.style;
+			}
+			if (classNameIsDynamic === true) {
+				vNode.className = arguments[className.arg];
+			} else {
+				vNode.className = blueprint.className;
+			}
+		}
+		return vNode;
+	};
+}
+
+function VText(text) {
+	this.text = text;
+	this.dom = null;
+}
+
+function createVText(text) {
+	return new VText(text);
+}
+
+// Copy of the util from dom/util, otherwise it makes massive bundles
+function documentCreateElement(tag, isSVG) {
+	var dom;
+
+	if (isSVG === true) {
+		dom = document.createElementNS('http://www.w3.org/2000/svg', tag);
+	} else {
+		dom = document.createElement(tag);
+	}
+	return dom;
+}
+
+function createUniversalElement(tag, attrs, isSVG) {
+	if (isBrowser) {
+		var dom = documentCreateElement(tag, isSVG);
+		if (attrs) {
+			createStaticAttributes(attrs, dom);
+		}
+		return dom;
+	}
+	return null;
+}
+
+function createStaticAttributes(attrs, dom) {
+	var attrKeys = Object.keys(attrs);
+
+	for (var i = 0; i < attrKeys.length; i++) {
+		var attr = attrKeys[i];
+		var value = attrs[attr];
+
+		if (attr === 'className') {
+			dom.className = value;
+		} else {
+			if (value === true) {
+				dom.setAttribute(attr, attr);
+			} else if (!isNullOrUndefined(value) && value !== false && !isAttrAnEvent$1(attr)) {
+				dom.setAttribute(attr, value);
+			}
+		}
+	}
+}
+
+var index = {
+	createBlueprint: createBlueprint,
+	createVNode: createVNode,
+	createVText: createVText,
+	universal: {
+		createElement: createUniversalElement
+	}
+};
+
+return index;
+
+})));
+});
+
+var inferno = inferno$1;
+
+__$styleInject(".alert {\n    border-radius: 0.1875em;\n    color: #f5f5f5;\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    margin-bottom: 1.5em;\n    padding: 1em;\n    -webkit-transition: .3s;\n    transition: .3s;\n}\n.alert.collapse {\n    padding: 0;\n    margin: 0;\n    visibility: collapse;\n}\n.alert.collapse span, .alert.collapse a {\n    display: none;\n}\n.alert.success {\n    background-color: #8A9939;\n}\n.alert.error {\n    background-color: #C12834;\n}\n.alert span {\n    -ms-flex: 0.9;\n            -webkit-box-flex: 0.9;\n        flex: 0.9;\n}\n.alert span a {\n    font-size: 1em;\n    font-weight: normal;\n    text-decoration: underline;\n}\n.alert a {\n    -ms-flex-item-align: end;\n        align-self: flex-end;\n    color: #f5f5f5;\n    -ms-flex: 0.1;\n            -webkit-box-flex: 0.1;\n        flex: 0.1;\n    font-size: 1.2em;\n    font-weight: bold;\n    right: 1em;\n    text-align: right;\n    -webkit-transition: none;\n    transition: none;\n}\n", undefined);
+
+function collapseAlert(el) {
+  el.classList.add('collapse');
+  setTimeout(function () {
+    el.innerHTML = '';
+  }, 300);
+  return false;
+}
+
+var bp0$1 = inferno.createBlueprint({
+  tag: 'div'
+});
+var bp3$1 = inferno.createBlueprint({
+  tag: 'a',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  },
+  children: {
+    arg: 2
+  }
+});
+var bp2$1 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp1$1 = inferno.createBlueprint({
+  tag: 'div',
+  className: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var Alert = function Alert(model) {
+  var content = bp0$1();
+
+  var handleAlertClose = function handleAlertClose(e) {
+    var alertEl = e.currentTarget.parentElement;
+    return collapseAlert(alertEl);
+  };
+
+  var className = model.success ? 'alert success' : 'alert error';
+
+  content = bp1$1(className, [bp2$1(model.message), bp3$1({
+    href: '#'
+  }, {
+    onclick: handleAlertClose
+  }, '\xD7')]);
+
+  setTimeout(function () {
+    var alertEl = document.getElementsByClassName('alert')[0];
+    collapseAlert(alertEl);
+  }, 7000);
+
+  return content;
+};
+
+function representation(model) {
+  display(tabComponent(model));
+}
+
+function nextAction(model) {
+  // nothing to do here for now
+}
+
+function render(model) {
+  representation(model);
+  nextAction(model);
+}
+
+function persistState(payload) {
+  var requestOpts = {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+    headers: { 'Content-Type': 'application/json' }
+  };
+
+  fetch('/model', requestOpts).then(function (res) {
+    return res.json();
+  }).then(function (json) {
+    render(json);
+  }).catch(function (err) {
+    render(err);
+  });
+
+  return false;
+}
+
+function addNewJob(present) {
+  return persistState({ newJob: true });
+}
+
+function switchToTab(tabName, present) {
+  return persistState({ tabChange: tabName });
+}
+
+function save(data, present) {
+  return persistState(data);
+}
+
+var bp1$2 = inferno.createBlueprint({
+  tag: 'a',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  },
+  children: {
+    arg: 2
+  }
+});
+var bp0$2 = inferno.createBlueprint({
+  tag: 'li',
+  className: {
+    arg: 0
+  },
+  attrs: {
+    arg: 1
+  },
+  children: {
+    arg: 2
+  }
+});
+var TabItem = function TabItem(tabInfo) {
+  var selectedClass = tabInfo.active ? 'selected' : '';
+
+  return bp0$2(selectedClass, {
+    role: 'presentation'
+  }, bp1$2({
+    href: '#',
+    'aria-controls': tabInfo.name,
+    role: 'tab',
+    'data-toggle': 'tab'
+  }, {
+    onclick: function onclick() {
+      return switchToTab(tabInfo.name);
+    }
+  }, tabInfo.name));
+};
+
+__$styleInject("form {\n    letter-spacing: .03125em;\n}\nform h2 {\n    border-bottom: 1px solid #CBCFD1;\n    font-size: 1.25em;\n    margin: 0.4375em 0;\n    padding: 0.4375em 0;\n}\nform .form-container {\n    background-color: #EEEFF0;\n    border-radius: 0.1875em;\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    margin-bottom: 0.25em;\n    padding: 2em 4em;\n}\nform .form-container.vertical {\n    -ms-flex-direction: column;\n            -webkit-box-orient: vertical;\n            -webkit-box-direction: normal;\n        flex-direction: column;\n}\nform .form-container.vertical label {\n    margin: 0.5em 0;\n}\nform .form-container.jenkins [for=\"ciUsername\"], form .form-container.jenkins [name=\"ciUsername\"], form .form-container.jenkins [for=\"ciApiToken\"], form .form-container.jenkins [name=\"ciApiToken\"] {\n    display: none;\n    visibility: hidden;\n}\nform .form-container.circleci [for=\"ciAddress\"], form .form-container.circleci [name=\"ciAddress\"], form .form-container.buildkite [for=\"ciAddress\"], form .form-container.buildkite [name=\"ciAddress\"] {\n    display: none;\n    visibility: hidden;\n}\nform .form-container.buildkite [name=\"ciUsernameCircleCi\"], form .form-container.buildkite [name=\"ciUsernameTravis\"] {\n    display: none;\n    visibility: hidden;\n}\nform .form-container.circleci [name=\"ciUsernameBuildkite\"], form .form-container.circleci [name=\"ciUsernameTravis\"] {\n    display: none;\n    visibility: hidden;\n}\nform .form-container.travisci [name=\"ciUsernameCircleCi\"], form .form-container.travisci [name=\"ciUsernameBuildkite\"], form .form-container.travisci [for=\"ciAddress\"], form .form-container.travisci [name=\"ciAddress\"], form .form-container.travisci [for=\"ciApiToken\"], form .form-container.travisci [name=\"ciApiToken\"] {\n    display: none;\n    visibility: hidden;\n}\nform .form-container .fieldset {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n}\nform .form-container .fieldset label {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    margin: 0;\n}\nform .form-container .fieldset.hidden {\n    height: 0;\n    opacity: 0;\n    overflow: hidden;\n    width: 0;\n}\nform .form-container label {\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n}\nform .form-container label span {\n    font-weight: bold;\n}\nform .form-container input, form .form-container select {\n    border: 1px solid #ccc;\n    box-sizing: border-box;\n    color: #333;\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    padding: 0.625em;\n    margin: 0.3125em 0;\n}\nform .form-container input:focus, form .form-container select:focus {\n    border-color: #00B6F0;\n}\nform .form-container .full-length {\n    min-width: 100%;\n}\nform .form-container input[type=\"checkbox\"], form .form-container input[type=\"radio\"] {\n    -ms-flex-item-align: start;\n        align-self: flex-start;\n    border: none;\n    cursor: pointer;\n    -ms-flex-positive: 0.1;\n            -webkit-box-flex: 0.1;\n        flex-grow: 0.1;\n    padding: 0;\n}\nform .form-container input[type=\"checkbox\"] + label, form .form-container input[type=\"radio\"] + label {\n    cursor: pointer;\n}\nform .form-container input[type=\"checkbox\"]:not(old), form .form-container input[type=\"radio\"]:not(old) {\n    font-size: 1em;\n    margin: 0;\n    opacity: 0;\n    width: 2em;\n}\nform .form-container input[type=\"checkbox\"]:not(old) + label, form .form-container input[type=\"radio\"]:not(old) + label {\n    display: inline-block;\n    margin-left: -2em;\n    line-height: 1.5em;\n}\nform .form-container input[type=\"checkbox\"]:not(old) + label > span, form .form-container input[type=\"radio\"]:not(old) + label > span {\n    background: transparent;\n    border: 0.125em solid #838688;\n    border-radius: 0.25em;\n    display: inline-block;\n    height: 0.875em;\n    margin: 0.25em 0.5em 0.25em 0.25em;\n    vertical-align: bottom;\n    width: 0.875em;\n}\nform .form-container input[type=\"checkbox\"]:not(old):checked + label > span, form .form-container input[type=\"radio\"]:not(old):checked + label > span {\n    border-color: #00B6F0;\n}\nform .form-container input[type=\"checkbox\"]:not(old):checked + label > span:before, form .form-container input[type=\"radio\"]:not(old):checked + label > span:before {\n    color: #00B6F0;\n    display: block;\n    font-size: 0.875em;\n    font-weight: bold;\n    line-height: 1em;\n    text-align: center;\n    width: 1em;\n}\nform .form-container input[type=\"checkbox\"]:not(old):checked + label > span > span, form .form-container input[type=\"radio\"]:not(old):checked + label > span > span {\n    background-color: #00B6F0;\n    border: 0.0625em solid #00B6F0;\n    display: block;\n    height: 0.5em;\n    margin: 0.125em;\n    width: 0.5em;\n}\nform .form-container input[type=\"radio\"]:not(old) + label > span {\n    border-radius: 1em;\n}\nform .form-container input[type=\"radio\"]:not(old):checked + label > span > span {\n    border-radius: 1em;\n}\nform .form-container .controls {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n}\nform .wireless-connection, form .static-configuration {\n    -webkit-transition: .2s;\n    transition: .2s;\n}\nform .wireless-connection .fieldset, form .static-configuration .fieldset {\n    margin: 0.5em 0;\n}\nform .wireless-connection label, form .static-configuration label {\n    text-align: right;\n}\nform .wireless-connection label.checkbox, form .static-configuration label.checkbox {\n    cursor: pointer;\n    margin-left: 50%;\n}\nform .wireless-connection input[type=\"text\"],form .wireless-connection input[type=\"password\"],form .static-configuration input[type=\"text\"],form .static-configuration input[type=\"password\"] {\n    margin-left: 1em;\n}\nform .wireless-connection.shown, form .static-configuration.shown {\n    height: auto;\n    opacity: 1;\n    overflow: auto;\n    width: auto;\n}\nform .wireless-connection.hidden, form .static-configuration.hidden {\n    height: 0;\n    opacity: 0;\n    overflow: hidden;\n    width: 0;\n}\nform .actions {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    -ms-flex-align: center;\n            -webkit-box-align: center;\n        align-items: center;\n    margin-top: 1em;\n}\nform .actions button {\n    -ms-flex: 0.1;\n            -webkit-box-flex: 0.1;\n        flex: 0.1;\n}\nform .actions small {\n    color: #838688;\n    -ms-flex: 0.9;\n            -webkit-box-flex: 0.9;\n        flex: 0.9;\n    text-align: right;\n}\nform button {\n    background-color: #00B6F0;\n    border-radius: 0.1875em;\n    color: #fff;\n    font-size: 1.285em;\n    font-weight: bold;\n    line-height: 1;\n    padding: 1em 3em;\n    text-transform: capitalize;\n}\nform button:hover {\n    background-color: #5894CE;\n}\nform button.small {\n    font-size: 80%;\n    margin: 0.5em 0;\n}\nform button.secondary {\n    background-color: #A2B842;\n}\nform button.secondary:hover {\n    background-color: #8A9939;\n}\nform button.danger {\n    background-color: #A41E22;\n}\nform button.danger:hover {\n    background-color: #76141B;\n}\n", undefined);
+
+var transformFormIntoPayload = function transformFormIntoPayload(formElements, payload) {
+  for (var i = 0; i < formElements.length; i++) {
+    var formEl = formElements[i];
+    var alreadyContainsEl = false;
+
+    if (formEl.type === 'radio' && formEl.checked) {
+      payload[formEl.name] = formElements[formEl.name].value;
+    }
+
+    if (formEl.type !== 'radio') {
+      if (typeof payload[formEl.name] !== 'undefined' && !Array.isArray(payload[formEl.name])) {
+        alreadyContainsEl = true;
+
+        var originalValue = payload[formEl.name];
+        delete payload[formEl.name];
+
+        payload[formEl.name] = [];
+        payload[formEl.name].push(originalValue);
+      }
+
+      if (Array.isArray(payload[formEl.name])) {
+        alreadyContainsEl = true;
+      }
+
+      var value = formEl.type === 'checkbox' ? formEl.checked : formEl.value;
+      if (alreadyContainsEl) {
+        payload[formEl.name].push(value);
+      } else {
+        payload[formEl.name] = value;
+      }
+    }
+  }
+};
+
+var bp23 = inferno.createBlueprint({
+  tag: 'small',
+  children: {
+    arg: 0
+  }
+});
+var bp22 = inferno.createBlueprint({
+  tag: 'button',
+  attrs: {
+    type: 'submit'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp21 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'actions',
+  children: {
+    arg: 0
+  }
+});
+var bp20 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp19 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'ciApiToken'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp18 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var bp17 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp16 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'ciUsername',
+    name: 'ciUsernameTravis'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp15 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'ciUsername',
+    name: 'ciUsernameCircleCi'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp14 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'ciUsername',
+    name: 'ciUsernameBuildkite'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp13 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var bp12 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp11 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp10 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'ciAddress'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp9 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var bp8 = inferno.createBlueprint({
+  tag: 'option',
+  attrs: {
+    value: 'travisci'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp7 = inferno.createBlueprint({
+  tag: 'option',
+  attrs: {
+    value: 'buildkite'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp6 = inferno.createBlueprint({
+  tag: 'option',
+  attrs: {
+    value: 'circleci'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp5 = inferno.createBlueprint({
+  tag: 'option',
+  attrs: {
+    value: 'jenkins'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp4$1 = inferno.createBlueprint({
+  tag: 'select',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  },
+  children: {
+    arg: 2
+  }
+});
+var bp3$2 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp2$2 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'ciTool'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp1$3 = inferno.createBlueprint({
+  tag: 'div',
+  className: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var bp0$4 = inferno.createBlueprint({
+  tag: 'form',
+  events: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var CiTabContent = function CiTabContent(model, lastUpdated) {
+  var handleCiToolChange = function handleCiToolChange(event) {
+    var el = event.currentTarget;
+    el.parentElement.classList.remove(el.parentElement.classList.item(2));
+    el.parentElement.classList.add(el.value);
+
+    var inputEls = el.parentElement.getElementsByTagName('input');
+    for (var i = 0; i < inputEls.length; i++) {
+      inputEls[i].required = inputEls[i].offsetParent !== null;
+    }
+  };
+
+  var handleFormSubmit = function handleFormSubmit(event) {
+    var postData = { save: 'ci', payload: {} };
+    transformFormIntoPayload(event.currentTarget.elements, postData.payload);
+    return save(postData);
+  };
+
+  return bp0$4({
+    onsubmit: handleFormSubmit
+  }, [bp1$3('form-container vertical ' + model.tool, [bp2$2([bp3$2('CI tool'), ' you are using']), bp4$1({
+    required: true,
+    id: 'ciTool',
+    name: 'ciTool',
+    value: model.tool
+  }, {
+    onchange: handleCiToolChange
+  }, [bp5('Jenkins'), bp6('Circle CI'), bp7('Buildkite'), bp8('Travis CI')]), bp9([bp10(['Address of the ', bp11('CI server you want to connect to')]), bp12({
+    type: 'text',
+    id: 'ciAddress',
+    placeholder: 'http://myci.mycompany',
+    name: 'ciAddress',
+    value: model.address
+  })]), bp13([bp14('Organization Slug'), bp15('Team Name'), bp16('Account'), bp17({
+    type: 'text',
+    id: 'ciUsername',
+    name: 'ciUsername',
+    value: model.username
+  })]), bp18([bp19('API token'), bp20({
+    type: 'text',
+    id: 'ciApiToken',
+    placeholder: '',
+    name: 'ciApiToken',
+    value: model.apiToken
+  })])]), bp21([bp22('Save'), bp23(['Last updated: ', lastUpdated])])]);
+};
+
+__$styleInject("form .jobs-container > button {\n    -ms-flex-item-align: end;\n        align-self: flex-end;\n    background-color: #A2B842;\n    margin-right: 0.5em;\n}\nform .jobs-container .fieldset {\n    padding: 0.25em 0.5em;\n}\nform .jobs-container .fieldset:hover {\n    background-color: #fff;\n}\nform .jobs-container .fieldset:hover label {\n    font-weight: bold;\n}\nform .jobs-container .fieldset input, form .jobs-container .fieldset label {\n    -ms-flex: initial;\n            -webkit-box-flex: initial;\n        flex: initial;\n    -ms-flex-positive: initial;\n        flex-grow: initial;\n}\nform .jobs-container .fieldset input[type=\"text\"], form .jobs-container .fieldset label[type=\"text\"] {\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    margin-right: 1em;\n}\n", undefined);
+
+var bp6$2 = inferno.createBlueprint({
+  tag: 'button',
+  className: 'small danger',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  },
+  children: {
+    arg: 2
+  }
+});
+var bp5$2 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp4$3 = inferno.createBlueprint({
+  tag: 'span'
+});
+var bp3$4 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp2$4 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var bp1$5 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp0$6 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var Job = function Job(props) {
+  var handleRemoveJob = function handleRemoveJob(e) {
+    e.currentTarget.parentElement.remove();
+  };
+
+  return bp0$6([bp1$5({
+    type: 'checkbox',
+    name: 'jobActive',
+    id: 'jobActive_' + props.index,
+    checked: props.active,
+    value: 'jobActive_' + props.index
+  }), bp2$4({
+    for: 'jobActive_' + props.index
+  }, [bp3$4(bp4$3()), '\xA0']), bp5$2({
+    type: 'text',
+    name: 'jobName',
+    id: 'jobName_' + props.index,
+    value: props.name
+  }), bp6$2({
+    type: 'button'
+  }, {
+    onclick: handleRemoveJob
+  }, 'Remove')]);
+};
+
+var bp0$5 = inferno.createBlueprint({
+  tag: {
+    arg: 0
+  },
+  attrs: {
+    arg: 1
+  }
+});
+var bp12$1 = inferno.createBlueprint({
+  tag: 'small',
+  children: {
+    arg: 0
+  }
+});
+var bp11$1 = inferno.createBlueprint({
+  tag: 'button',
+  attrs: {
+    type: 'submit'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp10$1 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'actions',
+  children: {
+    arg: 0
+  }
+});
+var bp9$1 = inferno.createBlueprint({
+  tag: 'button',
+  className: 'small secondary',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  },
+  children: {
+    arg: 2
+  }
+});
+var bp8$1 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp7$1 = inferno.createBlueprint({
+  tag: 'label',
+  children: {
+    arg: 0
+  }
+});
+var bp6$1 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'jobs-container form-container vertical',
+  children: {
+    arg: 0
+  }
+});
+var bp5$1 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp4$2 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp3$3 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'pollRate'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp2$3 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'form-container vertical',
+  children: {
+    arg: 0
+  }
+});
+var bp1$4 = inferno.createBlueprint({
+  tag: 'form',
+  events: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var JobsTabContent = function JobsTabContent(model, lastUpdated) {
+  var handleFormSubmit = function handleFormSubmit(event) {
+    var postData = { save: 'jobs', payload: {} };
+    transformFormIntoPayload(event.currentTarget.elements, postData.payload);
+    return save(postData);
+  };
+
+  var handleAddNewJob = function handleAddNewJob(event) {
+    addNewJob();
+  };
+
+  var jobs = model.items.map(function (i, idx) {
+    return bp0$5(Job, {
+      name: i.name,
+      active: i.active,
+      index: idx
+    });
+  });
+
+  return bp1$4({
+    onsubmit: handleFormSubmit
+  }, [bp2$3([bp3$3(['Rate to ', bp4$2('poll your CI server'), ' (in seconds)']), bp5$1({
+    type: 'number',
+    name: 'pollRate',
+    id: 'pollRate',
+    value: model.pollrate
+  })]), bp6$1([bp7$1(bp8$1('Jobs to monitor')), jobs, bp9$1({
+    type: 'button'
+  }, {
+    onclick: handleAddNewJob
+  }, 'Add new job')]), bp10$1([bp11$1('Save'), bp12$1(['Last updated: ', lastUpdated])])]);
+};
+
+var bp52 = inferno.createBlueprint({
+  tag: 'small',
+  children: {
+    arg: 0
+  }
+});
+var bp51 = inferno.createBlueprint({
+  tag: 'button',
+  attrs: {
+    type: 'submit'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp50 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'actions',
+  children: {
+    arg: 0
+  }
+});
+var bp49 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp48 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'gateway'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp47 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var bp46 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp45 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'address'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp44 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var bp43 = inferno.createBlueprint({
+  tag: 'div',
+  className: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var bp42 = inferno.createBlueprint({
+  tag: 'span'
+});
+var bp41 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp40 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'no'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp39 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  }
+});
+var bp38 = inferno.createBlueprint({
+  tag: 'span'
+});
+var bp37 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp36 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'yes'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp35 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  }
+});
+var bp34 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'controls',
+  children: {
+    arg: 0
+  }
+});
+var bp33 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp32 = inferno.createBlueprint({
+  tag: 'label',
+  children: {
+    arg: 0
+  }
+});
+var bp31 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var bp30 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'form-container vertical',
+  children: {
+    arg: 0
+  }
+});
+var bp29 = inferno.createBlueprint({
+  tag: 'span'
+});
+var bp28 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp27 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'hidden'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp26 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp25 = inferno.createBlueprint({
+  tag: 'label',
+  className: 'checkbox',
+  children: {
+    arg: 0
+  }
+});
+var bp24 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp23$1 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'key'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp22$1 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var bp21$1 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp20$1 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'ssid'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp19$1 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var bp18$1 = inferno.createBlueprint({
+  tag: 'div',
+  className: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var bp17$1 = inferno.createBlueprint({
+  tag: 'span'
+});
+var bp16$1 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp15$1 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'ethernet'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp14$1 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  }
+});
+var bp13$1 = inferno.createBlueprint({
+  tag: 'span'
+});
+var bp12$2 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp11$2 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'wireless'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp10$2 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  }
+});
+var bp9$2 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'controls',
+  children: {
+    arg: 0
+  }
+});
+var bp8$2 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp7$2 = inferno.createBlueprint({
+  tag: 'label',
+  children: {
+    arg: 0
+  }
+});
+var bp6$3 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'fieldset',
+  children: {
+    arg: 0
+  }
+});
+var bp5$3 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'form-container vertical',
+  children: {
+    arg: 0
+  }
+});
+var bp4$4 = inferno.createBlueprint({
+  tag: 'input',
+  className: 'full-length',
+  attrs: {
+    arg: 0
+  }
+});
+var bp3$5 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp2$5 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'hostname'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp1$6 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'form-container vertical',
+  children: {
+    arg: 0
+  }
+});
+var bp0$7 = inferno.createBlueprint({
+  tag: 'form',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  },
+  children: {
+    arg: 2
+  }
+});
+var NetworkTabContent = function NetworkTabContent(model, lastUpdated) {
+  var handleConnectionTypeChange = function handleConnectionTypeChange(event) {
+    var formEl = event.currentTarget.parentNode.parentNode.parentNode;
+    var wifiConfEl = formEl.getElementsByClassName('wireless-connection')[0];
+
+    if (event.currentTarget.value === 'wireless') {
+      wifiConfEl.classList.remove('hidden');
+      wifiConfEl.classList.add('shown');
+    } else {
+      wifiConfEl.classList.remove('shown');
+      wifiConfEl.classList.add('hidden');
+    }
+  };
+
+  var handleDhcpChange = function handleDhcpChange(event) {
+    var formEl = event.currentTarget.parentNode.parentNode.parentNode;
+    var staticEl = formEl.getElementsByClassName('static-configuration')[0];
+
+    if (event.currentTarget.value === 'false') {
+      staticEl.classList.remove('hidden');
+      staticEl.classList.add('shown');
+    } else {
+      staticEl.classList.remove('shown');
+      staticEl.classList.add('hidden');
+    }
+  };
+
+  var handleFormSubmit = function handleFormSubmit(event) {
+    var postData = { save: 'network', payload: {} };
+    transformFormIntoPayload(event.currentTarget.elements, postData.payload);
+    return save(postData);
+  };
+
+  var wirelessContainerHidden = model.connectionType !== 'wireless' ? 'hidden' : 'shown';
+  var staticContainerHidden = model.dhcp === true ? 'hidden' : 'shown';
+
+  return bp0$7({
+    name: 'networkForm'
+  }, {
+    onsubmit: handleFormSubmit
+  }, [bp1$6([bp2$5(['Name of ', bp3$5('this device'), ' on the network']), bp4$4({
+    required: true,
+    type: 'text',
+    id: 'hostname',
+    name: 'hostname',
+    placeholder: 'e.g. mycompany-build-lights',
+    value: model.hostname
+  })]), bp5$3([bp6$3([bp7$2(['Select your ', bp8$2('preferred connection type')]), bp9$2([bp10$2({
+    type: 'radio',
+    name: 'connectionType',
+    checked: model.connectionType === 'wireless' ? 'checked' : '',
+    value: 'wireless',
+    id: 'wireless'
+  }, {
+    onchange: handleConnectionTypeChange
+  }), bp11$2([bp12$2(bp13$1()), 'Wireless']), bp14$1({
+    type: 'radio',
+    name: 'connectionType',
+    checked: model.connectionType === 'ethernet' ? 'checked' : '',
+    value: 'ethernet',
+    id: 'ethernet'
+  }, {
+    onchange: handleConnectionTypeChange
+  }), bp15$1([bp16$1(bp17$1()), 'Ethernet'])])]), bp18$1('wireless-connection ' + wirelessContainerHidden, [bp19$1([bp20$1('SSID'), bp21$1({
+    type: 'text',
+    id: 'ssid',
+    name: 'ssid',
+    value: model.wireless.ssid
+  })]), bp22$1([bp23$1('Password'), bp24({
+    type: 'password',
+    id: 'key',
+    name: 'key',
+    value: model.wireless.key
+  })]), bp25([bp26({
+    type: 'checkbox',
+    id: 'hidden',
+    name: 'hidden',
+    value: model.wireless.hidden,
+    checked: model.wireless.hidden ? 'checked' : ''
+  }), bp27([bp28(bp29()), 'Hidden network?'])])])]), bp30([bp31([bp32(['Assign network ', bp33('IP address')]), bp34([bp35({
+    type: 'radio',
+    name: 'useDhcp',
+    checked: !model.dhcp ? 'checked' : '',
+    value: 'false',
+    id: 'yes'
+  }, {
+    onchange: handleDhcpChange
+  }), bp36([bp37(bp38()), 'Yes']), bp39({
+    type: 'radio',
+    name: 'useDhcp',
+    checked: model.dhcp ? 'checked' : '',
+    value: 'true',
+    id: 'no'
+  }, {
+    onchange: handleDhcpChange
+  }), bp40([bp41(bp42()), 'No'])])]), bp43('static-configuration ' + staticContainerHidden, [bp44([bp45('Address'), bp46({
+    type: 'text',
+    name: 'address',
+    id: 'address',
+    value: model.address,
+    placeholder: '192.168.0.10/24'
+  })]), bp47([bp48('Gateway'), bp49({
+    type: 'text',
+    name: 'gateway',
+    id: 'gateway',
+    value: model.gateway,
+    placeholder: '192.168.0.1'
+  })])])]), bp50([bp51('Save'), bp52(['Last updated: ', lastUpdated])])]);
+};
+
+var bp11$3 = inferno.createBlueprint({
+  tag: 'small',
+  children: {
+    arg: 0
+  }
+});
+var bp10$3 = inferno.createBlueprint({
+  tag: 'button',
+  attrs: {
+    type: 'submit'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp9$3 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'actions',
+  children: {
+    arg: 0
+  }
+});
+var bp8$3 = inferno.createBlueprint({
+  tag: 'input',
+  attrs: {
+    arg: 0
+  }
+});
+var bp7$3 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'numLeds'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp6$4 = inferno.createBlueprint({
+  tag: 'option',
+  attrs: {
+    value: 'adafruit_lpd8806'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp5$4 = inferno.createBlueprint({
+  tag: 'option',
+  attrs: {
+    value: 'epistar_lpd8806'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp4$5 = inferno.createBlueprint({
+  tag: 'select',
+  attrs: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var bp3$6 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp2$6 = inferno.createBlueprint({
+  tag: 'label',
+  attrs: {
+    for: 'ledType'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp1$7 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'form-container vertical',
+  children: {
+    arg: 0
+  }
+});
+var bp0$8 = inferno.createBlueprint({
+  tag: 'form',
+  events: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var LedHardwareTabContent = function LedHardwareTabContent(model, lastUpdated) {
+  var handleFormSubmit = function handleFormSubmit(event) {
+    var postData = { save: 'led', payload: {} };
+    transformFormIntoPayload(event.currentTarget.elements, postData.payload);
+    return save(postData);
+  };
+
+  return bp0$8({
+    onsubmit: handleFormSubmit
+  }, [bp1$7([bp2$6(['Which ', bp3$6('LED strip'), ' you are using']), bp4$5({
+    required: true,
+    id: 'ledType',
+    name: 'ledType',
+    value: model.ledType
+  }, [bp5$4('Epistar LPD8806'), bp6$4('Adafruit LPD8806')]), bp7$3('Number of LEDs on your strip'), bp8$3({
+    type: 'number',
+    required: true,
+    id: 'numLeds',
+    name: 'numLeds',
+    value: model.numLeds
+  })]), bp9$3([bp10$3('Save'), bp11$3(['Last updated: ', lastUpdated])])]);
+};
+
+var bp0$3 = inferno.createBlueprint({
+  tag: 'div',
+  className: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var TabContent = function TabContent(tabInfo) {
+  var displayClass = !tabInfo.active ? 'hidden tab-content-container' : 'tab-content-container';
+  var content = void 0;
+
+  switch (tabInfo.name) {
+    case 'network':
+      content = NetworkTabContent(tabInfo.configuration, tabInfo.lastUpdated);
+      break;
+    case 'ci server':
+      content = CiTabContent(tabInfo.configuration, tabInfo.lastUpdated);
+      break;
+    case 'led hardware':
+      content = LedHardwareTabContent(tabInfo.configuration, tabInfo.lastUpdated);
+      break;
+    case 'jobs to monitor':
+      content = JobsTabContent(tabInfo.configuration, tabInfo.lastUpdated);
+      break;
+    default:
+      content = 'Nothing to see here.';
+  }
+
+  return bp0$3(displayClass, content);
+};
+
+var bp0 = inferno.createBlueprint({
+  tag: {
+    arg: 0
+  },
+  attrs: {
+    arg: 1
+  }
+});
+var bp4 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'tab-content container',
+  children: {
+    arg: 0
+  }
+});
+var bp3 = inferno.createBlueprint({
+  tag: 'ul',
+  className: 'container',
+  children: {
+    arg: 0
+  }
+});
+var bp2 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'tab-nav-container',
+  children: {
+    arg: 0
+  }
+});
+var bp1 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'tab',
+  children: {
+    arg: 0
+  }
+});
+var Tab = function Tab(model) {
+  var enabledTabs = model.tools.filter(function (t) {
+    return t.active;
+  }).map(function (t) {
+    return {
+      name: t.name,
+      active: t.name === model.selectedTool,
+      configuration: t.configuration,
+      lastUpdated: new Date(model.lastUpdated).toString()
+    };
+  });
+
+  var tabs = enabledTabs.map(TabItem);
+  var tabContent = enabledTabs.map(TabContent);
+
+  var alert = '';
+  if (model.result) {
+    alert = bp0(Alert, {
+      success: model.result.success,
+      message: model.result.message
+    });
+  }
+
+  return bp1([bp2(bp3(tabs)), bp4([alert, tabContent])]);
+};
+
+function tabComponent(model) {
+  return Tab(model);
+}
+
+function display(representation) {
+  var reprEl = document.getElementById('representation');
+  if (reprEl) {
+    infernoDom.render(representation, reprEl);
+  }
+}
+
+var cb = function cb(event) {
+  document.getElementById('supervisor').href = 'http://' + location.hostname + ':9001';
+
+  fetch('/model').then(function (res) {
+    return res.json();
+  }).then(function (json) {
+    display(tabComponent(json));
+  });
+};
+
+if (document.readyState === 'complete' || document.readyState !== 'loading' && !document.documentElement.doScroll) {
+  cb();
+} else {
+  document.addEventListener('DOMContentLoaded', cb);
+}
+
+var mutateScreen = function mutateScreen(e) {
+  var endpoint = e.currentTarget.href;
+  var isShutdown = endpoint.endsWith('shutdown');
+  var countdown = Number(e.currentTarget.dataset.countdown);
+
+  var representation = document.getElementById('representation');
+  representation.classList.add('waiting');
+  representation.innerHTML = '<div class="message"><p>Please wait...</p></div>';
+
+  fetch(endpoint).then(function (res) {
+    if (!res.ok) {
+      representation.classList.add('error');
+      representation.innerHTML = '<div class="message"><p>Could not execute.<br/>Please restart manually.<br/><br/><a href="#" onclick="location.reload()">Reload</a></p></div>';
+      return;
+    }
+
+    var intervalId = setInterval(function () {
+      var message = 'Reboot underway. Will refresh in ' + countdown + ' seconds.';
+      if (isShutdown) {
+        message = 'Shutdown underway. You can unplug your Raspberry Pi in ' + countdown + ' seconds.';
+      }
+
+      representation.innerHTML = '<div class="message"><p>' + message + '</p></div>';
+      countdown -= 1;
+
+      if (countdown === 0) {
+        clearInterval(intervalId);
+
+        if (isShutdown) {
+          representation.innerHTML = '<div class="message"><p>You can now unplug your Raspberry Pi.</p></div>';
+        } else {
+          location.reload();
+        }
+      }
+    }, 1000);
+  });
+
+  return false;
+};
+
+var deviceActionEls = document.getElementsByClassName('deviceAction');
+for (var i = 0; i < deviceActionEls.length; i++) {
+  if (!deviceActionEls[i].onclick) {
+    deviceActionEls[i].onclick = mutateScreen;
+  }
+}
+
+}());
 //# sourceMappingURL=bundle.js.map

@@ -1,20 +1,15 @@
 'use strict'
 
-const fs = require('fs')
-const logger = require('winston')
 const findIndex = require('lodash.findindex')
 
 const utils = require('./utils')
-
-const UTF_8 = 'utf8'
+const state = require('./state')
 
 module.exports.persist = (payload, lightConfigFile) => {
-  let lightConfJSON = JSON.parse(fs.readFileSync(lightConfigFile, UTF_8))
-  lightConfJSON.light.type = payload.ledType
-  lightConfJSON.light.num_leds = utils.defaultWhenInvalid(payload.numLeds, 32)
-
-  fs.writeFileSync(lightConfigFile, JSON.stringify(lightConfJSON, null, 2), UTF_8)
-  logger.info('Persisted new LED configuration')
+  state.write(lightConfigFile, data => {
+    data.light.type = payload.ledType
+    data.light.num_leds = utils.defaultWhenInvalid(payload.numLeds, 32)
+  })
 }
 
 module.exports.mutateModel = (model, payload) => {
