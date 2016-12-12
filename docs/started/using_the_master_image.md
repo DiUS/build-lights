@@ -1,6 +1,6 @@
 # Using the master image
 
-We provide a Jessie Raspbian based master image, properly partitioned with all software already installed - you can download the master image [here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161205.zip). All you need to do is unzip it and transfer the downloaded image into an SD Card.
+We provide a Jessie Raspbian based master image, properly partitioned with all software already installed - you can download the master image [here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161213.zip). All you need to do is unzip it and transfer the downloaded image into an SD Card.
 
 #### What's in the image
 
@@ -43,13 +43,13 @@ For Mac OSX, you can try [Pi Filler 1.3](http://ivanx.com/raspberrypi/files/PiFi
 
 For Windows, you can try [Win32DiskImager](http://sourceforge.net/projects/win32diskimager).
 
-For Linux, you can try ImageWriter. Alternatively, you can use the command line option. Example (if your microSD card is located at /dev/sdb):
+For Linux, you can try ImageWriter. Alternatively, you can use the command line option. Example \(if your microSD card is located at /dev/sdb\):
 
 ```
 sudo dd bs=1M if=build-lights-master-20161103.img of=/dev/sdb
 ```
 
-**NOTE**: when you use the command `df -h` it is very likely that your microSD card might be listed as `/dev/sdbN` with **N** being a number. This number is the partition number and you don't want to write a partition, you want write to the whole card. When you run the command above ensure *1)* that the microSD is unmounted and *2)* that you are not using the number.
+**NOTE**: when you use the command `df -h` it is very likely that your microSD card might be listed as `/dev/sdbN` with **N** being a number. This number is the partition number and you don't want to write a partition, you want write to the whole card. When you run the command above ensure _1\)_ that the microSD is unmounted and _2\)_ that you are not using the number.
 
 ### Running the master image for the first time
 
@@ -60,25 +60,31 @@ If logging in via SSH, the master image has this host name: **build-lights-v5-ma
 Once logged in...
 
 1. sudo as root by invoking `sudo su`
-2. Remount both `/root` and `/boot` partitions with read-write (RW) permissions
+2. Remount both `/root` and `/boot` partitions with read-write \(RW\) permissions  
    To remount `/root` partition with RW permission, run this command:
+
    ```
    rwroot
    ```
 
    To remount `/boot` partition with RW permission, run this command:
+
    ```
    rwboot
    ```
+
 3. Run `raspi-config` to change the **hostname** and **resize the root partition** to fill the entire microSD card.
 4. We recommend you configure other things such as Timezone and Wifi country, but it's up to you.
 5. Reboot   
 
-At this point, if you plugged an ethernet cable to your Raspberry Pi, you can go to the web interface on http://my-new-hostname and configure the rest over there:
+At this point, if you plugged an ethernet cable to your Raspberry Pi, you can go to the web interface on [http://my-new-hostname](http://my-new-hostname) and configure the rest over there:
 
 * Change hostname
-* Change connection type (Wireless, Ethernet)
-* Assign a static IP address (if you are not using DHCP)
+* Change connection type \(Wireless, Ethernet\)
+* Assign a static IP address \(if you are not using DHCP\)
 * Setup your CI connection
 * Setup the LED hardware you are using
 * Setup the jobs to be monitored
+
+
+
