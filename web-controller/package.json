@@ -59,7 +59,7 @@
         "nodejs-dashboard": "^0.2.1",
         "nodemon": "^1.11.0",
         "postcss-cssnext": "^2.8.0",
-        "postcss-import": "^9.0.0",
+        "postcss-import": "^8.1.2",
         "postcss-nested": "^1.0.0",
         "postcss-simple-vars": "^3.0.0",
         "proxyquire": "^1.7.10",
