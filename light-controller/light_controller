@@ -13,6 +13,7 @@ import importlib
 from lib import daemonize
 from lib import logger
 from lib import list_utils
+from lib import job_synchronizer
 from lib.constants import STATUS
 from config import json_config
 from lights import job2ledstrip
@@ -113,6 +114,8 @@ def run():
     ci_server_type = ci_server_conf.pop('type')
     poll_interval_seconds = ci_server_conf.pop('pollrate_s', None)
     ci = importlib.import_module('ci_server.' + ci_server_type).Source(**ci_server_conf)
+
+    job_synchronizer.JobSynchronizer().update_ci_jobs(ci.list_projects())
 
     jobs = conf['jobs']
     translator = job2ledstrip.Job2LedStrip(jobs, light)
