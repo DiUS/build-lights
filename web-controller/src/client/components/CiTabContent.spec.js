@@ -12,7 +12,7 @@ import { CiTabContent } from './CiTabContent'
 
 describe('CiTabContent', () => {
 
-  describe('#render', () => {
+  xdescribe('#render', () => {
     let $
 
     ['jenkins', 'circleci', 'travisci'].forEach(tool => {

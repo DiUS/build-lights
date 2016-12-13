@@ -2748,7 +2748,7 @@ var bp0$4 = inferno.createBlueprint({
     arg: 1
   }
 });
-var CiTabContent = function CiTabContent(model, lastUpdated) {
+var CiTabContent = function CiTabContent(model) {
   var handleCiToolChange = function handleCiToolChange(event) {
     var el = event.currentTarget;
     el.parentElement.classList.remove(el.parentElement.classList.item(2));
@@ -2768,11 +2768,11 @@ var CiTabContent = function CiTabContent(model, lastUpdated) {
 
   return bp0$4({
     onsubmit: handleFormSubmit
-  }, [bp1$3('form-container vertical ' + model.tool, [bp2$2([bp3$2('CI tool'), ' you are using']), bp4$1({
+  }, [bp1$3('form-container vertical ' + model.configuration.tool, [bp2$2([bp3$2('CI tool'), ' you are using']), bp4$1({
     required: true,
     id: 'ciTool',
     name: 'ciTool',
-    value: model.tool
+    value: model.configuration.tool
   }, {
     onchange: handleCiToolChange
   }, [bp5('Jenkins'), bp6('Circle CI'), bp7('Buildkite'), bp8('Travis CI')]), bp9([bp10(['Address of the ', bp11('CI server you want to connect to')]), bp12({
@@ -2780,19 +2780,19 @@ var CiTabContent = function CiTabContent(model, lastUpdated) {
     id: 'ciAddress',
     placeholder: 'http://myci.mycompany',
     name: 'ciAddress',
-    value: model.address
+    value: model.configuration.address
   })]), bp13([bp14('Organization Slug'), bp15('Team Name'), bp16('Account'), bp17({
     type: 'text',
     id: 'ciUsername',
     name: 'ciUsername',
-    value: model.username
+    value: model.configuration.username
   })]), bp18([bp19('API token'), bp20({
     type: 'text',
     id: 'ciApiToken',
     placeholder: '',
     name: 'ciApiToken',
-    value: model.apiToken
-  })])]), bp21([bp22('Save'), bp23(['Last updated: ', lastUpdated])])]);
+    value: model.configuration.apiToken
+  })])]), bp21([bp22('Save'), bp23(['Last updated: ', model.lastUpdated])])]);
 };
 
 __$styleInject("form .jobs-container > button {\n    -ms-flex-item-align: end;\n        align-self: flex-end;\n    background-color: #A2B842;\n    margin-right: 0.5em;\n}\nform .jobs-container .fieldset {\n    padding: 0.25em 0.5em;\n}\nform .jobs-container .fieldset:hover {\n    background-color: #fff;\n}\nform .jobs-container .fieldset:hover label {\n    font-weight: bold;\n}\nform .jobs-container .fieldset input, form .jobs-container .fieldset label {\n    -ms-flex: initial;\n            -webkit-box-flex: initial;\n        flex: initial;\n    -ms-flex-positive: initial;\n        flex-grow: initial;\n}\nform .jobs-container .fieldset input[type=\"text\"], form .jobs-container .fieldset label[type=\"text\"] {\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    margin-right: 1em;\n}\n", undefined);
@@ -2971,7 +2971,7 @@ var bp1$4 = inferno.createBlueprint({
     arg: 1
   }
 });
-var JobsTabContent = function JobsTabContent(model, lastUpdated) {
+var JobsTabContent = function JobsTabContent(model) {
   var handleFormSubmit = function handleFormSubmit(event) {
     var postData = { save: 'jobs', payload: {} };
     transformFormIntoPayload(event.currentTarget.elements, postData.payload);
@@ -2982,7 +2982,7 @@ var JobsTabContent = function JobsTabContent(model, lastUpdated) {
     addNewJob();
   };
 
-  var jobs = model.items.map(function (i, idx) {
+  var jobs = model.configuration.items.map(function (i, idx) {
     return bp0$5(Job, {
       name: i.name,
       active: i.active,
@@ -2996,12 +2996,12 @@ var JobsTabContent = function JobsTabContent(model, lastUpdated) {
     type: 'number',
     name: 'pollRate',
     id: 'pollRate',
-    value: model.pollrate
+    value: model.configuration.pollrate
   })]), bp6$1([bp7$1(bp8$1('Jobs to monitor')), jobs, bp9$1({
     type: 'button'
   }, {
     onclick: handleAddNewJob
-  }, 'Add new job')]), bp10$1([bp11$1('Save'), bp12$1(['Last updated: ', lastUpdated])])]);
+  }, 'Add new job')]), bp10$1([bp11$1('Save'), bp12$1(['Last updated: ', model.lastUpdated])])]);
 };
 
 var bp52 = inferno.createBlueprint({
@@ -3378,7 +3378,7 @@ var bp0$7 = inferno.createBlueprint({
     arg: 2
   }
 });
-var NetworkTabContent = function NetworkTabContent(model, lastUpdated) {
+var NetworkTabContent = function NetworkTabContent(model) {
   var handleConnectionTypeChange = function handleConnectionTypeChange(event) {
     var formEl = event.currentTarget.parentNode.parentNode.parentNode;
     var wifiConfEl = formEl.getElementsByClassName('wireless-connection')[0];
@@ -3411,8 +3411,8 @@ var NetworkTabContent = function NetworkTabContent(model, lastUpdated) {
     return save(postData);
   };
 
-  var wirelessContainerHidden = model.connectionType !== 'wireless' ? 'hidden' : 'shown';
-  var staticContainerHidden = model.dhcp === true ? 'hidden' : 'shown';
+  var wirelessContainerHidden = model.configuration.connectionType !== 'wireless' ? 'hidden' : 'shown';
+  var staticContainerHidden = model.configuration.dhcp === true ? 'hidden' : 'shown';
 
   return bp0$7({
     name: 'networkForm'
@@ -3424,11 +3424,11 @@ var NetworkTabContent = function NetworkTabContent(model, lastUpdated) {
     id: 'hostname',
     name: 'hostname',
     placeholder: 'e.g. mycompany-build-lights',
-    value: model.hostname
+    value: model.configuration.hostname
   })]), bp5$3([bp6$3([bp7$2(['Select your ', bp8$2('preferred connection type')]), bp9$2([bp10$2({
     type: 'radio',
     name: 'connectionType',
-    checked: model.connectionType === 'wireless' ? 'checked' : '',
+    checked: model.configuration.connectionType === 'wireless' ? 'checked' : '',
     value: 'wireless',
     id: 'wireless'
   }, {
@@ -3436,7 +3436,7 @@ var NetworkTabContent = function NetworkTabContent(model, lastUpdated) {
   }), bp11$2([bp12$2(bp13$1()), 'Wireless']), bp14$1({
     type: 'radio',
     name: 'connectionType',
-    checked: model.connectionType === 'ethernet' ? 'checked' : '',
+    checked: model.configuration.connectionType === 'ethernet' ? 'checked' : '',
     value: 'ethernet',
     id: 'ethernet'
   }, {
@@ -3445,22 +3445,22 @@ var NetworkTabContent = function NetworkTabContent(model, lastUpdated) {
     type: 'text',
     id: 'ssid',
     name: 'ssid',
-    value: model.wireless.ssid
+    value: model.configuration.wireless.ssid
   })]), bp22$1([bp23$1('Password'), bp24({
     type: 'password',
     id: 'key',
     name: 'key',
-    value: model.wireless.key
+    value: model.configuration.wireless.key
   })]), bp25([bp26({
     type: 'checkbox',
     id: 'hidden',
     name: 'hidden',
-    value: model.wireless.hidden,
-    checked: model.wireless.hidden ? 'checked' : ''
+    value: model.configuration.wireless.hidden,
+    checked: model.configuration.wireless.hidden ? 'checked' : ''
   }), bp27([bp28(bp29()), 'Hidden network?'])])])]), bp30([bp31([bp32(['Assign network ', bp33('IP address')]), bp34([bp35({
     type: 'radio',
     name: 'useDhcp',
-    checked: !model.dhcp ? 'checked' : '',
+    checked: !model.configuration.dhcp ? 'checked' : '',
     value: 'false',
     id: 'yes'
   }, {
@@ -3468,7 +3468,7 @@ var NetworkTabContent = function NetworkTabContent(model, lastUpdated) {
   }), bp36([bp37(bp38()), 'Yes']), bp39({
     type: 'radio',
     name: 'useDhcp',
-    checked: model.dhcp ? 'checked' : '',
+    checked: model.configuration.dhcp ? 'checked' : '',
     value: 'true',
     id: 'no'
   }, {
@@ -3477,15 +3477,15 @@ var NetworkTabContent = function NetworkTabContent(model, lastUpdated) {
     type: 'text',
     name: 'address',
     id: 'address',
-    value: model.address,
+    value: model.configuration.address,
     placeholder: '192.168.0.10/24'
   })]), bp47([bp48('Gateway'), bp49({
     type: 'text',
     name: 'gateway',
     id: 'gateway',
-    value: model.gateway,
+    value: model.configuration.gateway,
     placeholder: '192.168.0.1'
-  })])])]), bp50([bp51('Save'), bp52(['Last updated: ', lastUpdated])])]);
+  })])])]), bp50([bp51('Save'), bp52(['Last updated: ', model.lastUpdated])])]);
 };
 
 var bp11$3 = inferno.createBlueprint({
@@ -3583,7 +3583,7 @@ var bp0$8 = inferno.createBlueprint({
     arg: 1
   }
 });
-var LedHardwareTabContent = function LedHardwareTabContent(model, lastUpdated) {
+var LedHardwareTabContent = function LedHardwareTabContent(model) {
   var handleFormSubmit = function handleFormSubmit(event) {
     var postData = { save: 'led', payload: {} };
     transformFormIntoPayload(event.currentTarget.elements, postData.payload);
@@ -3596,14 +3596,14 @@ var LedHardwareTabContent = function LedHardwareTabContent(model, lastUpdated) {
     required: true,
     id: 'ledType',
     name: 'ledType',
-    value: model.ledType
+    value: model.configuration.ledType
   }, [bp5$4('Epistar LPD8806'), bp6$4('Adafruit LPD8806')]), bp7$3('Number of LEDs on your strip'), bp8$3({
     type: 'number',
     required: true,
     id: 'numLeds',
     name: 'numLeds',
-    value: model.numLeds
-  })]), bp9$3([bp10$3('Save'), bp11$3(['Last updated: ', lastUpdated])])]);
+    value: model.configuration.numLeds
+  })]), bp9$3([bp10$3('Save'), bp11$3(['Last updated: ', model.lastUpdated])])]);
 };
 
 var bp0$3 = inferno.createBlueprint({
@@ -3621,16 +3621,16 @@ var TabContent = function TabContent(tabInfo) {
 
   switch (tabInfo.name) {
     case 'network':
-      content = NetworkTabContent(tabInfo.configuration, tabInfo.lastUpdated);
+      content = NetworkTabContent(tabInfo);
       break;
     case 'ci server':
-      content = CiTabContent(tabInfo.configuration, tabInfo.lastUpdated);
+      content = CiTabContent(tabInfo);
       break;
     case 'led hardware':
-      content = LedHardwareTabContent(tabInfo.configuration, tabInfo.lastUpdated);
+      content = LedHardwareTabContent(tabInfo);
       break;
     case 'jobs to monitor':
-      content = JobsTabContent(tabInfo.configuration, tabInfo.lastUpdated);
+      content = JobsTabContent(tabInfo);
       break;
     default:
       content = 'Nothing to see here.';
