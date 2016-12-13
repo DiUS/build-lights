@@ -13,7 +13,7 @@ import { dismissAlert } from '../sam/actions'
 
 export const Tab = (model) => {
   const tabs = model.map(TabItem)
-  const tabContent = model.map(TabContent)
+  const tabContent = model.filter(tool => tool.active).map(TabContent)
 
   const dismissHandler = (e) => {
     delete model.alert

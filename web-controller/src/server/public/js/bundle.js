@@ -3677,7 +3677,9 @@ var bp1 = inferno.createBlueprint({
 });
 var Tab = function Tab(model) {
   var tabs = model.map(TabItem);
-  var tabContent = model.map(TabContent);
+  var tabContent = model.filter(function (tool) {
+    return tool.active;
+  }).map(TabContent);
 
   var dismissHandler = function dismissHandler(e) {
     delete model.alert;
