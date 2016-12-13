@@ -1,6 +1,6 @@
 'use strict'
 
-import { render } from './state'
+import * as state from './state'
 
 function persistState (payload) {
   const requestOpts = {
@@ -11,8 +11,8 @@ function persistState (payload) {
 
   fetch('/model', requestOpts)
     .then(res => res.json())
-    .then(json => { render(json) })
-    .catch(err => { render(err) })
+    .then(json => { state.render(state.represent(json)) })
+    .catch(err => { state.render(state.represent(err)) })
 
   return false
 }
@@ -23,6 +23,11 @@ export function addNewJob (present) {
 
 export function switchToTab (tabName, present) {
   return persistState({ tabChange: tabName })
+}
+
+export function dismissAlert (model) {
+  state.render(model)
+  return false
 }
 
 export function save (data, present) {

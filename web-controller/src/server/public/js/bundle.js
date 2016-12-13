@@ -2396,14 +2396,6 @@ var inferno = inferno$1;
 
 __$styleInject(".alert {\n    border-radius: 0.1875em;\n    color: #f5f5f5;\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    margin-bottom: 1.5em;\n    padding: 1em;\n    -webkit-transition: .3s;\n    transition: .3s;\n}\n.alert.collapse {\n    padding: 0;\n    margin: 0;\n    visibility: collapse;\n}\n.alert.collapse span, .alert.collapse a {\n    display: none;\n}\n.alert.success {\n    background-color: #8A9939;\n}\n.alert.error {\n    background-color: #C12834;\n}\n.alert span {\n    -ms-flex: 0.9;\n            -webkit-box-flex: 0.9;\n        flex: 0.9;\n}\n.alert span a {\n    font-size: 1em;\n    font-weight: normal;\n    text-decoration: underline;\n}\n.alert a {\n    -ms-flex-item-align: end;\n        align-self: flex-end;\n    color: #f5f5f5;\n    -ms-flex: 0.1;\n            -webkit-box-flex: 0.1;\n        flex: 0.1;\n    font-size: 1.2em;\n    font-weight: bold;\n    right: 1em;\n    text-align: right;\n    -webkit-transition: none;\n    transition: none;\n}\n", undefined);
 
-function collapseAlert(el) {
-  el.classList.add('collapse');
-  setTimeout(function () {
-    el.innerHTML = '';
-  }, 300);
-  return false;
-}
-
 var bp0$1 = inferno.createBlueprint({
   tag: 'div'
 });
@@ -2437,39 +2429,16 @@ var bp1$1 = inferno.createBlueprint({
 var Alert = function Alert(model) {
   var content = bp0$1();
 
-  var handleAlertClose = function handleAlertClose(e) {
-    var alertEl = e.currentTarget.parentElement;
-    return collapseAlert(alertEl);
-  };
-
   var className = model.success ? 'alert success' : 'alert error';
 
   content = bp1$1(className, [bp2$1(model.message), bp3$1({
     href: '#'
   }, {
-    onclick: handleAlertClose
+    onclick: model.dismissHandler
   }, '\xD7')]);
-
-  setTimeout(function () {
-    var alertEl = document.getElementsByClassName('alert')[0];
-    collapseAlert(alertEl);
-  }, 7000);
 
   return content;
 };
-
-function representation(model) {
-  display(tabComponent(model));
-}
-
-function nextAction(model) {
-  // nothing to do here for now
-}
-
-function render(model) {
-  representation(model);
-  nextAction(model);
-}
 
 function persistState(payload) {
   var requestOpts = {
@@ -2481,9 +2450,9 @@ function persistState(payload) {
   fetch('/model', requestOpts).then(function (res) {
     return res.json();
   }).then(function (json) {
-    render(json);
+    render(represent(json));
   }).catch(function (err) {
-    render(err);
+    render(represent(err));
   });
 
   return false;
@@ -2495,6 +2464,11 @@ function addNewJob(present) {
 
 function switchToTab(tabName, present) {
   return persistState({ tabChange: tabName });
+}
+
+function dismissAlert(model) {
+  render(model);
+  return false;
 }
 
 function save(data, present) {
@@ -3702,25 +3676,20 @@ var bp1 = inferno.createBlueprint({
   }
 });
 var Tab = function Tab(model) {
-  var enabledTabs = model.tools.filter(function (t) {
-    return t.active;
-  }).map(function (t) {
-    return {
-      name: t.name,
-      active: t.name === model.selectedTool,
-      configuration: t.configuration,
-      lastUpdated: new Date(model.lastUpdated).toString()
-    };
-  });
+  var tabs = model.map(TabItem);
+  var tabContent = model.map(TabContent);
 
-  var tabs = enabledTabs.map(TabItem);
-  var tabContent = enabledTabs.map(TabContent);
+  var dismissHandler = function dismissHandler(e) {
+    delete model.alert;
+    return dismissAlert(model);
+  };
 
   var alert = '';
-  if (model.result) {
+  if (model.alert) {
     alert = bp0(Alert, {
-      success: model.result.success,
-      message: model.result.message
+      success: model.alert.success,
+      message: model.alert.message,
+      dismissHandler: dismissHandler
     });
   }
 
@@ -3738,13 +3707,38 @@ function display(representation) {
   }
 }
 
+function represent(model) {
+  var currentState = model.tools.filter(function (t) {
+    return t.active;
+  }).map(function (t) {
+    return {
+      name: t.name,
+      active: t.name === model.selectedTool,
+      configuration: t.configuration,
+      lastUpdated: new Date(model.lastUpdated).toString()
+    };
+  });
+
+  currentState.alert = model.result;
+  return currentState;
+}
+
+function nextAction(stateModel) {
+  // nothing to do here for now
+}
+
+function render(stateModel) {
+  display(tabComponent(stateModel));
+  nextAction(stateModel);
+}
+
 var cb = function cb(event) {
   document.getElementById('supervisor').href = 'http://' + location.hostname + ':9001';
 
   fetch('/model').then(function (res) {
     return res.json();
   }).then(function (json) {
-    display(tabComponent(json));
+    render(represent(json));
   });
 };
 

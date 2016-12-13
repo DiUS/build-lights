@@ -25,22 +25,7 @@ describe('Alert', () => {
     clock.restore()
   })
 
-  it('renders alert message that disappears', () => {
-    InfernoDOM.render(<Alert success="true" message="all good" />, document.getElementById('representation'))
-    $ = cheerio.load(document.documentElement.outerHTML)
-
-    expect($('.alert span').text()).to.contain('all good')
-    expect($('.alert a').text()).to.contain('×')
-    expect($('.alert').hasClass('success')).to.be.true
-
-    clock.tick(8000)
-
-    $ = cheerio.load(document.documentElement.outerHTML)
-    expect($('.alert span').length).to.eql(0)
-    expect($('.alert').hasClass('collapse')).to.be.true
-  })
-
-  it('should remove alert content when dismiss click occurs', () => {
+  xit('should remove alert content when dismiss click occurs', () => {
     InfernoDOM.render(<Alert success="true" message="another message" />, document.getElementById('representation'))
 
     simulant.fire(document.getElementsByClassName('alert')[0].getElementsByTagName('a')[0], 'click')

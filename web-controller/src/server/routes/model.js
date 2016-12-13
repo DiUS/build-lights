@@ -2,8 +2,8 @@
 
 const fs = require('fs')
 const logger = require('winston')
-const findIndex = require('lodash.findindex')
 const fetch = require('node-fetch')
+const findIndex = require('lodash.findindex')
 
 const fsOpts = { encoding: 'utf8' }
 
@@ -22,18 +22,18 @@ module.exports = (router, configFile, lightConfigFile) => {
     let model = JSON.parse(fs.readFileSync(configFile, fsOpts))
 
     if (requestData.tabChange && model.selectedTool !== requestData.tabChange) {
-      logger.info('Updating active tab. Payload: %j', requestData)
+      logger.info('Updating active tab. Payload: "%j"', requestData)
       model.selectedTool = requestData.tabChange
     }
 
     if (requestData.newJob) {
-      logger.info('Adding new job to be monitored. Payload: %j', requestData)
+      logger.info('Adding new job to be monitored. Payload: "%j"', requestData)
       const jobsIdx = findIndex(model.tools, { name: 'jobs to monitor' })
       model.tools[jobsIdx].configuration.items.push({ name: '', active: false })
     }
 
     if (requestData.save) {
-      logger.info('About to save a configuration. Payload: %j', requestData)
+      logger.info('About to save a configuration. Payload: "%j"', requestData)
       const moduleService = require(`../services/${requestData.save}`)
       moduleService.persist(requestData.payload, lightConfigFile)
       moduleService.mutateModel(model, requestData.payload)
