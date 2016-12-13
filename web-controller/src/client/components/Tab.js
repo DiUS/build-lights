@@ -1,6 +1,5 @@
 'use strict'
 
-import './styles/App.css'
 import './styles/Tab.css'
 
 import Inferno from 'inferno' // eslint-disable-line

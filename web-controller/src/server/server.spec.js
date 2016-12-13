@@ -11,10 +11,13 @@ const UTF_8 = 'utf8'
 describe('Server', () => {
 
   const callback = sinon.stub()
-  callback.onCall(0).yields(new Error('could not execute'))
-  callback.onCall(2).yields(new Error('could not execute'))
-  callback.onCall(1).yields()
-  callback.onCall(3).yields()
+  callback.withArgs('shutdown -k -h now').onCall(0).yields(new Error('could not execute'))
+  callback.withArgs('shutdown -k -h now').onCall(1).returns()
+  callback.withArgs('shutdown -h now').onCall(0).returns()
+
+  callback.withArgs('shutdown -k -r now').onCall(0).yields(new Error('could not execute'))
+  callback.withArgs('shutdown -k -r now').onCall(1).returns()
+  callback.withArgs('shutdown -r now').onCall(0).returns()
 
   const serviceStub = { persist: (payload) => {} }
   const persistSpy = sinon.spy(serviceStub, 'persist')
@@ -23,8 +26,11 @@ describe('Server', () => {
     '../services/jobs': serviceStub,
     '../services/network': serviceStub
   })
-  const rebootRoute = proxyquire('./routes/reboot', { 'nodejs-system-reboot': callback })
-  const shutdownRoute = proxyquire('./routes/shutdown', { 'power-off': callback })
+
+  const cpStub = { execSync: callback }
+
+  const rebootRoute = proxyquire('./routes/reboot', { 'child_process': cpStub })
+  const shutdownRoute = proxyquire('./routes/shutdown', { 'child_process': cpStub })
 
   const app = proxyquire('./server', {
     './routes/model': modelRoute,
@@ -54,17 +60,21 @@ describe('Server', () => {
         .get('/reboot')
         .expect(500)
         .end((err, res) => {
-          expect(res.text).to.be.empty
+          expect(res.text).to.not.be.empty
+          expect(JSON.parse(res.text)).to.have.property('result')
           done()
         })
     })
 
-    it('ends response when successfully reboots', done => {
+    it('sends countdown response when successfully reboots', done => {
       request(app('fixtures/web-configuration.json', 'fixtures/light-configuration.json'))
         .get('/reboot')
         .expect(200)
         .end((err, res) => {
-          expect(res.text).to.be.empty
+          expect(res.text).to.not.be.empty
+          console.log(JSON.parse(res.text))
+          expect(JSON.parse(res.text)).to.not.have.property('result')
+          expect(JSON.parse(res.text)).to.eql({ reboot: true, countdown: 30 })
           done()
         })
     })
@@ -76,17 +86,20 @@ describe('Server', () => {
         .get('/shutdown')
         .expect(500)
         .end((err, res) => {
-          expect(res.text).to.be.empty
+          expect(res.text).to.not.be.empty
+          expect(JSON.parse(res.text)).to.have.property('result')
           done()
         })
     })
 
-    it('ends response when successfully reboots', done => {
+    it('sends countdown response when successfully reboots', done => {
       request(app('fixtures/web-configuration.json', 'fixtures/light-configuration.json'))
         .get('/shutdown')
         .expect(200)
         .end((err, res) => {
-          expect(res.text).to.be.empty
+          expect(res.text).to.not.be.empty
+          expect(JSON.parse(res.text)).to.not.have.property('result')
+          expect(JSON.parse(res.text)).to.eql({ shutdown: true, countdown: 15 })
           done()
         })
     })

@@ -1,8 +1,13 @@
 'use strict'
 
-import { tabComponent, display } from './view'
+import { completeDeviceAction } from './actions'
+import { mainComponent, display } from './view'
 
 export function represent (model) {
+  if (model.reboot || model.shutdown) {
+    return model
+  }
+
   let currentState = model.tools
     .filter(t => t.active)
     .map(t => {
@@ -18,11 +23,26 @@ export function represent (model) {
   return currentState
 }
 
+export function hasCountdownEnded (stateModel) {
+  return stateModel.countdown === 0
+}
+
+export function isExecutingDeviceAction (stateModel) {
+  return stateModel.reboot || stateModel.shutdown
+}
+
 export function nextAction (stateModel) {
-  // nothing to do here for now
+  if (isExecutingDeviceAction(stateModel)) {
+    if (hasCountdownEnded(stateModel)) {
+      completeDeviceAction(stateModel)
+    } else {
+      stateModel.countdown -= 1
+      setTimeout(() => { render(stateModel) }, 1000)
+    }
+  }
 }
 
 export function render (stateModel) {
-  display(tabComponent(stateModel))
+  display(mainComponent(stateModel))
   nextAction(stateModel)
 }

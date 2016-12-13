@@ -7,9 +7,14 @@ html, body {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
     min-width: 30em;
+
+    > div {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
 }
 
 .container {
@@ -20,13 +25,16 @@ body {
 
 .representation {
     flex: 1;
+    display: flex;
+    flex-direction: column;
 
-    &.waiting {
+    .waiting {
         background-color: $skyBlue;
         background-image: url('/static/img/loader.gif');
         background-position: 50% 40%;
         background-size: auto;
         background-repeat: no-repeat;
+        flex: 1;
         position: relative;
 
         &.error {

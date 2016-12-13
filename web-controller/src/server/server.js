@@ -23,8 +23,7 @@ module.exports = (configFile, lightConfigFile) => {
 
   app.engine('handlebars', expressHandlebars({
     defaultLayout: 'main',
-    layoutsDir: 'src/server/views/layouts',
-    partialsDir: 'src/server/views/partials'
+    layoutsDir: 'src/server/views/layouts'
   }))
 
   app.set('view engine', 'handlebars')

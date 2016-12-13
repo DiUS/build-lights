@@ -17,6 +17,74 @@ function __$styleInject(css, returnValue) {
   head.appendChild(style);
   return returnValue;
 }
+function persistState(payload) {
+  var requestOpts = {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+    headers: { 'Content-Type': 'application/json' }
+  };
+
+  fetch('/model', requestOpts).then(function (res) {
+    return res.json();
+  }).then(function (json) {
+    render(represent(json));
+  }).catch(function (err) {
+    render(represent(err));
+  });
+
+  return false;
+}
+
+function addNewJob(present) {
+  return persistState({ newJob: true });
+}
+
+function switchToTab(tabName, present) {
+  return persistState({ tabChange: tabName });
+}
+
+function dismissAlert(model) {
+  render(model);
+  return false;
+}
+
+function reboot() {
+  fetch('/reboot').then(function (res) {
+    return res.json();
+  }).then(function (json) {
+    render(represent(json));
+  }).catch(function (err) {
+    render(represent(err));
+  });
+
+  return false;
+}
+
+function shutdown() {
+  fetch('/shutdown').then(function (res) {
+    return res.json();
+  }).then(function (json) {
+    render(represent(json));
+  }).catch(function (err) {
+    render(represent(err));
+  });
+
+  return false;
+}
+
+function completeDeviceAction(model) {
+  if (model.reboot) {
+    location.reload();
+  } else {
+    model.completed = true;
+    render(model);
+  }
+}
+
+function save(data, present) {
+  return persistState(data);
+}
+
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 
@@ -2073,9 +2141,7 @@ return index;
 
 var infernoDom = infernoDom$1;
 
-__$styleInject("html, body {\n    margin: 0;\n    padding: 0;\n    height: 100%;\n}\nbody {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    -ms-flex-direction: column;\n            -webkit-box-orient: vertical;\n            -webkit-box-direction: normal;\n        flex-direction: column;\n    min-width: 30em;\n}\n.container {\n    margin: 0 auto;\n    max-width: 60em;\n    width: 100%;\n}\n.representation {\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n}\n.representation.waiting {\n    background-color: #00B6F0;\n    background-image: url('/static/img/loader.gif');\n    background-position: 50% 40%;\n    background-size: auto;\n    background-repeat: no-repeat;\n    position: relative;\n}\n.representation.waiting.error {\n    background-image: url('/static/img/warning.png');\n}\n.representation.waiting .message {\n    position: absolute;\n    top: 60%;\n    width: 100%;\n}\n.representation.waiting .message p {\n    color: #fff;\n    font-family: 'Roboto';\n    font-size: 1.8em;\n    letter-spacing: 1px;\n    line-height: 1.4;\n    text-align: center;\n}\n.representation.waiting .message p a {\n    text-decoration: underline;\n}\nheader {\n    background-color: #192854;\n}\nheader .container {\n    background-image: url('/static/img/dius_logo.png');\n    background-position: 0 50%;\n    background-size: 180px;\n    background-repeat: no-repeat;\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    height: 5em;\n    margin: .5em auto;\n}\nheader span {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    color: #ffffff;\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    font-family: 'Roboto';\n    font-size: 1.5em;\n    letter-spacing: 1px;\n    margin-left: 8em;\n    text-transform: uppercase;\n}\nheader .device-actions {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    position: relative;\n}\nheader .device-actions button {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    background-color: #21366C;\n    background-image: url('/static/img/power.png');\n    background-position: 1em 50%;\n    background-repeat: no-repeat;\n    background-size: 28px;\n    border: 1px solid #A3A9AC;\n    border-radius: 0.25em;\n    color: #ffffff;\n    font-size: 1.125em;\n    padding: 0.875em 3.5em;\n    position: relative;\n}\nheader .device-actions button:after {\n    border-color: #ffffff transparent transparent transparent;\n    border-style: solid;\n    border-width: 5px 5px 0 5px;\n    content: '\\A';\n    height: 0;\n    position: absolute;\n    right: 10%;\n    top: 50%;\n    width: 0;\n}\nheader .device-actions .dropdown-device-actions {\n    background-color: #ffffff;\n    border-radius: 0.25em;\n    box-shadow: 0px 0px 5px 1px #192854;\n    display: none;\n    position: absolute;\n    right: 0;\n    top: 85%;\n    z-index: 100;\n}\nheader .device-actions .dropdown-device-actions li a {\n    border-radius: 0.25em;\n    display: block;\n    padding: 0.75em 1.5em;\n}\nheader .device-actions .dropdown-device-actions li a:hover {\n    background-color: #CBCFD1;\n}\nheader .device-actions .dropdown-device-actions li.separator div {\n    border: 0.03125em solid #CBCFD1;\n    margin: 0.75em 1.5em;\n}\nheader .device-actions:hover button {\n    background-color: #314B84;\n}\nheader .device-actions:hover button:after {\n    border-color: transparent transparent #ffffff transparent;\n    border-width: 0 5px 5px 5px;\n}\nheader .device-actions:hover .dropdown-device-actions {\n    display: block;\n}\nfooter {\n    background: #A3A9AC;\n    font-size: 0.75em;\n    padding: 0.625em;\n    text-align: center;\n}\nfooter div {\n    padding: .5em 0;\n}\nfooter div a {\n    text-decoration: underline;\n}\n", undefined);
-
-__$styleInject(".tab {\n    min-width: 100%;\n}\n.tab .tab-nav-container {\n    border-bottom: 1px solid #A3A9AC;\n}\n.tab .tab-nav-container ul {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    list-style: none;\n}\n.tab .tab-nav-container ul li {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    border-bottom-style: solid;\n    border-bottom-width: 4px;\n    border-bottom-color: transparent;\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    margin-top: 4px;\n}\n.tab .tab-nav-container ul li a {\n    color: #666;\n    display: block;\n    font-family: 'Roboto', sans-serif;\n    letter-spacing: 2px;\n    padding: 1em 0;\n    text-align: center;\n    text-transform: uppercase;\n}\n.tab .tab-nav-container ul li.selected, .tab .tab-nav-container ul li:hover {\n    border-bottom-color: #192854;\n}\n.tab .tab-nav-container ul li.selected a, .tab .tab-nav-container ul li:hover a {\n    color: #192854;\n}\n.tab .tab-nav-container ul li.selected a {\n    font-weight: bold;\n}\n.tab .tab-content {\n    padding: 1.5em 0;\n}\n.tab .tab-content .tab-content-container {\n    display: block;\n}\n.tab .tab-content .tab-content-container.hidden {\n    display: none;\n}\n", undefined);
+__$styleInject("html, body {\n    margin: 0;\n    padding: 0;\n    height: 100%;\n}\nbody {\n    min-width: 30em;\n}\nbody > div {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    margin: 0;\n    padding: 0;\n    height: 100%;\n}\n.container {\n    margin: 0 auto;\n    max-width: 60em;\n    width: 100%;\n}\n.representation {\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    -ms-flex-direction: column;\n            -webkit-box-orient: vertical;\n            -webkit-box-direction: normal;\n        flex-direction: column;\n}\n.representation .waiting {\n    background-color: #00B6F0;\n    background-image: url('/static/img/loader.gif');\n    background-position: 50% 40%;\n    background-size: auto;\n    background-repeat: no-repeat;\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    position: relative;\n}\n.representation .waiting.error {\n    background-image: url('/static/img/warning.png');\n}\n.representation .waiting .message {\n    position: absolute;\n    top: 60%;\n    width: 100%;\n}\n.representation .waiting .message p {\n    color: #fff;\n    font-family: 'Roboto';\n    font-size: 1.8em;\n    letter-spacing: 1px;\n    line-height: 1.4;\n    text-align: center;\n}\n.representation .waiting .message p a {\n    text-decoration: underline;\n}\nheader {\n    background-color: #192854;\n}\nheader .container {\n    background-image: url('/static/img/dius_logo.png');\n    background-position: 0 50%;\n    background-size: 180px;\n    background-repeat: no-repeat;\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    height: 5em;\n    margin: .5em auto;\n}\nheader span {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    color: #ffffff;\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    font-family: 'Roboto';\n    font-size: 1.5em;\n    letter-spacing: 1px;\n    margin-left: 8em;\n    text-transform: uppercase;\n}\nheader .device-actions {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    position: relative;\n}\nheader .device-actions button {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    background-color: #21366C;\n    background-image: url('/static/img/power.png');\n    background-position: 1em 50%;\n    background-repeat: no-repeat;\n    background-size: 28px;\n    border: 1px solid #A3A9AC;\n    border-radius: 0.25em;\n    color: #ffffff;\n    font-size: 1.125em;\n    padding: 0.875em 3.5em;\n    position: relative;\n}\nheader .device-actions button:after {\n    border-color: #ffffff transparent transparent transparent;\n    border-style: solid;\n    border-width: 5px 5px 0 5px;\n    content: '\\A';\n    height: 0;\n    position: absolute;\n    right: 10%;\n    top: 50%;\n    width: 0;\n}\nheader .device-actions .dropdown-device-actions {\n    background-color: #ffffff;\n    border-radius: 0.25em;\n    box-shadow: 0px 0px 5px 1px #192854;\n    display: none;\n    position: absolute;\n    right: 0;\n    top: 85%;\n    z-index: 100;\n}\nheader .device-actions .dropdown-device-actions li a {\n    border-radius: 0.25em;\n    display: block;\n    padding: 0.75em 1.5em;\n}\nheader .device-actions .dropdown-device-actions li a:hover {\n    background-color: #CBCFD1;\n}\nheader .device-actions .dropdown-device-actions li.separator div {\n    border: 0.03125em solid #CBCFD1;\n    margin: 0.75em 1.5em;\n}\nheader .device-actions:hover button {\n    background-color: #314B84;\n}\nheader .device-actions:hover button:after {\n    border-color: transparent transparent #ffffff transparent;\n    border-width: 0 5px 5px 5px;\n}\nheader .device-actions:hover .dropdown-device-actions {\n    display: block;\n}\nfooter {\n    background: #A3A9AC;\n    font-size: 0.75em;\n    padding: 0.625em;\n    text-align: center;\n}\nfooter div {\n    padding: .5em 0;\n}\nfooter div a {\n    text-decoration: underline;\n}\n", undefined);
 
 var inferno$1 = createCommonjsModule(function (module, exports) {
 /*!
@@ -2394,9 +2460,11 @@ return index;
 
 var inferno = inferno$1;
 
+__$styleInject(".tab {\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    min-width: 100%;\n}\n.tab .tab-nav-container {\n    border-bottom: 1px solid #A3A9AC;\n}\n.tab .tab-nav-container ul {\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    list-style: none;\n}\n.tab .tab-nav-container ul li {\n    -ms-flex-item-align: center;\n        -ms-grid-row-align: center;\n        align-self: center;\n    border-bottom-style: solid;\n    border-bottom-width: 4px;\n    border-bottom-color: transparent;\n    -ms-flex: 1;\n            -webkit-box-flex: 1;\n        flex: 1;\n    margin-top: 4px;\n}\n.tab .tab-nav-container ul li a {\n    color: #666;\n    display: block;\n    font-family: 'Roboto', sans-serif;\n    letter-spacing: 2px;\n    padding: 1em 0;\n    text-align: center;\n    text-transform: uppercase;\n}\n.tab .tab-nav-container ul li.selected, .tab .tab-nav-container ul li:hover {\n    border-bottom-color: #192854;\n}\n.tab .tab-nav-container ul li.selected a, .tab .tab-nav-container ul li:hover a {\n    color: #192854;\n}\n.tab .tab-nav-container ul li.selected a {\n    font-weight: bold;\n}\n.tab .tab-content {\n    padding: 1.5em 0;\n}\n.tab .tab-content .tab-content-container {\n    display: block;\n}\n.tab .tab-content .tab-content-container.hidden {\n    display: none;\n}\n", undefined);
+
 __$styleInject(".alert {\n    border-radius: 0.1875em;\n    color: #f5f5f5;\n    display: -ms-flexbox;\n    display: -webkit-box;\n    display: flex;\n    margin-bottom: 1.5em;\n    padding: 1em;\n    -webkit-transition: .3s;\n    transition: .3s;\n}\n.alert.collapse {\n    padding: 0;\n    margin: 0;\n    visibility: collapse;\n}\n.alert.collapse span, .alert.collapse a {\n    display: none;\n}\n.alert.success {\n    background-color: #8A9939;\n}\n.alert.error {\n    background-color: #C12834;\n}\n.alert span {\n    -ms-flex: 0.9;\n            -webkit-box-flex: 0.9;\n        flex: 0.9;\n}\n.alert span a {\n    font-size: 1em;\n    font-weight: normal;\n    text-decoration: underline;\n}\n.alert a {\n    -ms-flex-item-align: end;\n        align-self: flex-end;\n    color: #f5f5f5;\n    -ms-flex: 0.1;\n            -webkit-box-flex: 0.1;\n        flex: 0.1;\n    font-size: 1.2em;\n    font-weight: bold;\n    right: 1em;\n    text-align: right;\n    -webkit-transition: none;\n    transition: none;\n}\n", undefined);
 
-var bp0$1 = inferno.createBlueprint({
+var bp0$2 = inferno.createBlueprint({
   tag: 'div'
 });
 var bp3$1 = inferno.createBlueprint({
@@ -2411,13 +2479,13 @@ var bp3$1 = inferno.createBlueprint({
     arg: 2
   }
 });
-var bp2$1 = inferno.createBlueprint({
+var bp2$2 = inferno.createBlueprint({
   tag: 'span',
   children: {
     arg: 0
   }
 });
-var bp1$1 = inferno.createBlueprint({
+var bp1$2 = inferno.createBlueprint({
   tag: 'div',
   className: {
     arg: 0
@@ -2427,11 +2495,11 @@ var bp1$1 = inferno.createBlueprint({
   }
 });
 var Alert = function Alert(model) {
-  var content = bp0$1();
+  var content = bp0$2();
 
   var className = model.success ? 'alert success' : 'alert error';
 
-  content = bp1$1(className, [bp2$1(model.message), bp3$1({
+  content = bp1$2(className, [bp2$2(model.message), bp3$1({
     href: '#'
   }, {
     onclick: model.dismissHandler
@@ -2440,42 +2508,7 @@ var Alert = function Alert(model) {
   return content;
 };
 
-function persistState(payload) {
-  var requestOpts = {
-    method: 'PUT',
-    body: JSON.stringify(payload),
-    headers: { 'Content-Type': 'application/json' }
-  };
-
-  fetch('/model', requestOpts).then(function (res) {
-    return res.json();
-  }).then(function (json) {
-    render(represent(json));
-  }).catch(function (err) {
-    render(represent(err));
-  });
-
-  return false;
-}
-
-function addNewJob(present) {
-  return persistState({ newJob: true });
-}
-
-function switchToTab(tabName, present) {
-  return persistState({ tabChange: tabName });
-}
-
-function dismissAlert(model) {
-  render(model);
-  return false;
-}
-
-function save(data, present) {
-  return persistState(data);
-}
-
-var bp1$2 = inferno.createBlueprint({
+var bp1$3 = inferno.createBlueprint({
   tag: 'a',
   attrs: {
     arg: 0
@@ -2487,7 +2520,7 @@ var bp1$2 = inferno.createBlueprint({
     arg: 2
   }
 });
-var bp0$2 = inferno.createBlueprint({
+var bp0$3 = inferno.createBlueprint({
   tag: 'li',
   className: {
     arg: 0
@@ -2502,9 +2535,9 @@ var bp0$2 = inferno.createBlueprint({
 var TabItem = function TabItem(tabInfo) {
   var selectedClass = tabInfo.active ? 'selected' : '';
 
-  return bp0$2(selectedClass, {
+  return bp0$3(selectedClass, {
     role: 'presentation'
-  }, bp1$2({
+  }, bp1$3({
     href: '#',
     'aria-controls': tabInfo.name,
     role: 'tab',
@@ -2721,7 +2754,7 @@ var bp3$2 = inferno.createBlueprint({
     arg: 0
   }
 });
-var bp2$2 = inferno.createBlueprint({
+var bp2$3 = inferno.createBlueprint({
   tag: 'label',
   attrs: {
     for: 'ciTool'
@@ -2730,7 +2763,7 @@ var bp2$2 = inferno.createBlueprint({
     arg: 0
   }
 });
-var bp1$3 = inferno.createBlueprint({
+var bp1$4 = inferno.createBlueprint({
   tag: 'div',
   className: {
     arg: 0
@@ -2739,7 +2772,7 @@ var bp1$3 = inferno.createBlueprint({
     arg: 1
   }
 });
-var bp0$4 = inferno.createBlueprint({
+var bp0$5 = inferno.createBlueprint({
   tag: 'form',
   events: {
     arg: 0
@@ -2766,9 +2799,9 @@ var CiTabContent = function CiTabContent(model) {
     return save(postData);
   };
 
-  return bp0$4({
+  return bp0$5({
     onsubmit: handleFormSubmit
-  }, [bp1$3('form-container vertical ' + model.configuration.tool, [bp2$2([bp3$2('CI tool'), ' you are using']), bp4$1({
+  }, [bp1$4('form-container vertical ' + model.configuration.tool, [bp2$3([bp3$2('CI tool'), ' you are using']), bp4$1({
     required: true,
     id: 'ciTool',
     name: 'ciTool',
@@ -2825,7 +2858,7 @@ var bp3$4 = inferno.createBlueprint({
     arg: 0
   }
 });
-var bp2$4 = inferno.createBlueprint({
+var bp2$5 = inferno.createBlueprint({
   tag: 'label',
   attrs: {
     arg: 0
@@ -2834,13 +2867,13 @@ var bp2$4 = inferno.createBlueprint({
     arg: 1
   }
 });
-var bp1$5 = inferno.createBlueprint({
+var bp1$6 = inferno.createBlueprint({
   tag: 'input',
   attrs: {
     arg: 0
   }
 });
-var bp0$6 = inferno.createBlueprint({
+var bp0$7 = inferno.createBlueprint({
   tag: 'div',
   className: 'fieldset',
   children: {
@@ -2852,13 +2885,13 @@ var Job = function Job(props) {
     e.currentTarget.parentElement.remove();
   };
 
-  return bp0$6([bp1$5({
+  return bp0$7([bp1$6({
     type: 'checkbox',
     name: 'jobActive',
     id: 'jobActive_' + props.index,
     checked: props.active,
     value: 'jobActive_' + props.index
-  }), bp2$4({
+  }), bp2$5({
     for: 'jobActive_' + props.index
   }, [bp3$4(bp4$3()), '\xA0']), bp5$2({
     type: 'text',
@@ -2872,7 +2905,7 @@ var Job = function Job(props) {
   }, 'Remove')]);
 };
 
-var bp0$5 = inferno.createBlueprint({
+var bp0$6 = inferno.createBlueprint({
   tag: {
     arg: 0
   },
@@ -2955,14 +2988,14 @@ var bp3$3 = inferno.createBlueprint({
     arg: 0
   }
 });
-var bp2$3 = inferno.createBlueprint({
+var bp2$4 = inferno.createBlueprint({
   tag: 'div',
   className: 'form-container vertical',
   children: {
     arg: 0
   }
 });
-var bp1$4 = inferno.createBlueprint({
+var bp1$5 = inferno.createBlueprint({
   tag: 'form',
   events: {
     arg: 0
@@ -2983,16 +3016,16 @@ var JobsTabContent = function JobsTabContent(model) {
   };
 
   var jobs = model.configuration.items.map(function (i, idx) {
-    return bp0$5(Job, {
+    return bp0$6(Job, {
       name: i.name,
       active: i.active,
       index: idx
     });
   });
 
-  return bp1$4({
+  return bp1$5({
     onsubmit: handleFormSubmit
-  }, [bp2$3([bp3$3(['Rate to ', bp4$2('poll your CI server'), ' (in seconds)']), bp5$1({
+  }, [bp2$4([bp3$3(['Rate to ', bp4$2('poll your CI server'), ' (in seconds)']), bp5$1({
     type: 'number',
     name: 'pollRate',
     id: 'pollRate',
@@ -3350,7 +3383,7 @@ var bp3$5 = inferno.createBlueprint({
     arg: 0
   }
 });
-var bp2$5 = inferno.createBlueprint({
+var bp2$6 = inferno.createBlueprint({
   tag: 'label',
   attrs: {
     for: 'hostname'
@@ -3359,14 +3392,14 @@ var bp2$5 = inferno.createBlueprint({
     arg: 0
   }
 });
-var bp1$6 = inferno.createBlueprint({
+var bp1$7 = inferno.createBlueprint({
   tag: 'div',
   className: 'form-container vertical',
   children: {
     arg: 0
   }
 });
-var bp0$7 = inferno.createBlueprint({
+var bp0$8 = inferno.createBlueprint({
   tag: 'form',
   attrs: {
     arg: 0
@@ -3414,11 +3447,11 @@ var NetworkTabContent = function NetworkTabContent(model) {
   var wirelessContainerHidden = model.configuration.connectionType !== 'wireless' ? 'hidden' : 'shown';
   var staticContainerHidden = model.configuration.dhcp === true ? 'hidden' : 'shown';
 
-  return bp0$7({
+  return bp0$8({
     name: 'networkForm'
   }, {
     onsubmit: handleFormSubmit
-  }, [bp1$6([bp2$5(['Name of ', bp3$5('this device'), ' on the network']), bp4$4({
+  }, [bp1$7([bp2$6(['Name of ', bp3$5('this device'), ' on the network']), bp4$4({
     required: true,
     type: 'text',
     id: 'hostname',
@@ -3558,7 +3591,7 @@ var bp3$6 = inferno.createBlueprint({
     arg: 0
   }
 });
-var bp2$6 = inferno.createBlueprint({
+var bp2$7 = inferno.createBlueprint({
   tag: 'label',
   attrs: {
     for: 'ledType'
@@ -3567,14 +3600,14 @@ var bp2$6 = inferno.createBlueprint({
     arg: 0
   }
 });
-var bp1$7 = inferno.createBlueprint({
+var bp1$8 = inferno.createBlueprint({
   tag: 'div',
   className: 'form-container vertical',
   children: {
     arg: 0
   }
 });
-var bp0$8 = inferno.createBlueprint({
+var bp0$9 = inferno.createBlueprint({
   tag: 'form',
   events: {
     arg: 0
@@ -3590,9 +3623,9 @@ var LedHardwareTabContent = function LedHardwareTabContent(model) {
     return save(postData);
   };
 
-  return bp0$8({
+  return bp0$9({
     onsubmit: handleFormSubmit
-  }, [bp1$7([bp2$6(['Which ', bp3$6('LED strip'), ' you are using']), bp4$5({
+  }, [bp1$8([bp2$7(['Which ', bp3$6('LED strip'), ' you are using']), bp4$5({
     required: true,
     id: 'ledType',
     name: 'ledType',
@@ -3606,7 +3639,7 @@ var LedHardwareTabContent = function LedHardwareTabContent(model) {
   })]), bp9$3([bp10$3('Save'), bp11$3(['Last updated: ', model.lastUpdated])])]);
 };
 
-var bp0$3 = inferno.createBlueprint({
+var bp0$4 = inferno.createBlueprint({
   tag: 'div',
   className: {
     arg: 0
@@ -3636,10 +3669,10 @@ var TabContent = function TabContent(tabInfo) {
       content = 'Nothing to see here.';
   }
 
-  return bp0$3(displayClass, content);
+  return bp0$4(displayClass, content);
 };
 
-var bp0 = inferno.createBlueprint({
+var bp0$1 = inferno.createBlueprint({
   tag: {
     arg: 0
   },
@@ -3661,14 +3694,14 @@ var bp3 = inferno.createBlueprint({
     arg: 0
   }
 });
-var bp2 = inferno.createBlueprint({
+var bp2$1 = inferno.createBlueprint({
   tag: 'div',
   className: 'tab-nav-container',
   children: {
     arg: 0
   }
 });
-var bp1 = inferno.createBlueprint({
+var bp1$1 = inferno.createBlueprint({
   tag: 'div',
   className: 'tab',
   children: {
@@ -3688,18 +3721,317 @@ var Tab = function Tab(model) {
 
   var alert = '';
   if (model.alert) {
-    alert = bp0(Alert, {
+    alert = bp0$1(Alert, {
       success: model.alert.success,
       message: model.alert.message,
       dismissHandler: dismissHandler
     });
   }
 
-  return bp1([bp2(bp3(tabs)), bp4([alert, tabContent])]);
+  return bp1$1([bp2$1(bp3(tabs)), bp4([alert, tabContent])]);
 };
 
-function tabComponent(model) {
-  return Tab(model);
+var bp10$4 = inferno.createBlueprint({
+  tag: 'a',
+  attrs: {
+    arg: 0
+  },
+  children: {
+    arg: 1
+  }
+});
+var bp9$4 = inferno.createBlueprint({
+  tag: 'li',
+  children: {
+    arg: 0
+  }
+});
+var bp8$4 = inferno.createBlueprint({
+  tag: 'div'
+});
+var bp7$4 = inferno.createBlueprint({
+  tag: 'li',
+  className: 'separator',
+  children: {
+    arg: 0
+  }
+});
+var bp6$5 = inferno.createBlueprint({
+  tag: 'a',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  },
+  children: {
+    arg: 2
+  }
+});
+var bp5$5 = inferno.createBlueprint({
+  tag: 'li',
+  children: {
+    arg: 0
+  }
+});
+var bp4$6 = inferno.createBlueprint({
+  tag: 'a',
+  attrs: {
+    arg: 0
+  },
+  events: {
+    arg: 1
+  },
+  children: {
+    arg: 2
+  }
+});
+var bp3$7 = inferno.createBlueprint({
+  tag: 'li',
+  children: {
+    arg: 0
+  }
+});
+var bp2$8 = inferno.createBlueprint({
+  tag: 'ul',
+  className: 'dropdown-device-actions',
+  children: {
+    arg: 0
+  }
+});
+var bp1$9 = inferno.createBlueprint({
+  tag: 'button',
+  attrs: {
+    type: 'button',
+    'aria-haspopup': 'true'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp0$10 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'device-actions',
+  children: {
+    arg: 0
+  }
+});
+var bp13$2 = inferno.createBlueprint({
+  tag: 'span',
+  children: {
+    arg: 0
+  }
+});
+var bp12$3 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'container',
+  children: {
+    arg: 0
+  }
+});
+var bp11$4 = inferno.createBlueprint({
+  tag: 'header',
+  children: {
+    arg: 0
+  }
+});
+var Header = function Header(model) {
+  var supervisorHref = 'http://' + location.hostname + ':9001';
+
+  var rebootDevice = function rebootDevice() {
+    return reboot();
+  };
+  var shutdownDevice = function shutdownDevice() {
+    return shutdown();
+  };
+
+  var deviceActionsMenu = bp0$10([bp1$9('Menu'), bp2$8([bp3$7(bp4$6({
+    href: '#'
+  }, {
+    onclick: rebootDevice
+  }, 'Reboot')), bp5$5(bp6$5({
+    href: '#'
+  }, {
+    onclick: shutdownDevice
+  }, 'Shutdown')), bp7$4(bp8$4()), bp9$4(bp10$4({
+    id: 'supervisor',
+    target: '_blank',
+    href: supervisorHref
+  }, 'Supervisor'))])]);
+  if (model.reboot || model.shutdown) {
+    deviceActionsMenu = '';
+  }
+
+  return bp11$4(bp12$3([bp13$2('Build Lights'), deviceActionsMenu]));
+};
+
+var bp6$6 = inferno.createBlueprint({
+  tag: 'a',
+  attrs: {
+    href: 'http://creativecommons.org/licenses/by/3.0/',
+    title: 'Creative Commons BY 3.0',
+    target: '_blank'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp5$6 = inferno.createBlueprint({
+  tag: 'a',
+  attrs: {
+    href: 'http://www.flaticon.com',
+    title: 'Flaticon'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp4$7 = inferno.createBlueprint({
+  tag: 'a',
+  attrs: {
+    href: 'http://www.flaticon.com/authors/gregor-cresnar',
+    title: 'Gregor Cresnar'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp3$8 = inferno.createBlueprint({
+  tag: 'div',
+  children: {
+    arg: 0
+  }
+});
+var bp2$9 = inferno.createBlueprint({
+  tag: 'a',
+  attrs: {
+    href: 'http://www.dius.com.au',
+    target: '_blank',
+    title: 'DiUS'
+  },
+  children: {
+    arg: 0
+  }
+});
+var bp1$10 = inferno.createBlueprint({
+  tag: 'div',
+  children: {
+    arg: 0
+  }
+});
+var bp0$11 = inferno.createBlueprint({
+  tag: 'footer',
+  children: {
+    arg: 0
+  }
+});
+var Footer = function Footer() {
+  return bp0$11([bp1$10([bp2$9('DiUS'), ' \xA9 2016 - All rights reserved.']), bp3$8(['Icons made by ', bp4$7('Gregor Cresnar'), ' from ', bp5$6('www.flaticon.com'), ' is licensed by ', bp6$6('CC 3.0 BY')])]);
+};
+
+var bp2$10 = inferno.createBlueprint({
+  tag: 'small',
+  children: {
+    arg: 0
+  }
+});
+var bp1$11 = inferno.createBlueprint({
+  tag: 'br'
+});
+var bp0$12 = inferno.createBlueprint({
+  tag: 'p',
+  children: {
+    arg: 0
+  }
+});
+var bp5$7 = inferno.createBlueprint({
+  tag: 'small',
+  children: {
+    arg: 0
+  }
+});
+var bp4$8 = inferno.createBlueprint({
+  tag: 'br'
+});
+var bp3$9 = inferno.createBlueprint({
+  tag: 'p',
+  children: {
+    arg: 0
+  }
+});
+var bp8$5 = inferno.createBlueprint({
+  tag: 'small',
+  children: {
+    arg: 0
+  }
+});
+var bp7$5 = inferno.createBlueprint({
+  tag: 'br'
+});
+var bp6$7 = inferno.createBlueprint({
+  tag: 'p',
+  children: {
+    arg: 0
+  }
+});
+var bp10$5 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'message',
+  children: {
+    arg: 0
+  }
+});
+var bp9$5 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'waiting',
+  children: {
+    arg: 0
+  }
+});
+var Intermission = function Intermission(model) {
+  var message = bp0$12(['Shutdown underway. ', bp1$11(), ' ', bp2$10(['You can safely unplug your Raspberry Pi in ', model.countdown, ' seconds.'])]);
+
+  if (model.reboot) {
+    message = bp3$9(['Reboot underway. ', bp4$8(), ' ', bp5$7(['Will refresh in ', model.countdown, ' seconds.'])]);
+  }
+
+  if (model.completed) {
+    bp6$7(['Shutdown completed. ', bp7$5(), ' ', bp8$5('You can safely unplug your Raspberry Pi now.')]);
+  }
+
+  return bp9$5(bp10$5(message));
+};
+
+var bp2 = inferno.createBlueprint({
+  tag: {
+    arg: 0
+  }
+});
+var bp1 = inferno.createBlueprint({
+  tag: {
+    arg: 0
+  }
+});
+var bp0 = inferno.createBlueprint({
+  tag: 'div',
+  className: 'representation',
+  children: {
+    arg: 0
+  }
+});
+var Main = function Main(model) {
+  var mainContent = '';
+  if (model.reboot || model.shutdown) {
+    mainContent = Intermission(model);
+  } else {
+    mainContent = Tab(model);
+  }
+
+  return bp0([bp1(Header), mainContent, bp2(Footer)]);
+};
+
+function mainComponent(model) {
+  return Main(model);
 }
 
 function display(representation) {
@@ -3710,6 +4042,10 @@ function display(representation) {
 }
 
 function represent(model) {
+  if (model.reboot || model.shutdown) {
+    return model;
+  }
+
   var currentState = model.tools.filter(function (t) {
     return t.active;
   }).map(function (t) {
@@ -3725,18 +4061,33 @@ function represent(model) {
   return currentState;
 }
 
+function hasCountdownEnded(stateModel) {
+  return stateModel.countdown === 0;
+}
+
+function isExecutingDeviceAction(stateModel) {
+  return stateModel.reboot || stateModel.shutdown;
+}
+
 function nextAction(stateModel) {
-  // nothing to do here for now
+  if (isExecutingDeviceAction(stateModel)) {
+    if (hasCountdownEnded(stateModel)) {
+      completeDeviceAction(stateModel);
+    } else {
+      stateModel.countdown -= 1;
+      setTimeout(function () {
+        render(stateModel);
+      }, 1000);
+    }
+  }
 }
 
 function render(stateModel) {
-  display(tabComponent(stateModel));
+  display(mainComponent(stateModel));
   nextAction(stateModel);
 }
 
 var cb = function cb(event) {
-  document.getElementById('supervisor').href = 'http://' + location.hostname + ':9001';
-
   fetch('/model').then(function (res) {
     return res.json();
   }).then(function (json) {
@@ -3748,53 +4099,6 @@ if (document.readyState === 'complete' || document.readyState !== 'loading' && !
   cb();
 } else {
   document.addEventListener('DOMContentLoaded', cb);
-}
-
-var mutateScreen = function mutateScreen(e) {
-  var endpoint = e.currentTarget.href;
-  var isShutdown = endpoint.endsWith('shutdown');
-  var countdown = Number(e.currentTarget.dataset.countdown);
-
-  var representation = document.getElementById('representation');
-  representation.classList.add('waiting');
-  representation.innerHTML = '<div class="message"><p>Please wait...</p></div>';
-
-  fetch(endpoint).then(function (res) {
-    if (!res.ok) {
-      representation.classList.add('error');
-      representation.innerHTML = '<div class="message"><p>Could not execute.<br/>Please restart manually.<br/><br/><a href="#" onclick="location.reload()">Reload</a></p></div>';
-      return;
-    }
-
-    var intervalId = setInterval(function () {
-      var message = 'Reboot underway. Will refresh in ' + countdown + ' seconds.';
-      if (isShutdown) {
-        message = 'Shutdown underway. You can unplug your Raspberry Pi in ' + countdown + ' seconds.';
-      }
-
-      representation.innerHTML = '<div class="message"><p>' + message + '</p></div>';
-      countdown -= 1;
-
-      if (countdown === 0) {
-        clearInterval(intervalId);
-
-        if (isShutdown) {
-          representation.innerHTML = '<div class="message"><p>You can now unplug your Raspberry Pi.</p></div>';
-        } else {
-          location.reload();
-        }
-      }
-    }, 1000);
-  });
-
-  return false;
-};
-
-var deviceActionEls = document.getElementsByClassName('deviceAction');
-for (var i = 0; i < deviceActionEls.length; i++) {
-  if (!deviceActionEls[i].onclick) {
-    deviceActionEls[i].onclick = mutateScreen;
-  }
 }
 
 }());
