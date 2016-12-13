@@ -9,7 +9,7 @@ We partitioned the image to minimise the risk of data corruption. This way, when
 Here's what it looks like:
 
 ```sh
-pi@build-lights-v5-master:~ $ df -h
+pi@build-lights-v2-master:~ $ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/root       1.2G 1001M  126M  89% /
 devtmpfs        459M     0  459M   0% /dev
@@ -55,7 +55,7 @@ sudo dd bs=1M if=build-lights-master-20161103.img of=/dev/sdb
 
 After booting the image for the first time, log in to the Pi, either via SSH or via keyboard and screen on the Pi itself.
 
-If logging in via SSH, the master image has this host name: **build-lights-v5-master**. You can login with username `pi` and password `raspberry`.
+If logging in via SSH, the master image has this host name: **build-lights-v2-master**. You can login with username `pi` and password `raspberry`.
 
 Once logged in...
 
