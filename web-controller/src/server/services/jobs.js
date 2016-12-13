@@ -6,6 +6,7 @@ const findIndex = require('lodash.findindex')
 
 const utils = require('./utils')
 const state = require('./state')
+const jobStore = require('../store/jobs')
 
 exports.persist = (payload, lightConfigFile) => {
   state.write(lightConfigFile, data => {
@@ -15,6 +16,10 @@ exports.persist = (payload, lightConfigFile) => {
     const actives = flatten([payload.jobActive])
 
     data.jobs = compact(names.map((name, index) => actives[index] ? name : null))
+
+    jobStore.setJobs(names.map((name, index) => {
+      return {name, active: actives[index]}
+    }))
   })
 }
 
