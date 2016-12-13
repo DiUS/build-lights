@@ -5,6 +5,8 @@ const logger = require('winston')
 const fetch = require('node-fetch')
 const findIndex = require('lodash.findindex')
 
+const jobStore = require('../store/jobs')
+
 const fsOpts = { encoding: 'utf8' }
 
 function restartLights () {
@@ -14,7 +16,15 @@ function restartLights () {
 module.exports = (router, configFile, lightConfigFile) => {
   router.get('/model', (req, res) => {
     const configuration = fs.readFileSync(configFile, fsOpts)
-    res.json(JSON.parse(configuration))
+    let result = JSON.parse(configuration)
+
+    jobStore.list().then((configuredJobs) => {
+      result.tools.filter((tool) => {
+        return tool.name === 'jobs to monitor'
+      })[0].configuration.items = configuredJobs
+
+      res.json(result)
+    })
   })
 
   router.put('/model', (req, res) => {

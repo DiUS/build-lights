@@ -3,7 +3,7 @@ import rethinkdb as rethink
 class JobSynchronizer():
 
     def update_ci_jobs(self, jobs):
-        rethink.connect("172.17.0.2", 28015).repl()
+        rethink.connect("localhost", 28015).repl()
 
         cursor = rethink.table("jobs").run()
         existingJobs = []

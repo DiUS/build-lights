@@ -2,7 +2,7 @@
 const rethink = require('rethinkdb')
 
 const DB_NAME = 'build-lights'
-const HOST = '172.17.0.2'
+const HOST = 'localhost'
 const PORT = 28015
 const JOBS_TABLE = 'jobs'
 
@@ -53,7 +53,7 @@ exports.setJobs = (jobs) => {
 exports.list = () => {
   return new Promise((resolve, reject) => {
     connect().then((connection) => {
-      rethink.table(JOBS_TABLE).run(connection, (err, cursor) => {
+      rethink.table(JOBS_TABLE).orderBy('name').run(connection, (err, cursor) => {
         if (err) reject(err)
         cursor.toArray((err, result) => {
           if (err) reject(err)
