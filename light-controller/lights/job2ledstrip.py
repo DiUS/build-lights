@@ -28,10 +28,10 @@ class Job2LedStrip(object):
         self.offset = dict.fromkeys(self.jobs)
         self.leds_per_job = int(self.strand.num_leds / len(self.jobs))
 
-        index = 0
+        index = self.leds_per_job * len(self.jobs)
         for name in self.jobs:
+            index = index - self.leds_per_job
             self.offset[name] = index
-            index = index + self.leds_per_job
 
     def update(self, job_name, job_status):
         if job_name in self.offset.keys():

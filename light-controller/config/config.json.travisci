@@ -3,7 +3,7 @@
         "type": "console",
         "num_leds": 32
     },
-    "api": {
+    "ci_server": {
         "type": "travisci",
         "username": "DiUS",
         "pollrate_s": 3

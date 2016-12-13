@@ -5,9 +5,9 @@
         "simulate_mode": false,
         "spidev": "/dev/spidev0.0"
     },
-    "api": {
-        "type": "jenkins_direct",
-        "url": "http://psn-ci:8080/api/json",
+    "ci_server": {
+        "type": "jenkins",
+        "url": "http://psn-ci:8080",
         "pollrate_s": 3
     },
     "jobs": [

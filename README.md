@@ -12,9 +12,9 @@ It is an effective way of providing constant visual feedback and it can be very 
 
 #### Features at a glance
 
-* Monitors Jenkins web API directly.
-* Plays sound when build finishes.
+* Monitors a number of CI servers.
 * Automatically divides LEDs to each build.
+* Sets LED colours according to build status.
 
 Check the [road map](/docs/roadmap.md) for our planned features.
 

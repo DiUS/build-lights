@@ -25,6 +25,44 @@ form {
             }
         }
 
+        &.jenkins {
+            [for="ciUsername"], [name="ciUsername"],
+            [for="ciApiToken"], [name="ciApiToken"] {
+                display: none;
+                visibility: hidden;
+            }
+        }
+
+        &.circleci, &.buildkite {
+            [for="ciAddress"], [name="ciAddress"] {
+                display: none;
+                visibility: hidden;
+            }
+        }
+
+        &.buildkite {
+          [name="ciUsernameCircleCi"], [name="ciUsernameTravis"] {
+            display: none;
+            visibility: hidden;
+          }
+        }
+
+        &.circleci {
+          [name="ciUsernameBuildkite"], [name="ciUsernameTravis"] {
+            display: none;
+            visibility: hidden;
+          }
+        }
+
+        &.travisci {
+            [name="ciUsernameCircleCi"], [name="ciUsernameBuildkite"],
+            [for="ciAddress"], [name="ciAddress"],
+            [for="ciApiToken"], [name="ciApiToken"] {
+                display: none;
+                visibility: hidden;
+            }
+        }
+
         .fieldset {
             display: flex;
             label {

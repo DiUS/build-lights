@@ -1,14 +1,14 @@
 'use strict'
 
-import * as view from './sam/view'
+import * as state from './sam/state'
 
 const cb = (event) => {
-  document.getElementById('supervisor').href = `${location.hostname}:9001`
+  document.getElementById('supervisor').href = `http://${location.hostname}:9001`
 
   fetch('/model')
     .then(res => res.json())
     .then(json => {
-      view.display(view.tabComponent(json))
+      state.render(state.represent(json))
     })
 }
 

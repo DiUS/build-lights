@@ -24,13 +24,10 @@ build/Release
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
 
-# rolled up client folder
-src/server/public/js
-
 # JSCPD
 jscpd.json
 
 # Temporary fixtures
 fixtures/tmp*.json
-configuration.json
-light-configuration.json
+/web-configuration.json
+/light-configuration.json

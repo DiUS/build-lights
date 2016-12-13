@@ -28,7 +28,7 @@ export const JobsTabContent = (model, lastUpdated) => {
         <input type='number' name='pollRate' id='pollRate' value={model.pollrate} />
       </div>
       <div className='jobs-container form-container vertical'>
-        <label>Jobs</label>
+        <label><span>Jobs to monitor</span></label>
         {jobs}
         <button type='button' className='small secondary' onClick={handleAddNewJob}>Add new job</button>
       </div>

@@ -15,7 +15,7 @@ class JsonConfigTest(unittest.TestCase):
             JsonConfig('./config/test/invalid_config_duplicated_job_names.json')
             self.assertTrue(False)
         except ConfigError as ce:
-            self.assertEquals('Error in config file ./config/test/invalid_config_duplicated_job_names.json: jobs must be unique.', str(ce))
+            self.assertEquals("Error in config file ./config/test/invalid_config_duplicated_job_names.json: ['abc', 'abc'] has non-unique elements", str(ce))
 
     def test_accepts_valid_config(self):
         JsonConfig('./config/test/valid_config.json')

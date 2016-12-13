@@ -1,0 +1,15 @@
+{
+    "light": {
+        "type": "adafruit_lpd8806",
+        "num_leds": 32
+    },
+    "ci_server": {
+        "type": "jenkins",
+        "url": "http://localhost:8080",
+        "pollrate_s": 10
+    },
+    "jobs": [
+        "Job to monitor 1",
+        "Job to monitor 2"
+    ]
+}

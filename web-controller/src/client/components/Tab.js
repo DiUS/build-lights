@@ -9,21 +9,21 @@ import { Alert } from './Alert'
 import { TabItem } from './TabItem'
 import { TabContent } from './TabContent'
 
-export const Tab = (model) => {
-  const enabledTabs = model.tools
-    .filter(t => t.active)
-    .map(t => {
-      return {
-        name: t.name,
-        active: t.name === model.selectedTool,
-        configuration: t.configuration,
-        lastUpdated: new Date(model.lastUpdated).toString()
-      }
-    })
+import { dismissAlert } from '../sam/actions'
 
-  const tabs = enabledTabs.map(TabItem)
-  const tabContent = enabledTabs.map(TabContent)
-  const alert = Alert(model.result)
+export const Tab = (model) => {
+  const tabs = model.map(TabItem)
+  const tabContent = model.map(TabContent)
+
+  const dismissHandler = (e) => {
+    delete model.alert
+    return dismissAlert(model)
+  }
+
+  let alert = ''
+  if (model.alert) {
+    alert = <Alert success={model.alert.success} message={model.alert.message} dismissHandler={dismissHandler} />
+  }
 
   return (
     <div className='tab'>

@@ -160,4 +160,26 @@ describe('Utils', () => {
     })
   })
 
+  describe('#defaultWhenInvalid', () => {
+    it('returns default value when NaN', () => {
+      expect(utils.defaultWhenInvalid('a', 3)).to.eql(3)
+    })
+
+    it('returns default value when null', () => {
+      expect(utils.defaultWhenInvalid(null, 3)).to.eql(3)
+    })
+
+    it('returns default value when undefined', () => {
+      expect(utils.defaultWhenInvalid(undefined, 3)).to.eql(3)
+    })
+
+    it('returns value when valid number', () => {
+      expect(utils.defaultWhenInvalid(10, 3)).to.eql(10)
+    })
+
+    it('returns value when valid number string', () => {
+      expect(utils.defaultWhenInvalid('10', 3)).to.eql(10)
+    })
+  })
+
 })

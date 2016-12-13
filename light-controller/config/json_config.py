@@ -27,17 +27,12 @@ class JsonConfig(object):
     def __init__(self, config_file='config.json'):
         self.config_file = config_file
         self._load_config()
-        self._check_config_is_valid()
+        self._check_config_against_schema()
 
     def _load_config(self):
         f = open(self.config_file, 'r')
         self.config = json.load(f, object_hook=json_custom_decode.decode_unicode_to_str_dict)
         f.close()
-
-    def _check_config_is_valid(self):
-        self._check_config_against_schema()
-        if not list_utils.list_items_unique(self.config['jobs']):
-            raise ConfigError(self.config_file, 'jobs must be unique.')
 
     def _check_config_against_schema(self):
         schemafile  = os.path.join(os.path.dirname(os.path.realpath(__file__)), "config_schema.json")
@@ -49,11 +44,5 @@ class JsonConfig(object):
         except ValidationError as ve:
             raise ConfigError(self.config_file, str(ve.message).encode('utf-8'))
 
-    def get_jobs(self):
-        return self.config['jobs']
-
-    def get_light_config(self):
-        return self.config['light']
-
-    def get_api_config(self):
-        return self.config['api']
+    def __getitem__(self, key):
+        return self.config[key]
