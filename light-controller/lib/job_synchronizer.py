@@ -1,9 +1,10 @@
 import rethinkdb as rethink
+import os
 
 class JobSynchronizer():
 
     def update_ci_jobs(self, jobs):
-        rethink.connect("localhost", 28015).repl()
+        rethink.connect(os.getenv('RETHINKDB_HOST', 'localhost'), 28015).repl()
 
         cursor = rethink.db('build_lights').table("jobs").run()
         existingJobs = []
