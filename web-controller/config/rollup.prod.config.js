@@ -7,11 +7,15 @@ import resolve from 'rollup-plugin-node-resolve'
 
 // PostCSS plugins
 import cssnano from 'cssnano'
+import stylelint from 'stylelint'
 import nested from 'postcss-nested'
 import atImport from 'postcss-import'
 import cssnext from 'postcss-cssnext'
+import reporter from 'postcss-reporter'
 import autoprefixer from 'autoprefixer'
 import simplevars from 'postcss-simple-vars'
+
+import stylelintConfiguration from 'stylelint-config-standard'
 
 export default {
   entry: 'src/client/app.js',
@@ -20,15 +24,19 @@ export default {
   plugins: [
     postcss({
       plugins: [
+        stylelint({
+          config: stylelintConfiguration,
+          configOverrides: { rules: { indentation: 4 } }
+        }),
         atImport(),
         simplevars(),
         nested(),
         autoprefixer({ browsers: 'last 2 versions' }),
         cssnext({ warnForDuplicates: false }),
-        cssnano({
-          discardDuplicates: true
-        })
-      ]
+        cssnano({ discardDuplicates: true }),
+        reporter({ clearMessages: true })
+      ],
+      combineStyleTags: true
     }),
     resolve({
       main: true,
