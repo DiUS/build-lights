@@ -30,6 +30,33 @@ export function dismissAlert (model) {
   return false
 }
 
+export function reboot () {
+  fetch('/reboot')
+    .then(res => res.json())
+    .then(json => { state.render(state.represent(json)) })
+    .catch(err => { state.render(state.represent(err)) })
+
+  return false
+}
+
+export function shutdown () {
+  fetch('/shutdown')
+    .then(res => res.json())
+    .then(json => { state.render(state.represent(json)) })
+    .catch(err => { state.render(state.represent(err)) })
+
+  return false
+}
+
+export function completeDeviceAction (model) {
+  if (model.reboot) {
+    location.reload()
+  } else {
+    model.completed = true
+    state.render(model)
+  }
+}
+
 export function save (data, present) {
   return persistState(data)
 }

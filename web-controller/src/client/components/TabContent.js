@@ -13,16 +13,16 @@ export const TabContent = (tabInfo) => {
 
   switch (tabInfo.name) {
     case 'network':
-      content = NetworkTabContent(tabInfo.configuration, tabInfo.lastUpdated)
+      content = NetworkTabContent(tabInfo)
       break
     case 'ci server':
-      content = CiTabContent(tabInfo.configuration, tabInfo.lastUpdated)
+      content = CiTabContent(tabInfo)
       break
     case 'led hardware':
-      content = LedHardwareTabContent(tabInfo.configuration, tabInfo.lastUpdated)
+      content = LedHardwareTabContent(tabInfo)
       break
     case 'jobs to monitor':
-      content = JobsTabContent(tabInfo.configuration, tabInfo.lastUpdated)
+      content = JobsTabContent(tabInfo)
       break
     default:
       content = 'Nothing to see here.'

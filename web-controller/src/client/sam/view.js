@@ -2,10 +2,10 @@
 
 import InfernoDOM from 'inferno-dom'
 
-import { Tab } from '../components/Tab'
+import { Main } from '../components/Main'
 
-export function tabComponent (model) {
-  return Tab(model)
+export function mainComponent (model) {
+  return Main(model)
 }
 
 export function display (representation) {

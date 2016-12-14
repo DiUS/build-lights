@@ -51,6 +51,7 @@
         "babel-register": "^6.18.0",
         "chai": "^3.5.0",
         "cheerio": "^0.22.0",
+        "csslint": "^1.0.5",
         "cssnano": "^3.7.7",
         "jscpd": "^0.6.5",
         "jsdomify": "^3.1.0",
@@ -61,6 +62,7 @@
         "postcss-cssnext": "^2.8.0",
         "postcss-import": "^9.0.0",
         "postcss-nested": "^1.0.0",
+        "postcss-reporter": "^3.0.0",
         "postcss-simple-vars": "^3.0.0",
         "proxyquire": "^1.7.10",
         "rimraf": "^2.5.4",
@@ -76,6 +78,8 @@
         "sinon": "^1.17.6",
         "sinon-chai": "^2.8.0",
         "standard": "^8.4.0",
+        "stylelint": "^7.6.0",
+        "stylelint-config-standard": "^15.0.0",
         "supertest": "^2.0.1"
     },
     "dependencies": {

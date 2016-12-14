@@ -1,6 +1,5 @@
 'use strict'
 
-import './styles/App.css'
 import './styles/Tab.css'
 
 import Inferno from 'inferno' // eslint-disable-line
@@ -13,7 +12,7 @@ import { dismissAlert } from '../sam/actions'
 
 export const Tab = (model) => {
   const tabs = model.map(TabItem)
-  const tabContent = model.map(TabContent)
+  const tabContent = model.filter(tool => tool.active).map(TabContent)
 
   const dismissHandler = (e) => {
     delete model.alert

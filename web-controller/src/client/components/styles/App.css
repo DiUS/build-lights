@@ -1,15 +1,21 @@
 @import "colors.css";
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
     min-width: 30em;
+
+    > div {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
 }
 
 .container {
@@ -20,13 +26,16 @@ body {
 
 .representation {
     flex: 1;
+    display: flex;
+    flex-direction: column;
 
-    &.waiting {
+    .waiting {
         background-color: $skyBlue;
         background-image: url('/static/img/loader.gif');
         background-position: 50% 40%;
         background-size: auto;
         background-repeat: no-repeat;
+        flex: 1;
         position: relative;
 
         &.error {
@@ -39,7 +48,7 @@ body {
             width: 100%;
 
             p {
-                color: #fff;
+                color: $white;
                 font-family: 'Roboto';
                 font-size: 1.8em;
                 letter-spacing: 1px;
@@ -55,7 +64,7 @@ body {
 }
 
 header {
-    background-color: #192854;
+    background-color: $darkNavy;
 
     .container {
         background-image: url('/static/img/dius_logo.png');
@@ -64,12 +73,12 @@ header {
         background-repeat: no-repeat;
         display: flex;
         height: 5em;
-        margin: .5em auto;
+        margin: 0.5em auto;
     }
 
     span {
         align-self: center;
-        color: #ffffff;
+        color: $white;
         flex: 1;
         font-family: 'Roboto';
         font-size: 1.5em;
@@ -89,15 +98,15 @@ header {
             background-position: 1em 50%;
             background-repeat: no-repeat;
             background-size: 28px;
-            border: 1px solid #A3A9AC;
+            border: 1px solid $grey;
             border-radius: 0.25em;
-            color: #ffffff;
+            color: $white;
             font-size: 1.125em;
             padding: 0.875em 3.5em;
             position: relative;
 
-            &:after {
-                border-color: #ffffff transparent transparent transparent;
+            &::after {
+                border-color: $white transparent transparent transparent;
                 border-style: solid;
                 border-width: 5px 5px 0 5px;
                 content: '\A';
@@ -110,9 +119,9 @@ header {
         }
 
         .dropdown-device-actions {
-            background-color: #ffffff;
+            background-color: $white;
             border-radius: 0.25em;
-            box-shadow: 0px 0px 5px 1px $darkNavy;
+            box-shadow: 0 0 5px 1px $darkNavy;
             display: none;
             position: absolute;
             right: 0;
@@ -143,8 +152,8 @@ header {
             button {
                 background-color: #314B84;
 
-                &:after {
-                    border-color: transparent transparent #ffffff transparent;
+                &::after {
+                    border-color: transparent transparent $white transparent;
                     border-width: 0 5px 5px 5px;
                 }
             }
@@ -164,7 +173,7 @@ footer {
     text-align: center;
 
     div {
-        padding: .5em 0;
+        padding: 0.5em 0;
 
         a {
             text-decoration: underline;

@@ -2,6 +2,7 @@
 @import "variables.css";
 
 .tab {
+    flex: 1;
     min-width: 100%;
 
     .tab-nav-container {
@@ -13,9 +14,7 @@
 
             li {
                 align-self: center;
-                border-bottom-style: solid;
-                border-bottom-width: 4px;
-                border-bottom-color: transparent;
+                border-bottom: 4px solid transparent;
                 flex: 1;
                 margin-top: 4px;
 
@@ -29,8 +28,10 @@
                     text-transform: uppercase;
                 }
 
-                &.selected, &:hover {
+                &.selected,
+                &:hover {
                     border-bottom-color: $darkNavy;
+
                     a {
                         color: $darkNavy;
                     }

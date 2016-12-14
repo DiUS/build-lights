@@ -4,11 +4,15 @@ import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
 
 // PostCSS plugins
+import stylelint from 'stylelint'
 import nested from 'postcss-nested'
 import atImport from 'postcss-import'
 import cssnext from 'postcss-cssnext'
 import autoprefixer from 'autoprefixer'
+import reporter from 'postcss-reporter'
 import simplevars from 'postcss-simple-vars'
+
+import stylelintConfiguration from 'stylelint-config-standard'
 
 export default {
   entry: 'src/client/app.js',
@@ -17,12 +21,18 @@ export default {
   plugins: [
     postcss({
       plugins: [
+        stylelint({
+          config: stylelintConfiguration,
+          configOverrides: { rules: { indentation: 4 } }
+        }),
         atImport(),
         simplevars(),
         nested(),
         autoprefixer({ browsers: 'last 2 versions' }),
-        cssnext({ warnForDuplicates: false })
-      ]
+        cssnext({ warnForDuplicates: false }),
+        reporter({ clearMessages: true })
+      ],
+      combineStyleTags: true
     }),
     resolve({
       main: true,
