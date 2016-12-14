@@ -28,6 +28,15 @@ To get all this going...
 
 **Note:** if you create `web-configuration.json` in the same directory as `web-controller` then you can run `npm run dev:server` and enjoy a dashboard with [nodemon](http://npmjs.com/package/nodemon)
 
+You also need rethinkdb. You can run a dockerized instance with:
+
+    docker run -v "$PWD:/data" -d rethinkdb
+
+To set up the required data, go to your rethinkdb admin page (e.g. http://172.17.0.2:8080/#dataexplorer) and run
+
+    r.dbCreate('build_lights');
+    r.db('build_lights').tableCreate('jobs')
+
 ## To run tests
 You can run `npm test` and here's what's going to happen:
 
