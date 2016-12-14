@@ -18,6 +18,7 @@ module.exports = (router, configFile, lightConfigFile) => {
     const configuration = fs.readFileSync(configFile, fsOpts)
     let result = JSON.parse(configuration)
 
+    // eventually all config will come from rethink. For now lets just jam in the bit we've changed
     jobStore.list().then((configuredJobs) => {
       result.tools.filter((tool) => {
         return tool.name === 'jobs to monitor'

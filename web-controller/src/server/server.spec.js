@@ -18,8 +18,10 @@ describe('Server', () => {
 
   const serviceStub = { persist: (payload) => {} }
   const persistSpy = sinon.spy(serviceStub, 'persist')
+  const storeStub = { list: () => {[]} }
 
   const modelRoute = proxyquire('./routes/model', {
+    '../store/jobs': storeStub,
     '../services/jobs': serviceStub,
     '../services/network': serviceStub
   })

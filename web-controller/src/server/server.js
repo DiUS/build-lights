@@ -7,9 +7,13 @@ const helmet = require('helmet')
 const logger = require('./logger')
 const winston = require('winston')
 const express = require('express')
+const app = express()
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
 const bodyParser = require('body-parser')
 const compression = require('compression')
 const expressHandlebars = require('express-handlebars')
+const jobStore = require('./store/jobs')
 
 module.exports = (configFile, lightConfigFile) => {
   // when config file does not exist
@@ -18,8 +22,6 @@ module.exports = (configFile, lightConfigFile) => {
 
   // same when light config file does not exist
   fs.lstatSync(lightConfigFile)
-
-  const app = express()
 
   app.engine('handlebars', expressHandlebars({
     defaultLayout: 'main',
@@ -57,5 +59,9 @@ module.exports = (configFile, lightConfigFile) => {
     res.json(payload)
   })
 
-  return app
+  jobStore.listenForChanges((change) => {
+    io.emit('job', change)
+  })
+
+  return http
 }
