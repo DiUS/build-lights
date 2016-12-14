@@ -2,7 +2,6 @@
 
 form {
     .jobs-container {
-
         > button {
             align-self: flex-end;
             background-color: $green;
@@ -10,17 +9,18 @@ form {
         }
 
         .fieldset {
-
             padding: 0.25em 0.5em;
 
             &:hover {
                 background-color: #fff;
+
                 label {
                     font-weight: bold;
                 }
             }
 
-            input, label {
+            input,
+            label {
                 flex: initial;
                 flex-grow: initial;
 
