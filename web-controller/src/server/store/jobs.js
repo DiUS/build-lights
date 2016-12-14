@@ -33,19 +33,54 @@ const insert = (jobs, connection) => {
   })
 }
 
-const truncate = (connection) => {
+const update = (job, connection) => {
   return new Promise((resolve, reject) => {
-    rethink.table(JOBS_TABLE).delete().run(connection, (err, result) => {
+    rethink.table(JOBS_TABLE).filter({name: job.name}).update(job).run(connection, (err, result) => {
       if (err) reject(err)
       resolve(result)
     })
   })
 }
 
+const remove = (removals, connection) => {
+  removals.forEach((removal) => {
+    rethink.table(JOBS_TABLE).filter({name: removal.name}).delete().run(connection, (err, result) => {
+      if (err) throw err
+    })
+  })
+}
+
+const removeDeletedJobs = (existingJobs, currentJobs, connection) => {
+  const removals = existingJobs.filter((existingJob) => {
+    return !currentJobs.find((currentJob) => { return currentJob.name === existingJob.name })
+  })
+  remove(removals, connection)
+}
+
+const insertNewJobs = (existingJobs, currentJobs, connection) => {
+  const inserts = currentJobs.filter((job) => {
+    return !existingJobs.find((existingJob) => { return existingJob.name === job.name })
+  })
+  insert(inserts, connection)
+}
+
+const updateExistingjobs = (existingJobs, currentJobs, connection) => {
+  currentJobs.forEach((job) => {
+    const existingJob = existingJobs.find((existingJob) => { return existingJob.name === job.name })
+    if (existingJob) {
+      if (existingJob.active !== job.active) {
+        update(job, connection)
+      }
+    }
+  })
+}
+
 exports.setJobs = (jobs) => {
   connect().then((connection) => {
-    truncate(connection).then(() => {
-      insert(jobs, connection)
+    exports.list().then((existingJobs) => {
+      removeDeletedJobs(existingJobs, jobs, connection)
+      updateExistingjobs(existingJobs, jobs, connection)
+      insertNewJobs(existingJobs, jobs, connection)
     })
   })
 }
