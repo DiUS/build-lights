@@ -8,6 +8,12 @@ export function represent (model) {
     return model
   }
 
+  if (model.requestRefresh) {
+    let currentState = JSON.parse(window.localStorage.getItem('currentState'))
+    currentState.refreshNeeded = true
+    return currentState
+  }
+
   let currentState = model.tools
     .filter(t => t.active)
     .map(t => {
@@ -20,6 +26,9 @@ export function represent (model) {
     })
 
   currentState.alert = model.result
+
+  window.localStorage.setItem('currentState', JSON.stringify(currentState))
+
   return currentState
 }
 

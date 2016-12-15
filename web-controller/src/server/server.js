@@ -59,7 +59,7 @@ module.exports = (configFile, lightConfigFile) => {
   })
 
   jobStore.listenForChanges((change) => {
-    io.emit('job', change)
+    io.emit('jobs_changed')
   })
 
   return http

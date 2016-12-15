@@ -19,7 +19,7 @@ export const Main = (model) => {
 
   return (
     <div className='representation'>
-      <Header />
+      {Header(model)}
       {mainContent}
       <Footer />
     </div>

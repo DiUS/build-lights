@@ -17,6 +17,10 @@ function persistState (payload) {
   return false
 }
 
+export function requestRefresh () {
+  state.render(state.represent({requestRefresh: true}))
+}
+
 export function addNewJob (present) {
   return persistState({ newJob: true })
 }
