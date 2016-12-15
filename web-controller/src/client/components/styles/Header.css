@@ -1,0 +1,107 @@
+@import "colors.css";
+
+header {
+    background-color: $darkNavy;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+
+    .container {
+        background-image: url('/static/img/dius_logo.png');
+        background-position: 0 50%;
+        background-size: 180px;
+        background-repeat: no-repeat;
+        display: flex;
+        height: 5em;
+        margin: 0.5em auto;
+    }
+
+    span {
+        align-self: center;
+        color: $white;
+        flex: 1;
+        font-family: 'Roboto';
+        font-size: 1.5em;
+        letter-spacing: 1px;
+        margin-left: 8em;
+        text-transform: uppercase;
+    }
+
+    .device-actions {
+        display: flex;
+        position: relative;
+
+        button {
+            align-self: center;
+            background-color: #21366C;
+            background-image: url('/static/img/power.png');
+            background-position: 1em 50%;
+            background-repeat: no-repeat;
+            background-size: 28px;
+            border: 1px solid $grey;
+            border-radius: 0.25em;
+            color: $white;
+            font-size: 1.125em;
+            padding: 0.875em 3.5em;
+            position: relative;
+
+            &::after {
+                border-color: $white transparent transparent transparent;
+                border-style: solid;
+                border-width: 5px 5px 0 5px;
+                content: '\A';
+                height: 0;
+                position: absolute;
+                right: 10%;
+                top: 50%;
+                width: 0;
+            }
+        }
+
+        .dropdown-device-actions {
+            background-color: $white;
+            border-radius: 0.25em;
+            box-shadow: 0 0 5px 1px $darkNavy;
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 85%;
+
+            li {
+                a {
+                    border-radius: 0.25em;
+                    display: block;
+                    padding: 0.75em 1.5em;
+
+                    &:hover {
+                        background-color: $lightGrey;
+                    }
+                }
+
+                &.separator {
+                    div {
+                        border: 0.03125em solid $lightGrey;
+                        margin: 0.75em 1.5em;
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            button {
+                background-color: #314B84;
+
+                &::after {
+                    border-color: transparent transparent $white transparent;
+                    border-width: 0 5px 5px 5px;
+                }
+            }
+
+            .dropdown-device-actions {
+                display: block;
+            }
+        }
+    }
+}

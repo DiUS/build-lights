@@ -1,0 +1,16 @@
+@import "colors.css";
+
+footer {
+    background: $grey;
+    font-size: 0.75em;
+    padding: 0.625em;
+    text-align: center;
+
+    div {
+        padding: 0.5em 0;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+}

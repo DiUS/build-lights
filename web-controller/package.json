@@ -82,6 +82,7 @@
         "supertest": "^2.0.1"
     },
     "dependencies": {
+        "bluebird": "^2.9.0",
         "body-parser": "^1.15.2",
         "compression": "^1.6.2",
         "express": "^4.14.0",

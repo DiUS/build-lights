@@ -1,5 +1,6 @@
 'use strict'
 
+import './styles/Header.css'
 import Inferno from 'inferno' // eslint-disable-line
 
 import { reboot, shutdown } from '../sam/actions'
