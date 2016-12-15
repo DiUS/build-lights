@@ -44,7 +44,7 @@ export default {
       babelrc: false,
       exclude: 'node_modules/**',
       plugins: [ 'inferno', 'syntax-jsx' ],
-      presets: [ 'es2015-rollup' ]
+      presets: [ [ 'es2015', { modules: false } ] ]
     })
   ]
 }
