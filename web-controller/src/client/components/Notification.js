@@ -4,8 +4,8 @@ import Inferno from 'inferno' // eslint-disable-line
 
 export const Notification = (model) => {
   return (
-    <div>
-      <span>{model.message}</span>
+    <div class='notifications'>
+      <button onClick={model.onClick}>{model.message}</button>
     </div>
   )
 }

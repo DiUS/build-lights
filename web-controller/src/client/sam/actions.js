@@ -21,6 +21,13 @@ export function requestRefresh (refresh = true) {
   state.render(state.represent({requestRefresh: refresh}))
 }
 
+export function refresh () {
+  fetch('/model')
+    .then(res => res.json())
+    .then(json => { state.render(state.represent(json)) })
+    .catch(err => { state.render(state.represent(err)) })
+}
+
 export function switchToTab (tabName, present) {
   return persistState({ tabChange: tabName })
 }

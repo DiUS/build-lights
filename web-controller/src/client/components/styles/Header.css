@@ -29,6 +29,34 @@ header {
         text-transform: uppercase;
     }
 
+    .notifications {
+        display: flex;
+        position: relative;
+        padding-right: 5px;
+
+        button {
+            text-transform: none;
+            align-self: center;
+            background-color: $lightRed;
+            background-image: url('/static/img/power.png');
+            background-position: 1em 50%;
+            background-repeat: no-repeat;
+            background-size: 28px;
+            border: 1px solid $darkRed;
+            border-radius: 0.25em;
+            color: $white;
+            font-size: 1.125em;
+            padding: 0.875em 0.2em 0.875em 3.5em;
+            position: relative;
+        }
+
+        &:hover {
+            button {
+                background-color: $darkRed;
+            }
+        }
+    }
+
     .device-actions {
         display: flex;
         position: relative;
