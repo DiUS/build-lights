@@ -3,7 +3,6 @@
 const fs = require('fs')
 const logger = require('winston')
 const fetch = require('node-fetch')
-const findIndex = require('lodash.findindex')
 
 const jobStore = require('../store/jobs')
 
@@ -20,9 +19,9 @@ module.exports = (router, configFile, lightConfigFile) => {
 
     // eventually all config will come from rethink. For now lets just jam in the bit we've changed
     jobStore.list().then((configuredJobs) => {
-      result.tools.filter((tool) => {
+      result.tools.find((tool) => {
         return tool.name === 'jobs to monitor'
-      })[0].configuration.items = configuredJobs
+      }).configuration.items = configuredJobs
 
       res.json(result)
     })
@@ -35,12 +34,6 @@ module.exports = (router, configFile, lightConfigFile) => {
     if (requestData.tabChange && model.selectedTool !== requestData.tabChange) {
       logger.info('Updating active tab. Payload: "%j"', requestData)
       model.selectedTool = requestData.tabChange
-    }
-
-    if (requestData.newJob) {
-      logger.info('Adding new job to be monitored. Payload: "%j"', requestData)
-      const jobsIdx = findIndex(model.tools, { name: 'jobs to monitor' })
-      model.tools[jobsIdx].configuration.items.push({ name: '', active: false })
     }
 
     if (requestData.save) {

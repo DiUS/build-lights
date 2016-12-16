@@ -21,10 +21,6 @@ export function requestRefresh () {
   state.render(state.represent({requestRefresh: true}))
 }
 
-export function addNewJob (present) {
-  return persistState({ newJob: true })
-}
-
 export function switchToTab (tabName, present) {
   return persistState({ tabChange: tabName })
 }
