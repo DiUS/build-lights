@@ -8,9 +8,9 @@ export function represent (model) {
     return model
   }
 
-  if (model.requestRefresh) {
+  if (model.requestRefresh !== null && model.requestRefresh !== undefined) {
     let currentState = JSON.parse(window.localStorage.getItem('currentState'))
-    currentState.refreshNeeded = true
+    currentState.refreshNeeded = model.requestRefresh
     return currentState
   }
 
@@ -26,6 +26,7 @@ export function represent (model) {
     })
 
   currentState.alert = model.result
+  currentState.refreshNeeded = false
 
   window.localStorage.setItem('currentState', JSON.stringify(currentState))
 

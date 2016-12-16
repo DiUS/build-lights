@@ -17,8 +17,8 @@ function persistState (payload) {
   return false
 }
 
-export function requestRefresh () {
-  state.render(state.represent({requestRefresh: true}))
+export function requestRefresh (refresh = true) {
+  state.render(state.represent({requestRefresh: refresh}))
 }
 
 export function switchToTab (tabName, present) {

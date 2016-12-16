@@ -3,20 +3,14 @@
 import './styles/Header.css'
 import Inferno from 'inferno' // eslint-disable-line
 import { Notification } from './Notification' // eslint-disable-line
-import socketio from 'socket.io-client'
 
-import { reboot, requestRefresh, shutdown } from '../sam/actions'
+import { reboot, shutdown } from '../sam/actions'
 
 export const Header = (model) => {
   const supervisorHref = `http://${location.hostname}:9001`
 
   const rebootDevice = () => reboot()
   const shutdownDevice = () => shutdown()
-
-  var socket = socketio()
-  socket.on('jobs_changed', function () {
-    requestRefresh()
-  })
 
   let deviceActionsMenu = (
     <div class='device-actions'>
