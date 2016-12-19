@@ -1,0 +1,17 @@
+{
+    "light": {
+        "type": "console",
+        "num_leds": 32
+    },
+    "ci_server": {
+        "type": "bamboo",
+        "baseUrl": "http://localhost:8085",
+        "user": "daemon",
+        "password": "daemon",
+        "pollrate_s": 3
+    },
+    "jobs": [
+        "BROK-WOOT",
+        "BROK-SUC"
+    ]
+}
