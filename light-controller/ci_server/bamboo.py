@@ -10,7 +10,7 @@ _STATUS = {
 class Source():
 
     def __init__(self, url, username = None, password = None):
-        self.url = url
+        self.url = self._without_trailing_slash(url)
         self.username = username
         self.password = password
 
@@ -39,6 +39,11 @@ class Source():
     def _plan_is_building(self, plan):
         data = self._query(self.url + "/rest/api/latest/plan/" + plan + '.json')
         return data['isBuilding']
+
+    def _without_trailing_slash(self, url):
+        if url.endswith('/'):
+            url = url[:-1]
+        return url
 
     def _query(self, url):
         request = urllib2.Request(url)
