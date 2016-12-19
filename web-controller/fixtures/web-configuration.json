@@ -23,6 +23,7 @@
                 "tool": "jenkins",
                 "address": "http://localhost",
                 "username": "",
+                "password": "",
                 "apiToken": ""
             },
             "active": true
