@@ -17,15 +17,20 @@ module.exports.persist = (payload, lightConfigFile) => {
     }
 
     switch (payload.ciTool) {
-      case 'jenkins':
-        toolData = { url: payload.ciAddress }
+      case 'bamboo':
+        toolData = {url: payload.ciAddress}
+        if (payload.ciUsername) { toolData.username = payload.ciUsername }
+        if (payload.ciPassword) { toolData.password = payload.ciPassword }
         break
-      case 'circleci':
       case 'buildkite':
+      case 'circleci':
         toolData = {
           username: payload.ciUsername,
           api_token: payload.ciApiToken
         }
+        break
+      case 'jenkins':
+        toolData = { url: payload.ciAddress }
         break
       case 'travisci':
         toolData = { username: payload.ciUsername }
@@ -42,5 +47,6 @@ module.exports.mutateModel = (model, payload) => {
   model.tools[toolIdx].configuration.tool = payload.ciTool
   model.tools[toolIdx].configuration.address = payload.ciAddress || ''
   model.tools[toolIdx].configuration.username = payload.ciUsername || ''
+  model.tools[toolIdx].configuration.password = payload.ciPassword || ''
   model.tools[toolIdx].configuration.apiToken = payload.ciApiToken || ''
 }

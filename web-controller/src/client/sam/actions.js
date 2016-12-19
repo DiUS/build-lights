@@ -1,5 +1,6 @@
 'use strict'
 
+import findIndex from 'lodash.findindex'
 import * as state from './state'
 
 function persistState (payload) {
@@ -15,6 +16,13 @@ function persistState (payload) {
     .catch(err => { state.render(state.represent(err)) })
 
   return false
+}
+
+export function selectCiTool (ciTool) {
+  let currentState = JSON.parse(window.localStorage.getItem('currentState'))
+  const toolIdx = findIndex(currentState, { name: 'ci server' })
+  currentState[toolIdx].configuration.tool = ciTool
+  state.render(currentState)
 }
 
 export function addNewJob (present) {

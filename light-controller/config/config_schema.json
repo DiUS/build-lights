@@ -135,13 +135,13 @@
                                 "bamboo"
                             ]
                         },
-                        "user": {
-                            "type": "string"
+                        "username": {
+                            "$ref": "#/definitions/nonEmptyString"
                         },
                         "password": {
-                            "type": "string"
+                            "$ref": "#/definitions/nonEmptyString"
                         },
-                        "baseUrl": {
+                        "url": {
                             "type": "string"
                         },
                         "pollrate_s": {
@@ -151,7 +151,7 @@
                     },
                     "required": [
                         "type",
-                        "baseUrl",
+                        "url",
                         "pollrate_s"
                     ],
                     "additionalProperties": false
@@ -171,5 +171,11 @@
         "light",
         "ci_server",
         "jobs"
-    ]
+    ],
+    "definitions": {
+        "nonEmptyString": {
+            "type": "string",
+            "minLength": 1
+        }
+    }
 }

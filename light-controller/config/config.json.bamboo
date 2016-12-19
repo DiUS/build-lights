@@ -5,8 +5,8 @@
     },
     "ci_server": {
         "type": "bamboo",
-        "baseUrl": "http://localhost:8085",
-        "user": "daemon",
+        "url": "http://localhost:8085",
+        "username": "daemon",
         "password": "daemon",
         "pollrate_s": 3
     },

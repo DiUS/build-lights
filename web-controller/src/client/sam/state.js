@@ -20,6 +20,8 @@ export function represent (model) {
     })
 
   currentState.alert = model.result
+
+  window.localStorage.setItem('currentState', JSON.stringify(currentState))
   return currentState
 }
 

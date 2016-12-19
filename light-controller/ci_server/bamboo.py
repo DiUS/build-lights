@@ -9,9 +9,9 @@ _STATUS = {
 
 class Source():
 
-    def __init__(self, baseUrl, user = None, password = None):
-        self.baseUrl = baseUrl
-        self.user = user
+    def __init__(self, url, username = None, password = None):
+        self.url = url
+        self.username = username
         self.password = password
 
     def list_projects(self):
@@ -32,19 +32,17 @@ class Source():
             return STATUS.POLL_ERROR
 
     def _fetch_all_projects(self):
-        url = self.baseUrl + '/rest/api/latest/result.json'
-        data = self._query(url)
+        data = self._query(self.url + '/rest/api/latest/result.json')
         return data['results']['result']
 
     def _plan_is_building(self, plan):
-        url = self.baseUrl + "/rest/api/latest/plan/" + plan + '.json'
-        data = self._query(url)
+        data = self._query(self.url + "/rest/api/latest/plan/" + plan + '.json')
         return data['isBuilding']
 
     def _query(self, url):
         request = urllib2.Request(url)
-        if self.user != None and self.password != None:
-            base64string = base64.encodestring('%s:%s' % (self.user, self.password)).replace('\n', '')
+        if self.username != None and self.password != None:
+            base64string = base64.encodestring('%s:%s' % (self.username, self.password)).replace('\n', '')
             request.add_header("Authorization", "Basic %s" % base64string)
         response = urllib2.urlopen(request)
         return json.loads(response.read())

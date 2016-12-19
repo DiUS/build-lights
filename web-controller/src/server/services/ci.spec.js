@@ -21,6 +21,46 @@ describe('CI Service', () => {
       fs.unlinkSync(lightConfig)
     })
 
+    describe('updates Bamboo configuration', () => {
+      it('when username and password is specified', () => {
+        const payload = {
+          ciTool: 'bamboo',
+          ciAddress: 'http://my.ci:9090',
+          ciUsername: 'test',
+          ciPassword: 'password'
+        }
+
+        ci.persist(payload, lightConfig)
+
+        const persistedData = JSON.parse(fs.readFileSync(lightConfig, UTF_8))
+        expect(persistedData).to.have.property('ci_server')
+        expect(persistedData.ci_server).to.have.property('type', 'bamboo')
+        expect(persistedData.ci_server).to.have.property('url', 'http://my.ci:9090')
+        expect(persistedData.ci_server).to.have.property('username')
+        expect(persistedData.ci_server).to.have.property('password')
+        expect(persistedData.ci_server).to.not.have.property('api_token')
+      })
+
+      it('when username and password is not specified', () => {
+        const payload = {
+          ciTool: 'bamboo',
+          ciAddress: 'http://my.ci:9090',
+          ciUsername: '',
+          ciPassword: ''
+        }
+
+        ci.persist(payload, lightConfig)
+
+        const persistedData = JSON.parse(fs.readFileSync(lightConfig, UTF_8))
+        expect(persistedData).to.have.property('ci_server')
+        expect(persistedData.ci_server).to.have.property('type', 'bamboo')
+        expect(persistedData.ci_server).to.have.property('url', 'http://my.ci:9090')
+        expect(persistedData.ci_server).to.not.have.property('username')
+        expect(persistedData.ci_server).to.not.have.property('password')
+        expect(persistedData.ci_server).to.not.have.property('api_token')
+      })
+    })
+
     it('updates Jenkins CI configuration', () => {
       const payload = {
         ciTool: 'jenkins',
