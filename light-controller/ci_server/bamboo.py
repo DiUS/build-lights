@@ -29,6 +29,7 @@ class Source():
             else:
                 return _STATUS[build['state']]
         except Exception, e:
+            print str(e)
             return STATUS.POLL_ERROR
 
     def _fetch_all_projects(self):
