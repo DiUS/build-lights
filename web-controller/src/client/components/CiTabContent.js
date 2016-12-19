@@ -43,7 +43,7 @@ export const CiTabContent = (model) => {
   const password = isToolOneOf(['bamboo']) ? (
     <div className='fieldset'>
       <label for='ciPassword'>Password (Optional)</label>
-      <input type='text' id='ciPassword' placeholder='' name='ciPassword' value={model.configuration.password} />
+      <input type='password' id='ciPassword' placeholder='' name='ciPassword' value={model.configuration.password} />
     </div>) : ''
 
   const apiToken = isToolOneOf(['buildkite', 'circleci']) ? (
