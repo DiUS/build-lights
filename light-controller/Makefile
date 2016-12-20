@@ -2,7 +2,7 @@
 
 all: test stop
 
-test: server.PID
+test:
 	python -m unittest discover . -p '*_test.py'
 
 stop: server.PID
