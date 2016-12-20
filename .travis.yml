@@ -16,8 +16,8 @@ script:
   - pip install -r requirements.txt
   - pushd fixtures
   - python run.py &
-  - make test
   - popd
+  - make test
   - popd
   - pushd web-controller
   - nvm install v6
