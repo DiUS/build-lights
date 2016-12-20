@@ -21,127 +21,134 @@ default_config_file = 'config.json'
 light = None
 dlogger = None
 
-def _write_pid(filename):
-    global dlogger
+class LightController:
 
-    try:
-        pidfile = open(filename, "w")
-        pidfile.write("%d\n" % os.getpid())
-        pidfile.close()
-    except IOError, e:
-        dlogger.log("ERROR: unable to write pid file %s: %s", filename, str(e))
+    def _write_pid(self, filename):
+        global dlogger
 
-def _unlink_pid(filename):
-    try:
-        os.unlink(filename)
-    except:
-        pass
+        try:
+            pidfile = open(filename, "w")
+            pidfile.write("%d\n" % os.getpid())
+            pidfile.close()
+        except IOError, e:
+            dlogger.log("ERROR: unable to write pid file %s: %s", filename, str(e))
 
-def _handle_signals(signum, stack):
-    global light
-    if signum == signal.SIGTERM or signum == signal.SIGINT:
-        if light is not None:
-            light.stop()
+    def _unlink_pid(self, filename):
+        try:
+            os.unlink(filename)
+        except:
+            pass
 
-def print_usage(prog_cmd):
-    print "Usage: %s [options]" % prog_cmd
-    print "Options:"
-    print "-b           --daemonize         Run in the background."
-    print "-l           --syslog            Log output to syslog."
-    print "-c <file>    --config <file>     Config file, default \"%s\"." % default_config_file
-    print "-h           --help              Print this help page."
+    def _handle_signals(self, signum, stack):
+        global light
+        if signum == signal.SIGTERM or signum == signal.SIGINT:
+            if light is not None:
+                light.stop()
 
-def run():
-    global light
-    global dlogger
+    def _print_usage(self, prog_cmd):
+        print "Usage: %s [options]" % prog_cmd
+        print "Options:"
+        print "-b           --daemonize         Run in the background."
+        print "-l           --syslog            Log output to syslog."
+        print "-c <file>    --config <file>     Config file, default \"%s\"." % default_config_file
+        print "-h           --help              Print this help page."
 
-    background = False
-    forcesyslog = False
-    config_file = default_config_file
-    dlogger = logger.Logger(os.path.basename(sys.argv[0]))
+    def __init__(self):
+        global light
+        global dlogger
 
-    try:
-        (opts, args) = getopt.getopt(sys.argv[1:], "hblc:", ["help", "daemonize", "syslog", "config="])
-    except getopt.error, why:
-        dlogger.log("Error: getopt error: %s", why)
-        print_usage(sys.argv[0])
-        sys.exit(-1)
+        background = False
+        forcesyslog = False
+        config_file = default_config_file
+        dlogger = logger.Logger(os.path.basename(sys.argv[0]))
 
-    try:
-        for opt in opts:
-            if opt[0] == "-h" or opt[0] == "--help":
-                print_usage(sys.argv[0])
-                sys.exit(1)
-            if opt[0] == "-b" or opt[0] == "--daemonize":
-                background = True
-                continue
-            if opt[0] == "-l" or opt[0] == "--syslog":
-                forcesyslog = True
-                continue
-            if opt[0] == "-c" or opt[0] == "--config":
-                config_file = opt[1]
-                continue
-            print_usage(sys.argv[0])
+        try:
+            (opts, args) = getopt.getopt(sys.argv[1:], "hblc:", ["help", "daemonize", "syslog", "config="])
+        except getopt.error, why:
+            dlogger.log("Error: getopt error: %s", why)
+            self._print_usage(sys.argv[0])
             sys.exit(-1)
-    except ValueError, why:
-        dlogger.log("Error: bad parameter \"%s\" for option %s: %s", opt[1], opt[0], why)
-        print_usage(sys.argv[0])
-        sys.exit(-1)
 
-    if forcesyslog:
-        logger.Logger.use_syslog = True
+        try:
+            for opt in opts:
+                if opt[0] == "-h" or opt[0] == "--help":
+                    self._print_usage(sys.argv[0])
+                    sys.exit(1)
+                if opt[0] == "-b" or opt[0] == "--daemonize":
+                    background = True
+                    continue
+                if opt[0] == "-l" or opt[0] == "--syslog":
+                    forcesyslog = True
+                    continue
+                if opt[0] == "-c" or opt[0] == "--config":
+                    config_file = opt[1]
+                    continue
+                self._print_usage(sys.argv[0])
+                sys.exit(-1)
+        except ValueError, why:
+            dlogger.log("Error: bad parameter \"%s\" for option %s: %s", opt[1], opt[0], why)
+            self._print_usage(sys.argv[0])
+            sys.exit(-1)
 
-    if background:
-        logger.Logger.use_syslog = True
-        daemonize.createDaemon()
+        if forcesyslog:
+            logger.Logger.use_syslog = True
 
-    if not os.path.isfile(config_file):
-        dlogger.log("ERROR: config file %s not found.", config_file)
-        sys.exit(-1)
+        if background:
+            logger.Logger.use_syslog = True
+            daemonize.createDaemon()
 
-    try:
-        conf = json_config.JsonConfig(config_file)
-    except Exception, e:
-        logger.print_trace(e)
-        sys.exit(-1)
+        if not os.path.isfile(config_file):
+            dlogger.log("ERROR: config file %s not found.", config_file)
+            sys.exit(-1)
 
-    light_conf = conf['light']
-    light_type = light_conf.pop('type')
-    light = importlib.import_module('lights.' + light_type).Strand(**light_conf)
+        try:
+            self.conf = json_config.JsonConfig(config_file)
+        except Exception, e:
+            logger.print_trace(e)
+            sys.exit(-1)
 
-    ci_server_conf = conf['ci_server']
-    ci_server_type = ci_server_conf.pop('type')
-    poll_interval_seconds = ci_server_conf.pop('pollrate_s', None)
-    ci = importlib.import_module('ci_server.' + ci_server_type).Source(**ci_server_conf)
+        ci_server_conf = self.conf['ci_server']
+        ci_server_type = ci_server_conf.pop('type')
+        self.poll_interval_seconds = ci_server_conf.pop('pollrate_s', None)
+        self.ci = importlib.import_module('ci_server.' + ci_server_type).Source(**ci_server_conf)
 
-    jobs = conf['jobs']
-    translator = job2ledstrip.Job2LedStrip(jobs, light)
+    def list_projects(self):
+        return self.ci.list_projects()
 
-    dlogger.log("Starting light controller")
-    signal.signal(signal.SIGTERM, _handle_signals)
-    signal.signal(signal.SIGINT, _handle_signals)
-    pidfilename = "/var/run/%s.pid" % os.path.basename(sys.argv[0])
-    _write_pid(pidfilename)
+    def control_lights(self):
+        light_conf = self.conf['light']
+        light_type = light_conf.pop('type')
+        light = importlib.import_module('lights.' + light_type).Strand(**light_conf)
 
-    try:
-        light.daemon = True
-        light.start()
+        jobs = self.conf['jobs']
+        translator = job2ledstrip.Job2LedStrip(jobs, light)
 
-        for job in jobs:
-            translator.update(job, STATUS.UNKNOWN)
-        while True:
+        dlogger.log("Starting light controller")
+        pidfilename = "/var/run/%s.pid" % os.path.basename(sys.argv[0])
+        self._write_pid(pidfilename)
+
+        try:
+            light.daemon = True
+            light.start()
+
             for job in jobs:
-                status = ci.project_status(job)
-                translator.update(job, status)
-            light.join(poll_interval_seconds)
-            if not light.isAlive():
-                break
-    except Exception, e:
-        logger.print_trace(e)
-        sys.exit(-1)
+                translator.update(job, STATUS.UNKNOWN)
+            while True:
+                for job in jobs:
+                    status = self.ci.project_status(job)
+                    translator.update(job, status)
+                light.join(self.poll_interval_seconds)
+                if not light.isAlive():
+                    break
+        except Exception, e:
+            logger.print_trace(e)
+            sys.exit(-1)
 
-    _unlink_pid(pidfilename)
-    dlogger.log("Terminated light controller")
+        self._unlink_pid(pidfilename)
+        dlogger.log("Terminated light controller")
 
 if __name__ == "__main__":
-    run()
+    lc = LightController()
+    signal.signal(signal.SIGTERM, lc._handle_signals)
+    signal.signal(signal.SIGINT, lc._handle_signals)
+    lc.control_lights()
