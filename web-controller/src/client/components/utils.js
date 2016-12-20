@@ -25,10 +25,12 @@ exports.transformFormIntoPayload = (formElements, payload) => {
       }
 
       const value = (formEl.type === 'checkbox') ? formEl.checked : formEl.value
-      if (alreadyContainsEl) {
-        payload[formEl.name].push(value)
-      } else {
-        payload[formEl.name] = value
+      if (formEl.name) {
+        if (alreadyContainsEl) {
+          payload[formEl.name].push(value)
+        } else {
+          payload[formEl.name] = value
+        }
       }
     }
   }

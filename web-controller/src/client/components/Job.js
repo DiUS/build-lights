@@ -2,11 +2,12 @@
 
 import './styles/forms.css'
 import './styles/jobs.css'
+import { removeJob } from '../sam/actions'
 
 import Inferno from 'inferno' // eslint-disable-line
 
 export const Job = (props) => {
-  const handleRemoveJob = (e) => { e.currentTarget.parentElement.remove() }
+  const handleRemoveJob = (e) => { removeJob(props.index) }
 
   return (
     <div className='fieldset'>

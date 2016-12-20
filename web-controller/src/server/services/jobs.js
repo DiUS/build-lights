@@ -26,4 +26,5 @@ module.exports.mutateModel = (model, payload) => {
   const names = flatten([payload.jobName])
   const actives = flatten([payload.jobActive])
   model.tools[toolIdx].configuration.items = names.map((name, index) => ({ name, active: actives[index] }))
+    .filter((item) => { return item.name !== undefined })
 }

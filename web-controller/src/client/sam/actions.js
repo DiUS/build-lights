@@ -22,6 +22,15 @@ export function selectCiTool (ciTool) {
   let currentState = JSON.parse(window.localStorage.getItem('currentState'))
   const toolIdx = findIndex(currentState, { name: 'ci server' })
   currentState[toolIdx].configuration.tool = ciTool
+  window.localStorage.setItem('currentState', JSON.stringify(currentState))
+  state.render(currentState)
+}
+
+export function removeJob (index) {
+  let currentState = JSON.parse(window.localStorage.getItem('currentState'))
+  const toolIdx = findIndex(currentState, { name: 'jobs to monitor' })
+  currentState[toolIdx].configuration.items.splice(index, 1)
+  window.localStorage.setItem('currentState', JSON.stringify(currentState))
   state.render(currentState)
 }
 
