@@ -1,7 +1,6 @@
-language: node_js
-node_js:
-- '4'
-- '6'
+language: python
+python:
+- '2.7'
 env:
   - CXX=g++-4.8
 addons:
@@ -12,5 +11,16 @@ addons:
       - g++-4.8
 matrix:
   fast_finish: true
-before_install: pushd web-controller
-after_script: popd
+script:
+  - pushd light-controller
+  - pip install -r requirements.txt
+  - pushd fixtures
+  - python run.py
+  - make test
+  - popd
+  - popd
+  - pushd web-controller
+  - nvm install v6
+  - npm install
+  - npm test
+  - popd
