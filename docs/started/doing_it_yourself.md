@@ -193,7 +193,7 @@ This is the default configuration for the light controller:
 {
   "light": {
     "type": "epistar_lpd8806",
-    "num_leds": "32"
+    "num_leds": 32
   },
   "ci_server": {
     "type": "jenkins",
