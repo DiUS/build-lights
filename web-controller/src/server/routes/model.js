@@ -44,14 +44,19 @@ module.exports = (router, configFile, lightConfigFile) => {
     logger.info('Committed configuration to file.')
 
     if (requestData.save) {
-      restartLights().then(() => {
+      if (process.env['DISABLE_RESTART_ON_SAVE'] === 'true') {
         model.result = { success: true, message: 'Configuration successfully persisted.' }
         res.json(model)
-      }).catch(err => {
-        logger.error(err)
-        model.result = { success: false, message: 'Configuration successfully persisted, but unable to restart lights.' }
-        res.json(model)
-      })
+      } else {
+        restartLights().then(() => {
+          model.result = { success: true, message: 'Configuration successfully persisted.' }
+          res.json(model)
+        }).catch(err => {
+          logger.error(err)
+          model.result = { success: false, message: 'Configuration successfully persisted, but unable to restart lights.' }
+          res.json(model)
+        })
+      }
     } else {
       res.json(model)
     }
