@@ -34,8 +34,12 @@ export function removeJob (index) {
   state.render(currentState)
 }
 
-export function addNewJob (present) {
-  return persistState({ newJob: true })
+export function addNewJob () {
+  let currentState = JSON.parse(window.localStorage.getItem('currentState'))
+  const toolIdx = findIndex(currentState, { name: 'jobs to monitor' })
+  currentState[toolIdx].configuration.items.push({ name: '', active: false })
+  window.localStorage.setItem('currentState', JSON.stringify(currentState))
+  state.render(currentState)
 }
 
 export function switchToTab (tabName, present) {
