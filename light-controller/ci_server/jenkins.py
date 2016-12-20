@@ -1,6 +1,7 @@
 import jenkinsapi
 from jenkinsapi.jenkins import Jenkins
 from lib.constants import STATUS
+from lib import logger
 
 _STATUS = {
     'aborted'         : STATUS.ABORTED,
@@ -23,6 +24,7 @@ class Source():
 
     def __init__(self, url):
         self.J = Jenkins(url)
+        self.logger = logger.Logger('jenkins_ci')
 
     def list_projects(self):
         return self.J.keys()
@@ -30,7 +32,8 @@ class Source():
     def project_status(self, project):
         try:
             result = self.J[project].poll(tree='color')
-        except Exception:
+        except Exception, e:
+            self.logger.log("Error while computing state for project '%s': %s", project, str(e))
             return STATUS.POLL_ERROR
 
         return _STATUS[result['color']]

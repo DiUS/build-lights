@@ -1,5 +1,6 @@
 import urllib2, base64, json
 from lib.constants import STATUS
+from lib import logger
 
 _STATUS = {
     'Successful': STATUS.SUCCESS,
@@ -13,6 +14,7 @@ class Source():
         self.url = self._without_trailing_slash(url)
         self.username = username
         self.password = password
+        self.logger = logger.Logger('bamboo_ci')
 
     def list_projects(self):
         return list(map(lambda x: x['plan']['key'], self._fetch_all_projects()))
@@ -29,7 +31,7 @@ class Source():
             else:
                 return _STATUS[build['state']]
         except Exception, e:
-            print str(e)
+            self.logger.log("Error while computing state for plan '%s': %s", plan, str(e))
             return STATUS.POLL_ERROR
 
     def _fetch_all_projects(self):

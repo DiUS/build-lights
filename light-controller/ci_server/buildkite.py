@@ -1,5 +1,6 @@
 import urllib, json
 from lib.constants import STATUS
+from lib import logger
 
 _STATUS = {
     'running'   : STATUS.BUILDING_FROM_PREVIOUS_STATE,
@@ -20,6 +21,7 @@ class Source():
         self.api_token = api_token
         self.username  = username
         self.endpoint  = endpoint if endpoint else 'https://api.buildkite.com'
+        self.logger = logger.Logger('buildkite_ci')
 
     def list_projects(self):
         params = {'access_token': self.api_token}
@@ -34,6 +36,7 @@ class Source():
             data = self._query(url, params)
             state = data[0]['state']
         except Exception, e:
+            self.logger.log("Error while computing state for pipeline '%s': %s", pipeline, str(e))
             return STATUS.POLL_ERROR
 
         return _STATUS[state]

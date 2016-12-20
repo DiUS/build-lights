@@ -63,7 +63,7 @@ def run():
     try:
         (opts, args) = getopt.getopt(sys.argv[1:], "hblc:", ["help", "daemonize", "syslog", "config="])
     except getopt.error, why:
-        print "Error: getopt error: %s" % (why)
+        dlogger.log("Error: getopt error: %s", why)
         print_usage(sys.argv[0])
         sys.exit(-1)
 
@@ -84,7 +84,7 @@ def run():
             print_usage(sys.argv[0])
             sys.exit(-1)
     except ValueError, why:
-        print "Error: bad parameter \"%s\" for option %s: %s" % (opt[1], opt[0], why)
+        dlogger.log("Error: bad parameter \"%s\" for option %s: %s", opt[1], opt[0], why)
         print_usage(sys.argv[0])
         sys.exit(-1)
 

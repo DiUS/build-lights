@@ -1,5 +1,6 @@
 from circleclient.circleclient import CircleClient
 from lib.constants import STATUS
+from lib import logger
 
 # other status values include 'retried' and 'running'
 _CURRENT_STATUS = {
@@ -37,6 +38,7 @@ class Source():
     def __init__(self, api_token, username, endpoint=None):
         self.client = CircleClient(api_token, endpoint)
         self.username = username
+        self.logger = logger.Logger('circle_ci')
 
     def list_projects(self):
         projects  = self.client.projects.list_projects()
@@ -48,6 +50,7 @@ class Source():
         try:
             result = self.client.build.recent(self.username, project, limit=1, branch='master')[0]
         except Exception, e:
+            self.logger.log("Error while computing state for project '%s': %s", project, str(e))
             return STATUS.POLL_ERROR
 
         current = result['status']

@@ -1,5 +1,6 @@
 from travispy import TravisPy
 from lib.constants import STATUS
+from lib import logger
 
 _STATUS = {
    'created'  : STATUS.UNKNOWN,
@@ -21,6 +22,7 @@ class Source():
             kwargs['uri'] = uri
         self.client = TravisPy(**kwargs)
         self.username = username
+        self.logger = logger.Logger('travis_ci')
 
     def list_projects(self):
         repos = self.client.repos(owner_name=self.username)
@@ -29,7 +31,8 @@ class Source():
     def project_status(self, project):
         try:
             state = self.client.repo(self.username + '/' + project).last_build_state
-        except Exception:
+        except Exception, e:
+            self.logger.log("Error while computing state for project '%s': %s", project, str(e))
             return STATUS.POLL_ERROR
 
         return _STATUS[state]
