@@ -15,7 +15,7 @@ script:
   - pushd light-controller
   - pip install -r requirements.txt
   - pushd fixtures
-  - python run.py
+  - python run.py &
   - make test
   - popd
   - popd
