@@ -28,9 +28,10 @@ describe('Server', () => {
   })
 
   const cpStub = { execSync: callback }
+  const loggerStub = { info: sinon.stub() }
 
-  const rebootRoute = proxyquire('./routes/reboot', { 'child_process': cpStub })
-  const shutdownRoute = proxyquire('./routes/shutdown', { 'child_process': cpStub })
+  const rebootRoute = proxyquire('./routes/reboot', { 'child_process': cpStub, '../logger': loggerStub })
+  const shutdownRoute = proxyquire('./routes/shutdown', { 'child_process': cpStub, '../logger': loggerStub })
 
   const app = proxyquire('./server', {
     './routes/model': modelRoute,
