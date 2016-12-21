@@ -42,6 +42,10 @@ export function addNewJob () {
   state.render(currentState)
 }
 
+export function autoDiscoverJobs () {
+  return persistState({ autoDiscoverJobs: true })
+}
+
 export function switchToTab (tabName, present) {
   return persistState({ tabChange: tabName })
 }

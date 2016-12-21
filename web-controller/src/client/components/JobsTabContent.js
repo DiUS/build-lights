@@ -5,7 +5,7 @@ import './styles/forms.css'
 import Inferno from 'inferno' // eslint-disable-line
 
 import { Job } from './Job'
-import { addNewJob, save } from '../sam/actions'
+import { addNewJob, autoDiscoverJobs, save } from '../sam/actions'
 import { transformFormIntoPayload } from './utils'
 
 export const JobsTabContent = (model) => {
@@ -31,6 +31,7 @@ export const JobsTabContent = (model) => {
         <label><span>Jobs to monitor</span></label>
         {jobs}
         <button type='button' className='small secondary' onClick={handleAddNewJob}>Add new job</button>
+        <button type='button' className='small secondary' onClick={autoDiscoverJobs}>Auto discover jobs</button>
       </div>
       <div className='actions'>
         <button type='submit'>Save</button>

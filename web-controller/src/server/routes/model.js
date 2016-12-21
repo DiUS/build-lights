@@ -3,7 +3,7 @@
 const fs = require('fs')
 const logger = require('winston')
 const fetch = require('node-fetch')
-
+const findIndex = require('lodash.findindex')
 const fsOpts = { encoding: 'utf8' }
 
 function restartLights () {
@@ -23,6 +23,23 @@ module.exports = (router, configFile, lightConfigFile) => {
     if (requestData.tabChange && model.selectedTool !== requestData.tabChange) {
       logger.info('Updating active tab. Payload: "%j"', requestData)
       model.selectedTool = requestData.tabChange
+    }
+
+    if (requestData.autoDiscoverJobs) {
+      const jobsIdx = findIndex(model.tools, { name: 'jobs to monitor' })
+      const jobs = model.tools[jobsIdx].configuration.items
+
+      fetch('http://localhost:8005/jobs').then((res) => {
+        return res.json()
+      }).then((discoveredJobNames) => {
+        discoveredJobNames.forEach((discoveredJobName) => {
+          if (!jobs.find((job) => { return job.name === discoveredJobName })) {
+            jobs.push({name: discoveredJobName, active: false})
+          }
+        })
+        res.json(model)
+      })
+      return
     }
 
     if (requestData.save) {
