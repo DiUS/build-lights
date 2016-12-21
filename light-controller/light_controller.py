@@ -121,6 +121,10 @@ class LightController:
         light = importlib.import_module('lights.' + light_type).Strand(**light_conf)
 
         jobs = self.conf['jobs']
+        if len(jobs) < 1:
+            dlogger.log("No jobs have been configured")
+            sys.exit(-1)
+
         translator = job2ledstrip.Job2LedStrip(jobs, light)
 
         dlogger.log("Starting light controller")
@@ -151,4 +155,5 @@ if __name__ == "__main__":
     lc = LightController()
     signal.signal(signal.SIGTERM, lc._handle_signals)
     signal.signal(signal.SIGINT, lc._handle_signals)
+    # print lc.list_projects()
     lc.control_lights()
