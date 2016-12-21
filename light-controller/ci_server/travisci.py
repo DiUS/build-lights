@@ -26,6 +26,7 @@ class Source():
 
     def list_projects(self):
         repos = self.client.repos(owner_name=self.username)
+        repos = filter(lambda x: x.active == True, repos)
         return list(map(lambda x: x.slug.split('/')[1], repos))
 
     def project_status(self, project):

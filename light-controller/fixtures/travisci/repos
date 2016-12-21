@@ -1,7 +1,12 @@
 {
   "repos" : [
     {
-      "slug": "DiUS/build-lights"
+      "slug": "DiUS/build-lights",
+      "active": true
+    },
+    {
+      "slug": "DiUS/disabled-job",
+      "active": false
     }
   ]
 }

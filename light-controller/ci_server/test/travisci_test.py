@@ -13,6 +13,10 @@ class TravisCITest(unittest.TestCase):
         projects = self.source.list_projects()
         self.assertTrue('build-lights' in projects)
 
+    def test_list_projects_excludes_inactive_jobs(self):
+        projects = self.source.list_projects()
+        self.assertFalse('disabled-job' in projects)
+
     def test_returns_success_for_good_build(self):
         self.assertEqual(self.source.project_status('build-lights'), STATUS.SUCCESS)
 
