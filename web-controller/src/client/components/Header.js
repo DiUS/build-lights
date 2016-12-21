@@ -1,14 +1,17 @@
 'use strict'
 
+import './styles/Header.css'
+
 import Inferno from 'inferno' // eslint-disable-line
 
-import { reboot, shutdown } from '../sam/actions'
+import { reboot, shutdown, upgrade } from '../sam/actions'
 
 export const Header = (model) => {
   const supervisorHref = `http://${location.hostname}:9001`
 
   const rebootDevice = () => reboot()
   const shutdownDevice = () => shutdown()
+  const upgradeSoftware = () => upgrade()
 
   let deviceActionsMenu = (
     <div class='device-actions'>
@@ -19,6 +22,12 @@ export const Header = (model) => {
         </li>
         <li>
           <a href='#' onClick={shutdownDevice}>Shutdown</a>
+        </li>
+        <li class='separator'>
+          <div />
+        </li>
+        <li>
+          <a href='#' onClick={upgradeSoftware}>Upgrade software</a>
         </li>
         <li class='separator'>
           <div />

@@ -1,5 +1,7 @@
 'use strict'
 
+import './styles/Footer.css'
+
 import Inferno from 'inferno' // eslint-disable-line
 
 export const Footer = () => {
