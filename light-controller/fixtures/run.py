@@ -7,6 +7,8 @@ class MyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/travisci/repos/DiUS/build-lights':
             self.path = '/travisci/repos-build-lights'
+        if self.path == '/travisci/repos/DiUS/disabled-job':
+            self.path = '/travisci/repos-disabled-job'
         if self.path == '/buildkite/v2/organizations/my_username/pipelines/project1/builds?access_token=some_token&branch=master':
             self.path = '/buildkite/v2/organizations/my_username/pipelines-project1/builds'
         return SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)

@@ -35,4 +35,7 @@ class Source():
             self.logger.log("Error while computing state for project '%s': %s", project, str(e))
             return STATUS.POLL_ERROR
 
+        if not state:
+            return STATUS.UNKNOWN
+
         return _STATUS[state]
