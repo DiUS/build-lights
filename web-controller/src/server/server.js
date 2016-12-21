@@ -41,6 +41,7 @@ module.exports = (configFile, lightConfigFile) => {
   require('./routes/home')(router)
   require('./routes/reboot')(router)
   require('./routes/shutdown')(router)
+  require('./routes/upgrade')(router, configFile)
   require('./routes/model')(router, configFile, lightConfigFile)
 
   app.use(router)

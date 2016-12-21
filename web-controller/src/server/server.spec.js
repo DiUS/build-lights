@@ -1,11 +1,13 @@
 'use strict'
 
 const fs = require('fs')
+const path = require('path')
 const sinon = require('sinon')
 const expect = require('chai').expect
 const request = require('supertest')
 const proxyquire = require('proxyquire')
 
+const PROJECT_DIR = path.resolve(process.cwd(), '..')
 const UTF_8 = 'utf8'
 
 describe('Server', () => {
@@ -19,6 +21,9 @@ describe('Server', () => {
   callback.withArgs('shutdown -k -r now').onCall(1).returns()
   callback.withArgs('shutdown -r now').onCall(0).returns()
 
+  callback.withArgs(`cd ${PROJECT_DIR} && git pull`).onCall(0).returns('Already up-to-date')
+  callback.withArgs(`cd ${PROJECT_DIR} && git pull`).onCall(1).returns('needs updating')
+
   const serviceStub = { persist: (payload) => {} }
   const persistSpy = sinon.spy(serviceStub, 'persist')
 
@@ -28,15 +33,18 @@ describe('Server', () => {
   })
 
   const cpStub = { execSync: callback }
+  const fsStub = { readFileSync: sinon.stub().returns('{}') }
   const loggerStub = { info: sinon.stub() }
 
   const rebootRoute = proxyquire('./routes/reboot', { 'child_process': cpStub, '../logger': loggerStub })
   const shutdownRoute = proxyquire('./routes/shutdown', { 'child_process': cpStub, '../logger': loggerStub })
+  const upgradeRoute = proxyquire('./routes/upgrade', { 'child_process': cpStub, 'fs': fsStub })
 
   const app = proxyquire('./server', {
     './routes/model': modelRoute,
     './routes/reboot': rebootRoute,
-    './routes/shutdown': shutdownRoute
+    './routes/shutdown': shutdownRoute,
+    './routes/upgrade': upgradeRoute,
   })
 
   it('throws error when configuration file cannot be found', () => {
@@ -233,8 +241,34 @@ describe('Server', () => {
           })
       })
 
+      describe('when upgrading software', () => {
+        it('responds with "already on its latest version" when no changes are detected', done => {
+          request(app(randomConfigFile, 'fixtures/light-configuration.json'))
+            .get('/upgrade')
+            .expect(200)
+            .end((err, res) => {
+              expect(res.body).to.have.property('result')
+              expect(res.body.result).to.have.property('success', true)
+              expect(res.body.result).to.have.property('message', 'Software already on its latest version.')
+              done()
+            })
+        })
+
+        it('instructs the user to reboot device for changes to take effect', done => {
+          request(app(randomConfigFile, 'fixtures/light-configuration.json'))
+            .get('/upgrade')
+            .expect(200)
+            .end((err, res) => {
+              expect(res.body).to.have.property('result')
+              expect(res.body.result).to.have.property('success', true)
+              expect(res.body.result).to.have.property('message', 'Software updated. Please reboot the device for changes to take effect.')
+              done()
+            })
+        })
+      })
+
       describe('persisting configuration', () => {
-        ['network', 'jobs'].forEach(tool => {
+        ['network', 'jobs', 'ci', 'led'].forEach(tool => {
           it(`invokes "${tool}" service to persist configuration`, done => {
             request(app(randomConfigFile, 'fixtures/light-configuration.json'))
               .put('/model')

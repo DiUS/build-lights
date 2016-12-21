@@ -73,6 +73,15 @@ export function shutdown () {
   return false
 }
 
+export function upgrade () {
+  fetch('/upgrade')
+    .then(res => res.json())
+    .then(json => { state.render(state.represent(json)) })
+    .catch(err => { state.render(state.represent(err)) })
+
+  return false
+}
+
 export function completeDeviceAction (model) {
   if (model.reboot) {
     location.reload()
