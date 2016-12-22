@@ -1,7 +1,7 @@
 'use strict'
 
 const cp = require('child_process')
-const logger = require('../logger')
+const logger = require('winston')
 
 module.exports = (router) => {
   router.get('/shutdown', (req, res) => {

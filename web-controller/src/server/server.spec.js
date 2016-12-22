@@ -36,8 +36,8 @@ describe('Server', () => {
   const fsStub = { readFileSync: sinon.stub().returns('{}') }
   const loggerStub = { info: sinon.stub() }
 
-  const rebootRoute = proxyquire('./routes/reboot', { 'child_process': cpStub, '../logger': loggerStub })
-  const shutdownRoute = proxyquire('./routes/shutdown', { 'child_process': cpStub, '../logger': loggerStub })
+  const rebootRoute = proxyquire('./routes/reboot', { 'child_process': cpStub, 'winston': loggerStub })
+  const shutdownRoute = proxyquire('./routes/shutdown', { 'child_process': cpStub, 'winston': loggerStub })
   const upgradeRoute = proxyquire('./routes/upgrade', { 'child_process': cpStub, 'fs': fsStub })
 
   const app = proxyquire('./server', {
