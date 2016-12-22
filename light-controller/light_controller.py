@@ -18,8 +18,8 @@ from config import json_config
 from lights import job2ledstrip
 
 default_config_file = 'config.json'
+dlogger = logger.Logger('light_controller')
 light = None
-dlogger = None
 
 class LightController:
 
@@ -60,12 +60,11 @@ class LightController:
         background = False
         forcesyslog = False
         config_file = default_config_file
-        dlogger = logger.Logger(os.path.basename(sys.argv[0]))
 
         try:
-            (opts, args) = getopt.getopt(sys.argv[1:], "hblc:", ["help", "daemonize", "syslog", "config="])
+            (opts, args) = getopt.getopt(sys.argv[1:], "hblc:", ["-h", "help", "-b", "daemonize", "-l", "syslog", "-c", "config="])
         except getopt.error, why:
-            dlogger.log("Error: getopt error: %s", why)
+            dlogger.log("Error: getopt error: %s" % why)
             self._print_usage(sys.argv[0])
             sys.exit(-1)
 
@@ -98,7 +97,7 @@ class LightController:
             daemonize.createDaemon()
 
         if not os.path.isfile(config_file):
-            dlogger.log("ERROR: config file %s not found.", config_file)
+            dlogger.log("ERROR: config file %s not found." % config_file)
             sys.exit(-1)
 
         try:
