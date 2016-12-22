@@ -31,7 +31,7 @@ class LightController:
             pidfile.write("%d\n" % os.getpid())
             pidfile.close()
         except IOError, e:
-            dlogger.log("ERROR: unable to write pid file %s: %s", filename, str(e))
+            dlogger.log("ERROR: unable to write pid file %s: %s" % (filename, str(e)))
 
     def _unlink_pid(self, filename):
         try:
@@ -85,7 +85,7 @@ class LightController:
                 self._print_usage(sys.argv[0])
                 sys.exit(-1)
         except ValueError, why:
-            dlogger.log("Error: bad parameter \"%s\" for option %s: %s", opt[1], opt[0], why)
+            dlogger.log("Error: bad parameter \"%s\" for option %s: %s" % (opt[1], opt[0], why))
             self._print_usage(sys.argv[0])
             sys.exit(-1)
 
