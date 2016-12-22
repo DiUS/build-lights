@@ -84,5 +84,9 @@ export function completeDeviceAction (model) {
 }
 
 export function save (data, present) {
+  let currentState = JSON.parse(window.localStorage.getItem('currentState'))
+  currentState.saveInProgress = true
+  window.localStorage.setItem('currentState', JSON.stringify(currentState))
+  state.render(currentState)
   return persistState(data)
 }

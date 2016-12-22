@@ -7,6 +7,7 @@ import Inferno from 'inferno' // eslint-disable-line
 import { Alert } from './Alert'
 import { TabItem } from './TabItem'
 import { TabContent } from './TabContent'
+import { SpinnerOverlay } from './Spinner'
 
 import { dismissAlert } from '../sam/actions'
 
@@ -24,6 +25,11 @@ export const Tab = (model) => {
     alert = <Alert success={model.alert.success} message={model.alert.message} dismissHandler={dismissHandler} />
   }
 
+  let saveIndicator = ''
+  if (model.saveInProgress) {
+    saveIndicator = <SpinnerOverlay />
+  }
+
   return (
     <div className='tab'>
       <div className='tab-nav-container'>
@@ -32,6 +38,7 @@ export const Tab = (model) => {
         </ul>
       </div>
       <div className='tab-content container'>
+        {saveIndicator}
         {alert}
         {tabContent}
       </div>
