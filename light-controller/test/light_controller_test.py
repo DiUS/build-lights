@@ -53,26 +53,33 @@ class LightControllerTest(unittest.TestCase):
         self.assertEqual(se.exception.code, -1)
 
     @patch.object(sys, 'argv', ["program", "-c", "./config/config.json.jenkins"])
-    def test_init_successful(self):
+    @patch.object(light_controller.importlib, 'import_module', autospec=True)
+    def test_init_successful(self, mock_import_module):
         lc = light_controller.LightController()
         self.assertIsNotNone(lc.conf)
         self.assertEqual(lc.poll_interval_seconds, 3)
+        self.assertTrue(mock_import_module.called)
         self.assertIsNotNone(lc.ci)
 
     @patch.object(sys, 'argv', ["program", "-c", "./config/config.json.jenkins"])
-    def test_writes_pid_file(self):
+    @patch.object(light_controller.importlib, 'import_module', autospec=True)
+    def test_writes_pid_file(self, mock_import_module):
         light_controller.LightController()._write_pid('/tmp/pid')
+        self.assertTrue(mock_import_module.called)
         self.assertTrue(os.path.isfile('/tmp/pid'))
 
     @patch.object(light_controller.dlogger, 'log')
+    @patch.object(light_controller.importlib, 'import_module', autospec=True)
     @patch.object(sys, 'argv', ["program", "-c", "./config/config.json.jenkins"])
-    def test_fails_to_write_pid_file_on_non_existing_location(self, mock_log):
+    def test_fails_to_write_pid_file_on_non_existing_location(self, mock_import_module, mock_log):
         light_controller.LightController()._write_pid('/non-existing/location/pid')
         self.assertFalse(os.path.isfile('/non-existing/location/pid'))
         mock_log.assert_called_with("ERROR: unable to write pid file /non-existing/location/pid: [Errno 2] No such file or directory: \'/non-existing/location/pid\'")
+        self.assertTrue(mock_import_module.called)
 
     @patch.object(sys, 'argv', ["program", "-c", "./config/config.json.jenkins"])
-    def test_list_projects(self):
+    @patch.object(light_controller.importlib, 'import_module')
+    def test_list_projects(self, mock_import_module):
         lc = light_controller.LightController()
 
         with patch.object(lc.ci, 'list_projects') as mock_ci:
