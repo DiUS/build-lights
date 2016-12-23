@@ -63,7 +63,7 @@
                         },
                         "url": {
                             "type": "string",
-                            "pattern": "^https?://[0-9a-zA-Z-_]+:?[0-9]+$"
+                            "pattern": "^https?://[0-9a-zA-Z-_.]+:?[0-9]+$"
                         },
                         "pollrate_s": {
                             "type": "integer",
