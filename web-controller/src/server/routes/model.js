@@ -7,9 +7,13 @@ const findIndex = require('lodash.findindex')
 const fsOpts = { encoding: 'utf8' }
 
 function restartLights () {
-  const lights = fetch('http://localhost:9001/index.html?processname=light_controller&action=restart')
-  const server = fetch('http://localhost:9001/index.html?processname=light_controller_server&action=restart')
-  return Promise.all([server, lights])
+  if (process.env.NODE_ENV === 'production') {
+    const lights = fetch('http://localhost:9001/index.html?processname=light_controller&action=restart')
+    const server = fetch('http://localhost:9001/index.html?processname=light_controller_server&action=restart')
+    return Promise.all([server, lights])
+  } else {
+    return Promise.resolve(true)
+  }
 }
 
 module.exports = (router, configFile, lightConfigFile) => {
