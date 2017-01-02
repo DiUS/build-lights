@@ -22,11 +22,12 @@ This application uses [RollupJS](rollupjs.org) to create a bundle with front end
 To get all this going...
 - Clone this repo
 - Change to the `web-controller` directory
-- Run `npm install`
-- Run `npm run dev:client`
-- Run `node ./src/server/index.js /path/to/web-configuration.json`
+- Run `yarn` to install dependencies
+- Run `yarn run dev:client`
+- Run `node ./src/server/index.js /path/to/web-configuration.json /path/to/light-configuration.json`
+- Point your browser to (http://localhost:3000)
 
-**Note:** if you create `web-configuration.json` in the same directory as `web-controller` then you can run `npm run dev:server` and enjoy a dashboard with [nodemon](http://npmjs.com/package/nodemon)
+**Note:** if you create `web-configuration.json` in the same directory as `web-controller` then you can run `yarn run dev:server` and enjoy a dashboard with [nodemon](http://npmjs.com/package/nodemon)
 
 ## To run tests
 You can run `npm test` and here's what's going to happen:
