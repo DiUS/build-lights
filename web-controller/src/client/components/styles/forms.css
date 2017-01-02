@@ -80,7 +80,7 @@ form {
                 cursor: pointer;
             }
 
-            &:not(old) {
+            &:not(old) { /* stylelint-disable-line selector-type-no-unknown */
                 font-size: 1em;
                 margin: 0;
                 opacity: 0;
@@ -133,7 +133,7 @@ form {
         }
 
         input[type="radio"] {
-            &:not(old) {
+            &:not(old) { /* stylelint-disable-line selector-type-no-unknown */
                 + label {
                     > span {
                         border-radius: 1em;
