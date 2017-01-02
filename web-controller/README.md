@@ -30,7 +30,7 @@ To get all this going...
 **Note:** if you create `web-configuration.json` in the same directory as `web-controller` then you can run `yarn run dev:server` and enjoy a dashboard with [nodemon](http://npmjs.com/package/nodemon)
 
 ## To run tests
-You can run `npm test` and here's what's going to happen:
+You can run `yarn test` and here's what's going to happen:
 
 1. Run lint using [Standard JS](http://standardjs.com/)
 2. Run [JSCPD](https://github.com/kucherenko/jscpd)
