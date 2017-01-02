@@ -26,14 +26,6 @@ export function selectCiTool (ciTool) {
   state.render(currentState)
 }
 
-export function removeJob (index) {
-  let currentState = JSON.parse(window.localStorage.getItem('currentState'))
-  const toolIdx = findIndex(currentState, { name: 'jobs to monitor' })
-  currentState[toolIdx].configuration.items.splice(index, 1)
-  window.localStorage.setItem('currentState', JSON.stringify(currentState))
-  state.render(currentState)
-}
-
 export function autoDiscoverJobs () {
   return persistState({ autoDiscoverJobs: true })
 }
