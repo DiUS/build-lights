@@ -26,6 +26,18 @@ export function selectCiTool (ciTool) {
   state.render(currentState)
 }
 
+export function reorderJob (a, b) {
+  let currentState = JSON.parse(window.localStorage.getItem('currentState'))
+  const toolIdx = findIndex(currentState, { name: 'jobs to monitor' })
+  const jobs = currentState[toolIdx].configuration.items
+
+  jobs[a.index] = { name: b.name, active: b.active }
+  jobs[b.index] = { name: a.name, active: a.active }
+
+  window.localStorage.setItem('currentState', JSON.stringify(currentState))
+  state.render(currentState)
+}
+
 export function autoDiscoverJobs () {
   return persistState({ autoDiscoverJobs: true })
 }
