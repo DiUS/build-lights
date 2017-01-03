@@ -28,8 +28,10 @@ describe('Server', () => {
   const persistSpy = sinon.spy(serviceStub, 'persist')
 
   const modelRoute = proxyquire('./routes/model', {
+    '../services/network': serviceStub,
     '../services/jobs': serviceStub,
-    '../services/network': serviceStub
+    '../services/ci': serviceStub,
+    '../services/led': serviceStub
   })
 
   const cpStub = { execSync: callback }
