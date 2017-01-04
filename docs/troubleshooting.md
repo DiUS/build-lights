@@ -13,9 +13,12 @@ There are two ways to achieve this:
 
 For the first option you will need to ssh into your Pi and go to the location where the software is installed - in the case of the master image, that's under `/storage` - and execute a `git pull`. Restart the Pi and you should be good to go.
 
+**Note: **_we now offer a software update through the web interface!_
+
 If you are using the master image and want to do more than a `git pull`, for the second option you will need to backup the configuration files present under `/storage/etc/build-lights`, the wireless configuration under `/etc/wpa_supplicant` and the DHCP configuration under `/etc/dhcpcd.conf`.
 
 Download the latest master image, write it to the SD Card and put your configuration files back on.
+
 ### I'm behind a corporate proxy
 
 Yes, I know, it's not great. But there are ways around it.
@@ -31,6 +34,4 @@ environment=http_proxy='http://user:pwd@proxy:8080',https_proxy='http://user:pwd
 Replace the `http://user@pwd@proxy:8080` with the appropriate username, password and proxy address and port for your company and then the light controller should be able to talk to external websites that are allowed through the proxy.
 
 **Note:** it is possible you might need a `no_proxy` setting as well in case you are forced to use the proxy for every device connected to the network but yout sys admin has whitelisted your CI serverand you don't need proxy for that.
-
-
 
