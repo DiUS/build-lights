@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel'
 import uglify from 'rollup-plugin-uglify'
 import postcss from 'rollup-plugin-postcss'
+import replace from 'rollup-plugin-replace'
 import commonjs from 'rollup-plugin-commonjs'
 import filesize from 'rollup-plugin-filesize'
 import resolve from 'rollup-plugin-node-resolve'
@@ -38,6 +39,7 @@ export default {
       ],
       combineStyleTags: true
     }),
+    replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
     resolve({
       main: true,
       jsnext: true,

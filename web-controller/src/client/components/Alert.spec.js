@@ -1,8 +1,8 @@
 'use strict'
 
 import Inferno from 'inferno'
+import testUtils from 'inferno-test-utils'
 import jsdomify from 'jsdomify'
-import InfernoDOM from 'inferno-dom'
 
 const sinon = require('sinon')
 const cheerio = require('cheerio')
@@ -21,20 +21,20 @@ describe('Alert', () => {
 
   // required to reset the DOM to initial state
   afterEach(() => {
-    jsdomify.clear()
+    // jsdomify.clear()
     clock.restore()
   })
 
-  xit('should remove alert content when dismiss click occurs', () => {
-    InfernoDOM.render(<Alert success="true" message="another message" />, document.getElementById('representation'))
-
-    simulant.fire(document.getElementsByClassName('alert')[0].getElementsByTagName('a')[0], 'click')
-
-    clock.tick(1000)
-
-    $ = cheerio.load(document.documentElement.outerHTML)
-    expect($('.alert span').length).to.eql(0)
-    expect($('.alert').hasClass('collapse')).to.be.true
+  it('should remove alert content when dismiss click occurs', () => {
+    testUtils.renderIntoDocument(<Alert success="true" message="another message" />)
+console.log(document.getElementsByClassName('alert'));
+    // simulant.fire(document.getElementsByClassName('alert')[0].getElementsByTagName('a')[0], 'click')
+    //
+    // clock.tick(1000)
+    //
+    // $ = cheerio.load(document.documentElement.outerHTML)
+    // expect($('.alert span').length).to.eql(0)
+    // expect($('.alert').hasClass('collapse')).to.be.true
   })
 
 })

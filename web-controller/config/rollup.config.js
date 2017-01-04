@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel'
+import replace from 'rollup-plugin-replace'
 import postcss from 'rollup-plugin-postcss'
 import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
@@ -34,6 +35,7 @@ export default {
       ],
       combineStyleTags: true
     }),
+    replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
     resolve({
       main: true,
       jsnext: true,
