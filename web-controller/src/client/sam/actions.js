@@ -3,6 +3,13 @@
 import findIndex from 'lodash.findindex'
 import * as state from './state'
 
+function setInProgressState () {
+  let currentState = JSON.parse(window.localStorage.getItem('currentState'))
+  currentState.saveInProgress = true
+  window.localStorage.setItem('currentState', JSON.stringify(currentState))
+  state.render(currentState)
+}
+
 function persistState (payload) {
   const requestOpts = {
     method: 'PUT',
@@ -70,6 +77,8 @@ export function shutdown () {
 }
 
 export function upgrade () {
+  setInProgressState()
+
   fetch('/upgrade')
     .then(res => res.json())
     .then(json => { state.render(state.represent(json)) })
@@ -88,9 +97,6 @@ export function completeDeviceAction (model) {
 }
 
 export function save (data, present) {
-  let currentState = JSON.parse(window.localStorage.getItem('currentState'))
-  currentState.saveInProgress = true
-  window.localStorage.setItem('currentState', JSON.stringify(currentState))
-  state.render(currentState)
+  setInProgressState()
   return persistState(data)
 }
