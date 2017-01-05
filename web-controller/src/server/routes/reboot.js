@@ -8,6 +8,7 @@ module.exports = (router) => {
     cp.execSync('shutdown -k -r now')
     logger.info('User able to perform reboot action. Rebootting the device.')
     res.json({ reboot: true, countdown: 30 })
-    cp.execSync('shutdown -r now')
+    // delaying action so browser can load resources
+    setTimeout(() => { cp.execSync('shutdown -r now') }, 300)
   })
 }
