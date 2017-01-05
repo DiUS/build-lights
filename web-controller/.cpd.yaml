@@ -3,12 +3,14 @@ languages:
   - jsx
   - css
 files:
-  - "**/*.js"
+  - "src/server/**/*.js"
+  - "src/client/**/*.js"
+  - "src/client/components/styles/*.css"
 exclude:
-  - "**/bundle.js"
-  - "**/bundle.js.map"
-  - "**/node_modules/**"
-  - "**/*.spec.js"
-  - "**/config/**"
-  - "**/fixtures/**"
+  - "src/server/public/js/bundle.js"
+  - "src/server/public/js/bundle.js.map"
+  - "node_modules/**"
+  - "src/**/*.spec.js"
+  - "config/**"
+  - "fixtures/**"
 reporter: json
