@@ -1,6 +1,6 @@
 # Using the master image
 
-We provide a Jessie Raspbian based master image, properly partitioned with all software already installed - you can download the [master image here](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20161223.zip). All you need to do is unzip it and transfer the downloaded image into an SD Card.
+We provide a Jessie Raspbian based master image, properly partitioned with all software already installed - you can download the [master image](https://s3-ap-southeast-2.amazonaws.com/dius-build-lights-assets/build-lights-master-20170109.img.gz) here. All you need to do is unzip it and transfer the downloaded image into an SD Card.
 
 #### What's in the image
 
@@ -76,6 +76,7 @@ Once logged in...
 3. Run `raspi-config` to change the **hostname** and **resize the root partition** to fill the entire microSD card.
 
 4. We recommend you configure other things such as Timezone and Wifi country, but it's up to you.
+
 5. Reboot   
 
 At this point, if you plugged an ethernet cable to your Raspberry Pi, you can go to the web interface on [http://my-new-hostname](http://my-new-hostname) and configure the rest over there:
