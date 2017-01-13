@@ -90,7 +90,7 @@ insserv watchdog; /etc/init.d/watchdog start
 ```
 
 
-http://raspberrypi.stackexchange.com/questions/33850/pi-b-raspbian-jessie-watchdog-doesnt-start-at-boot additional settings needed on Jessie, edit /lib/systemd/system/watchdog.service and add:
+[additional settings](http://raspberrypi.stackexchange.com/questions/33850/pi-b-raspbian-jessie-watchdog-doesnt-start-at-boot) needed on Jessie, edit /lib/systemd/system/watchdog.service and add:
 
 ```
 [Install]
