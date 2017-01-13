@@ -9,9 +9,8 @@ There are two ways to get the build lights working: using our Master Image (see 
 * [Software for light and web controllers](https://github.com/DiUS/build-lights)
 
 #### Using the master image
-If you want to use the master image we provide then move on to [Master Image](/docs/started/master_image.md). All software should be there already.
+If you want to use the master image we provide then move on to [Master Image](/docs/started/using_the_master_image.md). All software should be there already.
 
 By default the configuration assumes that your Raspberry Pi will be connected to your network via an ethernet cable using DHCP.
 
 #### Doing all yourself
-
