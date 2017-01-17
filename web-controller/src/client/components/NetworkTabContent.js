@@ -79,9 +79,9 @@ export const NetworkTabContent = (model) => {
           <label><span>IP address</span> assignment</label>
           <div className='controls'>
             <input type='radio' name='useDhcp' checked={!model.configuration.dhcp ? 'checked' : ''} value='false' id='yes' onChange={handleDhcpChange} />
-            <label for='yes'><span><span /></span>DHCP (dynamic)</label>
+            <label for='yes'><span><span /></span>Static (manual)</label>
             <input type='radio' name='useDhcp' checked={model.configuration.dhcp ? 'checked' : ''} value='true' id='no' onChange={handleDhcpChange} />
-            <label for='no'><span><span /></span>Static (manual)</label>
+            <label for='no'><span><span /></span>DHCP (dynamic)</label>
           </div>
         </div>
         <div className={`static-configuration ${staticContainerHidden}`}>
