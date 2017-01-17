@@ -22,7 +22,7 @@ module.exports = (router, configFile, lightConfigFile) => {
     res.json(JSON.parse(configuration))
   })
 
-  router.put('/model', (req, res) => {
+  router.put('/model', (req, res, next) => {
     const requestData = req.body || {}
     let model = JSON.parse(fs.readFileSync(configFile, fsOpts))
 
@@ -36,7 +36,7 @@ module.exports = (router, configFile, lightConfigFile) => {
       const oldJobs = model.tools[jobsIdx].configuration.items
       const newJobs = model.tools[jobsIdx].configuration.items = []
 
-      fetch('http://localhost:8005/jobs')
+      fetch('http://localhost:8005/jobs', { timeout: 5000 })
         .then((res) => res.json())
         .then((discoveredJobNames) => {
           discoveredJobNames.forEach((discoveredJobName) => {
@@ -45,6 +45,10 @@ module.exports = (router, configFile, lightConfigFile) => {
             newJobs.push(newJob)
           })
           res.json(model)
+        })
+        .catch(err => {
+          logger.error(err)
+          return next(new Error('Could not retrieve list of jobs.'))
         })
       return
     }
