@@ -46,6 +46,7 @@ export function reorderJob (a, b) {
 }
 
 export function autoDiscoverJobs () {
+  setInProgressState()
   return persistState({ autoDiscoverJobs: true })
 }
 

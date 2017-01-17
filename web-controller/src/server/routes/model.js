@@ -36,16 +36,16 @@ module.exports = (router, configFile, lightConfigFile) => {
       const oldJobs = model.tools[jobsIdx].configuration.items
       const newJobs = model.tools[jobsIdx].configuration.items = []
 
-      fetch('http://localhost:8005/jobs').then((res) => {
-        return res.json()
-      }).then((discoveredJobNames) => {
-        discoveredJobNames.forEach((discoveredJobName) => {
-          const oldJob = oldJobs.find(job => job.name === discoveredJobName)
-          const newJob = oldJob || { name: discoveredJobName, branch: 'master', active: false }
-          newJobs.push(newJob)
+      fetch('http://localhost:8005/jobs')
+        .then((res) => res.json())
+        .then((discoveredJobNames) => {
+          discoveredJobNames.forEach((discoveredJobName) => {
+            const oldJob = oldJobs.find(job => job.name === discoveredJobName)
+            const newJob = oldJob || { name: discoveredJobName, branch: 'master', active: false }
+            newJobs.push(newJob)
+          })
+          res.json(model)
         })
-        res.json(model)
-      })
       return
     }
 
