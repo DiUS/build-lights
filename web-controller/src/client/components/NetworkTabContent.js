@@ -76,12 +76,12 @@ export const NetworkTabContent = (model) => {
       </div>
       <div className='form-container vertical'>
         <div className='fieldset'>
-          <label>Assign network <span>IP address</span></label>
+          <label><span>IP address</span> assignment</label>
           <div className='controls'>
             <input type='radio' name='useDhcp' checked={!model.configuration.dhcp ? 'checked' : ''} value='false' id='yes' onChange={handleDhcpChange} />
-            <label for='yes'><span><span /></span>Yes</label>
+            <label for='yes'><span><span /></span>DHCP (dynamic)</label>
             <input type='radio' name='useDhcp' checked={model.configuration.dhcp ? 'checked' : ''} value='true' id='no' onChange={handleDhcpChange} />
-            <label for='no'><span><span /></span>No</label>
+            <label for='no'><span><span /></span>Static (manual)</label>
           </div>
         </div>
         <div className={`static-configuration ${staticContainerHidden}`}>
