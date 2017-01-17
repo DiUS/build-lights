@@ -41,7 +41,7 @@ module.exports = (router, configFile, lightConfigFile) => {
       }).then((discoveredJobNames) => {
         discoveredJobNames.forEach((discoveredJobName) => {
           const oldJob = oldJobs.find(job => job.name === discoveredJobName)
-          const newJob = oldJob || { name: discoveredJobName, active: false }
+          const newJob = oldJob || { name: discoveredJobName, branch: 'master', active: false }
           newJobs.push(newJob)
         })
         res.json(model)
