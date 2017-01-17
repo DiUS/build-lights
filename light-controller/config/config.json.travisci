@@ -9,11 +9,11 @@
         "pollrate_s": 3
     },
     "jobs": [
-        "build-lights",
-        "java-faker",
-        "pact-jvm",
-        "pact-consumer-swift",
-        "pact-consumer-js-dsl",
-        "pact_broker-docker"
+        { "name": "build-lights", "branch": "master" },
+        { "name": "java-faker", "branch": "master" },
+        { "name": "pact-jvm", "branch": "master" },
+        { "name": "pact-consumer-swift", "branch": "master" },
+        { "name": "pact-consumer-js-dsl", "branch": "master" },
+        { "name": "pact_broker-docker", "branch": "master" }
     ]
 }

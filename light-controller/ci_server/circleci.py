@@ -46,9 +46,9 @@ class Source():
         result    = list(map(lambda x: x['reponame'], selection))
         return result
 
-    def project_status(self, project):
+    def project_status(self, project, branch='master'):
         try:
-            result = self.client.build.recent(self.username, project, limit=1, branch='master')[0]
+            result = self.client.build.recent(self.username, project, limit=1, branch=branch)[0]
         except Exception, e:
             self.logger.log("Error while computing state for project '%s': %s", project, str(e))
             return STATUS.POLL_ERROR

@@ -19,7 +19,7 @@ class Source():
     def list_projects(self):
         return list(map(lambda x: x['plan']['key'], self._fetch_all_projects()))
 
-    def project_status(self, plan):
+    def project_status(self, plan, branch='master'):
         try:
             if self._plan_is_building(plan):
                 return STATUS.BUILDING_FROM_PREVIOUS_STATE

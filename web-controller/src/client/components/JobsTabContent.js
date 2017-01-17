@@ -15,7 +15,7 @@ export const JobsTabContent = (model) => {
     return save(postData)
   }
 
-  const jobs = model.configuration.items.map((i, idx) => <Job name={i.name} active={i.active} index={idx} />)
+  const jobs = model.configuration.items.map((i, idx) => <Job name={i.name} active={i.active} branch={i.branch} index={idx} />)
 
   return (
     <form onSubmit={handleFormSubmit}>
@@ -24,7 +24,7 @@ export const JobsTabContent = (model) => {
         <input type='number' name='pollRate' id='pollRate' value={model.configuration.pollrate} />
       </div>
       <div className='jobs-container form-container vertical'>
-        <label><span>Jobs to monitor</span></label>
+        <label><span>Monitored jobs</span></label>
         {jobs}
         <button type='button' className='small secondary' onClick={autoDiscoverJobs}>Auto discover jobs</button>
       </div>

@@ -24,6 +24,7 @@ export const Job = (props) => {
       <input type='checkbox' name='jobActive' id={`jobActive_${props.index}`} checked={props.active} value={`jobActive_${props.index}`} />
       <label for={`jobActive_${props.index}`}><span><span /></span>&nbsp;</label>
       <input type='text' name='jobName' id={`jobName_${props.index}`} value={props.name} />
+      <input type='text' name='jobBranch' id={`jobBranch_${props.index}`} value={props.branch} />
     </div>
   )
 }

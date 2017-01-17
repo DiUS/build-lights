@@ -120,11 +120,18 @@ class LightController:
         light = importlib.import_module('lights.' + light_type).Strand(**light_conf)
 
         jobs = self.conf['jobs']
+        job_names = []
+        job_branches = []
+
+        for job in jobs:
+            job_names.append(job['name'])
+            job_branches.append(job['branch'])
+
         if len(jobs) < 1:
             dlogger.log("No jobs have been configured")
             sys.exit(-1)
 
-        translator = job2ledstrip.Job2LedStrip(jobs, light)
+        translator = job2ledstrip.Job2LedStrip(job_names, light)
 
         dlogger.log("Starting light controller")
         pidfilename = "/var/run/%s.pid" % os.path.basename(sys.argv[0])
@@ -135,11 +142,12 @@ class LightController:
             light.start()
 
             for job in jobs:
-                translator.update(job, STATUS.UNKNOWN)
+                translator.update(job['name'], STATUS.UNKNOWN)
             while True:
                 for job in jobs:
-                    status = self.ci.project_status(job)
-                    translator.update(job, status)
+                    job_name = job['name']
+                    status = self.ci.project_status(job_name, job['branch'])
+                    translator.update(job_name, status)
                 light.join(self.poll_interval_seconds)
                 if not light.isAlive():
                     break

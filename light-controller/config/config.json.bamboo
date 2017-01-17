@@ -11,7 +11,7 @@
         "pollrate_s": 3
     },
     "jobs": [
-        "BROK-WOOT",
-        "BROK-SUC"
+        { "name": "BROK-WOOT", "branch": "master" },
+        { "name": "BROK-SUC", "branch": "master" }
     ]
 }

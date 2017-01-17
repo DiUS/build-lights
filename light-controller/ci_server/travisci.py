@@ -29,7 +29,7 @@ class Source():
         repos = filter(lambda x: x.active == True, repos)
         return list(map(lambda x: x.slug.split('/')[1], repos))
 
-    def project_status(self, project):
+    def project_status(self, project, branch='master'):
         try:
             state = self.client.repo(self.username + '/' + project).last_build_state
         except Exception, e:

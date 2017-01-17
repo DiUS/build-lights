@@ -9,21 +9,21 @@
         "pollrate_s": 3
     },
     "jobs": [
-        "ZigBee-devices-docs",
-        "ZigBee-devices-gate-1",
-        "ZigBee-devices-gate-1-NA",
-        "ZigBee-devices-gate-1-OR",
-        "ZigBee-devices-gate-2",
-        "ZigBee-devices-gate-3a",
-        "ZigBee-devices-gate-3b",
-        "ZigBee-devices-gate-3c",
-        "ZigBee-devices-gate-3d",
-        "ZigBee-devices-gate-4",
-        "ZigBee-devices-gate1-OR-2.1",
-        "ZigBee-devices-GridNet-SGC-upgrade-test",
-        "ZigBee-devices-ZAP_ZNP",
-        "ZigBee-devices-ZAP_ZNP-GridNet",
-        "zigbee-gateway-gate-1",
-        "zigbee-gateway-gate-2"
+        {"name": "ZigBee-devices-docs", "branch": "master"},
+        {"name": "ZigBee-devices-gate-1", "branch": "master"},
+        {"name": "ZigBee-devices-gate-1-NA", "branch": "master"},
+        {"name": "ZigBee-devices-gate-1-OR", "branch": "master"},
+        {"name": "ZigBee-devices-gate-2", "branch": "master"},
+        {"name": "ZigBee-devices-gate-3a", "branch": "master"},
+        {"name": "ZigBee-devices-gate-3b", "branch": "master"},
+        {"name": "ZigBee-devices-gate-3c", "branch": "master"},
+        {"name": "ZigBee-devices-gate-3d", "branch": "master"},
+        {"name": "ZigBee-devices-gate-4", "branch": "master"},
+        {"name": "ZigBee-devices-gate1-OR-2.1", "branch": "master"},
+        {"name": "ZigBee-devices-GridNet-SGC-upgrade-test", "branch": "master"},
+        {"name": "ZigBee-devices-ZAP_ZNP", "branch": "master"},
+        {"name": "ZigBee-devices-ZAP_ZNP-GridNet", "branch": "master"},
+        {"name": "zigbee-gateway-gate-1", "branch": "master"},
+        {"name": "zigbee-gateway-gate-2", "branch": "master"}
     ]
 }

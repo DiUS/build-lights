@@ -29,8 +29,8 @@ class Source():
         data = self._query(url, params)
         return list(map(lambda x: x['slug'], data))
 
-    def project_status(self, pipeline):
-        params = {'access_token': self.api_token, 'branch': 'master'}
+    def project_status(self, pipeline, branch='master'):
+        params = {'access_token': self.api_token, 'branch': branch}
         url = self.endpoint + "/v2/organizations/" + self.username + "/pipelines/" + pipeline + "/builds"
         try:
             data = self._query(url, params)

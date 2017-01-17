@@ -11,7 +11,7 @@
         "pollrate_s": 3
     },
     "jobs": [
-        "ZigBee-devices-docs",
-        "ZigBee-devices-gate-1"
+        { "name": "ZigBee-devices-docs", "branch": "master" },
+        { "name": "ZigBee-devices-gate-1", "branch": "master" }
     ]
 }

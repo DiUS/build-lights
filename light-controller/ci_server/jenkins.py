@@ -29,7 +29,7 @@ class Source():
     def list_projects(self):
         return self.J.keys()
 
-    def project_status(self, project):
+    def project_status(self, project, branch='master'):
         try:
             result = self.J[project].poll(tree='color')
         except Exception, e:

@@ -163,7 +163,20 @@
             "uniqueItems": true,
             "minItems": 0,
             "items": {
-                "type": "string"
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "branch": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "branch"
+                ],
+                "additionalProperties": false
             }
         }
     },
