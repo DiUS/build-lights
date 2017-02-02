@@ -35,7 +35,7 @@ class Source():
             return STATUS.POLL_ERROR
 
     def _fetch_all_projects(self):
-        data = self._query(self.url + '/rest/api/latest/result.json')
+        data = self._query(self.url + '/rest/api/latest/result.json?max-result=100')
         return data['results']['result']
 
     def _plan_is_building(self, plan):
