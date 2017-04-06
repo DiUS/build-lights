@@ -1,5 +1,11 @@
 # Setup read only mode
 
+This guide only works with Jessie Raspbian __without__ X server and desktop manager. If you run Jessie Raspbian __with__ Pixel, follow [this](/docs/started/setup_read_only_desktop.md) guide.
+
+It is recommended to run the build-lights in __read-only__ mode to minimize the probability of SD card corruption when power is removed abruptly. If you have writable partitions on the same SD card as the root filesystem, corruption may still occur when power is removed while the SD card is doing wear-leveling across partitions.
+
+Note that this procedure mounts __both__ _root filesystem_ and _boot partition_ as read-only. If you have additional partitions, those will not be mounted as read-only.
+
 #### Replace log management with busybox, you can read the logs with logread
 
 ```
