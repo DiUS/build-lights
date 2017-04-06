@@ -1,5 +1,7 @@
 # Setup Jessie Raspbian Pixel read only mode
 
+This guide is meant for Jessie Raspbian __with__ Pixel. If you run Jessie Raspbian __without__ X server and desktop manager, it is recommended to use [this](/docs/started/setup_read_only_mode.md) guide.
+
 It is recommended to run the build-lights in __read-only__ mode. All modifications to the root filesystem stay in RAM, so there is minimal chance of corrupting the SD card when the power is removed abruptly. If you have writable partitions on the same SD card as the root filesystem, corruption may still occur when power is removed while the SD card is doing wear-leveling across partitions.
 
 Note that only the root partition is overlaid by this procedure. In particular, the /boot partition will not overlaid. If you have created any additional partitions, those will not be overlaid either.
