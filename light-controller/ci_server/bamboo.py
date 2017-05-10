@@ -24,8 +24,7 @@ class Source():
             if self._plan_is_building(plan):
                 return STATUS.BUILDING_FROM_PREVIOUS_STATE
 
-            builds = self._fetch_all_projects()
-            build = next((x for x in builds if x['plan']['key'] == plan), None)
+            build = self._fetch_project_result(plan)
             if build is None:
                 return STATUS.UNKNOWN
             else:
@@ -33,6 +32,10 @@ class Source():
         except Exception, e:
             self.logger.log("Error while computing state for plan '%s': %s", plan, str(e))
             return STATUS.POLL_ERROR
+
+    def _fetch_project_result(self, plan):
+        data = self._query(self.url + '/rest/api/latest/result/' + plan + '.json?expand=results[0].result')
+        return data['results']['result'][0]
 
     def _fetch_all_projects(self):
         data = self._query(self.url + '/rest/api/latest/result.json?max-result=100')
