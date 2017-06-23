@@ -53,3 +53,8 @@ docs/_build/
 
 # Build lights configuration
 config.json
+
+# Local dev
+.envrc
+*.swp
+.direnv/

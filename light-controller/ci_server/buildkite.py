@@ -19,7 +19,7 @@ class Source():
 
     def __init__(self, api_token, username, endpoint=None):
         self.api_token = api_token
-        self.username  = username
+        self.username  = username.replace(' ', '-')
         self.endpoint  = endpoint if endpoint else 'https://api.buildkite.com'
         self.logger = logger.Logger('buildkite_ci')
 

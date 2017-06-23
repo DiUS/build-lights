@@ -14,6 +14,10 @@ class BuildkiteTest(unittest.TestCase):
         projects = self.source.list_projects()
         self.assertTrue('project1' in projects)
         self.assertTrue('project2' in projects)
+    
+    def test_list_projects_with_space_in_orgname(self):
+        self.source = Source('api_token', 'test space', 'xxx')
+        self.assertEqual(self.source.username, 'test-space')
 
     def test_returns_success_for_good_build(self):
         self.assertEqual(self.source.project_status('project1'), STATUS.SUCCESS)
