@@ -1,6 +1,6 @@
 # Doing it yourself
 
-#### Donwload Jessie Raspbian
+#### Download Jessie Raspbian
 
 Get the latest version of the LITE OS [here](https://www.raspberrypi.org/downloads/raspbian/) and write it to a microSD card using the instructions present below:
 
